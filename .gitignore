@@ -1,0 +1,47 @@
+# =========================
+# Variabel Lingkungan & Keamanan
+# =========================
+.env
+ca.pem
+*.pem
+*.key
+*.crt
+
+# =========================
+# Lingkungan Virtual (Virtual Environment)
+# =========================
+venv/
+env/
+.venv/
+
+# =========================
+# Cache Python & Bytecode
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# =========================
+# Database Lokal
+# =========================
+*.db
+*.sqlite
+*.sqlite3
+
+# =========================
+# Folder Instance Flask (Untuk konfigurasi lokal tambahan)
+# =========================
+instance/
+
+# =========================
+# File Log
+# =========================
+*.log
+
+# =========================
+# Pengaturan OS & IDE (VS Code, PyCharm, dll)
+# =========================
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
