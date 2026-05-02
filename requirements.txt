@@ -1,2 +1,8 @@
 pymysql
 cryptography
+
+
+
+## FLASK 
+flask
+flask_sqlalchemy
