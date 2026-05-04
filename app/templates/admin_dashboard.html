@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card" style="margin-top: 30px;">
+    <h2>Dashboard Admin</h2>
+    <p>Kelola daftar paket langganan dan voucher di sini.</p>
+    
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div style="color: green; margin-bottom: 15px; font-weight: bold;">
+          {% for message in messages %}
+            {{ message }}
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    
+    <div style="margin-bottom: 20px;">
+        <a href="{{ url_for('admin_package_add') }}" class="btn btn-primary">+ Tambah Paket Baru</a>
+    </div>
+
+    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+        <thead>
+            <tr style="background-color: #f4f4f4; border-bottom: 2px solid #ddd;">
+                <th style="padding: 12px; text-align: left;">Nama Paket</th>
+                <th style="padding: 12px; text-align: left;">Tipe</th>
+                <th style="padding: 12px; text-align: left;">Harga</th>
+                <th style="padding: 12px; text-align: left;">Kecepatan</th>
+                <th style="padding: 12px; text-align: center;">Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for paket in packages %}
+            <tr style="border-bottom: 1px solid #ddd;">
+                <td style="padding: 12px;">{{ paket.name }}</td>
+                <td style="padding: 12px;">{{ paket.package_type }}</td>
+                <td style="padding: 12px;">Rp {{ "{:,.0f}".format(paket.price) }}</td>
+                <td style="padding: 12px;">{{ paket.speed }}</td>
+                <td style="padding: 12px; text-align: center;">
+                    <a href="{{ url_for('admin_package_edit', id=paket.id) }}" class="btn" style="background-color: #ffc107; color: #000; padding: 5px 10px; text-decoration: none; display: inline-block;">Edit</a>
+                    <form action="{{ url_for('admin_package_delete', id=paket.id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Apakah Anda yakin ingin menghapus paket ini?');">
+                        <button type="submit" class="btn" style="background-color: #dc3545; color: white; padding: 5px 10px; border: none; cursor: pointer;">Hapus</button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5" style="padding: 12px; text-align: center;">Belum ada paket yang tersedia.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

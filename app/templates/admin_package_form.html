@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="display: flex; justify-content: center; margin-top: 50px;">
+    <div class="card" style="width: 100%; max-width: 500px; padding: 30px;">
+        <h2 style="margin-bottom: 20px;">{{ 'Edit Paket' if package else 'Tambah Paket Baru' }}</h2>
+        
+        <form method="POST">
+            <div style="margin-bottom: 15px; text-align: left;">
+                <label style="display: block; margin-bottom: 5px;">Nama Paket</label>
+                <input type="text" name="name" value="{{ package.name if package else '' }}" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" required placeholder="Contoh: Paket Bulanan Premium">
+            </div>
+            
+            <div style="margin-bottom: 15px; text-align: left;">
+                <label style="display: block; margin-bottom: 5px;">Tipe Paket</label>
+                <select name="package_type" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" required>
+                    <option value="bulanan" {% if package and package.package_type == 'bulanan' %}selected{% endif %}>Langganan (Bulanan)</option>
+                    <option value="jam-jaman" {% if package and package.package_type == 'jam-jaman' %}selected{% endif %}>Voucher (Jam-jaman)</option>
+                </select>
+            </div>
+            
+            <div style="margin-bottom: 15px; text-align: left;">
+                <label style="display: block; margin-bottom: 5px;">Harga (Rp)</label>
+                <input type="number" name="price" value="{{ package.price | int if package else '' }}" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" required placeholder="Contoh: 150000">
+            </div>
+            
+            <div style="margin-bottom: 20px; text-align: left;">
+                <label style="display: block; margin-bottom: 5px;">Kecepatan</label>
+                <input type="text" name="speed" value="{{ package.speed if package else '' }}" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" required placeholder="Contoh: 20 Mbps">
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Simpan Paket</button>
+            <a href="{{ url_for('admin_dashboard') }}" style="display: block; text-align: center; margin-top: 15px; color: #555;">Batal</a>
+        </form>
+    </div>
+</div>
+{% endblock %}
