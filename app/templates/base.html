@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi ISP & Voucher Wi-Fi</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Menghubungkan CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <!-- Navbar Global -->
+    <nav class="navbar">
+        <a href="{{ url_for('index') }}" class="navbar-brand"><i class="fa-solid fa-bolt text-accent"></i> Wi-Fi Flash</a>
+        <div class="nav-links">
+            <a href="{{ url_for('index') }}"><i class="fa-solid fa-layer-group"></i> Katalog Layanan</a>
+            {% if current_user.is_authenticated %}
+                {% if current_user.is_admin %}
+                    <a href="{{ url_for('admin_dashboard') }}" style="color: var(--primary-color);"><i class="fa-solid fa-shield-halved"></i> Menu Admin</a>
+                {% else %}
+                    <a href="{{ url_for('dashboard') }}"><i class="fa-solid fa-chart-pie"></i> Dashboard</a>
+                {% endif %}
+                <a href="{{ url_for('logout') }}" class="btn btn-secondary" style="padding: 0.4rem 1rem; margin-left: 15px;"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            {% else %}
+                <a href="{{ url_for('login') }}" class="btn btn-secondary" style="padding: 0.4rem 1rem; margin-left: 15px;"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+                <a href="{{ url_for('register') }}" class="btn btn-primary" style="padding: 0.4rem 1rem; margin-left: 10px;"><i class="fa-solid fa-user-plus"></i> Register</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <!-- Konten Dinamis -->
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+</body>
+</html>

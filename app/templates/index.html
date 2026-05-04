@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="text-center" style="margin-bottom: 4rem; margin-top: 2rem;">
+    <h1 style="font-size: 3.5rem; margin-bottom: 15px; background: linear-gradient(90deg, #fff, var(--primary-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Koneksi Super Cepat.</h1>
+    <p style="font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 0 auto;">Aktifkan layanan internet premium sekarang juga. Tanpa lelet, tanpa batas, langsung aktif dalam hitungan detik.</p>
+</div>
+
+<div class="grid-katalog">
+    {% for paket in packages %}
+    <div class="package-card">
+        <div class="package-type">
+            {% if paket.package_type == 'jam-jaman' %}
+                <i class="fa-solid fa-hourglass-half"></i> Voucher
+            {% else %}
+                <i class="fa-solid fa-calendar-check"></i> Langganan
+            {% endif %}
+        </div>
+        
+        <h3 style="margin-top: 15px;">{{ paket.name }}</h3>
+        
+        <div class="price">
+            <span>Rp</span> {{ "{:,.0f}".format(paket.price) }}
+        </div>
+        
+        <div class="package-speed">
+            <i class="fa-solid fa-gauge-high"></i> Kecepatan: <strong>{{ paket.speed }}</strong>
+        </div>
+        
+        <a href="{{ url_for('order', package_id=paket.id) }}" class="btn btn-primary" style="width: 100%; margin-top: 15px;">
+            <i class="fa-solid fa-cart-shopping"></i> Beli Sekarang
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

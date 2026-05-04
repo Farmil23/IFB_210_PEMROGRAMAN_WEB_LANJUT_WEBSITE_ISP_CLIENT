@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Dashboard Pelanggan</h2>
+<p style="margin-bottom: 20px;">Riwayat Transaksi dan Voucher Anda</p>
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>No TRX</th>
+                <th>Tanggal</th>
+                <th>Paket</th>
+                <th>Status</th>
+                <th>Kode Voucher</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for trx in transactions %}
+            <tr>
+                <td>#{{ trx.id }}</td>
+                <td>{{ trx.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                <td>
+                    <!-- Memanggil relasi tabel Package (butuh setting di models) -->
+                    {% if trx.package_id == 1 %} Voucher 3 Jam {% else %} Paket Bulanan {% endif %}
+                </td>
+                <td>
+                    {% if trx.status == 'pending' %}
+                        <span class="badge pending">Menunggu Pembayaran</span>
+                    {% elif trx.status == 'paid' %}
+                        <span class="badge paid">Lunas</span>
+                    {% else %}
+                        <span class="badge">{{ trx.status }}</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if trx.status == 'paid' and trx.voucher %}
+                        <strong>{{ trx.voucher.code }}</strong>
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5" style="text-align: center;">Belum ada riwayat transaksi.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
