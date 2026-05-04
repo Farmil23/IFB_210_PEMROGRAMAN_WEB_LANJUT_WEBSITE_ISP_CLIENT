@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="display: flex; justify-content: center; margin-top: 50px;">
+    <div class="card" style="width: 100%; max-width: 400px; padding: 30px;">
+        <h2 style="margin-bottom: 20px;">Pemesanan Pemasangan Baru</h2>
+        <p style="margin-bottom: 20px;">Paket: <strong>{{ package.name }}</strong> ({{ package.speed }})</p>
+        
+        <form action="{{ url_for('checkout', package_id=package.id) }}" method="POST">
+            <div style="margin-bottom: 15px; text-align: left;">
+                <label style="display: block; margin-bottom: 5px;">Alamat Lengkap Pemasangan</label>
+                <textarea name="address" rows="3" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" required placeholder="Contoh: Jl. Merdeka No. 10, RT 01/RW 02"></textarea>
+            </div>
+            
+            <div style="margin-bottom: 20px; text-align: left;">
+                <label style="display: block; margin-bottom: 5px;">Nomor HP / WhatsApp Aktif</label>
+                <input type="text" name="phone_number" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" required placeholder="Contoh: 08123456789">
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Lanjut Pembayaran</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

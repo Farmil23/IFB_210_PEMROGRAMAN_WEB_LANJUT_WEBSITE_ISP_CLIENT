@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="display: flex; justify-content: center; margin-top: 50px;">
+    <div class="card" style="width: 100%; max-width: 400px; padding: 30px;">
+        <h2 style="margin-bottom: 20px;">Pemesanan Voucher Wi-Fi</h2>
+        <p style="margin-bottom: 20px;">Paket: <strong>{{ package.name }}</strong> ({{ package.speed }})</p>
+        
+        <form action="{{ url_for('checkout', package_id=package.id) }}" method="POST">
+            <div style="margin-bottom: 20px; text-align: left;">
+                <label style="display: block; margin-bottom: 5px;">Pilih Jaringan / Router Terdekat</label>
+                <select name="router_location" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" required>
+                    <option value="">-- Pilih Lokasi --</option>
+                    <option value="Router Utara (Kampus)">Router Utara (Kampus)</option>
+                    <option value="Router Selatan (Asrama)">Router Selatan (Asrama)</option>
+                    <option value="Router Barat (Kantin)">Router Barat (Kantin)</option>
+                    <option value="Warnet Utama">Warnet Utama</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Lanjut Pembayaran</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
