@@ -1,43 +1,376 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
+    <!-- ===================================== -->
+    <!-- META -->
+    <!-- ===================================== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aplikasi ISP & Voucher Wi-Fi</title>
-    <!-- Google Fonts -->
+
+    <title>
+        {% block title %}
+            ISP Platform
+        {% endblock %}
+    </title>
+
+    <!-- ===================================== -->
+    <!-- GOOGLE FONT -->
+    <!-- ===================================== -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Menghubungkan CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- ===================================== -->
+    <!-- TAILWIND -->
+    <!-- ===================================== -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+
+                    colors: {
+                        primary: '#4338CA',
+                        secondary: '#06B6D4',
+                        dark: '#0F172A',
+                        darklight: '#1E293B',
+                    },
+
+                    boxShadow: {
+                        premium: '0 10px 30px rgba(0,0,0,0.15)',
+                        glow: '0 0 25px rgba(6,182,212,0.35)',
+                    },
+
+                    backgroundImage: {
+                        heroGradient:
+                            'linear-gradient(135deg, #0F172A 0%, #1E1B4B 40%, #0F172A 100%)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- ===================================== -->
+    <!-- ICONS -->
+    <!-- ===================================== -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- ===================================== -->
+    <!-- AOS ANIMATION -->
+    <!-- ===================================== -->
+    <link
+        href="https://unpkg.com/aos@2.3.4/dist/aos.css"
+        rel="stylesheet"
+    />
+
+    <!-- ===================================== -->
+    <!-- CUSTOM STYLE -->
+    <!-- ===================================== -->
+    <style>
+
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at top left, rgba(67,56,202,0.15), transparent 25%),
+                radial-gradient(circle at bottom right, rgba(6,182,212,0.12), transparent 25%),
+                #020617;
+
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* ===================================== */
+        /* GLASS EFFECT */
+        /* ===================================== */
+        .glass {
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        /* ===================================== */
+        /* PREMIUM CARD */
+        /* ===================================== */
+        .premium-card {
+            background: rgba(15,23,42,0.85);
+
+            border: 1px solid rgba(255,255,255,0.06);
+
+            box-shadow:
+                0 10px 40px rgba(0,0,0,0.35);
+
+            transition: all 0.35s ease;
+        }
+
+        .premium-card:hover {
+            transform: translateY(-6px);
+
+            border-color: rgba(6,182,212,0.35);
+
+            box-shadow:
+                0 20px 50px rgba(6,182,212,0.15);
+        }
+
+        /* ===================================== */
+        /* BUTTON */
+        /* ===================================== */
+        .btn-primary {
+            background:
+                linear-gradient(
+                    135deg,
+                    #4338CA,
+                    #06B6D4
+                );
+
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 30px rgba(6,182,212,0.3);
+        }
+
+        .btn-outline {
+            border: 1px solid rgba(255,255,255,0.1);
+
+            background: rgba(255,255,255,0.03);
+
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.08);
+        }
+
+        /* ===================================== */
+        /* SCROLLBAR */
+        /* ===================================== */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #020617;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(
+                180deg,
+                #4338CA,
+                #06B6D4
+            );
+
+            border-radius: 999px;
+        }
+
+        /* ===================================== */
+        /* INPUT */
+        /* ===================================== */
+        .input-modern {
+            background: rgba(255,255,255,0.04);
+
+            border: 1px solid rgba(255,255,255,0.08);
+
+            transition: all 0.3s ease;
+        }
+
+        .input-modern:focus {
+            outline: none;
+
+            border-color: rgba(6,182,212,0.5);
+
+            box-shadow:
+                0 0 0 4px rgba(6,182,212,0.1);
+        }
+
+        /* ===================================== */
+        /* ANIMATED BACKGROUND BLUR */
+        /* ===================================== */
+        .blur-circle {
+            position: absolute;
+            border-radius: 999px;
+            filter: blur(100px);
+            z-index: -1;
+        }
+
+        .blur-1 {
+            width: 300px;
+            height: 300px;
+
+            background: rgba(67,56,202,0.25);
+
+            top: -100px;
+            left: -100px;
+        }
+
+        .blur-2 {
+            width: 350px;
+            height: 350px;
+
+            background: rgba(6,182,212,0.2);
+
+            bottom: -120px;
+            right: -120px;
+        }
+
+        /* ===================================== */
+        /* FADE ANIMATION */
+        /* ===================================== */
+        .fade-up {
+            animation: fadeUp 0.7s ease forwards;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+    </style>
+
+    {% block head %}{% endblock %}
 </head>
-<body>
 
-    <!-- Navbar Global -->
-    <nav class="navbar">
-        <a href="{{ url_for('index') }}" class="navbar-brand"><i class="fa-solid fa-bolt text-accent"></i> Wi-Fi Flash</a>
-        <div class="nav-links">
-            <a href="{{ url_for('index') }}"><i class="fa-solid fa-layer-group"></i> Katalog Layanan</a>
-            {% if current_user.is_authenticated %}
-                {% if current_user.is_admin %}
-                    <a href="{{ url_for('admin_dashboard') }}" style="color: var(--primary-color);"><i class="fa-solid fa-shield-halved"></i> Menu Admin</a>
-                {% else %}
-                    <a href="{{ url_for('dashboard') }}"><i class="fa-solid fa-chart-pie"></i> Dashboard</a>
-                {% endif %}
-                <a href="{{ url_for('logout') }}" class="btn btn-secondary" style="padding: 0.4rem 1rem; margin-left: 15px;"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
-            {% else %}
-                <a href="{{ url_for('login') }}" class="btn btn-secondary" style="padding: 0.4rem 1rem; margin-left: 15px;"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
-                <a href="{{ url_for('register') }}" class="btn btn-primary" style="padding: 0.4rem 1rem; margin-left: 10px;"><i class="fa-solid fa-user-plus"></i> Register</a>
+<body class="relative min-h-screen">
+
+    <!-- ===================================== -->
+    <!-- BACKGROUND EFFECT -->
+    <!-- ===================================== -->
+    <div class="blur-circle blur-1"></div>
+    <div class="blur-circle blur-2"></div>
+
+    <!-- ===================================== -->
+    <!-- NAVBAR -->
+    <!-- ===================================== -->
+    {% include 'partials/navbar.html' %}
+
+    <!-- ===================================== -->
+    <!-- FLASH MESSAGE -->
+    <!-- ===================================== -->
+    <div class="fixed top-5 right-5 z-50 space-y-3">
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+
+                {% for category, message in messages %}
+
+                    <div
+                        class="
+                            glass
+                            px-5
+                            py-4
+                            rounded-2xl
+                            shadow-premium
+                            border
+                            fade-up
+
+                            {% if category == 'success' %}
+                                border-emerald-400/30
+                            {% elif category == 'danger' %}
+                                border-red-400/30
+                            {% else %}
+                                border-cyan-400/30
+                            {% endif %}
+                        "
+                    >
+                        <div class="flex items-center gap-3">
+
+                            <i data-lucide="bell" class="w-5 h-5 text-cyan-400"></i>
+
+                            <span class="text-sm text-slate-200">
+                                {{ message }}
+                            </span>
+
+                        </div>
+                    </div>
+
+                {% endfor %}
+
             {% endif %}
-        </div>
-    </nav>
+        {% endwith %}
 
-    <!-- Konten Dinamis -->
-    <main class="container">
-        {% block content %}{% endblock %}
+    </div>
+
+    <!-- ===================================== -->
+    <!-- MAIN CONTENT -->
+    <!-- ===================================== -->
+    <main class="relative z-10">
+
+        {% block content %}
+        {% endblock %}
+
     </main>
+
+    <!-- ===================================== -->
+    <!-- FOOTER -->
+    <!-- ===================================== -->
+    {% include 'partials/footer.html' %}
+
+    <!-- ===================================== -->
+    <!-- AOS -->
+    <!-- ===================================== -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+        });
+
+        lucide.createIcons();
+    </script>
+
+    <!-- ===================================== -->
+    <!-- GLOBAL SCRIPT -->
+    <!-- ===================================== -->
+    <script>
+
+        // =====================================
+        // AUTO HIDE ALERT
+        // =====================================
+
+        setTimeout(() => {
+
+            const alerts = document.querySelectorAll('.fade-up');
+
+            alerts.forEach(alert => {
+
+                alert.style.opacity = '0';
+                alert.style.transform = 'translateY(-10px)';
+
+                setTimeout(() => {
+                    alert.remove();
+                }, 300);
+
+            });
+
+        }, 4000);
+
+    </script>
+
+    {% block scripts %}{% endblock %}
 
 </body>
 </html>
