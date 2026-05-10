@@ -1,32 +1,358 @@
 {% extends "base.html" %}
 
+{% block title %}
+Login | NexaNet
+{% endblock %}
+
 {% block content %}
-<div style="display: flex; justify-content: center; margin-top: 50px;">
-    <div class="card" style="width: 100%; max-width: 400px; padding: 30px;">
-        <h2 style="margin-bottom: 20px;">Masuk ke Akun</h2>
-        <form method="POST" action="{{ url_for('login') }}">
-            {% with messages = get_flashed_messages() %}
-              {% if messages %}
-                <div style="color: red; margin-bottom: 15px; font-size: 14px; text-align: center;">
-                  {% for message in messages %}
-                    {{ message }}
-                  {% endfor %}
+
+<div class="relative min-h-screen overflow-hidden flex items-center justify-center px-6 py-20">
+
+    <!-- BACKGROUND -->
+    <div class="absolute inset-0 bg-gradient-to-br from-slate-950 via-indigo-950 to-slate-950"></div>
+
+    <div class="absolute top-0 left-0 w-[500px] h-[500px] bg-cyan-500/10 blur-[140px] rounded-full"></div>
+
+    <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-indigo-500/10 blur-[140px] rounded-full"></div>
+
+    <!-- GRID -->
+    <div class="relative z-10 w-full max-w-6xl grid lg:grid-cols-2 rounded-[40px] overflow-hidden border border-white/10 bg-white/5 backdrop-blur-2xl">
+
+        <!-- LEFT -->
+        <div class="hidden lg:flex flex-col justify-between p-14 border-r border-white/10">
+
+            <div>
+
+                <!-- LOGO -->
+                <div class="flex items-center gap-4">
+
+                    <div class="
+                            w-16
+                            h-16
+                            rounded-3xl
+                            bg-gradient-to-br
+                            from-indigo-600
+                            to-cyan-500
+                            flex
+                            items-center
+                            justify-center
+                            shadow-glow
+                        ">
+
+                        <i data-lucide="wifi" class="w-8 h-8 text-white"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h1 class="text-3xl font-black text-white">
+                            NexaNet
+                        </h1>
+
+                        <p class="text-slate-400">
+                            Premium ISP Platform
+                        </p>
+
+                    </div>
+
                 </div>
-              {% endif %}
-            {% endwith %}
-            <div style="margin-bottom: 15px; text-align: left;">
-                <label style="display: block; margin-bottom: 5px;">Email</label>
-                <input type="email" name="email" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" required>
+
+                <!-- TEXT -->
+                <div class="mt-20">
+
+                    <div class="
+                            inline-flex
+                            items-center
+                            gap-2
+                            px-4
+                            py-2
+                            rounded-full
+                            bg-cyan-500/10
+                            border
+                            border-cyan-400/20
+                        ">
+
+                        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+
+                        <p class="text-cyan-300 text-sm font-medium">
+                            Secure Customer Portal
+                        </p>
+
+                    </div>
+
+                    <h2 class="
+                            mt-8
+                            text-5xl
+                            font-black
+                            leading-tight
+                            text-white
+                        ">
+                        Experience
+                        Future Internet
+                        Infrastructure
+                    </h2>
+
+                    <p class="
+                            mt-8
+                            text-lg
+                            text-slate-300
+                            leading-relaxed
+                            max-w-xl
+                        ">
+                        Access your premium internet services, monitor
+                        transactions, manage subscriptions, and enjoy
+                        ultra-fast connectivity with NexaNet.
+                    </p>
+
+                </div>
+
             </div>
-            <div style="margin-bottom: 20px; text-align: left;">
-                <label style="display: block; margin-bottom: 5px;">Password</label>
-                <input type="password" name="password" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" required>
+
+            <!-- STATS -->
+            <div class="grid grid-cols-3 gap-4">
+
+                <div class="glass rounded-3xl p-5">
+
+                    <h3 class="text-3xl font-black text-cyan-400">
+                        99.9%
+                    </h3>
+
+                    <p class="text-slate-400 text-sm mt-2">
+                        Uptime
+                    </p>
+
+                </div>
+
+                <div class="glass rounded-3xl p-5">
+
+                    <h3 class="text-3xl font-black text-cyan-400">
+                        24/7
+                    </h3>
+
+                    <p class="text-slate-400 text-sm mt-2">
+                        Support
+                    </p>
+
+                </div>
+
+                <div class="glass rounded-3xl p-5">
+
+                    <h3 class="text-3xl font-black text-cyan-400">
+                        10K+
+                    </h3>
+
+                    <p class="text-slate-400 text-sm mt-2">
+                        Users
+                    </p>
+
+                </div>
+
             </div>
-            <button type="submit" class="btn btn-primary" style="width: 100%;">Masuk</button>
-        </form>
-        <div style="margin-top: 15px; text-align: center; font-size: 14px;">
-            Belum punya akun? <a href="{{ url_for('register') }}">Daftar di sini</a>
+
         </div>
+
+        <!-- RIGHT -->
+        <div class="p-8 lg:p-14 flex items-center">
+
+            <div class="w-full max-w-xl mx-auto">
+
+                <!-- TITLE -->
+                <div>
+
+                    <h2 class="
+                            text-4xl
+                            font-black
+                            text-white
+                        ">
+                        Welcome Back
+                    </h2>
+
+                    <p class="text-slate-400 mt-4 text-lg">
+                        Login to continue accessing your dashboard.
+                    </p>
+
+                </div>
+
+                <!-- FLASH -->
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="mt-8 space-y-4">
+
+                            {% for category, message in messages %}
+
+                            <div class="
+                                    rounded-2xl
+                                    border
+                                    border-red-500/20
+                                    bg-red-500/10
+                                    px-5
+                                    py-4
+                                    text-red-300
+                                ">
+                                {{ message }}
+                            </div>
+
+                            {% endfor %}
+
+                        </div>
+                    {% endif %}
+                {% endwith %}
+
+                <!-- FORM -->
+                <form method="POST" class="mt-10 space-y-6">
+
+                    <!-- EMAIL -->
+                    <div>
+
+                        <label class="
+                                block
+                                text-sm
+                                font-semibold
+                                text-slate-300
+                                mb-3
+                            ">
+                            Email Address
+                        </label>
+
+                        <div class="relative">
+
+                            <i data-lucide="mail" class="
+                                    absolute
+                                    left-5
+                                    top-1/2
+                                    -translate-y-1/2
+                                    w-5
+                                    h-5
+                                    text-slate-500
+                                "></i>
+
+                            <input
+                                type="email"
+                                name="email"
+                                required
+                                class="
+                                    w-full
+                                    h-16
+                                    rounded-2xl
+                                    border
+                                    border-white/10
+                                    bg-white/5
+                                    pl-14
+                                    pr-5
+                                    text-white
+                                    placeholder:text-slate-500
+                                    focus:outline-none
+                                    focus:ring-2
+                                    focus:ring-cyan-400/40
+                                    focus:border-cyan-400/40
+                                    transition-all
+                                "
+                                placeholder="Enter your email"
+                            >
+
+                        </div>
+
+                    </div>
+
+                    <!-- PASSWORD -->
+                    <div>
+
+                        <label class="
+                                block
+                                text-sm
+                                font-semibold
+                                text-slate-300
+                                mb-3
+                            ">
+                            Password
+                        </label>
+
+                        <div class="relative">
+
+                            <i data-lucide="lock" class="
+                                    absolute
+                                    left-5
+                                    top-1/2
+                                    -translate-y-1/2
+                                    w-5
+                                    h-5
+                                    text-slate-500
+                                "></i>
+
+                            <input
+                                type="password"
+                                name="password"
+                                required
+                                class="
+                                    w-full
+                                    h-16
+                                    rounded-2xl
+                                    border
+                                    border-white/10
+                                    bg-white/5
+                                    pl-14
+                                    pr-5
+                                    text-white
+                                    placeholder:text-slate-500
+                                    focus:outline-none
+                                    focus:ring-2
+                                    focus:ring-cyan-400/40
+                                    focus:border-cyan-400/40
+                                    transition-all
+                                "
+                                placeholder="Enter your password"
+                            >
+
+                        </div>
+
+                    </div>
+
+                    <!-- BUTTON -->
+                    <button
+                        type="submit"
+                        class="
+                            w-full
+                            h-16
+                            rounded-2xl
+                            bg-gradient-to-r
+                            from-indigo-600
+                            to-cyan-500
+                            text-white
+                            font-bold
+                            text-lg
+                            shadow-glow
+                            hover:scale-[1.01]
+                            transition-all
+                        "
+                    >
+                        Login to Dashboard
+                    </button>
+
+                </form>
+
+                <!-- REGISTER -->
+                <p class="
+                        mt-8
+                        text-center
+                        text-slate-400
+                    ">
+                    Don't have an account?
+
+                    <a href="/register" class="
+                            text-cyan-400
+                            hover:text-cyan-300
+                            font-semibold
+                        ">
+                        Create Account
+                    </a>
+                </p>
+
+            </div>
+
+        </div>
+
     </div>
+
 </div>
+
 {% endblock %}
