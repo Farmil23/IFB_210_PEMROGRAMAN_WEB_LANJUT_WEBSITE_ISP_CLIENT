@@ -1,4 +1,5 @@
 import os
+# pyrefly: ignore [missing-import]
 from dotenv import load_dotenv
 
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -10,10 +11,4 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False 
     
     # Konfigurasi tambahan untuk SSL Aiven MySQL
-    SQLALCHEMY_ENGINE_OPTIONS = {
-        "connect_args": {
-            "ssl": {
-                "ca": os.path.join(basedir, "ca.pem") ## MEMANGGIL SSL KEAMANAN (HIRAUKAN AJA YA)
-            }
-        }
-    }
+    SQLALCHEMY_ENGINE_OPTIONS = {}
