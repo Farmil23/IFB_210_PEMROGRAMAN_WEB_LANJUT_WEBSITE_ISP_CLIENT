@@ -1,36 +1,893 @@
 {% extends "base.html" %}
 
-{% block content %}
-<div class="text-center" style="margin-bottom: 4rem; margin-top: 2rem;">
-    <h1 style="font-size: 3.5rem; margin-bottom: 15px; background: linear-gradient(90deg, #fff, var(--primary-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Koneksi Super Cepat.</h1>
-    <p style="font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin: 0 auto;">Aktifkan layanan internet premium sekarang juga. Tanpa lelet, tanpa batas, langsung aktif dalam hitungan detik.</p>
-</div>
+{% block title %}
+NexaNet | Premium ISP Platform
+{% endblock %}
 
-<div class="grid-katalog">
-    {% for paket in packages %}
-    <div class="package-card">
-        <div class="package-type">
-            {% if paket.package_type == 'jam-jaman' %}
-                <i class="fa-solid fa-hourglass-half"></i> Voucher
-            {% else %}
-                <i class="fa-solid fa-calendar-check"></i> Langganan
-            {% endif %}
+{% block content %}
+
+<!-- ===================================== -->
+<!-- HERO SECTION -->
+<!-- ===================================== -->
+<section
+    class="
+        relative
+        overflow-hidden
+        min-h-screen
+        flex
+        items-center
+    "
+>
+
+    <!-- GRADIENT BACKGROUND -->
+    <div
+        class="
+            absolute
+            inset-0
+            bg-gradient-to-br
+            from-indigo-950
+            via-slate-950
+            to-cyan-950
+        "
+    ></div>
+
+    <!-- GLOW -->
+    <div
+        class="
+            absolute
+            top-0
+            left-0
+            w-[500px]
+            h-[500px]
+            bg-indigo-600/20
+            blur-[140px]
+            rounded-full
+        "
+    ></div>
+
+    <div
+        class="
+            absolute
+            bottom-0
+            right-0
+            w-[500px]
+            h-[500px]
+            bg-cyan-500/20
+            blur-[140px]
+            rounded-full
+        "
+    ></div>
+
+    <div
+        class="
+            relative
+            z-10
+            max-w-7xl
+            mx-auto
+            px-6
+            lg:px-8
+            py-24
+            grid
+            lg:grid-cols-2
+            gap-16
+            items-center
+        "
+    >
+
+        <!-- LEFT -->
+        <div data-aos="fade-right">
+
+            <!-- BADGE -->
+            <div
+                class="
+                    inline-flex
+                    items-center
+                    gap-2
+                    px-4
+                    py-2
+                    rounded-full
+                    glass
+                    border
+                    border-cyan-400/20
+                    mb-8
+                "
+            >
+
+                <span
+                    class="
+                        w-2
+                        h-2
+                        rounded-full
+                        bg-cyan-400
+                        animate-pulse
+                    "
+                ></span>
+
+                <p
+                    class="
+                        text-sm
+                        text-cyan-300
+                        font-medium
+                    "
+                >
+                    Next Generation Internet Platform
+                </p>
+
+            </div>
+
+            <!-- TITLE -->
+            <h1
+                class="
+                    text-5xl
+                    lg:text-7xl
+                    font-black
+                    leading-tight
+                    tracking-tight
+                    text-white
+                "
+            >
+                Ultra Fast
+                <span
+                    class="
+                        bg-gradient-to-r
+                        from-cyan-400
+                        to-indigo-400
+                        bg-clip-text
+                        text-transparent
+                    "
+                >
+                    Internet
+                </span>
+
+                For Modern Digital Life
+            </h1>
+
+            <!-- DESCRIPTION -->
+            <p
+                class="
+                    mt-8
+                    text-lg
+                    lg:text-xl
+                    text-slate-300
+                    leading-relaxed
+                    max-w-2xl
+                "
+            >
+                Experience premium fiber internet with blazing speed,
+                ultra-low latency, secure connectivity, and modern
+                digital services designed for the future.
+            </p>
+
+            <!-- BUTTON -->
+            <div
+                class="
+                    mt-10
+                    flex
+                    flex-col
+                    sm:flex-row
+                    gap-4
+                "
+            >
+
+                <a
+                    href="/register"
+                    class="
+                        btn-primary
+                        px-8
+                        py-4
+                        rounded-2xl
+                        text-white
+                        font-semibold
+                        text-center
+                        shadow-glow
+                    "
+                >
+                    Get Started
+                </a>
+
+                <a
+                    href="#packages"
+                    class="
+                        px-8
+                        py-4
+                        rounded-2xl
+                        border
+                        border-white/10
+                        bg-white/5
+                        text-white
+                        font-semibold
+                        hover:bg-white/10
+                        transition-all
+                        text-center
+                    "
+                >
+                    Explore Packages
+                </a>
+
+            </div>
+
+            <!-- STATS -->
+            <div
+                class="
+                    mt-14
+                    grid
+                    grid-cols-3
+                    gap-4
+                "
+            >
+
+                <div class="glass rounded-3xl p-5">
+
+                    <h2
+                        class="
+                            text-3xl
+                            font-black
+                            text-cyan-400
+                        "
+                    >
+                        99.9%
+                    </h2>
+
+                    <p class="text-slate-400 mt-1 text-sm">
+                        Network Uptime
+                    </p>
+
+                </div>
+
+                <div class="glass rounded-3xl p-5">
+
+                    <h2
+                        class="
+                            text-3xl
+                            font-black
+                            text-cyan-400
+                        "
+                    >
+                        24/7
+                    </h2>
+
+                    <p class="text-slate-400 mt-1 text-sm">
+                        Premium Support
+                    </p>
+
+                </div>
+
+                <div class="glass rounded-3xl p-5">
+
+                    <h2
+                        class="
+                            text-3xl
+                            font-black
+                            text-cyan-400
+                        "
+                    >
+                        10K+
+                    </h2>
+
+                    <p class="text-slate-400 mt-1 text-sm">
+                        Active Customers
+                    </p>
+
+                </div>
+
+            </div>
+
         </div>
-        
-        <h3 style="margin-top: 15px;">{{ paket.name }}</h3>
-        
-        <div class="price">
-            <span>Rp</span> {{ "{:,.0f}".format(paket.price) }}
+
+        <!-- RIGHT -->
+        <div
+            class="relative"
+            data-aos="fade-left"
+        >
+
+            <!-- MAIN DASHBOARD -->
+            <div
+                class="
+                    premium-card
+                    rounded-[32px]
+                    p-8
+                    relative
+                    overflow-hidden
+                "
+            >
+
+                <!-- TOP -->
+                <div
+                    class="
+                        flex
+                        items-center
+                        justify-between
+                        mb-8
+                    "
+                >
+
+                    <div>
+
+                        <p class="text-slate-400 text-sm">
+                            Current Network Speed
+                        </p>
+
+                        <h2
+                            class="
+                                text-5xl
+                                font-black
+                                text-white
+                                mt-2
+                            "
+                        >
+                            940
+                            <span
+                                class="
+                                    text-xl
+                                    text-cyan-400
+                                "
+                            >
+                                Mbps
+                            </span>
+                        </h2>
+
+                    </div>
+
+                    <div
+                        class="
+                            w-16
+                            h-16
+                            rounded-3xl
+                            bg-gradient-to-br
+                            from-indigo-600
+                            to-cyan-500
+                            flex
+                            items-center
+                            justify-center
+                            shadow-glow
+                        "
+                    >
+
+                        <i
+                            data-lucide="activity"
+                            class="w-8 h-8 text-white"
+                        ></i>
+
+                    </div>
+
+                </div>
+
+                <!-- GRAPH -->
+                <div
+                    class="
+                        h-44
+                        rounded-3xl
+                        bg-gradient-to-br
+                        from-indigo-500/10
+                        to-cyan-500/10
+                        border
+                        border-white/5
+                        flex
+                        items-end
+                        gap-3
+                        p-5
+                    "
+                >
+
+                    <div class="w-full h-16 bg-cyan-400/30 rounded-t-2xl"></div>
+                    <div class="w-full h-24 bg-cyan-400/40 rounded-t-2xl"></div>
+                    <div class="w-full h-28 bg-cyan-400/50 rounded-t-2xl"></div>
+                    <div class="w-full h-20 bg-cyan-400/40 rounded-t-2xl"></div>
+                    <div class="w-full h-36 bg-cyan-400/70 rounded-t-2xl"></div>
+                    <div class="w-full h-32 bg-cyan-400/50 rounded-t-2xl"></div>
+
+                </div>
+
+                <!-- BOTTOM -->
+                <div
+                    class="
+                        grid
+                        grid-cols-2
+                        gap-4
+                        mt-6
+                    "
+                >
+
+                    <div
+                        class="
+                            glass
+                            rounded-2xl
+                            p-5
+                        "
+                    >
+
+                        <p class="text-slate-400 text-sm">
+                            Ping
+                        </p>
+
+                        <h3
+                            class="
+                                text-2xl
+                                font-bold
+                                text-white
+                                mt-2
+                            "
+                        >
+                            4ms
+                        </h3>
+
+                    </div>
+
+                    <div
+                        class="
+                            glass
+                            rounded-2xl
+                            p-5
+                        "
+                    >
+
+                        <p class="text-slate-400 text-sm">
+                            Stability
+                        </p>
+
+                        <h3
+                            class="
+                                text-2xl
+                                font-bold
+                                text-white
+                                mt-2
+                            "
+                        >
+                            Excellent
+                        </h3>
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
-        
-        <div class="package-speed">
-            <i class="fa-solid fa-gauge-high"></i> Kecepatan: <strong>{{ paket.speed }}</strong>
-        </div>
-        
-        <a href="{{ url_for('order', package_id=paket.id) }}" class="btn btn-primary" style="width: 100%; margin-top: 15px;">
-            <i class="fa-solid fa-cart-shopping"></i> Beli Sekarang
-        </a>
+
     </div>
-    {% endfor %}
-</div>
+
+</section>
+
+<!-- ===================================== -->
+<!-- FEATURES -->
+<!-- ===================================== -->
+<section
+    id="features"
+    class="py-28"
+>
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+        <!-- TITLE -->
+        <div
+            class="
+                text-center
+                max-w-3xl
+                mx-auto
+            "
+            data-aos="fade-up"
+        >
+
+            <h2
+                class="
+                    text-4xl
+                    lg:text-5xl
+                    font-black
+                    text-white
+                "
+            >
+                Why Choose
+                <span
+                    class="
+                        bg-gradient-to-r
+                        from-cyan-400
+                        to-indigo-400
+                        bg-clip-text
+                        text-transparent
+                    "
+                >
+                    NexaNet
+                </span>
+            </h2>
+
+            <p
+                class="
+                    mt-6
+                    text-lg
+                    text-slate-400
+                "
+            >
+                Built with modern infrastructure, intelligent systems,
+                and premium customer experience.
+            </p>
+
+        </div>
+
+        <!-- GRID -->
+        <div
+            class="
+                mt-20
+                grid
+                md:grid-cols-2
+                lg:grid-cols-3
+                gap-8
+            "
+        >
+
+            <!-- CARD -->
+            <div
+                class="
+                    premium-card
+                    rounded-3xl
+                    p-8
+                "
+                data-aos="fade-up"
+            >
+
+                <div
+                    class="
+                        w-16
+                        h-16
+                        rounded-3xl
+                        bg-gradient-to-br
+                        from-indigo-600
+                        to-cyan-500
+                        flex
+                        items-center
+                        justify-center
+                        shadow-glow
+                    "
+                >
+
+                    <i
+                        data-lucide="zap"
+                        class="w-8 h-8 text-white"
+                    ></i>
+
+                </div>
+
+                <h3
+                    class="
+                        mt-8
+                        text-2xl
+                        font-bold
+                        text-white
+                    "
+                >
+                    Blazing Fast Speed
+                </h3>
+
+                <p
+                    class="
+                        mt-4
+                        text-slate-400
+                        leading-relaxed
+                    "
+                >
+                    Enjoy ultra-fast fiber connectivity with stable
+                    high-speed internet access.
+                </p>
+
+            </div>
+
+            <!-- CARD -->
+            <div
+                class="
+                    premium-card
+                    rounded-3xl
+                    p-8
+                "
+                data-aos="fade-up"
+                data-aos-delay="100"
+            >
+
+                <div
+                    class="
+                        w-16
+                        h-16
+                        rounded-3xl
+                        bg-gradient-to-br
+                        from-indigo-600
+                        to-cyan-500
+                        flex
+                        items-center
+                        justify-center
+                        shadow-glow
+                    "
+                >
+
+                    <i
+                        data-lucide="shield-check"
+                        class="w-8 h-8 text-white"
+                    ></i>
+
+                </div>
+
+                <h3
+                    class="
+                        mt-8
+                        text-2xl
+                        font-bold
+                        text-white
+                    "
+                >
+                    Secure Infrastructure
+                </h3>
+
+                <p
+                    class="
+                        mt-4
+                        text-slate-400
+                        leading-relaxed
+                    "
+                >
+                    Enterprise-grade protection with secure networking
+                    and reliable uptime.
+                </p>
+
+            </div>
+
+            <!-- CARD -->
+            <div
+                class="
+                    premium-card
+                    rounded-3xl
+                    p-8
+                "
+                data-aos="fade-up"
+                data-aos-delay="200"
+            >
+
+                <div
+                    class="
+                        w-16
+                        h-16
+                        rounded-3xl
+                        bg-gradient-to-br
+                        from-indigo-600
+                        to-cyan-500
+                        flex
+                        items-center
+                        justify-center
+                        shadow-glow
+                    "
+                >
+
+                    <i
+                        data-lucide="headphones"
+                        class="w-8 h-8 text-white"
+                    ></i>
+
+                </div>
+
+                <h3
+                    class="
+                        mt-8
+                        text-2xl
+                        font-bold
+                        text-white
+                    "
+                >
+                    24/7 Premium Support
+                </h3>
+
+                <p
+                    class="
+                        mt-4
+                        text-slate-400
+                        leading-relaxed
+                    "
+                >
+                    Dedicated customer support ready to help anytime you
+                    need assistance.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ===================================== -->
+<!-- PACKAGES -->
+<!-- ===================================== -->
+<section
+    id="packages"
+    class="pb-28"
+>
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+        <!-- TITLE -->
+        <div
+            class="
+                text-center
+                max-w-3xl
+                mx-auto
+            "
+        >
+
+            <h2
+                class="
+                    text-4xl
+                    lg:text-5xl
+                    font-black
+                    text-white
+                "
+            >
+                Premium Internet Packages
+            </h2>
+
+            <p
+                class="
+                    mt-6
+                    text-lg
+                    text-slate-400
+                "
+            >
+                Choose the perfect package for your digital lifestyle.
+            </p>
+
+        </div>
+
+        <!-- PACKAGE GRID -->
+        <div
+            class="
+                mt-20
+                grid
+                md:grid-cols-2
+                lg:grid-cols-3
+                gap-8
+            "
+        >
+
+            {% for package in packages %}
+
+            <div
+                class="
+                    premium-card
+                    rounded-[32px]
+                    p-8
+                    relative
+                    overflow-hidden
+                "
+                data-aos="fade-up"
+            >
+
+                <!-- GLOW -->
+                <div
+                    class="
+                        absolute
+                        top-0
+                        right-0
+                        w-40
+                        h-40
+                        bg-cyan-500/10
+                        blur-[90px]
+                    "
+                ></div>
+
+                <!-- SPEED -->
+                <div
+                    class="
+                        inline-flex
+                        items-center
+                        px-4
+                        py-2
+                        rounded-full
+                        bg-cyan-500/10
+                        border
+                        border-cyan-400/20
+                        text-cyan-300
+                        text-sm
+                        font-semibold
+                    "
+                >
+                    {{ package.speed }}
+                </div>
+
+                <!-- NAME -->
+                <h3
+                    class="
+                        mt-6
+                        text-3xl
+                        font-black
+                        text-white
+                    "
+                >
+                    {{ package.name }}
+                </h3>
+
+                <!-- PRICE -->
+                <div class="mt-6">
+
+                    <span
+                        class="
+                            text-5xl
+                            font-black
+                            text-white
+                        "
+                    >
+                        Rp{{ package.price }}
+                    </span>
+
+                    <span class="text-slate-400">
+                        /month
+                    </span>
+
+                </div>
+
+                <!-- FEATURE -->
+                <div class="mt-8 space-y-4">
+
+                    <div class="flex items-center gap-3">
+
+                        <i
+                            data-lucide="check"
+                            class="w-5 h-5 text-cyan-400"
+                        ></i>
+
+                        <p class="text-slate-300">
+                            Unlimited bandwidth
+                        </p>
+
+                    </div>
+
+                    <div class="flex items-center gap-3">
+
+                        <i
+                            data-lucide="check"
+                            class="w-5 h-5 text-cyan-400"
+                        ></i>
+
+                        <p class="text-slate-300">
+                            Fiber optic network
+                        </p>
+
+                    </div>
+
+                    <div class="flex items-center gap-3">
+
+                        <i
+                            data-lucide="check"
+                            class="w-5 h-5 text-cyan-400"
+                        ></i>
+
+                        <p class="text-slate-300">
+                            24/7 support
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- BUTTON -->
+                <a
+                    href="/login"
+                    class="
+                        mt-10
+                        block
+                        text-center
+                        btn-primary
+                        py-4
+                        rounded-2xl
+                        text-white
+                        font-semibold
+                    "
+                >
+                    Choose Package
+                </a>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
 {% endblock %}

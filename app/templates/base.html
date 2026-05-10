@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- ===================================== -->
     <!-- META -->
@@ -9,7 +10,7 @@
 
     <title>
         {% block title %}
-            ISP Platform
+        ISP Platform
         {% endblock %}
     </title>
 
@@ -19,7 +20,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
 
     <!-- ===================================== -->
     <!-- TAILWIND -->
@@ -63,16 +65,12 @@
     <!-- ===================================== -->
     <!-- AOS ANIMATION -->
     <!-- ===================================== -->
-    <link
-        href="https://unpkg.com/aos@2.3.4/dist/aos.css"
-        rel="stylesheet"
-    />
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
 
     <!-- ===================================== -->
     <!-- CUSTOM STYLE -->
     <!-- ===================================== -->
     <style>
-
         * {
             font-family: 'Inter', sans-serif;
         }
@@ -83,8 +81,8 @@
 
         body {
             background:
-                radial-gradient(circle at top left, rgba(67,56,202,0.15), transparent 25%),
-                radial-gradient(circle at bottom right, rgba(6,182,212,0.12), transparent 25%),
+                radial-gradient(circle at top left, rgba(67, 56, 202, 0.15), transparent 25%),
+                radial-gradient(circle at bottom right, rgba(6, 182, 212, 0.12), transparent 25%),
                 #020617;
 
             color: white;
@@ -95,23 +93,23 @@
         /* GLASS EFFECT */
         /* ===================================== */
         .glass {
-            background: rgba(255,255,255,0.06);
+            background: rgba(255, 255, 255, 0.06);
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
 
-            border: 1px solid rgba(255,255,255,0.08);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         /* ===================================== */
         /* PREMIUM CARD */
         /* ===================================== */
         .premium-card {
-            background: rgba(15,23,42,0.85);
+            background: rgba(15, 23, 42, 0.85);
 
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 1px solid rgba(255, 255, 255, 0.06);
 
             box-shadow:
-                0 10px 40px rgba(0,0,0,0.35);
+                0 10px 40px rgba(0, 0, 0, 0.35);
 
             transition: all 0.35s ease;
         }
@@ -119,10 +117,10 @@
         .premium-card:hover {
             transform: translateY(-6px);
 
-            border-color: rgba(6,182,212,0.35);
+            border-color: rgba(6, 182, 212, 0.35);
 
             box-shadow:
-                0 20px 50px rgba(6,182,212,0.15);
+                0 20px 50px rgba(6, 182, 212, 0.15);
         }
 
         /* ===================================== */
@@ -130,11 +128,9 @@
         /* ===================================== */
         .btn-primary {
             background:
-                linear-gradient(
-                    135deg,
+                linear-gradient(135deg,
                     #4338CA,
-                    #06B6D4
-                );
+                    #06B6D4);
 
             transition: all 0.3s ease;
         }
@@ -143,19 +139,19 @@
             transform: translateY(-2px);
 
             box-shadow:
-                0 10px 30px rgba(6,182,212,0.3);
+                0 10px 30px rgba(6, 182, 212, 0.3);
         }
 
         .btn-outline {
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
 
-            background: rgba(255,255,255,0.03);
+            background: rgba(255, 255, 255, 0.03);
 
             transition: all 0.3s ease;
         }
 
         .btn-outline:hover {
-            background: rgba(255,255,255,0.08);
+            background: rgba(255, 255, 255, 0.08);
         }
 
         /* ===================================== */
@@ -170,11 +166,9 @@
         }
 
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(
-                180deg,
-                #4338CA,
-                #06B6D4
-            );
+            background: linear-gradient(180deg,
+                    #4338CA,
+                    #06B6D4);
 
             border-radius: 999px;
         }
@@ -183,9 +177,9 @@
         /* INPUT */
         /* ===================================== */
         .input-modern {
-            background: rgba(255,255,255,0.04);
+            background: rgba(255, 255, 255, 0.04);
 
-            border: 1px solid rgba(255,255,255,0.08);
+            border: 1px solid rgba(255, 255, 255, 0.08);
 
             transition: all 0.3s ease;
         }
@@ -193,10 +187,10 @@
         .input-modern:focus {
             outline: none;
 
-            border-color: rgba(6,182,212,0.5);
+            border-color: rgba(6, 182, 212, 0.5);
 
             box-shadow:
-                0 0 0 4px rgba(6,182,212,0.1);
+                0 0 0 4px rgba(6, 182, 212, 0.1);
         }
 
         /* ===================================== */
@@ -213,7 +207,7 @@
             width: 300px;
             height: 300px;
 
-            background: rgba(67,56,202,0.25);
+            background: rgba(67, 56, 202, 0.25);
 
             top: -100px;
             left: -100px;
@@ -223,7 +217,7 @@
             width: 350px;
             height: 350px;
 
-            background: rgba(6,182,212,0.2);
+            background: rgba(6, 182, 212, 0.2);
 
             bottom: -120px;
             right: -120px;
@@ -247,7 +241,6 @@
                 transform: translateY(0);
             }
         }
-
     </style>
 
     {% block head %}{% endblock %}
@@ -264,7 +257,7 @@
     <!-- ===================================== -->
     <!-- NAVBAR -->
     <!-- ===================================== -->
-    {% include 'partials/navbar.html' %}
+    <!-- Navbar temporary disabled -->
 
     <!-- ===================================== -->
     <!-- FLASH MESSAGE -->
@@ -272,12 +265,11 @@
     <div class="fixed top-5 right-5 z-50 space-y-3">
 
         {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
+        {% if messages %}
 
-                {% for category, message in messages %}
+        {% for category, message in messages %}
 
-                    <div
-                        class="
+        <div class="
                             glass
                             px-5
                             py-4
@@ -293,22 +285,21 @@
                             {% else %}
                                 border-cyan-400/30
                             {% endif %}
-                        "
-                    >
-                        <div class="flex items-center gap-3">
+                        ">
+            <div class="flex items-center gap-3">
 
-                            <i data-lucide="bell" class="w-5 h-5 text-cyan-400"></i>
+                <i data-lucide="bell" class="w-5 h-5 text-cyan-400"></i>
 
-                            <span class="text-sm text-slate-200">
-                                {{ message }}
-                            </span>
+                <span class="text-sm text-slate-200">
+                    {{ message }}
+                </span>
 
-                        </div>
-                    </div>
+            </div>
+        </div>
 
-                {% endfor %}
+        {% endfor %}
 
-            {% endif %}
+        {% endif %}
         {% endwith %}
 
     </div>
@@ -326,7 +317,7 @@
     <!-- ===================================== -->
     <!-- FOOTER -->
     <!-- ===================================== -->
-    {% include 'partials/footer.html' %}
+    <!-- Footer temporary disabled -->
 
     <!-- ===================================== -->
     <!-- AOS -->
@@ -373,4 +364,5 @@
     {% block scripts %}{% endblock %}
 
 </body>
+
 </html>
