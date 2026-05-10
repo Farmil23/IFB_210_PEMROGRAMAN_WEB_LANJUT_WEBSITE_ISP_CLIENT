@@ -1,0 +1,2 @@
+SECRET_KEY=super-secret-key-untuk-project-akhir ## keamaann
+DATABASE_URI=mysql+pymysql://avnadmin:AVNS_Phom4_9sdiyLssS6eHn@mysql-380db707-readysteady232615-58b1.l.aivencloud.com:13216/isp_client_db ## configurasi database
