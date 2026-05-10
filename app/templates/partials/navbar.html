@@ -1,0 +1,494 @@
+<nav
+    class="
+        sticky
+        top-0
+        z-50
+        border-b
+        border-white/10
+        bg-slate-950/70
+        backdrop-blur-2xl
+    "
+>
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+        <div class="flex items-center justify-between h-20">
+
+            <!-- ===================================== -->
+            <!-- LOGO -->
+            <!-- ===================================== -->
+            <a
+                href="/"
+                class="flex items-center gap-3 group"
+            >
+
+                <div
+                    class="
+                        w-11
+                        h-11
+                        rounded-2xl
+                        bg-gradient-to-br
+                        from-indigo-600
+                        to-cyan-500
+                        flex
+                        items-center
+                        justify-center
+                        shadow-glow
+                        transition-all
+                        duration-300
+                        group-hover:scale-105
+                    "
+                >
+
+                    <i
+                        data-lucide="wifi"
+                        class="w-5 h-5 text-white"
+                    ></i>
+
+                </div>
+
+                <div>
+
+                    <h1
+                        class="
+                            text-xl
+                            font-extrabold
+                            tracking-tight
+                            text-white
+                        "
+                    >
+                        NexaNet
+                    </h1>
+
+                    <p
+                        class="
+                            text-xs
+                            text-slate-400
+                            -mt-1
+                        "
+                    >
+                        Premium ISP Platform
+                    </p>
+
+                </div>
+
+            </a>
+
+            <!-- ===================================== -->
+            <!-- DESKTOP MENU -->
+            <!-- ===================================== -->
+            <div
+                class="
+                    hidden
+                    lg:flex
+                    items-center
+                    gap-2
+                    glass
+                    px-3
+                    py-2
+                    rounded-2xl
+                "
+            >
+
+                <a
+                    href="/"
+                    class="
+                        px-4
+                        py-2
+                        rounded-xl
+                        text-sm
+                        font-medium
+                        text-slate-300
+                        hover:text-white
+                        hover:bg-white/5
+                        transition-all
+                    "
+                >
+                    Home
+                </a>
+
+                <a
+                    href="#packages"
+                    class="
+                        px-4
+                        py-2
+                        rounded-xl
+                        text-sm
+                        font-medium
+                        text-slate-300
+                        hover:text-white
+                        hover:bg-white/5
+                        transition-all
+                    "
+                >
+                    Packages
+                </a>
+
+                <a
+                    href="#features"
+                    class="
+                        px-4
+                        py-2
+                        rounded-xl
+                        text-sm
+                        font-medium
+                        text-slate-300
+                        hover:text-white
+                        hover:bg-white/5
+                        transition-all
+                    "
+                >
+                    Features
+                </a>
+
+                <a
+                    href="#faq"
+                    class="
+                        px-4
+                        py-2
+                        rounded-xl
+                        text-sm
+                        font-medium
+                        text-slate-300
+                        hover:text-white
+                        hover:bg-white/5
+                        transition-all
+                    "
+                >
+                    FAQ
+                </a>
+
+            </div>
+
+            <!-- ===================================== -->
+            <!-- RIGHT MENU -->
+            <!-- ===================================== -->
+            <div class="hidden lg:flex items-center gap-4">
+
+                {% if current_user.is_authenticated %}
+
+                    <!-- USER INFO -->
+                    <div
+                        class="
+                            glass
+                            px-4
+                            py-2
+                            rounded-2xl
+                            flex
+                            items-center
+                            gap-3
+                        "
+                    >
+
+                        <div
+                            class="
+                                w-10
+                                h-10
+                                rounded-xl
+                                bg-gradient-to-br
+                                from-indigo-600
+                                to-cyan-500
+                                flex
+                                items-center
+                                justify-center
+                                font-bold
+                                text-white
+                            "
+                        >
+                            {{ current_user.username[0]|upper }}
+                        </div>
+
+                        <div>
+
+                            <p
+                                class="
+                                    text-sm
+                                    font-semibold
+                                    text-white
+                                "
+                            >
+                                {{ current_user.username }}
+                            </p>
+
+                            <p
+                                class="
+                                    text-xs
+                                    text-slate-400
+                                "
+                            >
+                                {% if current_user.is_admin %}
+                                    Administrator
+                                {% else %}
+                                    Customer
+                                {% endif %}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <!-- DASHBOARD -->
+                    <a
+                        href="/dashboard"
+                        class="
+                            btn-primary
+                            px-5
+                            py-3
+                            rounded-2xl
+                            text-sm
+                            font-semibold
+                            text-white
+                            shadow-glow
+                        "
+                    >
+                        Dashboard
+                    </a>
+
+                    <!-- LOGOUT -->
+                    <a
+                        href="/logout"
+                        class="
+                            px-5
+                            py-3
+                            rounded-2xl
+                            border
+                            border-white/10
+                            bg-white/5
+                            text-sm
+                            font-medium
+                            text-slate-300
+                            hover:bg-white/10
+                            hover:text-white
+                            transition-all
+                        "
+                    >
+                        Logout
+                    </a>
+
+                {% else %}
+
+                    <!-- LOGIN -->
+                    <a
+                        href="/login"
+                        class="
+                            text-slate-300
+                            hover:text-white
+                            transition-all
+                            text-sm
+                            font-medium
+                        "
+                    >
+                        Login
+                    </a>
+
+                    <!-- REGISTER -->
+                    <a
+                        href="/register"
+                        class="
+                            btn-primary
+                            px-5
+                            py-3
+                            rounded-2xl
+                            text-sm
+                            font-semibold
+                            text-white
+                            shadow-glow
+                        "
+                    >
+                        Get Started
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+            <!-- ===================================== -->
+            <!-- MOBILE BUTTON -->
+            <!-- ===================================== -->
+            <button
+                id="mobile-menu-button"
+                class="
+                    lg:hidden
+                    glass
+                    w-12
+                    h-12
+                    rounded-2xl
+                    flex
+                    items-center
+                    justify-center
+                "
+            >
+
+                <i
+                    data-lucide="menu"
+                    class="w-5 h-5 text-white"
+                ></i>
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- ===================================== -->
+    <!-- MOBILE MENU -->
+    <!-- ===================================== -->
+    <div
+        id="mobile-menu"
+        class="
+            hidden
+            lg:hidden
+            border-t
+            border-white/10
+            bg-slate-950/95
+            backdrop-blur-2xl
+        "
+    >
+
+        <div class="px-6 py-6 space-y-3">
+
+            <a
+                href="/"
+                class="
+                    block
+                    px-4
+                    py-3
+                    rounded-2xl
+                    text-slate-300
+                    hover:bg-white/5
+                    hover:text-white
+                    transition-all
+                "
+            >
+                Home
+            </a>
+
+            <a
+                href="#packages"
+                class="
+                    block
+                    px-4
+                    py-3
+                    rounded-2xl
+                    text-slate-300
+                    hover:bg-white/5
+                    hover:text-white
+                    transition-all
+                "
+            >
+                Packages
+            </a>
+
+            <a
+                href="#features"
+                class="
+                    block
+                    px-4
+                    py-3
+                    rounded-2xl
+                    text-slate-300
+                    hover:bg-white/5
+                    hover:text-white
+                    transition-all
+                "
+            >
+                Features
+            </a>
+
+            <a
+                href="#faq"
+                class="
+                    block
+                    px-4
+                    py-3
+                    rounded-2xl
+                    text-slate-300
+                    hover:bg-white/5
+                    hover:text-white
+                    transition-all
+                "
+            >
+                FAQ
+            </a>
+
+            <div class="pt-4 border-t border-white/10">
+
+                {% if current_user.is_authenticated %}
+
+                    <a
+                        href="/dashboard"
+                        class="
+                            block
+                            w-full
+                            text-center
+                            btn-primary
+                            py-3
+                            rounded-2xl
+                            text-white
+                            font-semibold
+                        "
+                    >
+                        Dashboard
+                    </a>
+
+                {% else %}
+
+                    <a
+                        href="/login"
+                        class="
+                            block
+                            w-full
+                            text-center
+                            border
+                            border-white/10
+                            bg-white/5
+                            py-3
+                            rounded-2xl
+                            text-slate-300
+                            mb-3
+                        "
+                    >
+                        Login
+                    </a>
+
+                    <a
+                        href="/register"
+                        class="
+                            block
+                            w-full
+                            text-center
+                            btn-primary
+                            py-3
+                            rounded-2xl
+                            text-white
+                            font-semibold
+                        "
+                    >
+                        Get Started
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</nav>
+
+<script>
+
+    const mobileMenuButton =
+        document.getElementById('mobile-menu-button');
+
+    const mobileMenu =
+        document.getElementById('mobile-menu');
+
+    mobileMenuButton.addEventListener('click', () => {
+
+        mobileMenu.classList.toggle('hidden');
+
+    });
+
+</script>
