@@ -11,7 +11,7 @@ from functools import wraps
 # INFO = KONFIGURASI URL N8N
 # ==========================================
 # INFO = Ganti IP ini dengan IP VPS n8n kamu yang asli
-N8N_WEBHOOK_CHECKOUT_URL = "https://n8n.srv1631432.hstgr.cloud/webhook-test/create_checkout"
+N8N_WEBHOOK_CHECKOUT_URL = "https://n8n.srv1631432.hstgr.cloud/webhook/create_checkout"
 
 
 # ==========================================

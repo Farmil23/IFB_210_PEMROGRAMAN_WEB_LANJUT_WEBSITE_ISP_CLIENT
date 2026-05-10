@@ -1,8 +1,16 @@
-pymysql
-cryptography
+# =============================================
+# INFO = DEPENDENCIES PROYEK ISP VOUCHER WI-FI
+# =============================================
 
+## DATABASE
+pymysql          # INFO = Driver koneksi MySQL untuk Python
+cryptography     # INFO = Dibutuhkan pymysql untuk koneksi SSL ke Aiven MySQL
 
+## FLASK CORE
+Flask            # INFO = Web framework utama
+Flask-SQLAlchemy # INFO = ORM untuk integrasi SQLAlchemy dengan Flask
+Flask-Login      # INFO = Manajemen sesi dan autentikasi pengguna
 
-## FLASK 
-flask
-flask_sqlalchemy
+## HTTP & ENV
+requests         # INFO = Untuk mengirim HTTP POST ke webhook n8n
+python-dotenv    # INFO = Membaca variabel lingkungan dari file .env
