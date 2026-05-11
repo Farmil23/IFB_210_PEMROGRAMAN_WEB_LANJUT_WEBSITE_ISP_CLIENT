@@ -1,12 +1,10 @@
 {% extends "base.html" %}
 
 {% block title %}
-NexaNet | Premium ISP Platform
+BTN Net | Baraya Telematika Nusantara
 {% endblock %}
 
 {% block content %}
-
-{% include 'partials/header.html' %}
 
 <!-- ===================================== -->
 <!-- HERO SECTION -->
@@ -14,20 +12,21 @@ NexaNet | Premium ISP Platform
 <section class="
         relative
         overflow-hidden
-        min-h-screen
+        min-h-[95vh]
         flex
         items-center
     ">
 
-    <!-- GRADIENT BACKGROUND -->
+    <!-- BACKGROUND -->
     <div class="
             absolute
             inset-0
             bg-gradient-to-br
-            from-indigo-950
-            via-slate-950
-            to-cyan-950
-        "></div>
+            from-red-50
+            via-white
+            to-red-100
+        ">
+    </div>
 
     <!-- GLOW -->
     <div class="
@@ -36,10 +35,11 @@ NexaNet | Premium ISP Platform
             left-0
             w-[500px]
             h-[500px]
-            bg-indigo-600/20
-            blur-[140px]
+            bg-red-500/10
+            blur-[120px]
             rounded-full
-        "></div>
+        ">
+    </div>
 
     <div class="
             absolute
@@ -47,11 +47,13 @@ NexaNet | Premium ISP Platform
             right-0
             w-[500px]
             h-[500px]
-            bg-cyan-500/20
-            blur-[140px]
+            bg-red-800/10
+            blur-[120px]
             rounded-full
-        "></div>
+        ">
+    </div>
 
+    <!-- CONTENT -->
     <div class="
             relative
             z-10
@@ -62,7 +64,7 @@ NexaNet | Premium ISP Platform
             py-24
             grid
             lg:grid-cols-2
-            gap-16
+            gap-20
             items-center
         ">
 
@@ -73,30 +75,32 @@ NexaNet | Premium ISP Platform
             <div class="
                     inline-flex
                     items-center
-                    gap-2
-                    px-4
-                    py-2
+                    gap-3
+                    px-5
+                    py-3
                     rounded-full
-                    glass
+                    bg-white
+                    shadow-soft
                     border
-                    border-cyan-400/20
+                    border-red-100
                     mb-8
                 ">
 
                 <span class="
-                        w-2
-                        h-2
+                        w-3
+                        h-3
                         rounded-full
-                        bg-cyan-400
+                        bg-red-500
                         animate-pulse
-                    "></span>
+                    ">
+                </span>
 
                 <p class="
                         text-sm
-                        text-cyan-300
-                        font-medium
+                        font-semibold
+                        text-red-700
                     ">
-                    Next Generation Internet Platform
+                    Enterprise Internet Infrastructure
                 </p>
 
             </div>
@@ -108,20 +112,22 @@ NexaNet | Premium ISP Platform
                     font-black
                     leading-tight
                     tracking-tight
-                    text-white
+                    text-slate-900
                 ">
-                Ultra Fast
+
+                Premium Internet
                 <span class="
-                        bg-gradient-to-r
-                        from-cyan-400
-                        to-indigo-400
-                        bg-clip-text
                         text-transparent
+                        bg-clip-text
+                        bg-gradient-to-r
+                        from-red-600
+                        to-red-800
                     ">
-                    Internet
+                    For Modern
                 </span>
 
-                For Modern Digital Life
+                Digital Connectivity
+
             </h1>
 
             <!-- DESCRIPTION -->
@@ -129,13 +135,16 @@ NexaNet | Premium ISP Platform
                     mt-8
                     text-lg
                     lg:text-xl
-                    text-slate-300
+                    text-slate-600
                     leading-relaxed
                     max-w-2xl
                 ">
-                Experience premium fiber internet with blazing speed,
-                ultra-low latency, secure connectivity, and modern
-                digital services designed for the future.
+
+                BARAYA TELEMATIKA NUSANTARA delivers
+                enterprise-grade internet infrastructure with
+                ultra-fast connectivity, secure networking,
+                and reliable digital services for modern users.
+
             </p>
 
             <!-- BUTTON -->
@@ -147,89 +156,119 @@ NexaNet | Premium ISP Platform
                     gap-4
                 ">
 
-                <a href="/register" class="
+                <!-- PRIMARY -->
+                <a href="/register"
+                    class="
                         btn-primary
                         px-8
                         py-4
                         rounded-2xl
                         text-white
-                        font-semibold
+                        font-bold
                         text-center
-                        shadow-glow
                     ">
+
                     Get Started
+
                 </a>
 
-                <a href="#packages" class="
+                <!-- SECONDARY -->
+                <a href="#packages"
+                    class="
+                        btn-secondary
                         px-8
                         py-4
                         rounded-2xl
-                        border
-                        border-white/10
-                        bg-white/5
-                        text-white
-                        font-semibold
-                        hover:bg-white/10
-                        transition-all
+                        text-slate-800
+                        font-bold
                         text-center
                     ">
+
                     Explore Packages
+
                 </a>
 
             </div>
 
             <!-- STATS -->
             <div class="
-                    mt-14
+                    mt-16
                     grid
                     grid-cols-3
                     gap-4
                 ">
 
-                <div class="glass rounded-3xl p-5">
+                <!-- CARD -->
+                <div class="
+                        premium-card
+                        rounded-3xl
+                        p-5
+                    ">
 
                     <h2 class="
                             text-3xl
                             font-black
-                            text-cyan-400
+                            text-red-600
                         ">
                         99.9%
                     </h2>
 
-                    <p class="text-slate-400 mt-1 text-sm">
+                    <p class="
+                            text-sm
+                            text-slate-500
+                            mt-2
+                        ">
                         Network Uptime
                     </p>
 
                 </div>
 
-                <div class="glass rounded-3xl p-5">
+                <!-- CARD -->
+                <div class="
+                        premium-card
+                        rounded-3xl
+                        p-5
+                    ">
 
                     <h2 class="
                             text-3xl
                             font-black
-                            text-cyan-400
+                            text-red-600
                         ">
                         24/7
                     </h2>
 
-                    <p class="text-slate-400 mt-1 text-sm">
-                        Premium Support
+                    <p class="
+                            text-sm
+                            text-slate-500
+                            mt-2
+                        ">
+                        Support Service
                     </p>
 
                 </div>
 
-                <div class="glass rounded-3xl p-5">
+                <!-- CARD -->
+                <div class="
+                        premium-card
+                        rounded-3xl
+                        p-5
+                    ">
 
                     <h2 class="
                             text-3xl
                             font-black
-                            text-cyan-400
+                            text-red-600
                         ">
                         10K+
                     </h2>
 
-                    <p class="text-slate-400 mt-1 text-sm">
-                        Active Customers
+                    <p class="
+                            text-sm
+                            text-slate-500
+                            mt-2
+                        ">
+                        Active Users
                     </p>
 
                 </div>
@@ -239,44 +278,52 @@ NexaNet | Premium ISP Platform
         </div>
 
         <!-- RIGHT -->
-        <div class="relative" data-aos="fade-left">
+        <div
+            class="relative"
+            data-aos="fade-left"
+        >
 
-            <!-- MAIN DASHBOARD -->
+            <!-- MAIN CARD -->
             <div class="
                     premium-card
-                    rounded-[32px]
+                    rounded-[40px]
                     p-8
                     relative
                     overflow-hidden
                 ">
 
-                <!-- TOP -->
+                <!-- HEADER -->
                 <div class="
                         flex
                         items-center
                         justify-between
-                        mb-8
+                        mb-10
                     ">
 
                     <div>
 
-                        <p class="text-slate-400 text-sm">
-                            Current Network Speed
+                        <p class="
+                                text-sm
+                                text-slate-500
+                            ">
+                            Network Performance
                         </p>
 
                         <h2 class="
                                 text-5xl
                                 font-black
-                                text-white
+                                text-slate-900
                                 mt-2
                             ">
+
                             940
                             <span class="
                                     text-xl
-                                    text-cyan-400
+                                    text-red-600
                                 ">
                                 Mbps
                             </span>
+
                         </h2>
 
                     </div>
@@ -286,15 +333,18 @@ NexaNet | Premium ISP Platform
                             h-16
                             rounded-3xl
                             bg-gradient-to-br
-                            from-indigo-600
-                            to-cyan-500
+                            from-red-600
+                            to-red-800
                             flex
                             items-center
                             justify-center
                             shadow-glow
                         ">
 
-                        <i data-lucide="activity" class="w-8 h-8 text-white"></i>
+                        <i
+                            data-lucide="activity"
+                            class="w-8 h-8 text-white"
+                        ></i>
 
                     </div>
 
@@ -302,25 +352,25 @@ NexaNet | Premium ISP Platform
 
                 <!-- GRAPH -->
                 <div class="
-                        h-44
+                        h-52
                         rounded-3xl
                         bg-gradient-to-br
-                        from-indigo-500/10
-                        to-cyan-500/10
+                        from-red-50
+                        to-red-100
                         border
-                        border-white/5
+                        border-red-100
                         flex
                         items-end
                         gap-3
-                        p-5
+                        p-6
                     ">
 
-                    <div class="w-full h-16 bg-cyan-400/30 rounded-t-2xl"></div>
-                    <div class="w-full h-24 bg-cyan-400/40 rounded-t-2xl"></div>
-                    <div class="w-full h-28 bg-cyan-400/50 rounded-t-2xl"></div>
-                    <div class="w-full h-20 bg-cyan-400/40 rounded-t-2xl"></div>
-                    <div class="w-full h-36 bg-cyan-400/70 rounded-t-2xl"></div>
-                    <div class="w-full h-32 bg-cyan-400/50 rounded-t-2xl"></div>
+                    <div class="w-full h-16 bg-red-300 rounded-t-2xl"></div>
+                    <div class="w-full h-24 bg-red-400 rounded-t-2xl"></div>
+                    <div class="w-full h-32 bg-red-500 rounded-t-2xl"></div>
+                    <div class="w-full h-20 bg-red-400 rounded-t-2xl"></div>
+                    <div class="w-full h-40 bg-red-600 rounded-t-2xl"></div>
+                    <div class="w-full h-28 bg-red-500 rounded-t-2xl"></div>
 
                 </div>
 
@@ -332,20 +382,24 @@ NexaNet | Premium ISP Platform
                         mt-6
                     ">
 
+                    <!-- CARD -->
                     <div class="
-                            glass
-                            rounded-2xl
+                            bg-red-50
+                            rounded-3xl
                             p-5
                         ">
 
-                        <p class="text-slate-400 text-sm">
+                        <p class="
+                                text-sm
+                                text-slate-500
+                            ">
                             Ping
                         </p>
 
                         <h3 class="
                                 text-2xl
-                                font-bold
-                                text-white
+                                font-black
+                                text-slate-900
                                 mt-2
                             ">
                             4ms
@@ -353,20 +407,24 @@ NexaNet | Premium ISP Platform
 
                     </div>
 
+                    <!-- CARD -->
                     <div class="
-                            glass
-                            rounded-2xl
+                            bg-red-50
+                            rounded-3xl
                             p-5
                         ">
 
-                        <p class="text-slate-400 text-sm">
+                        <p class="
+                                text-sm
+                                text-slate-500
+                            ">
                             Stability
                         </p>
 
                         <h3 class="
                                 text-2xl
-                                font-bold
-                                text-white
+                                font-black
+                                text-slate-900
                                 mt-2
                             ">
                             Excellent
@@ -387,42 +445,49 @@ NexaNet | Premium ISP Platform
 <!-- ===================================== -->
 <!-- FEATURES -->
 <!-- ===================================== -->
-<section id="features" class="py-28">
+<section
+    id="features"
+    class="py-28"
+>
 
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="
+            max-w-7xl
+            mx-auto
+            px-6
+            lg:px-8
+        ">
 
         <!-- TITLE -->
-        <div class="
+        <div
+            class="
                 text-center
                 max-w-3xl
                 mx-auto
-            " data-aos="fade-up">
+            "
+            data-aos="fade-up"
+        >
 
             <h2 class="
                     text-4xl
                     lg:text-5xl
                     font-black
-                    text-white
+                    text-slate-900
                 ">
-                Why Choose
-                <span class="
-                        bg-gradient-to-r
-                        from-cyan-400
-                        to-indigo-400
-                        bg-clip-text
-                        text-transparent
-                    ">
-                    NexaNet
-                </span>
+
+                Enterprise Grade
+                Digital Infrastructure
+
             </h2>
 
             <p class="
                     mt-6
                     text-lg
-                    text-slate-400
+                    text-slate-600
                 ">
-                Built with modern infrastructure, intelligent systems,
-                and premium customer experience.
+
+                Designed for modern connectivity,
+                secure networking, and premium digital experience.
+
             </p>
 
         </div>
@@ -436,134 +501,159 @@ NexaNet | Premium ISP Platform
                 gap-8
             ">
 
-            <!-- CARD -->
+            <!-- FEATURE -->
             <div class="
                     premium-card
-                    rounded-3xl
+                    rounded-[32px]
                     p-8
-                " data-aos="fade-up">
+                "
+                data-aos="fade-up"
+            >
 
                 <div class="
                         w-16
                         h-16
                         rounded-3xl
                         bg-gradient-to-br
-                        from-indigo-600
-                        to-cyan-500
+                        from-red-600
+                        to-red-800
                         flex
                         items-center
                         justify-center
                         shadow-glow
                     ">
 
-                    <i data-lucide="zap" class="w-8 h-8 text-white"></i>
+                    <i
+                        data-lucide="zap"
+                        class="w-8 h-8 text-white"
+                    ></i>
 
                 </div>
 
                 <h3 class="
                         mt-8
                         text-2xl
-                        font-bold
-                        text-white
+                        font-black
+                        text-slate-900
                     ">
-                    Blazing Fast Speed
+                    Ultra Fast Internet
                 </h3>
 
                 <p class="
                         mt-4
-                        text-slate-400
+                        text-slate-600
                         leading-relaxed
                     ">
-                    Enjoy ultra-fast fiber connectivity with stable
-                    high-speed internet access.
+
+                    Experience blazing-fast fiber internet
+                    optimized for streaming, gaming,
+                    and enterprise connectivity.
+
                 </p>
 
             </div>
 
-            <!-- CARD -->
+            <!-- FEATURE -->
             <div class="
                     premium-card
-                    rounded-3xl
+                    rounded-[32px]
                     p-8
-                " data-aos="fade-up" data-aos-delay="100">
+                "
+                data-aos="fade-up"
+                data-aos-delay="100"
+            >
 
                 <div class="
                         w-16
                         h-16
                         rounded-3xl
                         bg-gradient-to-br
-                        from-indigo-600
-                        to-cyan-500
+                        from-red-600
+                        to-red-800
                         flex
                         items-center
                         justify-center
                         shadow-glow
                     ">
 
-                    <i data-lucide="shield-check" class="w-8 h-8 text-white"></i>
+                    <i
+                        data-lucide="shield-check"
+                        class="w-8 h-8 text-white"
+                    ></i>
 
                 </div>
 
                 <h3 class="
                         mt-8
                         text-2xl
-                        font-bold
-                        text-white
+                        font-black
+                        text-slate-900
                     ">
-                    Secure Infrastructure
+                    Enterprise Security
                 </h3>
 
                 <p class="
                         mt-4
-                        text-slate-400
+                        text-slate-600
                         leading-relaxed
                     ">
-                    Enterprise-grade protection with secure networking
-                    and reliable uptime.
+
+                    Advanced network protection
+                    and stable infrastructure
+                    for maximum reliability.
+
                 </p>
 
             </div>
 
-            <!-- CARD -->
+            <!-- FEATURE -->
             <div class="
                     premium-card
-                    rounded-3xl
+                    rounded-[32px]
                     p-8
-                " data-aos="fade-up" data-aos-delay="200">
+                "
+                data-aos="fade-up"
+                data-aos-delay="200"
+            >
 
                 <div class="
                         w-16
                         h-16
                         rounded-3xl
                         bg-gradient-to-br
-                        from-indigo-600
-                        to-cyan-500
+                        from-red-600
+                        to-red-800
                         flex
                         items-center
                         justify-center
                         shadow-glow
                     ">
 
-                    <i data-lucide="headphones" class="w-8 h-8 text-white"></i>
+                    <i
+                        data-lucide="headphones"
+                        class="w-8 h-8 text-white"
+                    ></i>
 
                 </div>
 
                 <h3 class="
                         mt-8
                         text-2xl
-                        font-bold
-                        text-white
+                        font-black
+                        text-slate-900
                     ">
                     24/7 Premium Support
                 </h3>
 
                 <p class="
                         mt-4
-                        text-slate-400
+                        text-slate-600
                         leading-relaxed
                     ">
-                    Dedicated customer support ready to help anytime you
-                    need assistance.
+
+                    Dedicated customer support team
+                    ready to assist your connectivity needs.
+
                 </p>
 
             </div>
@@ -577,9 +667,17 @@ NexaNet | Premium ISP Platform
 <!-- ===================================== -->
 <!-- PACKAGES -->
 <!-- ===================================== -->
-<section id="packages" class="pb-28">
+<section
+    id="packages"
+    class="pb-28"
+>
 
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="
+            max-w-7xl
+            mx-auto
+            px-6
+            lg:px-8
+        ">
 
         <!-- TITLE -->
         <div class="
@@ -592,22 +690,27 @@ NexaNet | Premium ISP Platform
                     text-4xl
                     lg:text-5xl
                     font-black
-                    text-white
+                    text-slate-900
                 ">
+
                 Premium Internet Packages
+
             </h2>
 
             <p class="
                     mt-6
                     text-lg
-                    text-slate-400
+                    text-slate-600
                 ">
-                Choose the perfect package for your digital lifestyle.
+
+                Choose the perfect package
+                for your digital lifestyle.
+
             </p>
 
         </div>
 
-        <!-- PACKAGE GRID -->
+        <!-- GRID -->
         <div class="
                 mt-20
                 grid
@@ -620,11 +723,13 @@ NexaNet | Premium ISP Platform
 
             <div class="
                     premium-card
-                    rounded-[32px]
+                    rounded-[36px]
                     p-8
                     relative
                     overflow-hidden
-                " data-aos="fade-up">
+                "
+                data-aos="fade-up"
+            >
 
                 <!-- GLOW -->
                 <div class="
@@ -633,25 +738,28 @@ NexaNet | Premium ISP Platform
                         right-0
                         w-40
                         h-40
-                        bg-cyan-500/10
-                        blur-[90px]
-                    "></div>
+                        bg-red-500/10
+                        blur-[80px]
+                    ">
+                </div>
 
                 <!-- SPEED -->
                 <div class="
                         inline-flex
                         items-center
-                        px-4
+                        px-5
                         py-2
                         rounded-full
-                        bg-cyan-500/10
+                        bg-red-50
                         border
-                        border-cyan-400/20
-                        text-cyan-300
+                        border-red-100
+                        text-red-700
                         text-sm
-                        font-semibold
+                        font-bold
                     ">
+
                     {{ package.speed }}
+
                 </div>
 
                 <!-- NAME -->
@@ -659,9 +767,11 @@ NexaNet | Premium ISP Platform
                         mt-6
                         text-3xl
                         font-black
-                        text-white
+                        text-slate-900
                     ">
+
                     {{ package.name }}
+
                 </h3>
 
                 <!-- PRICE -->
@@ -670,46 +780,60 @@ NexaNet | Premium ISP Platform
                     <span class="
                             text-5xl
                             font-black
-                            text-white
+                            text-slate-900
                         ">
+
                         Rp{{ package.price }}
+
                     </span>
 
-                    <span class="text-slate-400">
+                    <span class="text-slate-500">
                         /month
                     </span>
 
                 </div>
 
-                <!-- FEATURE -->
-                <div class="mt-8 space-y-4">
+                <!-- FEATURES -->
+                <div class="
+                        mt-8
+                        space-y-4
+                    ">
 
                     <div class="flex items-center gap-3">
 
-                        <i data-lucide="check" class="w-5 h-5 text-cyan-400"></i>
+                        <i
+                            data-lucide="check"
+                            class="w-5 h-5 text-red-600"
+                        ></i>
 
-                        <p class="text-slate-300">
-                            Unlimited bandwidth
+                        <p class="text-slate-600">
+                            Unlimited Bandwidth
                         </p>
 
                     </div>
 
                     <div class="flex items-center gap-3">
 
-                        <i data-lucide="check" class="w-5 h-5 text-cyan-400"></i>
+                        <i
+                            data-lucide="check"
+                            class="w-5 h-5 text-red-600"
+                        ></i>
 
-                        <p class="text-slate-300">
-                            Fiber optic network
+                        <p class="text-slate-600">
+                            Fiber Optic Infrastructure
                         </p>
 
                     </div>
 
                     <div class="flex items-center gap-3">
 
-                        <i data-lucide="check" class="w-5 h-5 text-cyan-400"></i>
+                        <i
+                            data-lucide="check"
+                            class="w-5 h-5 text-red-600"
+                        ></i>
 
-                        <p class="text-slate-300">
-                            24/7 support
+                        <p class="text-slate-600">
+                            24/7 Customer Support
                         </p>
 
                     </div>
@@ -717,17 +841,20 @@ NexaNet | Premium ISP Platform
                 </div>
 
                 <!-- BUTTON -->
-                <a href="/login" class="
+                <a href="/login"
+                    class="
                         mt-10
                         block
-                        text-center
                         btn-primary
                         py-4
                         rounded-2xl
+                        text-center
                         text-white
-                        font-semibold
+                        font-bold
                     ">
+
                     Choose Package
+
                 </a>
 
             </div>
