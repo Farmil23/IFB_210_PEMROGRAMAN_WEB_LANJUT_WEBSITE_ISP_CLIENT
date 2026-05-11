@@ -1,376 +1,293 @@
 {% extends "base.html" %}
 
 {% block title %}
-NexaNet | Premium ISP Platform
+BTN Net | Baraya Telematika Nusantara
 {% endblock %}
 
 {% block content %}
 
-{% include 'partials/header.html' %}
-
-<!-- ===================================== -->
+<!-- ====================================================== -->
 <!-- HERO SECTION -->
-<!-- ===================================== -->
-<section class="
-        relative
-        overflow-hidden
-        min-h-screen
-        flex
-        items-center
-    ">
+<!-- ====================================================== -->
 
-    <!-- GRADIENT BACKGROUND -->
-    <div class="
-            absolute
-            inset-0
-            bg-gradient-to-br
-            from-indigo-950
-            via-slate-950
-            to-cyan-950
-        "></div>
+<section class="relative min-h-screen overflow-hidden bg-[#050505]">
 
-    <!-- GLOW -->
-    <div class="
-            absolute
-            top-0
-            left-0
-            w-[500px]
-            h-[500px]
-            bg-indigo-600/20
-            blur-[140px]
-            rounded-full
-        "></div>
+    <!-- GRID -->
+    <div class="absolute inset-0 opacity-[0.04]">
+        <div class="w-full h-full bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:90px_90px]"></div>
+    </div>
 
-    <div class="
-            absolute
-            bottom-0
-            right-0
-            w-[500px]
-            h-[500px]
-            bg-cyan-500/20
-            blur-[140px]
-            rounded-full
-        "></div>
+    <!-- CYBER LINES -->
+    <div class="absolute inset-0 cyber-lines opacity-40"></div>
 
-    <div class="
-            relative
-            z-10
-            max-w-7xl
-            mx-auto
-            px-6
-            lg:px-8
-            py-24
-            grid
-            lg:grid-cols-2
-            gap-16
-            items-center
-        ">
+    <!-- RED GLOW -->
+    <div class="absolute top-[-200px] right-[-150px] w-[800px] h-[800px] bg-red-700/10 blur-[180px] rounded-full"></div>
 
-        <!-- LEFT -->
-        <div data-aos="fade-right">
+    <div class="absolute bottom-[-250px] left-[-200px] w-[700px] h-[700px] bg-red-900/10 blur-[180px] rounded-full"></div>
 
-            <!-- BADGE -->
-            <div class="
-                    inline-flex
-                    items-center
-                    gap-2
-                    px-4
-                    py-2
-                    rounded-full
-                    glass
-                    border
-                    border-cyan-400/20
-                    mb-8
-                ">
+    <!-- DIAGONAL SHAPES -->
+    <div class="absolute top-0 right-[-10%] w-[700px] h-[700px] border border-red-800/20 rotate-45"></div>
 
-                <span class="
-                        w-2
-                        h-2
-                        rounded-full
-                        bg-cyan-400
-                        animate-pulse
-                    "></span>
+    <div class="absolute bottom-[-20%] left-[-10%] w-[500px] h-[500px] border border-red-900/20 -rotate-12"></div>
 
-                <p class="
-                        text-sm
-                        text-cyan-300
-                        font-medium
-                    ">
-                    Next Generation Internet Platform
+    <!-- RED LINE -->
+    <div class="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-red-600 to-transparent"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 pt-40 pb-32">
+
+        <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-20 items-center">
+
+            <!-- ====================================================== -->
+            <!-- LEFT -->
+            <!-- ====================================================== -->
+
+            <div>
+
+                <!-- LABEL -->
+                <div class="flex items-center gap-5 mb-10">
+
+                    <div class="w-20 h-[2px] bg-red-600"></div>
+
+                    <span class="uppercase tracking-[0.4em] text-red-500 text-xs font-bold">
+                        Enterprise Fiber Infrastructure
+                    </span>
+
+                </div>
+
+                <!-- TITLE -->
+                <h1 class="text-6xl lg:text-[7rem] leading-[0.88] font-black uppercase tracking-[-0.04em] text-white">
+
+                    BARAYA
+                    <br>
+
+                    <span class="text-red-600">
+                        TELEMATIKA
+                    </span>
+
+                    <br>
+
+                    NUSANTARA
+
+                </h1>
+
+                <!-- DESCRIPTION -->
+                <p class="mt-10 max-w-2xl text-lg lg:text-xl text-gray-400 leading-relaxed">
+
+                    BTN Net menghadirkan layanan internet enterprise-grade
+                    dengan teknologi fiber optic modern untuk konektivitas
+                    cepat, stabil, aman, dan scalable bagi rumah,
+                    bisnis, dan perusahaan modern.
+
                 </p>
 
-            </div>
+                <!-- CTA -->
+                <div class="mt-14 flex flex-col sm:flex-row gap-5">
 
-            <!-- TITLE -->
-            <h1 class="
-                    text-5xl
-                    lg:text-7xl
-                    font-black
-                    leading-tight
-                    tracking-tight
-                    text-white
-                ">
-                Ultra Fast
-                <span class="
-                        bg-gradient-to-r
-                        from-cyan-400
-                        to-indigo-400
-                        bg-clip-text
-                        text-transparent
-                    ">
-                    Internet
-                </span>
+                    <a href="/register"
+                       class="group relative overflow-hidden bg-red-600 hover:bg-red-700 transition-all duration-300 px-10 py-5 uppercase tracking-[0.2em] text-sm font-bold text-white border border-red-500">
 
-                For Modern Digital Life
-            </h1>
+                        <span class="relative z-10">
+                            Mulai Berlangganan
+                        </span>
 
-            <!-- DESCRIPTION -->
-            <p class="
-                    mt-8
-                    text-lg
-                    lg:text-xl
-                    text-slate-300
-                    leading-relaxed
-                    max-w-2xl
-                ">
-                Experience premium fiber internet with blazing speed,
-                ultra-low latency, secure connectivity, and modern
-                digital services designed for the future.
-            </p>
+                    </a>
 
-            <!-- BUTTON -->
-            <div class="
-                    mt-10
-                    flex
-                    flex-col
-                    sm:flex-row
-                    gap-4
-                ">
+                    <a href="#packages"
+                       class="border border-white/15 hover:border-red-500/40 bg-white/[0.03] hover:bg-red-600/10 transition-all duration-300 px-10 py-5 uppercase tracking-[0.2em] text-sm font-bold text-white text-center">
 
-                <a href="/register" class="
-                        btn-primary
-                        px-8
-                        py-4
-                        rounded-2xl
-                        text-white
-                        font-semibold
-                        text-center
-                        shadow-glow
-                    ">
-                    Get Started
-                </a>
+                        Lihat Paket
 
-                <a href="#packages" class="
-                        px-8
-                        py-4
-                        rounded-2xl
-                        border
-                        border-white/10
-                        bg-white/5
-                        text-white
-                        font-semibold
-                        hover:bg-white/10
-                        transition-all
-                        text-center
-                    ">
-                    Explore Packages
-                </a>
-
-            </div>
-
-            <!-- STATS -->
-            <div class="
-                    mt-14
-                    grid
-                    grid-cols-3
-                    gap-4
-                ">
-
-                <div class="glass rounded-3xl p-5">
-
-                    <h2 class="
-                            text-3xl
-                            font-black
-                            text-cyan-400
-                        ">
-                        99.9%
-                    </h2>
-
-                    <p class="text-slate-400 mt-1 text-sm">
-                        Network Uptime
-                    </p>
+                    </a>
 
                 </div>
 
-                <div class="glass rounded-3xl p-5">
+                <!-- STATS -->
+                <div class="mt-20 grid grid-cols-1 sm:grid-cols-3 gap-5">
 
-                    <h2 class="
-                            text-3xl
-                            font-black
-                            text-cyan-400
-                        ">
-                        24/7
-                    </h2>
+                    <div class="relative overflow-hidden border border-white/10 bg-white/[0.03] backdrop-blur-md p-6">
 
-                    <p class="text-slate-400 mt-1 text-sm">
-                        Premium Support
-                    </p>
+                        <div class="absolute top-0 left-0 w-full h-[2px] bg-red-600"></div>
 
-                </div>
+                        <h3 class="text-4xl font-black text-white">
+                            99.9%
+                        </h3>
 
-                <div class="glass rounded-3xl p-5">
-
-                    <h2 class="
-                            text-3xl
-                            font-black
-                            text-cyan-400
-                        ">
-                        10K+
-                    </h2>
-
-                    <p class="text-slate-400 mt-1 text-sm">
-                        Active Customers
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- RIGHT -->
-        <div class="relative" data-aos="fade-left">
-
-            <!-- MAIN DASHBOARD -->
-            <div class="
-                    premium-card
-                    rounded-[32px]
-                    p-8
-                    relative
-                    overflow-hidden
-                ">
-
-                <!-- TOP -->
-                <div class="
-                        flex
-                        items-center
-                        justify-between
-                        mb-8
-                    ">
-
-                    <div>
-
-                        <p class="text-slate-400 text-sm">
-                            Current Network Speed
+                        <p class="mt-2 text-xs uppercase tracking-[0.3em] text-gray-500">
+                            Uptime
                         </p>
 
-                        <h2 class="
-                                text-5xl
-                                font-black
-                                text-white
-                                mt-2
-                            ">
-                            940
-                            <span class="
-                                    text-xl
-                                    text-cyan-400
-                                ">
+                    </div>
+
+                    <div class="relative overflow-hidden border border-white/10 bg-white/[0.03] backdrop-blur-md p-6">
+
+                        <div class="absolute top-0 left-0 w-full h-[2px] bg-red-600"></div>
+
+                        <h3 class="text-4xl font-black text-white">
+                            24/7
+                        </h3>
+
+                        <p class="mt-2 text-xs uppercase tracking-[0.3em] text-gray-500">
+                            Support
+                        </p>
+
+                    </div>
+
+                    <div class="relative overflow-hidden border border-white/10 bg-white/[0.03] backdrop-blur-md p-6">
+
+                        <div class="absolute top-0 left-0 w-full h-[2px] bg-red-600"></div>
+
+                        <h3 class="text-4xl font-black text-white">
+                            10K+
+                        </h3>
+
+                        <p class="mt-2 text-xs uppercase tracking-[0.3em] text-gray-500">
+                            Customers
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ====================================================== -->
+            <!-- RIGHT -->
+            <!-- ====================================================== -->
+
+            <div class="relative">
+
+                <!-- OUTER FRAME -->
+                <div class="absolute -inset-6 border border-red-900/20"></div>
+
+                <!-- PANEL -->
+                <div class="relative bg-[#0d0d0d] border border-white/10 overflow-hidden shadow-[0_40px_120px_rgba(0,0,0,0.7)]">
+
+                    <!-- TOP -->
+                    <div class="flex items-center justify-between border-b border-white/10 px-8 py-5 bg-black/40">
+
+                        <div>
+
+                            <p class="text-xs uppercase tracking-[0.35em] text-red-500">
+                                BTN NET SYSTEM
+                            </p>
+
+                            <h3 class="mt-2 text-2xl font-black text-white uppercase">
+                                Live Network Monitoring
+                            </h3>
+
+                        </div>
+
+                        <div class="flex items-center gap-3">
+
+                            <div class="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
+
+                            <span class="text-xs uppercase tracking-[0.2em] text-gray-500">
+                                Online
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <!-- BODY -->
+                    <div class="p-8">
+
+                        <!-- SPEED -->
+                        <div class="flex items-end gap-4">
+
+                            <h2 class="text-[7rem] leading-none font-black text-white">
+                                940
+                            </h2>
+
+                            <span class="text-3xl font-bold text-red-500 mb-4">
                                 Mbps
                             </span>
-                        </h2>
 
-                    </div>
+                        </div>
 
-                    <div class="
-                            w-16
-                            h-16
-                            rounded-3xl
-                            bg-gradient-to-br
-                            from-indigo-600
-                            to-cyan-500
-                            flex
-                            items-center
-                            justify-center
-                            shadow-glow
-                        ">
-
-                        <i data-lucide="activity" class="w-8 h-8 text-white"></i>
-
-                    </div>
-
-                </div>
-
-                <!-- GRAPH -->
-                <div class="
-                        h-44
-                        rounded-3xl
-                        bg-gradient-to-br
-                        from-indigo-500/10
-                        to-cyan-500/10
-                        border
-                        border-white/5
-                        flex
-                        items-end
-                        gap-3
-                        p-5
-                    ">
-
-                    <div class="w-full h-16 bg-cyan-400/30 rounded-t-2xl"></div>
-                    <div class="w-full h-24 bg-cyan-400/40 rounded-t-2xl"></div>
-                    <div class="w-full h-28 bg-cyan-400/50 rounded-t-2xl"></div>
-                    <div class="w-full h-20 bg-cyan-400/40 rounded-t-2xl"></div>
-                    <div class="w-full h-36 bg-cyan-400/70 rounded-t-2xl"></div>
-                    <div class="w-full h-32 bg-cyan-400/50 rounded-t-2xl"></div>
-
-                </div>
-
-                <!-- BOTTOM -->
-                <div class="
-                        grid
-                        grid-cols-2
-                        gap-4
-                        mt-6
-                    ">
-
-                    <div class="
-                            glass
-                            rounded-2xl
-                            p-5
-                        ">
-
-                        <p class="text-slate-400 text-sm">
-                            Ping
+                        <p class="mt-4 text-xs uppercase tracking-[0.4em] text-gray-500">
+                            Dedicated Fiber Infrastructure
                         </p>
 
-                        <h3 class="
-                                text-2xl
-                                font-bold
-                                text-white
-                                mt-2
-                            ">
-                            4ms
-                        </h3>
+                        <!-- GRAPH -->
+                        <div class="mt-14">
 
-                    </div>
+                            <div class="flex items-end gap-4 h-56">
 
-                    <div class="
-                            glass
-                            rounded-2xl
-                            p-5
-                        ">
+                                <div class="flex-1 bg-red-950 h-20"></div>
 
-                        <p class="text-slate-400 text-sm">
-                            Stability
-                        </p>
+                                <div class="flex-1 bg-red-900 h-32"></div>
 
-                        <h3 class="
-                                text-2xl
-                                font-bold
-                                text-white
-                                mt-2
-                            ">
-                            Excellent
-                        </h3>
+                                <div class="flex-1 bg-red-700 h-48 shadow-[0_0_40px_rgba(220,38,38,0.5)]"></div>
+
+                                <div class="flex-1 bg-red-800 h-36"></div>
+
+                                <div class="flex-1 bg-red-950 h-24"></div>
+
+                            </div>
+
+                        </div>
+
+                        <!-- BOTTOM -->
+                        <div class="mt-12 grid md:grid-cols-3 gap-5">
+
+                            <div class="bg-red-600 p-6 min-h-[170px] flex flex-col justify-between">
+
+                                <div>
+
+                                    <p class="text-xs uppercase tracking-[0.3em] text-red-100">
+                                        Infrastructure
+                                    </p>
+
+                                    <h3 class="mt-5 text-5xl font-black text-white">
+                                        150+
+                                    </h3>
+
+                                </div>
+
+                                <p class="text-sm text-red-100">
+                                    Fiber Nodes Nationwide
+                                </p>
+
+                            </div>
+
+                            <div class="border border-white/10 bg-black/30 p-6 min-h-[170px] flex flex-col justify-between">
+
+                                <div>
+
+                                    <p class="text-xs uppercase tracking-[0.3em] text-gray-500">
+                                        Ping
+                                    </p>
+
+                                    <h3 class="mt-5 text-5xl font-black text-white">
+                                        4ms
+                                    </h3>
+
+                                </div>
+
+                                <div class="w-16 h-[2px] bg-red-600"></div>
+
+                            </div>
+
+                            <div class="border border-white/10 bg-black/30 p-6 min-h-[170px] flex flex-col justify-between">
+
+                                <div>
+
+                                    <p class="text-xs uppercase tracking-[0.3em] text-gray-500">
+                                        Stability
+                                    </p>
+
+                                    <h3 class="mt-5 text-4xl font-black text-white uppercase">
+                                        Excellent
+                                    </h3>
+
+                                </div>
+
+                                <div class="w-16 h-[2px] bg-emerald-500"></div>
+
+                            </div>
+
+                        </div>
 
                     </div>
 
@@ -384,186 +301,94 @@ NexaNet | Premium ISP Platform
 
 </section>
 
-<!-- ===================================== -->
+<!-- ====================================================== -->
 <!-- FEATURES -->
-<!-- ===================================== -->
-<section id="features" class="py-28">
+<!-- ====================================================== -->
 
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+<section id="features" class="py-32 bg-white relative overflow-hidden">
+
+    <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-red-50 rounded-full blur-3xl opacity-60"></div>
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
 
         <!-- TITLE -->
-        <div class="
-                text-center
-                max-w-3xl
-                mx-auto
-            " data-aos="fade-up">
+        <div class="max-w-3xl mx-auto text-center" data-aos="fade-up">
 
-            <h2 class="
-                    text-4xl
-                    lg:text-5xl
-                    font-black
-                    text-white
-                ">
-                Why Choose
-                <span class="
-                        bg-gradient-to-r
-                        from-cyan-400
-                        to-indigo-400
-                        bg-clip-text
-                        text-transparent
-                    ">
-                    NexaNet
-                </span>
+            <p class="text-red-700 font-semibold uppercase tracking-[0.25em] text-sm">
+                WHY CHOOSE BTN NET
+            </p>
+
+            <h2 class="mt-5 text-4xl lg:text-6xl font-black tracking-tight text-slate-950 uppercase leading-tight">
+                Enterprise Connectivity
+                For Modern Infrastructure
             </h2>
 
-            <p class="
-                    mt-6
-                    text-lg
-                    text-slate-400
-                ">
-                Built with modern infrastructure, intelligent systems,
-                and premium customer experience.
+            <p class="mt-6 text-lg text-slate-600 leading-relaxed">
+                Infrastruktur modern dan teknologi fiber optic terbaru
+                untuk menghadirkan pengalaman internet premium tanpa kompromi.
             </p>
 
         </div>
 
         <!-- GRID -->
-        <div class="
-                mt-20
-                grid
-                md:grid-cols-2
-                lg:grid-cols-3
-                gap-8
-            ">
+        <div class="mt-20 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 
             <!-- CARD -->
-            <div class="
-                    premium-card
-                    rounded-3xl
-                    p-8
-                " data-aos="fade-up">
+            <div class="premium-card p-10 bg-white border border-slate-200 hover:-translate-y-2 transition-all duration-300">
 
-                <div class="
-                        w-16
-                        h-16
-                        rounded-3xl
-                        bg-gradient-to-br
-                        from-indigo-600
-                        to-cyan-500
-                        flex
-                        items-center
-                        justify-center
-                        shadow-glow
-                    ">
+                <div class="w-16 h-16 bg-red-600 flex items-center justify-center">
 
                     <i data-lucide="zap" class="w-8 h-8 text-white"></i>
 
                 </div>
 
-                <h3 class="
-                        mt-8
-                        text-2xl
-                        font-bold
-                        text-white
-                    ">
-                    Blazing Fast Speed
+                <h3 class="mt-8 text-2xl font-black uppercase text-slate-950">
+                    High Speed Internet
                 </h3>
 
-                <p class="
-                        mt-4
-                        text-slate-400
-                        leading-relaxed
-                    ">
-                    Enjoy ultra-fast fiber connectivity with stable
-                    high-speed internet access.
+                <p class="mt-4 text-slate-600 leading-relaxed">
+                    Koneksi internet fiber optic dengan performa tinggi
+                    dan latency rendah untuk seluruh kebutuhan digital.
                 </p>
 
             </div>
 
             <!-- CARD -->
-            <div class="
-                    premium-card
-                    rounded-3xl
-                    p-8
-                " data-aos="fade-up" data-aos-delay="100">
+            <div class="premium-card p-10 bg-white border border-slate-200 hover:-translate-y-2 transition-all duration-300">
 
-                <div class="
-                        w-16
-                        h-16
-                        rounded-3xl
-                        bg-gradient-to-br
-                        from-indigo-600
-                        to-cyan-500
-                        flex
-                        items-center
-                        justify-center
-                        shadow-glow
-                    ">
+                <div class="w-16 h-16 bg-red-600 flex items-center justify-center">
 
                     <i data-lucide="shield-check" class="w-8 h-8 text-white"></i>
 
                 </div>
 
-                <h3 class="
-                        mt-8
-                        text-2xl
-                        font-bold
-                        text-white
-                    ">
+                <h3 class="mt-8 text-2xl font-black uppercase text-slate-950">
                     Secure Infrastructure
                 </h3>
 
-                <p class="
-                        mt-4
-                        text-slate-400
-                        leading-relaxed
-                    ">
-                    Enterprise-grade protection with secure networking
-                    and reliable uptime.
+                <p class="mt-4 text-slate-600 leading-relaxed">
+                    Infrastruktur enterprise-grade dengan sistem keamanan
+                    jaringan modern dan monitoring real-time.
                 </p>
 
             </div>
 
             <!-- CARD -->
-            <div class="
-                    premium-card
-                    rounded-3xl
-                    p-8
-                " data-aos="fade-up" data-aos-delay="200">
+            <div class="premium-card p-10 bg-white border border-slate-200 hover:-translate-y-2 transition-all duration-300">
 
-                <div class="
-                        w-16
-                        h-16
-                        rounded-3xl
-                        bg-gradient-to-br
-                        from-indigo-600
-                        to-cyan-500
-                        flex
-                        items-center
-                        justify-center
-                        shadow-glow
-                    ">
+                <div class="w-16 h-16 bg-red-600 flex items-center justify-center">
 
                     <i data-lucide="headphones" class="w-8 h-8 text-white"></i>
 
                 </div>
 
-                <h3 class="
-                        mt-8
-                        text-2xl
-                        font-bold
-                        text-white
-                    ">
-                    24/7 Premium Support
+                <h3 class="mt-8 text-2xl font-black uppercase text-slate-950">
+                    Premium Support
                 </h3>
 
-                <p class="
-                        mt-4
-                        text-slate-400
-                        leading-relaxed
-                    ">
-                    Dedicated customer support ready to help anytime you
-                    need assistance.
+                <p class="mt-4 text-slate-600 leading-relaxed">
+                    Tim technical support profesional siap membantu
+                    pelanggan kapanpun dibutuhkan.
                 </p>
 
             </div>
@@ -574,165 +399,194 @@ NexaNet | Premium ISP Platform
 
 </section>
 
-<!-- ===================================== -->
+<!-- ====================================================== -->
 <!-- PACKAGES -->
-<!-- ===================================== -->
-<section id="packages" class="pb-28">
+<!-- ====================================================== -->
 
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+<section id="packages" class="py-32 bg-[#f7f7f7] relative overflow-hidden">
+
+    <div class="absolute inset-0 opacity-[0.03]">
+        <div class="w-full h-full bg-[linear-gradient(to_right,#000_1px,transparent_1px),linear-gradient(to_bottom,#000_1px,transparent_1px)] bg-[size:60px_60px]"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
 
         <!-- TITLE -->
-        <div class="
-                text-center
-                max-w-3xl
-                mx-auto
-            ">
+        <div class="text-center max-w-3xl mx-auto">
 
-            <h2 class="
-                    text-4xl
-                    lg:text-5xl
-                    font-black
-                    text-white
-                ">
-                Premium Internet Packages
-            </h2>
-
-            <p class="
-                    mt-6
-                    text-lg
-                    text-slate-400
-                ">
-                Choose the perfect package for your digital lifestyle.
+            <p class="text-red-700 font-semibold uppercase tracking-[0.25em] text-sm">
+                INTERNET PACKAGES
             </p>
+
+            <h2 class="mt-5 text-4xl lg:text-6xl font-black tracking-tight text-slate-950 uppercase leading-tight">
+                Flexible Internet
+                Packages
+            </h2>
 
         </div>
 
-        <!-- PACKAGE GRID -->
-        <div class="
-                mt-20
-                grid
-                md:grid-cols-2
-                lg:grid-cols-3
-                gap-8
-            ">
+        <!-- GRID -->
+        <div class="mt-20 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 
             {% for package in packages %}
 
-            <div class="
-                    premium-card
-                    rounded-[32px]
-                    p-8
-                    relative
-                    overflow-hidden
-                " data-aos="fade-up">
+            <div class="premium-card bg-white border border-slate-200 p-8 relative overflow-hidden hover:-translate-y-2 transition-all duration-300">
 
-                <!-- GLOW -->
-                <div class="
-                        absolute
-                        top-0
-                        right-0
-                        w-40
-                        h-40
-                        bg-cyan-500/10
-                        blur-[90px]
-                    "></div>
+                <!-- RED TOP -->
+                <div class="absolute top-0 left-0 w-full h-1 bg-red-600"></div>
 
                 <!-- SPEED -->
-                <div class="
-                        inline-flex
-                        items-center
-                        px-4
-                        py-2
-                        rounded-full
-                        bg-cyan-500/10
-                        border
-                        border-cyan-400/20
-                        text-cyan-300
-                        text-sm
-                        font-semibold
-                    ">
-                    {{ package.speed }}
+                <div class="flex items-center justify-between">
+
+                    <div class="px-4 py-2 bg-red-50 border border-red-100 text-red-700 text-sm font-semibold uppercase tracking-wide">
+                        {{ package.speed }}
+                    </div>
+
+                    <i data-lucide="wifi" class="w-6 h-6 text-red-600"></i>
+
                 </div>
 
                 <!-- NAME -->
-                <h3 class="
-                        mt-6
-                        text-3xl
-                        font-black
-                        text-white
-                    ">
+                <h3 class="mt-8 text-3xl font-black text-slate-950 uppercase">
                     {{ package.name }}
                 </h3>
 
                 <!-- PRICE -->
-                <div class="mt-6">
+                <div class="mt-8">
 
-                    <span class="
-                            text-5xl
-                            font-black
-                            text-white
-                        ">
+                    <span class="text-5xl font-black text-slate-950">
                         Rp{{ package.price }}
                     </span>
 
-                    <span class="text-slate-400">
+                    <span class="text-slate-500">
                         /month
                     </span>
 
                 </div>
 
-                <!-- FEATURE -->
-                <div class="mt-8 space-y-4">
+                <!-- FEATURES -->
+                <div class="mt-10 space-y-4">
 
                     <div class="flex items-center gap-3">
-
-                        <i data-lucide="check" class="w-5 h-5 text-cyan-400"></i>
-
-                        <p class="text-slate-300">
-                            Unlimited bandwidth
-                        </p>
-
+                        <i data-lucide="check" class="w-5 h-5 text-red-600"></i>
+                        <p class="text-slate-700">Unlimited Bandwidth</p>
                     </div>
 
                     <div class="flex items-center gap-3">
-
-                        <i data-lucide="check" class="w-5 h-5 text-cyan-400"></i>
-
-                        <p class="text-slate-300">
-                            Fiber optic network
-                        </p>
-
+                        <i data-lucide="check" class="w-5 h-5 text-red-600"></i>
+                        <p class="text-slate-700">Fiber Optic Infrastructure</p>
                     </div>
 
                     <div class="flex items-center gap-3">
-
-                        <i data-lucide="check" class="w-5 h-5 text-cyan-400"></i>
-
-                        <p class="text-slate-300">
-                            24/7 support
-                        </p>
-
+                        <i data-lucide="check" class="w-5 h-5 text-red-600"></i>
+                        <p class="text-slate-700">24/7 Technical Support</p>
                     </div>
 
                 </div>
 
                 <!-- BUTTON -->
-                <a href="/login" class="
-                        mt-10
-                        block
-                        text-center
-                        btn-primary
-                        py-4
-                        rounded-2xl
-                        text-white
-                        font-semibold
-                    ">
-                    Choose Package
+                <a href="/login"
+                   class="mt-10 block btn-primary py-4 text-center text-white font-semibold uppercase tracking-wide">
+
+                    Purchase Package
+
                 </a>
 
             </div>
 
             {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ====================================================== -->
+<!-- TESTIMONIALS -->
+<!-- ====================================================== -->
+
+<section class="py-32 bg-[#0c0c0c] relative overflow-hidden">
+
+    <div class="absolute inset-0 cyber-lines opacity-30"></div>
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+
+        <!-- TITLE -->
+        <div class="text-center max-w-3xl mx-auto">
+
+            <p class="text-red-500 font-semibold uppercase tracking-[0.25em] text-sm">
+                CLIENT TESTIMONIALS
+            </p>
+
+            <h2 class="mt-5 text-4xl lg:text-6xl font-black tracking-tight text-white uppercase">
+                Trusted By Thousands
+            </h2>
+
+        </div>
+
+        <!-- GRID -->
+        <div class="mt-20 grid lg:grid-cols-3 gap-8">
+
+            <!-- CARD -->
+            <div class="bg-white/5 border border-white/10 p-8 backdrop-blur-xl">
+
+                <div class="flex items-center gap-1 text-red-500">
+                    ★ ★ ★ ★ ★
+                </div>
+
+                <p class="mt-6 text-gray-300 leading-relaxed">
+                    “Koneksi sangat stabil untuk kebutuhan kantor dan
+                    meeting online. Support juga sangat cepat.”
+                </p>
+
+                <div class="mt-8">
+                    <h4 class="font-bold text-white uppercase">
+                        PT Digital Nusantara
+                    </h4>
+                </div>
+
+            </div>
+
+            <!-- CARD -->
+            <div class="bg-white/5 border border-white/10 p-8 backdrop-blur-xl">
+
+                <div class="flex items-center gap-1 text-red-500">
+                    ★ ★ ★ ★ ★
+                </div>
+
+                <p class="mt-6 text-gray-300 leading-relaxed">
+                    “Internet cepat dan latency rendah untuk gaming
+                    maupun streaming 4K tanpa buffering.”
+                </p>
+
+                <div class="mt-8">
+                    <h4 class="font-bold text-white uppercase">
+                        Customer Residential
+                    </h4>
+                </div>
+
+            </div>
+
+            <!-- CARD -->
+            <div class="bg-white/5 border border-white/10 p-8 backdrop-blur-xl">
+
+                <div class="flex items-center gap-1 text-red-500">
+                    ★ ★ ★ ★ ★
+                </div>
+
+                <p class="mt-6 text-gray-300 leading-relaxed">
+                    “BTN Net memberikan kualitas layanan enterprise
+                    dengan harga yang kompetitif.”
+                </p>
+
+                <div class="mt-8">
+                    <h4 class="font-bold text-white uppercase">
+                        Startup Technology
+                    </h4>
+                </div>
+
+            </div>
 
         </div>
 

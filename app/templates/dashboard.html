@@ -1,384 +1,124 @@
 {% extends "base.html" %}
 
 {% block title %}
-Dashboard | NexaNet
+Dashboard | BTN Net
 {% endblock %}
 
 {% block content %}
 
-<div class="min-h-screen relative overflow-hidden">
+<div class="min-h-screen bg-[#f4f5f7]">
 
-    <!-- BACKGROUND -->
-    <div class="absolute inset-0 bg-gradient-to-br from-slate-950 via-indigo-950 to-slate-950"></div>
-
-    <div class="absolute top-0 left-0 w-[400px] h-[400px] bg-cyan-500/10 blur-[120px] rounded-full"></div>
-
-    <div class="absolute bottom-0 right-0 w-[400px] h-[400px] bg-indigo-500/10 blur-[120px] rounded-full"></div>
-
-    <div class="relative z-10 flex">
+    <!-- ===================================== -->
+    <!-- LAYOUT -->
+    <!-- ===================================== -->
+    <div class="flex">
 
         <!-- SIDEBAR -->
-        <aside class="
-                hidden
-                lg:flex
-                flex-col
-                w-80
-                min-h-screen
-                border-r
-                border-white/10
-                bg-slate-950/60
-                backdrop-blur-2xl
-            ">
+        {% include 'partials/sidebar.html' %}
 
-            <!-- LOGO -->
-            <div class="p-8 border-b border-white/10">
-
-                <div class="flex items-center gap-4">
-
-                    <div class="
-                            w-14
-                            h-14
-                            rounded-3xl
-                            bg-gradient-to-br
-                            from-indigo-600
-                            to-cyan-500
-                            flex
-                            items-center
-                            justify-center
-                            shadow-glow
-                        ">
-
-                        <i data-lucide="wifi" class="w-7 h-7 text-white"></i>
-
-                    </div>
-
-                    <div>
-
-                        <h1 class="text-2xl font-black text-white">
-                            NexaNet
-                        </h1>
-
-                        <p class="text-slate-400 text-sm">
-                            Customer Dashboard
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- MENU -->
-            <div class="flex-1 p-6 space-y-3">
-
-                <a href="/dashboard" class="
-                        flex
-                        items-center
-                        gap-4
-                        px-5
-                        py-4
-                        rounded-2xl
-                        bg-gradient-to-r
-                        from-indigo-600
-                        to-cyan-500
-                        text-white
-                        font-semibold
-                        shadow-glow
-                    ">
-
-                    <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
-
-                    Dashboard
-
-                </a>
-
-                <a href="/transactions" class="
-                        flex
-                        items-center
-                        gap-4
-                        px-5
-                        py-4
-                        rounded-2xl
-                        text-slate-300
-                        hover:bg-white/5
-                        hover:text-white
-                        transition-all
-                    ">
-
-                    <i data-lucide="receipt" class="w-5 h-5"></i>
-
-                    Transactions
-
-                </a>
-
-                <a href="/vouchers" class="
-                        flex
-                        items-center
-                        gap-4
-                        px-5
-                        py-4
-                        rounded-2xl
-                        text-slate-300
-                        hover:bg-white/5
-                        hover:text-white
-                        transition-all
-                    ">
-
-                    <i data-lucide="ticket" class="w-5 h-5"></i>
-
-                    Vouchers
-
-                </a>
-
-                <a href="/profile" class="
-                        flex
-                        items-center
-                        gap-4
-                        px-5
-                        py-4
-                        rounded-2xl
-                        text-slate-300
-                        hover:bg-white/5
-                        hover:text-white
-                        transition-all
-                    ">
-
-                    <i data-lucide="user" class="w-5 h-5"></i>
-
-                    Profile
-
-                </a>
-
-            </div>
-
-            <!-- USER -->
-            <div class="p-6 border-t border-white/10">
-
-                <div class="
-                        glass
-                        rounded-3xl
-                        p-5
-                        flex
-                        items-center
-                        gap-4
-                    ">
-
-                    <div class="
-                            w-14
-                            h-14
-                            rounded-2xl
-                            bg-gradient-to-br
-                            from-indigo-600
-                            to-cyan-500
-                            flex
-                            items-center
-                            justify-center
-                            text-white
-                            text-xl
-                            font-black
-                        ">
-                        {{ current_user.username[0]|upper }}
-                    </div>
-
-                    <div>
-
-                        <h3 class="text-white font-bold">
-                            {{ current_user.username }}
-                        </h3>
-
-                        <p class="text-slate-400 text-sm">
-                            Premium Customer
-                        </p>
-
-                    </div>
-
-                </div>
-
-                <a href="/logout" class="
-                        mt-5
-                        flex
-                        items-center
-                        justify-center
-                        gap-3
-                        w-full
-                        py-4
-                        rounded-2xl
-                        border
-                        border-white/10
-                        bg-white/5
-                        text-slate-300
-                        hover:bg-white/10
-                        hover:text-white
-                        transition-all
-                    ">
-
-                    <i data-lucide="log-out" class="w-5 h-5"></i>
-
-                    Logout
-
-                </a>
-
-            </div>
-
-        </aside>
-
+        <!-- ===================================== -->
         <!-- MAIN -->
-        <main class="flex-1 p-6 lg:p-10">
+        <!-- ===================================== -->
+        <main class="flex-1 lg:ml-[280px]">
 
-            <!-- TOPBAR -->
-            <div class="
-                    flex
-                    flex-col
-                    lg:flex-row
-                    lg:items-center
-                    lg:justify-between
-                    gap-6
-                ">
+            <!-- ===================================== -->
+            <!-- TOP HEADER -->
+            <!-- ===================================== -->
+            <section class="bg-white border-b border-gray-200">
 
-                <div>
+                <div class="px-6 lg:px-10 py-8">
 
-                    <h1 class="
-                            text-4xl
-                            font-black
-                            text-white
-                        ">
-                        Welcome Back,
-                        {{ current_user.username }}
-                    </h1>
+                    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
 
-                    <p class="text-slate-400 mt-3 text-lg">
-                        Monitor your internet service and account activity.
-                    </p>
-
-                </div>
-
-                <div class="
-                        glass
-                        rounded-3xl
-                        px-6
-                        py-4
-                        flex
-                        items-center
-                        gap-4
-                    ">
-
-                    <div class="
-                            w-12
-                            h-12
-                            rounded-2xl
-                            bg-gradient-to-br
-                            from-green-500
-                            to-emerald-400
-                            flex
-                            items-center
-                            justify-center
-                        ">
-
-                        <i data-lucide="wifi" class="w-6 h-6 text-white"></i>
-
-                    </div>
-
-                    <div>
-
-                        <p class="text-slate-400 text-sm">
-                            Network Status
-                        </p>
-
-                        <h3 class="text-white font-bold">
-                            Connected
-                        </h3>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- STATS -->
-            <div class="
-                    grid
-                    md:grid-cols-2
-                    xl:grid-cols-4
-                    gap-6
-                    mt-10
-                ">
-
-                <!-- CARD -->
-                <div class="premium-card rounded-3xl p-7">
-
-                    <div class="flex items-center justify-between">
-
+                        <!-- LEFT -->
                         <div>
 
-                            <p class="text-slate-400">
-                                Current Speed
+                            <p class="
+                                text-sm
+                                uppercase
+                                tracking-[0.3em]
+                                text-red-600
+                                font-bold
+                            ">
+                                Enterprise Customer Portal
                             </p>
 
-                            <h2 class="
-                                    text-4xl
-                                    font-black
-                                    text-white
-                                    mt-3
-                                ">
-                                940
-                                <span class="text-cyan-400 text-xl">
-                                    Mbps
+                            <h1 class="
+                                mt-3
+                                text-4xl
+                                lg:text-5xl
+                                font-black
+                                text-black
+                                leading-tight
+                            ">
+                                Welcome back,
+                                <span class="text-red-600">
+                                    {{ current_user.username }}
                                 </span>
-                            </h2>
+                            </h1>
 
-                        </div>
-
-                        <div class="
-                                w-16
-                                h-16
-                                rounded-3xl
-                                bg-cyan-500/10
-                                flex
-                                items-center
-                                justify-center
+                            <p class="
+                                mt-4
+                                text-gray-500
+                                max-w-2xl
+                                leading-relaxed
                             ">
-
-                            <i data-lucide="gauge" class="w-8 h-8 text-cyan-400"></i>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <!-- CARD -->
-                <div class="premium-card rounded-3xl p-7">
-
-                    <div class="flex items-center justify-between">
-
-                        <div>
-
-                            <p class="text-slate-400">
-                                Ping
+                                Monitor your internet services, subscription,
+                                billing activity, and network performance
+                                through BTN Net enterprise dashboard.
                             </p>
 
-                            <h2 class="
-                                    text-4xl
-                                    font-black
-                                    text-white
-                                    mt-3
-                                ">
-                                4ms
-                            </h2>
-
                         </div>
 
-                        <div class="
-                                w-16
-                                h-16
-                                rounded-3xl
-                                bg-indigo-500/10
-                                flex
+                        <!-- RIGHT -->
+                        <div class="flex items-center gap-4">
+
+                            <!-- STATUS -->
+                            <div class="
+                                hidden md:flex
                                 items-center
-                                justify-center
+                                gap-3
+                                px-5
+                                py-3
+                                bg-green-50
+                                border
+                                border-green-200
+                                rounded-xl
                             ">
 
-                            <i data-lucide="zap" class="w-8 h-8 text-indigo-400"></i>
+                                <div class="
+                                    w-3
+                                    h-3
+                                    rounded-full
+                                    bg-green-500
+                                    animate-pulse
+                                "></div>
+
+                                <span class="
+                                    text-sm
+                                    font-semibold
+                                    text-green-700
+                                ">
+                                    Network Stable
+                                </span>
+
+                            </div>
+
+                            <!-- BUTTON -->
+                            <button class="
+                                bg-red-600
+                                hover:bg-black
+                                transition-all
+                                duration-300
+                                text-white
+                                px-7
+                                py-4
+                                rounded-xl
+                                font-bold
+                                shadow-lg
+                            ">
+                                Upgrade Package
+                            </button>
 
                         </div>
 
@@ -386,300 +126,731 @@ Dashboard | NexaNet
 
                 </div>
 
-                <!-- CARD -->
-                <div class="premium-card rounded-3xl p-7">
+            </section>
 
-                    <div class="flex items-center justify-between">
+            <!-- ===================================== -->
+            <!-- CONTENT -->
+            <!-- ===================================== -->
+            <section class="p-6 lg:p-10">
 
-                        <div>
+                <!-- ===================================== -->
+                <!-- STATS -->
+                <!-- ===================================== -->
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
 
-                            <p class="text-slate-400">
-                                Package
-                            </p>
-
-                            <h2 class="
-                                    text-3xl
-                                    font-black
-                                    text-white
-                                    mt-3
-                                ">
-                                Premium
-                            </h2>
-
-                        </div>
-
-                        <div class="
-                                w-16
-                                h-16
-                                rounded-3xl
-                                bg-emerald-500/10
-                                flex
-                                items-center
-                                justify-center
-                            ">
-
-                            <i data-lucide="crown" class="w-8 h-8 text-emerald-400"></i>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <!-- CARD -->
-                <div class="premium-card rounded-3xl p-7">
-
-                    <div class="flex items-center justify-between">
-
-                        <div>
-
-                            <p class="text-slate-400">
-                                Uptime
-                            </p>
-
-                            <h2 class="
-                                    text-4xl
-                                    font-black
-                                    text-white
-                                    mt-3
-                                ">
-                                99.9%
-                            </h2>
-
-                        </div>
-
-                        <div class="
-                                w-16
-                                h-16
-                                rounded-3xl
-                                bg-pink-500/10
-                                flex
-                                items-center
-                                justify-center
-                            ">
-
-                            <i data-lucide="shield-check" class="w-8 h-8 text-pink-400"></i>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- CONTENT GRID -->
-            <div class="
-                    grid
-                    xl:grid-cols-3
-                    gap-8
-                    mt-10
-                ">
-
-                <!-- TRANSACTIONS -->
-                <div class="
-                        xl:col-span-2
-                        premium-card
-                        rounded-[32px]
-                        p-8
+                    <!-- CARD -->
+                    <div class="
+                        bg-white
+                        border
+                        border-gray-200
+                        rounded-2xl
+                        overflow-hidden
+                        hover:shadow-2xl
+                        transition-all
+                        duration-300
                     ">
 
-                    <div class="
-                            flex
-                            items-center
-                            justify-between
-                            mb-8
-                        ">
+                        <div class="h-1 bg-red-600"></div>
 
-                        <div>
+                        <div class="p-7">
 
-                            <h2 class="
-                                    text-2xl
-                                    font-black
-                                    text-white
-                                ">
-                                Recent Transactions
-                            </h2>
+                            <div class="flex items-start justify-between">
 
-                            <p class="text-slate-400 mt-2">
-                                Your latest payment activity.
-                            </p>
+                                <div>
 
-                        </div>
+                                    <p class="
+                                        text-xs
+                                        uppercase
+                                        tracking-[0.25em]
+                                        text-gray-500
+                                        font-semibold
+                                    ">
+                                        Active Plan
+                                    </p>
 
-                        <a href="/transactions" class="
-                                text-cyan-400
-                                hover:text-cyan-300
-                                font-semibold
-                            ">
-                            View All
-                        </a>
+                                    <h2 class="
+                                        mt-4
+                                        text-4xl
+                                        font-black
+                                        text-black
+                                    ">
+                                        100
+                                        <span class="text-lg text-red-600">
+                                            Mbps
+                                        </span>
+                                    </h2>
 
-                    </div>
+                                </div>
 
-                    <!-- TABLE -->
-                    <div class="space-y-4">
-
-                        {% if transactions %}
-
-                            {% for transaction in transactions %}
-
-                            <div class="
-                                    glass
-                                    rounded-2xl
-                                    p-5
+                                <div class="
+                                    w-14
+                                    h-14
+                                    rounded-xl
+                                    bg-red-50
                                     flex
                                     items-center
-                                    justify-between
+                                    justify-center
                                 ">
 
-                                <div class="flex items-center gap-4">
+                                    <i data-lucide="wifi" class="w-7 h-7 text-red-600"></i>
 
-                                    <div class="
-                                            w-14
-                                            h-14
-                                            rounded-2xl
-                                            bg-cyan-500/10
-                                            flex
-                                            items-center
-                                            justify-center
-                                        ">
+                                </div>
 
-                                        <i data-lucide="receipt" class="w-7 h-7 text-cyan-400"></i>
+                            </div>
 
-                                    </div>
+                        </div>
+
+                    </div>
+
+                    <!-- CARD -->
+                    <div class="
+                        bg-white
+                        border
+                        border-gray-200
+                        rounded-2xl
+                        overflow-hidden
+                        hover:shadow-2xl
+                        transition-all
+                        duration-300
+                    ">
+
+                        <div class="h-1 bg-black"></div>
+
+                        <div class="p-7">
+
+                            <div class="flex items-start justify-between">
+
+                                <div>
+
+                                    <p class="
+                                        text-xs
+                                        uppercase
+                                        tracking-[0.25em]
+                                        text-gray-500
+                                        font-semibold
+                                    ">
+                                        Transactions
+                                    </p>
+
+                                    <h2 class="
+                                        mt-4
+                                        text-4xl
+                                        font-black
+                                        text-black
+                                    ">
+                                        24
+                                    </h2>
+
+                                </div>
+
+                                <div class="
+                                    w-14
+                                    h-14
+                                    rounded-xl
+                                    bg-gray-100
+                                    flex
+                                    items-center
+                                    justify-center
+                                ">
+
+                                    <i data-lucide="receipt" class="w-7 h-7 text-black"></i>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- CARD -->
+                    <div class="
+                        bg-white
+                        border
+                        border-gray-200
+                        rounded-2xl
+                        overflow-hidden
+                        hover:shadow-2xl
+                        transition-all
+                        duration-300
+                    ">
+
+                        <div class="h-1 bg-red-600"></div>
+
+                        <div class="p-7">
+
+                            <div class="flex items-start justify-between">
+
+                                <div>
+
+                                    <p class="
+                                        text-xs
+                                        uppercase
+                                        tracking-[0.25em]
+                                        text-gray-500
+                                        font-semibold
+                                    ">
+                                        Active Voucher
+                                    </p>
+
+                                    <h2 class="
+                                        mt-4
+                                        text-4xl
+                                        font-black
+                                        text-black
+                                    ">
+                                        12
+                                    </h2>
+
+                                </div>
+
+                                <div class="
+                                    w-14
+                                    h-14
+                                    rounded-xl
+                                    bg-red-50
+                                    flex
+                                    items-center
+                                    justify-center
+                                ">
+
+                                    <i data-lucide="ticket-percent" class="w-7 h-7 text-red-600"></i>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- CARD -->
+                    <div class="
+                        bg-white
+                        border
+                        border-gray-200
+                        rounded-2xl
+                        overflow-hidden
+                        hover:shadow-2xl
+                        transition-all
+                        duration-300
+                    ">
+
+                        <div class="h-1 bg-black"></div>
+
+                        <div class="p-7">
+
+                            <div class="flex items-start justify-between">
+
+                                <div>
+
+                                    <p class="
+                                        text-xs
+                                        uppercase
+                                        tracking-[0.25em]
+                                        text-gray-500
+                                        font-semibold
+                                    ">
+                                        Connection
+                                    </p>
+
+                                    <h2 class="
+                                        mt-4
+                                        text-4xl
+                                        font-black
+                                        text-green-600
+                                    ">
+                                        Stable
+                                    </h2>
+
+                                </div>
+
+                                <div class="
+                                    w-14
+                                    h-14
+                                    rounded-xl
+                                    bg-green-50
+                                    flex
+                                    items-center
+                                    justify-center
+                                ">
+
+                                    <i data-lucide="activity" class="w-7 h-7 text-green-600"></i>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- ===================================== -->
+                <!-- MAIN GRID -->
+                <!-- ===================================== -->
+                <div class="grid grid-cols-1 xl:grid-cols-3 gap-8 mt-8">
+
+                    <!-- ================================= -->
+                    <!-- LEFT SIDE -->
+                    <!-- ================================= -->
+                    <div class="xl:col-span-2 space-y-8">
+
+                        <!-- NETWORK PERFORMANCE -->
+                        <div class="
+                            bg-white
+                            border
+                            border-gray-200
+                            rounded-2xl
+                            overflow-hidden
+                        ">
+
+                            <div class="h-1 bg-red-600"></div>
+
+                            <div class="p-8">
+
+                                <!-- HEADER -->
+                                <div class="
+                                    flex
+                                    flex-col
+                                    md:flex-row
+                                    md:items-center
+                                    md:justify-between
+                                    gap-5
+                                    mb-10
+                                ">
 
                                     <div>
 
-                                        <h3 class="text-white font-bold">
-                                            {{ transaction.package_name }}
+                                        <p class="
+                                            text-xs
+                                            uppercase
+                                            tracking-[0.3em]
+                                            text-red-600
+                                            font-bold
+                                        ">
+                                            Network Analytics
+                                        </p>
+
+                                        <h2 class="
+                                            mt-3
+                                            text-3xl
+                                            font-black
+                                            text-black
+                                        ">
+                                            Real-Time Performance
+                                        </h2>
+
+                                    </div>
+
+                                    <button class="
+                                        border
+                                        border-red-600
+                                        text-red-600
+                                        hover:bg-red-600
+                                        hover:text-white
+                                        transition-all
+                                        px-5
+                                        py-3
+                                        rounded-xl
+                                        font-semibold
+                                    ">
+                                        View Analytics
+                                    </button>
+
+                                </div>
+
+                                <!-- SPEED GRID -->
+                                <div class="grid md:grid-cols-3 gap-6">
+
+                                    <div class="
+                                        bg-[#f7f8fa]
+                                        rounded-2xl
+                                        p-7
+                                    ">
+
+                                        <p class="
+                                            text-xs
+                                            uppercase
+                                            tracking-[0.25em]
+                                            text-gray-500
+                                            font-semibold
+                                        ">
+                                            Download Speed
+                                        </p>
+
+                                        <h3 class="
+                                            mt-5
+                                            text-5xl
+                                            font-black
+                                            text-black
+                                        ">
+                                            940
                                         </h3>
 
-                                        <p class="text-slate-400 text-sm">
-                                            {{ transaction.created_at }}
+                                        <p class="mt-2 text-red-600 font-semibold">
+                                            Mbps
+                                        </p>
+
+                                    </div>
+
+                                    <div class="
+                                        bg-[#f7f8fa]
+                                        rounded-2xl
+                                        p-7
+                                    ">
+
+                                        <p class="
+                                            text-xs
+                                            uppercase
+                                            tracking-[0.25em]
+                                            text-gray-500
+                                            font-semibold
+                                        ">
+                                            Upload Speed
+                                        </p>
+
+                                        <h3 class="
+                                            mt-5
+                                            text-5xl
+                                            font-black
+                                            text-black
+                                        ">
+                                            520
+                                        </h3>
+
+                                        <p class="mt-2 text-red-600 font-semibold">
+                                            Mbps
+                                        </p>
+
+                                    </div>
+
+                                    <div class="
+                                        bg-[#f7f8fa]
+                                        rounded-2xl
+                                        p-7
+                                    ">
+
+                                        <p class="
+                                            text-xs
+                                            uppercase
+                                            tracking-[0.25em]
+                                            text-gray-500
+                                            font-semibold
+                                        ">
+                                            Ping
+                                        </p>
+
+                                        <h3 class="
+                                            mt-5
+                                            text-5xl
+                                            font-black
+                                            text-black
+                                        ">
+                                            4
+                                        </h3>
+
+                                        <p class="mt-2 text-red-600 font-semibold">
+                                            ms
                                         </p>
 
                                     </div>
 
                                 </div>
 
-                                <div class="text-right">
+                            </div>
 
-                                    <h3 class="text-white font-bold">
-                                        Rp{{ transaction.amount }}
-                                    </h3>
+                        </div>
 
-                                    <p class="text-emerald-400 text-sm">
-                                        Success
-                                    </p>
+                        <!-- TRANSACTION TABLE -->
+                        <div class="
+                            bg-white
+                            border
+                            border-gray-200
+                            rounded-2xl
+                            overflow-hidden
+                        ">
+
+                            <div class="h-1 bg-black"></div>
+
+                            <div class="p-8">
+
+                                <!-- HEADER -->
+                                <div class="
+                                    flex
+                                    items-center
+                                    justify-between
+                                    mb-8
+                                ">
+
+                                    <div>
+
+                                        <p class="
+                                            text-xs
+                                            uppercase
+                                            tracking-[0.3em]
+                                            text-red-600
+                                            font-bold
+                                        ">
+                                            Billing System
+                                        </p>
+
+                                        <h2 class="
+                                            mt-3
+                                            text-3xl
+                                            font-black
+                                            text-black
+                                        ">
+                                            Recent Transactions
+                                        </h2>
+
+                                    </div>
+
+                                    <button class="
+                                        border
+                                        border-gray-300
+                                        hover:border-red-600
+                                        hover:text-red-600
+                                        transition-all
+                                        px-5
+                                        py-3
+                                        rounded-xl
+                                        font-semibold
+                                    ">
+                                        View All
+                                    </button>
+
+                                </div>
+
+                                <!-- TABLE -->
+                                <div class="overflow-x-auto">
+
+                                    <table class="w-full min-w-[700px]">
+
+                                        <thead>
+
+                                            <tr class="border-b border-gray-200">
+
+                                                <th class="text-left py-5 text-sm uppercase tracking-wider text-gray-500">
+                                                    Invoice
+                                                </th>
+
+                                                <th class="text-left py-5 text-sm uppercase tracking-wider text-gray-500">
+                                                    Package
+                                                </th>
+
+                                                <th class="text-left py-5 text-sm uppercase tracking-wider text-gray-500">
+                                                    Status
+                                                </th>
+
+                                                <th class="text-left py-5 text-sm uppercase tracking-wider text-gray-500">
+                                                    Amount
+                                                </th>
+
+                                            </tr>
+
+                                        </thead>
+
+                                        <tbody>
+
+                                            <tr class="border-b border-gray-100 hover:bg-gray-50 transition-all">
+
+                                                <td class="py-6 font-bold text-black">
+                                                    INV-202601
+                                                </td>
+
+                                                <td class="py-6 text-gray-600">
+                                                    Enterprise Fiber
+                                                </td>
+
+                                                <td class="py-6">
+
+                                                    <span class="
+                                                        bg-green-100
+                                                        text-green-700
+                                                        px-4
+                                                        py-2
+                                                        rounded-full
+                                                        text-sm
+                                                        font-semibold
+                                                    ">
+                                                        Paid
+                                                    </span>
+
+                                                </td>
+
+                                                <td class="py-6 font-bold text-black">
+                                                    Rp 350.000
+                                                </td>
+
+                                            </tr>
+
+                                            <tr class="hover:bg-gray-50 transition-all">
+
+                                                <td class="py-6 font-bold text-black">
+                                                    INV-202600
+                                                </td>
+
+                                                <td class="py-6 text-gray-600">
+                                                    Gamer Package
+                                                </td>
+
+                                                <td class="py-6">
+
+                                                    <span class="
+                                                        bg-yellow-100
+                                                        text-yellow-700
+                                                        px-4
+                                                        py-2
+                                                        rounded-full
+                                                        text-sm
+                                                        font-semibold
+                                                    ">
+                                                        Pending
+                                                    </span>
+
+                                                </td>
+
+                                                <td class="py-6 font-bold text-black">
+                                                    Rp 250.000
+                                                </td>
+
+                                            </tr>
+
+                                        </tbody>
+
+                                    </table>
 
                                 </div>
 
                             </div>
 
-                            {% endfor %}
+                        </div>
 
-                        {% else %}
+                    </div>
 
-                            <div class="
-                                    glass
-                                    rounded-3xl
-                                    p-10
-                                    text-center
+                    <!-- ================================= -->
+                    <!-- RIGHT SIDE -->
+                    <!-- ================================= -->
+                    <div class="space-y-8">
+
+                        <!-- PROFILE -->
+                        <div class="
+                            bg-black
+                            rounded-2xl
+                            overflow-hidden
+                            text-white
+                            relative
+                        ">
+
+                            <div class="absolute top-0 left-0 w-full h-1 bg-red-600"></div>
+
+                            <div class="p-8">
+
+                                <div class="
+                                    w-20
+                                    h-20
+                                    rounded-2xl
+                                    bg-red-600
+                                    flex
+                                    items-center
+                                    justify-center
+                                    text-3xl
+                                    font-black
                                 ">
+                                    {{ current_user.username[0] | upper }}
+                                </div>
 
-                                <i data-lucide="receipt" class="w-14 h-14 text-slate-500 mx-auto"></i>
-
-                                <h3 class="text-white text-xl font-bold mt-5">
-                                    No Transactions Yet
+                                <h3 class="
+                                    mt-6
+                                    text-3xl
+                                    font-black
+                                ">
+                                    {{ current_user.username }}
                                 </h3>
 
-                                <p class="text-slate-400 mt-3">
-                                    Your transaction history will appear here.
+                                <p class="mt-2 text-gray-400">
+                                    Premium Enterprise Customer
                                 </p>
+
+                                <button class="
+                                    mt-8
+                                    w-full
+                                    bg-red-600
+                                    hover:bg-white
+                                    hover:text-black
+                                    transition-all
+                                    py-4
+                                    rounded-xl
+                                    font-bold
+                                ">
+                                    Manage Profile
+                                </button>
 
                             </div>
 
-                        {% endif %}
-
-                    </div>
-
-                </div>
-
-                <!-- PROFILE -->
-                <div class="
-                        premium-card
-                        rounded-[32px]
-                        p-8
-                    ">
-
-                    <div class="text-center">
-
-                        <div class="
-                                w-28
-                                h-28
-                                rounded-[32px]
-                                bg-gradient-to-br
-                                from-indigo-600
-                                to-cyan-500
-                                flex
-                                items-center
-                                justify-center
-                                text-white
-                                text-5xl
-                                font-black
-                                mx-auto
-                                shadow-glow
-                            ">
-                            {{ current_user.username[0]|upper }}
                         </div>
 
-                        <h2 class="
-                                mt-6
-                                text-3xl
-                                font-black
-                                text-white
-                            ">
-                            {{ current_user.username }}
-                        </h2>
-
-                        <p class="text-slate-400 mt-2">
-                            Premium Customer
-                        </p>
-
-                    </div>
-
-                    <div class="mt-10 space-y-5">
-
+                        <!-- VOUCHER -->
                         <div class="
-                                glass
-                                rounded-2xl
-                                p-5
-                            ">
+                            bg-white
+                            border
+                            border-gray-200
+                            rounded-2xl
+                            overflow-hidden
+                        ">
 
-                            <p class="text-slate-400 text-sm">
-                                Email
-                            </p>
+                            <div class="h-1 bg-red-600"></div>
 
-                            <h3 class="text-white font-semibold mt-2">
-                                {{ current_user.email }}
-                            </h3>
+                            <div class="p-8">
 
-                        </div>
+                                <p class="
+                                    text-xs
+                                    uppercase
+                                    tracking-[0.3em]
+                                    text-red-600
+                                    font-bold
+                                ">
+                                    Voucher Access
+                                </p>
 
-                        <div class="
-                                glass
-                                rounded-2xl
-                                p-5
-                            ">
+                                <h3 class="
+                                    mt-4
+                                    text-3xl
+                                    font-black
+                                    text-black
+                                ">
+                                    BTN-ULTRA-25
+                                </h3>
 
-                            <p class="text-slate-400 text-sm">
-                                Account Status
-                            </p>
+                                <p class="
+                                    mt-4
+                                    text-gray-500
+                                    leading-relaxed
+                                ">
+                                    Redeem your enterprise voucher for
+                                    premium internet service upgrades
+                                    and transaction discounts.
+                                </p>
 
-                            <h3 class="text-emerald-400 font-semibold mt-2">
-                                Active
-                            </h3>
+                                <button class="
+                                    mt-8
+                                    w-full
+                                    border
+                                    border-red-600
+                                    text-red-600
+                                    hover:bg-red-600
+                                    hover:text-white
+                                    transition-all
+                                    py-4
+                                    rounded-xl
+                                    font-bold
+                                ">
+                                    Redeem Voucher
+                                </button>
+
+                            </div>
 
                         </div>
 
@@ -687,7 +858,7 @@ Dashboard | NexaNet
 
                 </div>
 
-            </div>
+            </section>
 
         </main>
 
