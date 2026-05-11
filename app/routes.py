@@ -281,3 +281,30 @@ def payment_success():
     except Exception as e:
         db.session.rollback()
         return jsonify({"status": "error", "message": str(e)}), 500
+    
+    
+    
+@app.route('/transactions')
+@login_required
+def transactions():
+    # Ambil semua riwayat transaksi untuk user yang sedang login
+    transaksi_user = Transaction.query.filter_by(user_id=current_user.id).order_by(Transaction.id.desc()).all()
+    return render_template('transactions.html', transactions=transaksi_user)
+
+
+@app.route('/packages')
+@login_required
+def browse_packages():
+    # Mengambil semua paket yang tersedia dari database
+    available_packages = Package.query.all()
+    return render_template('packages.html', packages=available_packages)
+
+@app.route('/vouchers')
+@login_required
+def vouchers():
+    # Mengambil semua voucher yang transaksinya dimiliki oleh user yang sedang login
+    user_vouchers = Voucher.query.join(Transaction).filter(
+        Transaction.user_id == current_user.id
+    ).order_by(Voucher.id.desc()).all()
+    
+    return render_template('vouchers.html', vouchers=user_vouchers)

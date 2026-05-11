@@ -1,24 +1,52 @@
 {% extends "base.html" %}
 
+{% block title %}Checkout Langganan | NexaNet{% endblock %}
+
 {% block content %}
-<div style="display: flex; justify-content: center; margin-top: 50px;">
-    <div class="card" style="width: 100%; max-width: 400px; padding: 30px;">
-        <h2 style="margin-bottom: 20px;">Pemesanan Pemasangan Baru</h2>
-        <p style="margin-bottom: 20px;">Paket: <strong>{{ package.name }}</strong> ({{ package.speed }})</p>
-        
-        <form action="{{ url_for('checkout', package_id=package.id) }}" method="POST">
-            <div style="margin-bottom: 15px; text-align: left;">
-                <label style="display: block; margin-bottom: 5px;">Alamat Lengkap Pemasangan</label>
-                <textarea name="address" rows="3" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" required placeholder="Contoh: Jl. Merdeka No. 10, RT 01/RW 02"></textarea>
+<div class="relative min-h-screen flex items-center justify-center px-6 py-20 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-slate-950 via-indigo-950 to-slate-950"></div>
+    <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-indigo-500/10 blur-[140px] rounded-full"></div>
+
+    <div class="relative z-10 w-full max-w-xl">
+        <div class="premium-card rounded-[40px] p-10 backdrop-blur-2xl border border-white/10">
+            <div class="text-center mb-8">
+                <div class="w-20 h-20 rounded-3xl bg-gradient-to-br from-indigo-600 to-cyan-500 flex items-center justify-center shadow-glow mx-auto mb-6">
+                    <i data-lucide="home" class="w-10 h-10 text-white"></i>
+                </div>
+                <h2 class="text-3xl font-black text-white">Pemasangan Baru</h2>
+                <p class="text-slate-400 mt-2">Layanan Fiber Optic: <span class="text-cyan-400 font-bold">{{ package.name }}</span></p>
             </div>
-            
-            <div style="margin-bottom: 20px; text-align: left;">
-                <label style="display: block; margin-bottom: 5px;">Nomor HP / WhatsApp Aktif</label>
-                <input type="text" name="phone_number" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" required placeholder="Contoh: 08123456789">
-            </div>
-            
-            <button type="submit" class="btn btn-primary" style="width: 100%;">Lanjut Pembayaran</button>
-        </form>
+
+            <form action="{{ url_for('checkout', package_id=package.id) }}" method="POST" class="space-y-6">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-300 mb-3">Alamat Lengkap Pemasangan</label>
+                    <textarea name="address" rows="3" required class="input-modern w-full rounded-2xl p-5 text-white resize-none" placeholder="Contoh: Jl. Merdeka No. 10, RT 01/RW 02, Bandung"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-300 mb-3">Nomor WhatsApp Aktif</label>
+                    <div class="relative">
+                        <i data-lucide="phone" class="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500"></i>
+                        <input type="text" name="phone_number" required class="input-modern w-full h-16 rounded-2xl pl-14 pr-5 text-white" placeholder="Contoh: 08123456789">
+                    </div>
+                </div>
+
+                <div class="glass rounded-2xl p-6 border border-white/5 space-y-3">
+                    <div class="flex justify-between text-slate-400">
+                        <span>Biaya Langganan</span>
+                        <span>Rp{{ "{:,.0f}".format(package.price) }}</span>
+                    </div>
+                    <div class="flex justify-between text-white font-bold text-lg pt-3 border-t border-white/10">
+                        <span>Total Pembayaran</span>
+                        <span class="text-cyan-400">Rp{{ "{:,.0f}".format(package.price) }}</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full h-16 rounded-2xl bg-gradient-to-r from-indigo-600 to-cyan-500 text-white font-bold text-lg shadow-glow hover:scale-[1.02] transition-all">
+                    Konfirmasi dan Bayar
+                </button>
+            </form>
+        </div>
     </div>
 </div>
 {% endblock %}
