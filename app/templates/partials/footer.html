@@ -1,220 +1,420 @@
-<footer
-    class="
-        relative
-        border-t
-        border-white/10
-        mt-24
-        overflow-hidden
-    "
->
+<footer class="relative overflow-hidden mt-32">
+
+    <!-- TOP GRADIENT -->
+    <div class="
+            absolute
+            inset-0
+            bg-gradient-to-br
+            from-red-700
+            via-red-800
+            to-black
+        ">
+    </div>
 
     <!-- GLOW -->
-    <div
-        class="
+    <div class="
             absolute
             top-0
-            left-1/2
-            -translate-x-1/2
+            left-0
             w-[400px]
-            h-[200px]
-            bg-cyan-500/10
+            h-[400px]
+            bg-red-500/20
             blur-[120px]
-        "
-    ></div>
+            rounded-full
+        ">
+    </div>
 
-    <div
-        class="
+    <div class="
+            absolute
+            bottom-0
+            right-0
+            w-[400px]
+            h-[400px]
+            bg-white/10
+            blur-[120px]
+            rounded-full
+        ">
+    </div>
+
+    <!-- CONTENT -->
+    <div class="
             relative
+            z-10
             max-w-7xl
             mx-auto
             px-6
             lg:px-8
-            py-20
-        "
-    >
+            pt-24
+            pb-10
+        ">
 
-        <!-- TOP -->
-        <div
-            class="
+        <!-- CTA SECTION -->
+        <div class="
+                premium-card
+                rounded-[40px]
+                p-10
+                lg:p-16
+                mb-20
+                bg-white/10
+                border
+                border-white/10
+                backdrop-blur-xl
+            "
+            data-aos="fade-up">
+
+            <div class="
+                    grid
+                    lg:grid-cols-2
+                    gap-10
+                    items-center
+                ">
+
+                <!-- LEFT -->
+                <div>
+
+                    <div class="
+                            inline-flex
+                            items-center
+                            gap-2
+                            px-4
+                            py-2
+                            rounded-full
+                            bg-white/10
+                            border
+                            border-white/10
+                            text-white
+                            text-sm
+                            font-semibold
+                            mb-6
+                        ">
+
+                        <span class="
+                                w-2
+                                h-2
+                                rounded-full
+                                bg-red-400
+                                animate-pulse
+                            ">
+                        </span>
+
+                        Premium Enterprise ISP Platform
+
+                    </div>
+
+                    <h2 class="
+                            text-4xl
+                            lg:text-5xl
+                            font-black
+                            leading-tight
+                            text-white
+                        ">
+
+                        Ready To Experience
+                        <span class="text-red-300">
+                            Next Generation
+                        </span>
+                        Internet?
+
+                    </h2>
+
+                    <p class="
+                            mt-6
+                            text-lg
+                            text-red-100/80
+                            leading-relaxed
+                            max-w-2xl
+                        ">
+
+                        Join thousands of customers using
+                        BARAYA TELEMATIKA NUSANTARA
+                        for ultra-fast, stable, and enterprise-grade
+                        internet services.
+
+                    </p>
+
+                </div>
+
+                <!-- RIGHT -->
+                <div class="
+                        flex
+                        flex-col
+                        sm:flex-row
+                        gap-4
+                        lg:justify-end
+                    ">
+
+                    <!-- BUTTON -->
+                    <a href="/register"
+                        class="
+                            bg-white
+                            text-red-700
+                            px-8
+                            py-4
+                            rounded-2xl
+                            font-bold
+                            text-center
+                            hover:scale-105
+                            transition-all
+                            shadow-2xl
+                        ">
+
+                        Get Started
+
+                    </a>
+
+                    <a href="/#packages"
+                        class="
+                            border
+                            border-white/20
+                            bg-white/10
+                            text-white
+                            px-8
+                            py-4
+                            rounded-2xl
+                            font-bold
+                            text-center
+                            hover:bg-white/20
+                            transition-all
+                        ">
+
+                        Explore Packages
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- MAIN FOOTER -->
+        <div class="
                 grid
-                md:grid-cols-2
                 lg:grid-cols-4
                 gap-12
-            "
-        >
+            ">
 
             <!-- BRAND -->
-            <div>
+            <div class="lg:col-span-1">
 
-                <div class="flex items-center gap-3">
+                <!-- LOGO -->
+                <div class="flex items-center gap-4">
 
-                    <div
-                        class="
-                            w-12
-                            h-12
-                            rounded-2xl
-                            bg-gradient-to-br
-                            from-indigo-600
-                            to-cyan-500
+                    <div class="
+                            w-14
+                            h-14
+                            rounded-3xl
+                            bg-white
                             flex
                             items-center
                             justify-center
-                            shadow-glow
-                        "
-                    >
+                            shadow-2xl
+                        ">
 
                         <i
                             data-lucide="wifi"
-                            class="w-6 h-6 text-white"
+                            class="w-7 h-7 text-red-700"
                         ></i>
 
                     </div>
 
                     <div>
 
-                        <h2
-                            class="
+                        <h3 class="
                                 text-2xl
                                 font-black
                                 text-white
-                            "
-                        >
-                            NexaNet
-                        </h2>
+                            ">
+                            BTN Net
+                        </h3>
 
-                        <p
-                            class="
+                        <p class="
                                 text-sm
-                                text-slate-400
-                            "
-                        >
-                            Premium ISP Platform
+                                text-red-100/70
+                            ">
+                            Baraya Telematika Nusantara
                         </p>
 
                     </div>
 
                 </div>
 
-                <p
-                    class="
-                        mt-6
-                        text-slate-400
+                <!-- DESC -->
+                <p class="
+                        mt-8
+                        text-red-100/70
                         leading-relaxed
-                    "
-                >
-                    Modern internet infrastructure with premium speed,
-                    security, and customer experience for the digital era.
+                    ">
+
+                    Premium enterprise internet infrastructure
+                    with ultra-fast connectivity, secure network
+                    architecture, and reliable digital services.
+
                 </p>
 
-            </div>
+                <!-- SOCIAL -->
+                <div class="
+                        flex
+                        items-center
+                        gap-4
+                        mt-8
+                    ">
 
-            <!-- COMPANY -->
-            <div>
-
-                <h3
-                    class="
-                        text-lg
-                        font-bold
-                        text-white
-                        mb-5
-                    "
-                >
-                    Company
-                </h3>
-
-                <div class="space-y-4">
-
-                    <a
-                        href="#"
+                    <!-- ICON -->
+                    <a href="#"
                         class="
-                            block
-                            text-slate-400
-                            hover:text-cyan-400
+                            w-12
+                            h-12
+                            rounded-2xl
+                            bg-white/10
+                            border
+                            border-white/10
+                            flex
+                            items-center
+                            justify-center
+                            hover:bg-white
+                            hover:text-red-700
+                            text-white
                             transition-all
-                        "
-                    >
-                        About Us
+                        ">
+
+                        <i data-lucide="instagram" class="w-5 h-5"></i>
+
                     </a>
 
-                    <a
-                        href="#"
+                    <a href="#"
                         class="
-                            block
-                            text-slate-400
-                            hover:text-cyan-400
+                            w-12
+                            h-12
+                            rounded-2xl
+                            bg-white/10
+                            border
+                            border-white/10
+                            flex
+                            items-center
+                            justify-center
+                            hover:bg-white
+                            hover:text-red-700
+                            text-white
                             transition-all
-                        "
-                    >
-                        Services
+                        ">
+
+                        <i data-lucide="facebook" class="w-5 h-5"></i>
+
                     </a>
 
-                    <a
-                        href="#"
+                    <a href="#"
                         class="
-                            block
-                            text-slate-400
-                            hover:text-cyan-400
+                            w-12
+                            h-12
+                            rounded-2xl
+                            bg-white/10
+                            border
+                            border-white/10
+                            flex
+                            items-center
+                            justify-center
+                            hover:bg-white
+                            hover:text-red-700
+                            text-white
                             transition-all
-                        "
-                    >
-                        Network Coverage
+                        ">
+
+                        <i data-lucide="twitter" class="w-5 h-5"></i>
+
                     </a>
 
                 </div>
 
             </div>
 
-            <!-- SUPPORT -->
+            <!-- COMPANY -->
             <div>
 
-                <h3
-                    class="
+                <h4 class="
                         text-lg
                         font-bold
                         text-white
-                        mb-5
-                    "
-                >
-                    Support
-                </h3>
+                        mb-6
+                    ">
+                    Company
+                </h4>
 
                 <div class="space-y-4">
 
-                    <a
-                        href="#"
+                    <a href="/"
                         class="
                             block
-                            text-slate-400
-                            hover:text-cyan-400
+                            text-red-100/70
+                            hover:text-white
                             transition-all
-                        "
-                    >
-                        Help Center
+                        ">
+                        Home
                     </a>
 
-                    <a
-                        href="#"
+                    <a href="/#features"
                         class="
                             block
-                            text-slate-400
-                            hover:text-cyan-400
+                            text-red-100/70
+                            hover:text-white
                             transition-all
-                        "
-                    >
-                        Contact Support
+                        ">
+                        Features
                     </a>
 
-                    <a
-                        href="#"
+                    <a href="/#packages"
                         class="
                             block
-                            text-slate-400
-                            hover:text-cyan-400
+                            text-red-100/70
+                            hover:text-white
                             transition-all
-                        "
-                    >
-                        Terms & Conditions
+                        ">
+                        Packages
                     </a>
+
+                    <a href="/#faq"
+                        class="
+                            block
+                            text-red-100/70
+                            hover:text-white
+                            transition-all
+                        ">
+                        FAQ
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- SERVICES -->
+            <div>
+
+                <h4 class="
+                        text-lg
+                        font-bold
+                        text-white
+                        mb-6
+                    ">
+                    Services
+                </h4>
+
+                <div class="space-y-4">
+
+                    <p class="text-red-100/70">
+                        Fiber Internet
+                    </p>
+
+                    <p class="text-red-100/70">
+                        Enterprise Network
+                    </p>
+
+                    <p class="text-red-100/70">
+                        Dedicated Support
+                    </p>
+
+                    <p class="text-red-100/70">
+                        Smart Connectivity
+                    </p>
 
                 </div>
 
@@ -223,68 +423,119 @@
             <!-- CONTACT -->
             <div>
 
-                <h3
-                    class="
+                <h4 class="
                         text-lg
                         font-bold
                         text-white
-                        mb-5
-                    "
-                >
+                        mb-6
+                    ">
                     Contact
-                </h3>
+                </h4>
 
                 <div class="space-y-5">
 
-                    <div class="flex items-start gap-3">
+                    <!-- EMAIL -->
+                    <div class="flex items-start gap-4">
 
-                        <i
-                            data-lucide="map-pin"
-                            class="
-                                w-5
-                                h-5
-                                text-cyan-400
-                                mt-1
-                            "
-                        ></i>
+                        <div class="
+                                w-11
+                                h-11
+                                rounded-2xl
+                                bg-white/10
+                                flex
+                                items-center
+                                justify-center
+                                text-white
+                            ">
 
-                        <p class="text-slate-400">
-                            Indonesia Digital Network Center
-                        </p>
+                            <i data-lucide="mail" class="w-5 h-5"></i>
+
+                        </div>
+
+                        <div>
+
+                            <p class="
+                                    text-sm
+                                    text-red-100/60
+                                ">
+                                Email
+                            </p>
+
+                            <p class="text-white font-medium">
+                                support@btnnet.id
+                            </p>
+
+                        </div>
 
                     </div>
 
-                    <div class="flex items-center gap-3">
+                    <!-- PHONE -->
+                    <div class="flex items-start gap-4">
 
-                        <i
-                            data-lucide="phone"
-                            class="
-                                w-5
-                                h-5
-                                text-cyan-400
-                            "
-                        ></i>
+                        <div class="
+                                w-11
+                                h-11
+                                rounded-2xl
+                                bg-white/10
+                                flex
+                                items-center
+                                justify-center
+                                text-white
+                            ">
 
-                        <p class="text-slate-400">
-                            +62 812 3456 7890
-                        </p>
+                            <i data-lucide="phone" class="w-5 h-5"></i>
+
+                        </div>
+
+                        <div>
+
+                            <p class="
+                                    text-sm
+                                    text-red-100/60
+                                ">
+                                Phone
+                            </p>
+
+                            <p class="text-white font-medium">
+                                +62 812 3456 7890
+                            </p>
+
+                        </div>
 
                     </div>
 
-                    <div class="flex items-center gap-3">
+                    <!-- ADDRESS -->
+                    <div class="flex items-start gap-4">
 
-                        <i
-                            data-lucide="mail"
-                            class="
-                                w-5
-                                h-5
-                                text-cyan-400
-                            "
-                        ></i>
+                        <div class="
+                                w-11
+                                h-11
+                                rounded-2xl
+                                bg-white/10
+                                flex
+                                items-center
+                                justify-center
+                                text-white
+                            ">
 
-                        <p class="text-slate-400">
-                            support@nexanet.id
-                        </p>
+                            <i data-lucide="map-pin" class="w-5 h-5"></i>
+
+                        </div>
+
+                        <div>
+
+                            <p class="
+                                    text-sm
+                                    text-red-100/60
+                                ">
+                                Office
+                            </p>
+
+                            <p class="text-white font-medium">
+                                Bandung, Indonesia
+                            </p>
+
+                        </div>
 
                     </div>
 
@@ -295,97 +546,51 @@
         </div>
 
         <!-- BOTTOM -->
-        <div
-            class="
-                mt-16
+        <div class="
+                mt-20
                 pt-8
                 border-t
                 border-white/10
                 flex
                 flex-col
-                md:flex-row
+                lg:flex-row
+                gap-6
                 items-center
                 justify-between
-                gap-6
-            "
-        >
+            ">
 
-            <p
-                class="
-                    text-slate-500
+            <!-- COPYRIGHT -->
+            <p class="
+                    text-red-100/60
                     text-sm
-                "
-            >
-                © 2026 NexaNet ISP Platform. All rights reserved.
+                    text-center
+                    lg:text-left
+                ">
+
+                © 2026 BARAYA TELEMATIKA NUSANTARA.
+                All rights reserved.
+
             </p>
 
-            <div class="flex items-center gap-4">
+            <!-- STATUS -->
+            <div class="
+                    flex
+                    items-center
+                    gap-3
+                    text-red-100/70
+                    text-sm
+                ">
 
-                <a
-                    href="#"
-                    class="
-                        w-11
-                        h-11
-                        rounded-2xl
-                        glass
-                        flex
-                        items-center
-                        justify-center
-                        hover:bg-white/10
-                        transition-all
-                    "
-                >
+                <span class="
+                        w-2
+                        h-2
+                        rounded-full
+                        bg-green-400
+                        animate-pulse
+                    ">
+                </span>
 
-                    <i
-                        data-lucide="instagram"
-                        class="w-5 h-5 text-white"
-                    ></i>
-
-                </a>
-
-                <a
-                    href="#"
-                    class="
-                        w-11
-                        h-11
-                        rounded-2xl
-                        glass
-                        flex
-                        items-center
-                        justify-center
-                        hover:bg-white/10
-                        transition-all
-                    "
-                >
-
-                    <i
-                        data-lucide="twitter"
-                        class="w-5 h-5 text-white"
-                    ></i>
-
-                </a>
-
-                <a
-                    href="#"
-                    class="
-                        w-11
-                        h-11
-                        rounded-2xl
-                        glass
-                        flex
-                        items-center
-                        justify-center
-                        hover:bg-white/10
-                        transition-all
-                    "
-                >
-
-                    <i
-                        data-lucide="facebook"
-                        class="w-5 h-5 text-white"
-                    ></i>
-
-                </a>
+                All Systems Operational
 
             </div>
 
