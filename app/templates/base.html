@@ -2,74 +2,54 @@
 <html lang="en">
 
 <head>
-    <!-- ===================================== -->
-    <!-- META -->
-    <!-- ===================================== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>
-        {% block title %}
-        ISP Platform
-        {% endblock %}
+        {% block title %}BTN Net{% endblock %}
     </title>
 
-    <!-- ===================================== -->
     <!-- GOOGLE FONT -->
-    <!-- ===================================== -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
 
-    <!-- ===================================== -->
     <!-- TAILWIND -->
-    <!-- ===================================== -->
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+    <!-- LUCIDE ICON -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- ALPINE JS -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        inter: ['Inter', 'sans-serif'],
-                    },
-
                     colors: {
-                        primary: '#4338CA',
-                        secondary: '#06B6D4',
-                        dark: '#0F172A',
-                        darklight: '#1E293B',
+                        primary: '#DC2626',
+                        secondary: '#991B1B',
+                        dark: '#111827',
+                        light: '#F8FAFC',
                     },
-
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
                     boxShadow: {
-                        premium: '0 10px 30px rgba(0,0,0,0.15)',
-                        glow: '0 0 25px rgba(6,182,212,0.35)',
-                    },
-
-                    backgroundImage: {
-                        heroGradient:
-                            'linear-gradient(135deg, #0F172A 0%, #1E1B4B 40%, #0F172A 100%)',
+                        glow: '0 0 40px rgba(220,38,38,0.35)',
+                        soft: '0 10px 40px rgba(15,23,42,0.08)',
                     }
                 }
             }
         }
     </script>
 
-    <!-- ===================================== -->
-    <!-- ICONS -->
-    <!-- ===================================== -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-
-    <!-- ===================================== -->
-    <!-- AOS ANIMATION -->
-    <!-- ===================================== -->
-    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
-
-    <!-- ===================================== -->
-    <!-- CUSTOM STYLE -->
-    <!-- ===================================== -->
     <style>
         * {
             font-family: 'Inter', sans-serif;
@@ -80,288 +60,221 @@
         }
 
         body {
-            background:
-                radial-gradient(circle at top left, rgba(67, 56, 202, 0.15), transparent 25%),
-                radial-gradient(circle at bottom right, rgba(6, 182, 212, 0.12), transparent 25%),
-                #020617;
-
-            color: white;
+            background: #f8fafc;
+            color: #0f172a;
             overflow-x: hidden;
         }
 
-        /* ===================================== */
-        /* GLASS EFFECT */
-        /* ===================================== */
-        .glass {
-            background: rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-
-            border: 1px solid rgba(255, 255, 255, 0.08);
+        ::selection {
+            background: #dc2626;
+            color: white;
         }
 
-        /* ===================================== */
-        /* PREMIUM CARD */
-        /* ===================================== */
+        .glass {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
         .premium-card {
-            background: rgba(15, 23, 42, 0.85);
-
-            border: 1px solid rgba(255, 255, 255, 0.06);
-
-            box-shadow:
-                0 10px 40px rgba(0, 0, 0, 0.35);
-
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 10px 40px rgba(15, 23, 42, 0.06);
             transition: all 0.35s ease;
         }
 
         .premium-card:hover {
             transform: translateY(-6px);
-
-            border-color: rgba(6, 182, 212, 0.35);
-
-            box-shadow:
-                0 20px 50px rgba(6, 182, 212, 0.15);
+            box-shadow: 0 20px 60px rgba(220, 38, 38, 0.12);
         }
 
-        /* ===================================== */
-        /* BUTTON */
-        /* ===================================== */
         .btn-primary {
-            background:
-                linear-gradient(135deg,
-                    #4338CA,
-                    #06B6D4);
-
+            background: linear-gradient(to right, #dc2626, #991b1b);
             transition: all 0.3s ease;
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-
-            box-shadow:
-                0 10px 30px rgba(6, 182, 212, 0.3);
+            box-shadow: 0 15px 40px rgba(220, 38, 38, 0.3);
         }
 
-        .btn-outline {
-            border: 1px solid rgba(255, 255, 255, 0.1);
-
-            background: rgba(255, 255, 255, 0.03);
-
+        .btn-secondary {
+            background: white;
+            border: 1px solid #e2e8f0;
             transition: all 0.3s ease;
         }
 
-        .btn-outline:hover {
-            background: rgba(255, 255, 255, 0.08);
+        .btn-secondary:hover {
+            background: #f8fafc;
+            transform: translateY(-2px);
         }
 
-        /* ===================================== */
-        /* SCROLLBAR */
-        /* ===================================== */
-        ::-webkit-scrollbar {
-            width: 10px;
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 18px;
+            border-radius: 18px;
+            color: #475569;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
 
-        ::-webkit-scrollbar-track {
-            background: #020617;
+        .sidebar-link:hover {
+            background: rgba(220, 38, 38, 0.08);
+            color: #dc2626;
         }
 
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg,
-                    #4338CA,
-                    #06B6D4);
-
-            border-radius: 999px;
+        .sidebar-link.active {
+            background: linear-gradient(to right, #dc2626, #991b1b);
+            color: white;
+            box-shadow: 0 10px 30px rgba(220, 38, 38, 0.25);
         }
 
-        /* ===================================== */
-        /* INPUT */
-        /* ===================================== */
+        .table-modern {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table-modern thead {
+            background: #f1f5f9;
+        }
+
+        .table-modern th,
+        .table-modern td {
+            padding: 18px;
+            text-align: left;
+        }
+
+        .table-modern tbody tr {
+            border-bottom: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .table-modern tbody tr:hover {
+            background: rgba(220, 38, 38, 0.03);
+        }
+
         .input-modern {
-            background: rgba(255, 255, 255, 0.04);
-
-            border: 1px solid rgba(255, 255, 255, 0.08);
-
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 18px;
+            border: 1px solid #e2e8f0;
+            background: white;
             transition: all 0.3s ease;
         }
 
         .input-modern:focus {
             outline: none;
-
-            border-color: rgba(6, 182, 212, 0.5);
-
-            box-shadow:
-                0 0 0 4px rgba(6, 182, 212, 0.1);
+            border-color: #dc2626;
+            box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.1);
         }
 
-        /* ===================================== */
-        /* ANIMATED BACKGROUND BLUR */
-        /* ===================================== */
-        .blur-circle {
-            position: absolute;
+        .badge-success {
+            background: rgba(34, 197, 94, 0.12);
+            color: #16a34a;
+            padding: 6px 14px;
             border-radius: 999px;
-            filter: blur(100px);
-            z-index: -1;
+            font-size: 12px;
+            font-weight: 700;
         }
 
-        .blur-1 {
-            width: 300px;
-            height: 300px;
-
-            background: rgba(67, 56, 202, 0.25);
-
-            top: -100px;
-            left: -100px;
+        .badge-danger {
+            background: rgba(239, 68, 68, 0.12);
+            color: #dc2626;
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
         }
 
-        .blur-2 {
-            width: 350px;
-            height: 350px;
-
-            background: rgba(6, 182, 212, 0.2);
-
-            bottom: -120px;
-            right: -120px;
+        .badge-warning {
+            background: rgba(245, 158, 11, 0.12);
+            color: #d97706;
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 700;
         }
 
-        /* ===================================== */
-        /* FADE ANIMATION */
-        /* ===================================== */
-        .fade-up {
-            animation: fadeUp 0.7s ease forwards;
-        }
-
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .animated-bg {
+            background:
+                radial-gradient(circle at top left, rgba(220, 38, 38, 0.08), transparent 30%),
+                radial-gradient(circle at bottom right, rgba(153, 27, 27, 0.08), transparent 30%);
         }
     </style>
 
-    {% block head %}{% endblock %}
 </head>
 
-<body class="relative min-h-screen">
+<body class="animated-bg min-h-screen">
 
-    <!-- ===================================== -->
-    <!-- BACKGROUND EFFECT -->
-    <!-- ===================================== -->
-    <div class="blur-circle blur-1"></div>
-    <div class="blur-circle blur-2"></div>
-
-    <!-- ===================================== -->
     <!-- NAVBAR -->
-    <!-- ===================================== -->
-    {% include 'partials/navbar.html' %} disabled -->
+    {% include 'partials/navbar.html' %}
 
-    <!-- ===================================== -->
     <!-- FLASH MESSAGE -->
-    <!-- ===================================== -->
-    <div class="fixed top-5 right-5 z-50 space-y-3">
+    <div class="fixed top-24 right-6 z-50 space-y-4">
 
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
-
         {% for category, message in messages %}
 
-        <div class="
-                            glass
-                            px-5
-                            py-4
-                            rounded-2xl
-                            shadow-premium
-                            border
-                            fade-up
+        <div
+            class="glass rounded-2xl px-5 py-4 shadow-soft border border-white/40 min-w-[320px] animate-pulse">
 
-                            {% if category == 'success' %}
-                                border-emerald-400/30
-                            {% elif category == 'danger' %}
-                                border-red-400/30
-                            {% else %}
-                                border-cyan-400/30
-                            {% endif %}
-                        ">
-            <div class="flex items-center gap-3">
+            <div class="flex items-start gap-3">
 
-                <i data-lucide="bell" class="w-5 h-5 text-cyan-400"></i>
+                <div class="mt-1">
+                    {% if category == 'success' %}
+                    <i data-lucide="check-circle" class="w-5 h-5 text-green-500"></i>
+                    {% elif category == 'danger' %}
+                    <i data-lucide="x-circle" class="w-5 h-5 text-red-500"></i>
+                    {% else %}
+                    <i data-lucide="info" class="w-5 h-5 text-blue-500"></i>
+                    {% endif %}
+                </div>
 
-                <span class="text-sm text-slate-200">
-                    {{ message }}
-                </span>
+                <div>
+                    <p class="font-semibold text-slate-800 capitalize">
+                        {{ category }}
+                    </p>
+
+                    <p class="text-sm text-slate-500 mt-1">
+                        {{ message }}
+                    </p>
+                </div>
 
             </div>
+
         </div>
 
         {% endfor %}
-
         {% endif %}
         {% endwith %}
 
     </div>
 
-    <!-- ===================================== -->
-    <!-- MAIN CONTENT -->
-    <!-- ===================================== -->
-    <main class="relative z-10">
-
+    <!-- CONTENT -->
+    <main>
         {% block content %}
         {% endblock %}
-
     </main>
 
-    <!-- ===================================== -->
     <!-- FOOTER -->
-    <!-- ===================================== -->
-    {% include 'partials/footer.html' %} disabled -->
+    {% include 'partials/footer.html' %}
 
-    <!-- ===================================== -->
     <!-- AOS -->
-    <!-- ===================================== -->
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
     <script>
         AOS.init({
-            duration: 800,
+            duration: 900,
             once: true,
         });
 
         lucide.createIcons();
     </script>
-
-    <!-- ===================================== -->
-    <!-- GLOBAL SCRIPT -->
-    <!-- ===================================== -->
-    <script>
-
-        // =====================================
-        // AUTO HIDE ALERT
-        // =====================================
-
-        setTimeout(() => {
-
-            const alerts = document.querySelectorAll('.fade-up');
-
-            alerts.forEach(alert => {
-
-                alert.style.opacity = '0';
-                alert.style.transform = 'translateY(-10px)';
-
-                setTimeout(() => {
-                    alert.remove();
-                }, 300);
-
-            });
-
-        }, 4000);
-
-    </script>
-
-    {% block scripts %}{% endblock %}
 
 </body>
 
