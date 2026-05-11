@@ -1,69 +1,52 @@
-<nav
-    class="
+<nav class="
         fixed
         top-0
         left-0
         right-0
         z-50
-        transition-all
-        duration-300
-    "
-    id="navbar"
->
+        border-b
+        border-slate-200
+        bg-white/90
+        backdrop-blur-xl
+    ">
 
-```
-<!-- CONTAINER -->
-<div class="max-w-7xl mx-auto px-6 lg:px-8">
-
-    <!-- WRAPPER -->
     <div class="
-            mt-4
-            glass
-            rounded-2xl
-            border
-            border-slate-200
-            shadow-soft
+            max-w-7xl
+            mx-auto
+            px-6
+            lg:px-8
         ">
 
         <div class="
+                h-20
                 flex
                 items-center
                 justify-between
-                h-20
-                px-6
-                lg:px-8
             ">
 
-            <!-- ================================= -->
-            <!-- LEFT -->
-            <!-- ================================= -->
+            <!-- ======================================= -->
+            <!-- LOGO -->
+            <!-- ======================================= -->
 
-            <a
-                href="/"
+            <a href="/"
                 class="
                     flex
                     items-center
                     gap-4
-                    group
                 "
             >
 
-                <!-- LOGO -->
+                <!-- ICON -->
                 <div class="
                         w-12
                         h-12
                         rounded-2xl
-                        bg-gradient-to-br
-                        from-red-700
-                        to-red-500
+                        bg-red-700
                         flex
                         items-center
                         justify-center
-                        shadow-glow
-                        group-hover:scale-105
-                        transition-all
-                    "
-                >
+                        shadow-lg
+                    ">
 
                     <i
                         data-lucide="wifi"
@@ -72,17 +55,16 @@
 
                 </div>
 
-                <!-- BRAND -->
+                <!-- TEXT -->
                 <div>
 
                     <h1 class="
                             text-lg
                             font-black
                             tracking-tight
-                            text-slate-900
+                            text-slate-950
                             leading-none
-                        "
-                    >
+                        ">
                         BTN Net
                     </h1>
 
@@ -90,8 +72,7 @@
                             text-xs
                             text-slate-500
                             mt-1
-                        "
-                    >
+                        ">
                         Baraya Telematika Nusantara
                     </p>
 
@@ -99,20 +80,18 @@
 
             </a>
 
-            <!-- ================================= -->
-            <!-- DESKTOP MENU -->
-            <!-- ================================= -->
+            <!-- ======================================= -->
+            <!-- MENU -->
+            <!-- ======================================= -->
 
             <div class="
                     hidden
                     lg:flex
                     items-center
                     gap-10
-                "
-            >
+                ">
 
-                <a
-                    href="/"
+                <a href="/"
                     class="
                         text-sm
                         font-semibold
@@ -124,8 +103,7 @@
                     Home
                 </a>
 
-                <a
-                    href="/#features"
+                <a href="/#features"
                     class="
                         text-sm
                         font-semibold
@@ -137,8 +115,7 @@
                     Features
                 </a>
 
-                <a
-                    href="/#packages"
+                <a href="/#packages"
                     class="
                         text-sm
                         font-semibold
@@ -150,129 +127,112 @@
                     Packages
                 </a>
 
-                <a
-                    href="/#faq"
-                    class="
-                        text-sm
-                        font-semibold
-                        text-slate-700
-                        hover:text-red-700
-                        transition-all
-                    "
-                >
-                    FAQ
-                </a>
+                {% if current_user.is_authenticated %}
+
+                    {% if current_user.is_admin %}
+
+                    <a href="/admin"
+                        class="
+                            text-sm
+                            font-semibold
+                            text-slate-700
+                            hover:text-red-700
+                            transition-all
+                        "
+                    >
+                        Admin Panel
+                    </a>
+
+                    {% else %}
+
+                    <a href="/dashboard"
+                        class="
+                            text-sm
+                            font-semibold
+                            text-slate-700
+                            hover:text-red-700
+                            transition-all
+                        "
+                    >
+                        Dashboard
+                    </a>
+
+                    {% endif %}
+
+                {% endif %}
 
             </div>
 
-            <!-- ================================= -->
-            <!-- RIGHT -->
-            <!-- ================================= -->
+            <!-- ======================================= -->
+            <!-- ACTION -->
+            <!-- ======================================= -->
 
             <div class="
                     hidden
                     lg:flex
                     items-center
                     gap-4
-                "
-            >
+                ">
 
                 {% if current_user.is_authenticated %}
 
-                    <!-- USER DASHBOARD -->
-                    {% if current_user.is_admin %}
-
-                        <a
-                            href="/admin"
-                            class="
-                                px-5
-                                py-3
-                                rounded-xl
-                                btn-secondary
-                                text-sm
-                                font-semibold
-                                text-slate-700
-                            "
-                        >
-                            Admin Panel
-                        </a>
-
-                    {% else %}
-
-                        <a
-                            href="/dashboard"
-                            class="
-                                px-5
-                                py-3
-                                rounded-xl
-                                btn-secondary
-                                text-sm
-                                font-semibold
-                                text-slate-700
-                            "
-                        >
-                            Dashboard
-                        </a>
-
-                    {% endif %}
-
-                    <!-- LOGOUT -->
-                    <a
-                        href="/logout"
-                        class="
-                            px-6
-                            py-3
-                            rounded-xl
-                            btn-primary
-                            text-sm
-                            font-semibold
-                            text-white
-                        "
-                    >
-                        Logout
-                    </a>
+                <a href="/logout"
+                    class="
+                        px-5
+                        py-3
+                        rounded-2xl
+                        border
+                        border-slate-300
+                        text-slate-700
+                        font-semibold
+                        hover:border-red-700
+                        hover:text-red-700
+                        transition-all
+                    "
+                >
+                    Logout
+                </a>
 
                 {% else %}
 
-                    <!-- LOGIN -->
-                    <a
-                        href="/login"
-                        class="
-                            px-5
-                            py-3
-                            rounded-xl
-                            btn-secondary
-                            text-sm
-                            font-semibold
-                            text-slate-700
-                        "
-                    >
-                        Login
-                    </a>
+                <a href="/login"
+                    class="
+                        px-5
+                        py-3
+                        rounded-2xl
+                        border
+                        border-slate-300
+                        text-slate-700
+                        font-semibold
+                        hover:border-red-700
+                        hover:text-red-700
+                        transition-all
+                    "
+                >
+                    Login
+                </a>
 
-                    <!-- REGISTER -->
-                    <a
-                        href="/register"
-                        class="
-                            px-6
-                            py-3
-                            rounded-xl
-                            btn-primary
-                            text-sm
-                            font-semibold
-                            text-white
-                        "
-                    >
-                        Get Started
-                    </a>
+                <a href="/register"
+                    class="
+                        btn-primary
+                        px-6
+                        py-3
+                        rounded-2xl
+                        text-white
+                        font-semibold
+                        shadow-lg
+                    "
+                >
+                    Get Started
+                </a>
 
                 {% endif %}
 
             </div>
 
-            <!-- ================================= -->
+            <!-- ======================================= -->
             <!-- MOBILE BUTTON -->
-            <!-- ================================= -->
+            <!-- ======================================= -->
 
             <button
                 id="mobileMenuButton"
@@ -280,19 +240,17 @@
                     lg:hidden
                     w-12
                     h-12
-                    rounded-xl
-                    border
-                    border-slate-200
+                    rounded-2xl
+                    bg-slate-100
                     flex
                     items-center
                     justify-center
-                    text-slate-700
                 "
             >
 
                 <i
                     data-lucide="menu"
-                    class="w-6 h-6"
+                    class="w-6 h-6 text-slate-800"
                 ></i>
 
             </button>
@@ -301,207 +259,4 @@
 
     </div>
 
-</div>
-
-<!-- ================================= -->
-<!-- MOBILE MENU -->
-<!-- ================================= -->
-
-<div
-    id="mobileMenu"
-    class="
-        hidden
-        lg:hidden
-        px-6
-        mt-4
-    "
->
-
-    <div class="
-            glass
-            rounded-2xl
-            border
-            border-slate-200
-            shadow-soft
-            p-6
-            space-y-4
-        "
-    >
-
-        <a
-            href="/"
-            class="
-                block
-                text-sm
-                font-semibold
-                text-slate-700
-            "
-        >
-            Home
-        </a>
-
-        <a
-            href="/#features"
-            class="
-                block
-                text-sm
-                font-semibold
-                text-slate-700
-            "
-        >
-            Features
-        </a>
-
-        <a
-            href="/#packages"
-            class="
-                block
-                text-sm
-                font-semibold
-                text-slate-700
-            "
-        >
-            Packages
-        </a>
-
-        <a
-            href="/#faq"
-            class="
-                block
-                text-sm
-                font-semibold
-                text-slate-700
-            "
-        >
-            FAQ
-        </a>
-
-        <div class="border-t border-slate-200 pt-4">
-
-            {% if current_user.is_authenticated %}
-
-                {% if current_user.is_admin %}
-
-                    <a
-                        href="/admin"
-                        class="
-                            block
-                            mb-3
-                            px-5
-                            py-3
-                            rounded-xl
-                            btn-secondary
-                            text-sm
-                            font-semibold
-                            text-center
-                        "
-                    >
-                        Admin Panel
-                    </a>
-
-                {% else %}
-
-                    <a
-                        href="/dashboard"
-                        class="
-                            block
-                            mb-3
-                            px-5
-                            py-3
-                            rounded-xl
-                            btn-secondary
-                            text-sm
-                            font-semibold
-                            text-center
-                        "
-                    >
-                        Dashboard
-                    </a>
-
-                {% endif %}
-
-                <a
-                    href="/logout"
-                    class="
-                        block
-                        px-5
-                        py-3
-                        rounded-xl
-                        btn-primary
-                        text-sm
-                        font-semibold
-                        text-white
-                        text-center
-                    "
-                >
-                    Logout
-                </a>
-
-            {% else %}
-
-                <a
-                    href="/login"
-                    class="
-                        block
-                        mb-3
-                        px-5
-                        py-3
-                        rounded-xl
-                        btn-secondary
-                        text-sm
-                        font-semibold
-                        text-center
-                    "
-                >
-                    Login
-                </a>
-
-                <a
-                    href="/register"
-                    class="
-                        block
-                        px-5
-                        py-3
-                        rounded-xl
-                        btn-primary
-                        text-sm
-                        font-semibold
-                        text-white
-                        text-center
-                    "
-                >
-                    Get Started
-                </a>
-
-            {% endif %}
-
-        </div>
-
-    </div>
-
-</div>
-```
-
 </nav>
-
-<!-- SPACER -->
-
-<div class="h-28"></div>
-
-<!-- SCRIPT -->
-
-<script>
-
-    const mobileMenuButton =
-        document.getElementById("mobileMenuButton");
-
-    const mobileMenu =
-        document.getElementById("mobileMenu");
-
-    mobileMenuButton.addEventListener("click", () => {
-
-        mobileMenu.classList.toggle("hidden");
-
-    });
-
-</script>
