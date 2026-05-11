@@ -1,262 +1,622 @@
-<nav class="
+<!-- ========================================= -->
+<!-- BTN NET ENTERPRISE NAVBAR -->
+<!-- ========================================= -->
+
+<header
+    id="navbar"
+    class="
         fixed
         top-0
         left-0
-        right-0
+        w-full
         z-50
-        border-b
-        border-slate-200
-        bg-white/90
-        backdrop-blur-xl
-    ">
+        transition-all
+        duration-500
+    "
+>
 
-    <div class="
-            max-w-7xl
-            mx-auto
-            px-6
-            lg:px-8
-        ">
+    <!-- TOP BORDER -->
+    <div class="h-[2px] w-full bg-gradient-to-r from-red-700 via-red-500 to-red-700"></div>
 
-        <div class="
-                h-20
-                flex
-                items-center
-                justify-between
-            ">
+    <!-- MAIN NAV -->
+    <div
+        class="
+            backdrop-blur-xl
+            bg-black/75
+            border-b
+            border-white/5
+        "
+    >
 
-            <!-- ======================================= -->
-            <!-- LOGO -->
-            <!-- ======================================= -->
+        <div
+            class="
+                max-w-7xl
+                mx-auto
+                px-6
+                lg:px-8
+            "
+        >
 
-            <a href="/"
+            <div
                 class="
                     flex
                     items-center
-                    gap-4
+                    justify-between
+                    h-20
                 "
             >
 
-                <!-- ICON -->
-                <div class="
-                        w-12
-                        h-12
-                        rounded-2xl
-                        bg-red-700
+                <!-- ================================= -->
+                <!-- LOGO -->
+                <!-- ================================= -->
+
+                <a
+                    href="/"
+                    class="
                         flex
                         items-center
-                        justify-center
-                        shadow-lg
-                    ">
-
-                    <i
-                        data-lucide="wifi"
-                        class="w-6 h-6 text-white"
-                    ></i>
-
-                </div>
-
-                <!-- TEXT -->
-                <div>
-
-                    <h1 class="
-                            text-lg
-                            font-black
-                            tracking-tight
-                            text-slate-950
-                            leading-none
-                        ">
-                        JavaNet
-                    </h1>
-
-                    <p class="
-                            text-xs
-                            text-slate-500
-                            mt-1
-                        ">
-                        Baraya Telematika Nusantara
-                    </p>
-
-                </div>
-
-            </a>
-
-            <!-- ======================================= -->
-            <!-- MENU -->
-            <!-- ======================================= -->
-
-            <div class="
-                    hidden
-                    lg:flex
-                    items-center
-                    gap-10
-                ">
-
-                <a href="/"
-                    class="
-                        text-sm
-                        font-semibold
-                        text-slate-700
-                        hover:text-red-700
-                        transition-all
+                        gap-4
+                        group
                     "
                 >
-                    Home
-                </a>
 
-                <a href="/#features"
-                    class="
-                        text-sm
-                        font-semibold
-                        text-slate-700
-                        hover:text-red-700
-                        transition-all
-                    "
-                >
-                    Features
-                </a>
-
-                <a href="/#packages"
-                    class="
-                        text-sm
-                        font-semibold
-                        text-slate-700
-                        hover:text-red-700
-                        transition-all
-                    "
-                >
-                    Packages
-                </a>
-
-                {% if current_user.is_authenticated %}
-
-                    {% if current_user.is_admin %}
-
-                    <a href="/admin"
+                    <!-- LOGO ICON -->
+                    <div
                         class="
-                            text-sm
-                            font-semibold
-                            text-slate-700
-                            hover:text-red-700
-                            transition-all
+                            relative
+                            w-11
+                            h-11
+                            rounded-xl
+                            overflow-hidden
+                            border
+                            border-red-500/30
+                            bg-gradient-to-br
+                            from-red-700
+                            to-red-900
+                            flex
+                            items-center
+                            justify-center
+                            shadow-[0_0_20px_rgba(239,68,68,0.25)]
                         "
                     >
-                        Admin Panel
+
+                        <!-- GRID -->
+                        <div
+                            class="
+                                absolute
+                                inset-0
+                                opacity-20
+                                bg-[linear-gradient(rgba(255,255,255,0.15)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.15)_1px,transparent_1px)]
+                                bg-[size:12px_12px]
+                            "
+                        ></div>
+
+                        <!-- ICON -->
+                        <i
+                            data-lucide="radio-tower"
+                            class="
+                                w-5
+                                h-5
+                                text-white
+                                relative
+                                z-10
+                            "
+                        ></i>
+
+                    </div>
+
+                    <!-- TEXT -->
+                    <div>
+
+                        <h1
+                            class="
+                                text-white
+                                font-black
+                                tracking-tight
+                                text-lg
+                                leading-none
+                            "
+                        >
+                            BTN Net
+                        </h1>
+
+                        <p
+                            class="
+                                text-[10px]
+                                uppercase
+                                tracking-[0.28em]
+                                text-red-400
+                                mt-1
+                            "
+                        >
+                            Baraya Telematika Nusantara
+                        </p>
+
+                    </div>
+
+                </a>
+
+                <!-- ================================= -->
+                <!-- DESKTOP MENU -->
+                <!-- ================================= -->
+
+                <nav
+                    class="
+                        hidden
+                        lg:flex
+                        items-center
+                        gap-10
+                    "
+                >
+
+                    <a
+                        href="/"
+                        class="
+                            text-sm
+                            uppercase
+                            tracking-wider
+                            text-white
+                            hover:text-red-400
+                            transition
+                            font-semibold
+                        "
+                    >
+                        Home
                     </a>
+
+                    <a
+                        href="#features"
+                        class="
+                            text-sm
+                            uppercase
+                            tracking-wider
+                            text-slate-300
+                            hover:text-red-400
+                            transition
+                            font-semibold
+                        "
+                    >
+                        Infrastructure
+                    </a>
+
+                    <a
+                        href="#packages"
+                        class="
+                            text-sm
+                            uppercase
+                            tracking-wider
+                            text-slate-300
+                            hover:text-red-400
+                            transition
+                            font-semibold
+                        "
+                    >
+                        Packages
+                    </a>
+
+                    <a
+                        href="#coverage"
+                        class="
+                            text-sm
+                            uppercase
+                            tracking-wider
+                            text-slate-300
+                            hover:text-red-400
+                            transition
+                            font-semibold
+                        "
+                    >
+                        Coverage
+                    </a>
+
+                    <a
+                        href="#contact"
+                        class="
+                            text-sm
+                            uppercase
+                            tracking-wider
+                            text-slate-300
+                            hover:text-red-400
+                            transition
+                            font-semibold
+                        "
+                    >
+                        Contact
+                    </a>
+
+                </nav>
+
+                <!-- ================================= -->
+                <!-- RIGHT SECTION -->
+                <!-- ================================= -->
+
+                <div
+                    class="
+                        hidden
+                        lg:flex
+                        items-center
+                        gap-4
+                    "
+                >
+
+                    {% if current_user.is_authenticated %}
+
+                        <!-- DASHBOARD BUTTON -->
+                        <a
+                            href="/dashboard"
+                            class="
+                                px-5
+                                py-3
+                                rounded-xl
+                                border
+                                border-white/10
+                                bg-white/[0.03]
+                                text-white
+                                text-sm
+                                uppercase
+                                tracking-wider
+                                font-semibold
+                                hover:border-red-500/50
+                                hover:bg-red-500/10
+                                transition-all
+                                duration-300
+                            "
+                        >
+                            Dashboard
+                        </a>
+
+                        {% if current_user.is_admin %}
+
+                        <!-- ADMIN BUTTON -->
+                        <a
+                            href="/admin"
+                            class="
+                                px-5
+                                py-3
+                                rounded-xl
+                                bg-gradient-to-r
+                                from-red-700
+                                to-red-600
+                                text-white
+                                text-sm
+                                uppercase
+                                tracking-wider
+                                font-bold
+                                shadow-lg
+                                shadow-red-900/30
+                                hover:scale-[1.02]
+                                transition-all
+                            "
+                        >
+                            Admin Panel
+                        </a>
+
+                        {% endif %}
+
+                        <!-- LOGOUT -->
+                        <a
+                            href="/logout"
+                            class="
+                                px-5
+                                py-3
+                                rounded-xl
+                                border
+                                border-red-500/30
+                                text-red-300
+                                text-sm
+                                uppercase
+                                tracking-wider
+                                font-semibold
+                                hover:bg-red-500
+                                hover:text-white
+                                transition-all
+                                duration-300
+                            "
+                        >
+                            Logout
+                        </a>
 
                     {% else %}
 
-                    <a href="/dashboard"
-                        class="
-                            text-sm
-                            font-semibold
-                            text-slate-700
-                            hover:text-red-700
-                            transition-all
-                        "
-                    >
-                        Dashboard
-                    </a>
+                        <!-- LOGIN -->
+                        <a
+                            href="/login"
+                            class="
+                                text-sm
+                                uppercase
+                                tracking-wider
+                                text-slate-300
+                                hover:text-white
+                                transition
+                                font-semibold
+                            "
+                        >
+                            Login
+                        </a>
+
+                        <!-- REGISTER -->
+                        <a
+                            href="/register"
+                            class="
+                                relative
+                                overflow-hidden
+                                px-6
+                                py-3
+                                rounded-xl
+                                bg-gradient-to-r
+                                from-red-700
+                                to-red-600
+                                text-white
+                                text-sm
+                                uppercase
+                                tracking-wider
+                                font-bold
+                                shadow-[0_0_25px_rgba(239,68,68,0.35)]
+                                transition-all
+                                duration-300
+                                hover:scale-[1.02]
+                            "
+                        >
+
+                            <!-- LINE -->
+                            <div
+                                class="
+                                    absolute
+                                    top-0
+                                    left-[-100%]
+                                    w-full
+                                    h-full
+                                    bg-gradient-to-r
+                                    from-transparent
+                                    via-white/20
+                                    to-transparent
+                                    animate-[shine_4s_linear_infinite]
+                                "
+                            ></div>
+
+                            <span class="relative z-10">
+                                Get Started
+                            </span>
+
+                        </a>
 
                     {% endif %}
 
-                {% endif %}
+                </div>
 
-            </div>
+                <!-- ================================= -->
+                <!-- MOBILE BUTTON -->
+                <!-- ================================= -->
 
-            <!-- ======================================= -->
-            <!-- ACTION -->
-            <!-- ======================================= -->
-
-            <div class="
-                    hidden
-                    lg:flex
-                    items-center
-                    gap-4
-                ">
-
-                {% if current_user.is_authenticated %}
-
-                <a href="/logout"
+                <button
+                    id="mobileMenuBtn"
                     class="
-                        px-5
-                        py-3
-                        rounded-2xl
+                        lg:hidden
+                        w-11
+                        h-11
+                        rounded-xl
                         border
-                        border-slate-300
-                        text-slate-700
-                        font-semibold
-                        hover:border-red-700
-                        hover:text-red-700
-                        transition-all
-                    "
-                >
-                    Logout
-                </a>
-
-                {% else %}
-
-                <a href="/login"
-                    class="
-                        px-5
-                        py-3
-                        rounded-2xl
-                        border
-                        border-slate-300
-                        text-slate-700
-                        font-semibold
-                        hover:border-red-700
-                        hover:text-red-700
-                        transition-all
-                    "
-                >
-                    Login
-                </a>
-
-                <a href="/register"
-                    class="
-                        btn-primary
-                        px-6
-                        py-3
-                        rounded-2xl
+                        border-white/10
+                        bg-white/[0.03]
+                        flex
+                        items-center
+                        justify-center
                         text-white
-                        font-semibold
-                        shadow-lg
                     "
                 >
-                    Get Started
-                </a>
 
-                {% endif %}
+                    <i data-lucide="menu" class="w-5 h-5"></i>
+
+                </button>
 
             </div>
-
-            <!-- ======================================= -->
-            <!-- MOBILE BUTTON -->
-            <!-- ======================================= -->
-
-            <button
-                id="mobileMenuButton"
-                class="
-                    lg:hidden
-                    w-12
-                    h-12
-                    rounded-2xl
-                    bg-slate-100
-                    flex
-                    items-center
-                    justify-center
-                "
-            >
-
-                <i
-                    data-lucide="menu"
-                    class="w-6 h-6 text-slate-800"
-                ></i>
-
-            </button>
 
         </div>
 
     </div>
 
-</nav>
+    <!-- ========================================= -->
+    <!-- MOBILE MENU -->
+    <!-- ========================================= -->
+
+    <div
+        id="mobileMenu"
+        class="
+            hidden
+            lg:hidden
+            bg-black/95
+            backdrop-blur-xl
+            border-b
+            border-white/5
+        "
+    >
+
+        <div
+            class="
+                px-6
+                py-6
+                space-y-4
+            "
+        >
+
+            <a
+                href="/"
+                class="
+                    block
+                    text-white
+                    uppercase
+                    tracking-wider
+                    font-semibold
+                "
+            >
+                Home
+            </a>
+
+            <a
+                href="#features"
+                class="
+                    block
+                    text-slate-300
+                    uppercase
+                    tracking-wider
+                    font-semibold
+                "
+            >
+                Infrastructure
+            </a>
+
+            <a
+                href="#packages"
+                class="
+                    block
+                    text-slate-300
+                    uppercase
+                    tracking-wider
+                    font-semibold
+                "
+            >
+                Packages
+            </a>
+
+            <a
+                href="#coverage"
+                class="
+                    block
+                    text-slate-300
+                    uppercase
+                    tracking-wider
+                    font-semibold
+                "
+            >
+                Coverage
+            </a>
+
+            <a
+                href="#contact"
+                class="
+                    block
+                    text-slate-300
+                    uppercase
+                    tracking-wider
+                    font-semibold
+                "
+            >
+                Contact
+            </a>
+
+            <div class="pt-4 border-t border-white/10">
+
+                {% if current_user.is_authenticated %}
+
+                    <a
+                        href="/dashboard"
+                        class="
+                            block
+                            w-full
+                            text-center
+                            px-5
+                            py-3
+                            rounded-xl
+                            bg-red-600
+                            text-white
+                            font-bold
+                            uppercase
+                            tracking-wider
+                        "
+                    >
+                        Dashboard
+                    </a>
+
+                {% else %}
+
+                    <div class="space-y-3">
+
+                        <a
+                            href="/login"
+                            class="
+                                block
+                                w-full
+                                text-center
+                                px-5
+                                py-3
+                                rounded-xl
+                                border
+                                border-white/10
+                                text-white
+                                uppercase
+                                tracking-wider
+                                font-semibold
+                            "
+                        >
+                            Login
+                        </a>
+
+                        <a
+                            href="/register"
+                            class="
+                                block
+                                w-full
+                                text-center
+                                px-5
+                                py-3
+                                rounded-xl
+                                bg-red-600
+                                text-white
+                                uppercase
+                                tracking-wider
+                                font-bold
+                            "
+                        >
+                            Register
+                        </a>
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+<!-- ========================================= -->
+<!-- NAVBAR SCRIPT -->
+<!-- ========================================= -->
+
+<script>
+
+    // MOBILE MENU
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+
+    // NAVBAR SCROLL EFFECT
+    const navbar = document.getElementById('navbar');
+
+    window.addEventListener('scroll', () => {
+
+        if (window.scrollY > 20) {
+
+            navbar.classList.add(
+                'shadow-2xl',
+                'shadow-black/30'
+            );
+
+        } else {
+
+            navbar.classList.remove(
+                'shadow-2xl',
+                'shadow-black/30'
+            );
+
+        }
+
+    });
+
+</script>
