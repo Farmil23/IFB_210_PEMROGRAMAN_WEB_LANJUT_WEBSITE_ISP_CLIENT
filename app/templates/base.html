@@ -1,280 +1,262 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>
-        {% block title %}BTN Net{% endblock %}
-    </title>
+```
+<meta charset="UTF-8">
 
-    <!-- GOOGLE FONT -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
+<title>
+    {% block title %}
+    BTN Net
+    {% endblock %}
+</title>
 
-    <!-- TAILWIND -->
-    <script src="https://cdn.tailwindcss.com"></script>
+<!-- TAILWIND -->
+<script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- AOS -->
-    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<!-- AOS -->
+<link
+    href="https://unpkg.com/aos@2.3.4/dist/aos.css"
+    rel="stylesheet"
+>
 
-    <!-- LUCIDE ICON -->
-    <script src="https://unpkg.com/lucide@latest"></script>
+<!-- FONT -->
+<link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+>
 
-    <!-- ALPINE JS -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+>
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#DC2626',
-                        secondary: '#991B1B',
-                        dark: '#111827',
-                        light: '#F8FAFC',
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    boxShadow: {
-                        glow: '0 0 40px rgba(220,38,38,0.35)',
-                        soft: '0 10px 40px rgba(15,23,42,0.08)',
-                    }
-                }
-            }
-        }
-    </script>
+<link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+    rel="stylesheet"
+>
 
-    <style>
-        * {
-            font-family: 'Inter', sans-serif;
-        }
+<!-- LUCIDE -->
+<script src="https://unpkg.com/lucide@latest"></script>
 
-        html {
-            scroll-behavior: smooth;
-        }
+<!-- CUSTOM -->
+<style>
 
-        body {
-            background: #f8fafc;
-            color: #0f172a;
-            overflow-x: hidden;
-        }
+    *{
+        font-family: 'Inter', sans-serif;
+    }
 
-        ::selection {
-            background: #dc2626;
-            color: white;
-        }
+    html{
+        scroll-behavior:smooth;
+    }
 
-        .glass {
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
+    body{
+        background:#ffffff;
+        color:#0f172a;
+        overflow-x:hidden;
+    }
 
-        .premium-card {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(18px);
-            border: 1px solid rgba(226, 232, 240, 0.8);
-            box-shadow: 0 10px 40px rgba(15, 23, 42, 0.06);
-            transition: all 0.35s ease;
-        }
+    /* ================================= */
+    /* SCROLLBAR */
+    /* ================================= */
 
-        .premium-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 60px rgba(220, 38, 38, 0.12);
-        }
+    ::-webkit-scrollbar{
+        width:10px;
+    }
 
-        .btn-primary {
-            background: linear-gradient(to right, #dc2626, #991b1b);
-            transition: all 0.3s ease;
-        }
+    ::-webkit-scrollbar-track{
+        background:#f1f5f9;
+    }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(220, 38, 38, 0.3);
-        }
+    ::-webkit-scrollbar-thumb{
+        background:#991b1b;
+        border-radius:999px;
+    }
 
-        .btn-secondary {
-            background: white;
-            border: 1px solid #e2e8f0;
-            transition: all 0.3s ease;
-        }
+    /* ================================= */
+    /* GLASS */
+    /* ================================= */
 
-        .btn-secondary:hover {
-            background: #f8fafc;
-            transform: translateY(-2px);
-        }
+    .glass{
+        background:rgba(255,255,255,0.7);
+        backdrop-filter:blur(14px);
+        -webkit-backdrop-filter:blur(14px);
+        border:1px solid rgba(255,255,255,0.4);
+    }
 
-        .sidebar-link {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 14px 18px;
-            border-radius: 18px;
-            color: #475569;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
+    /* ================================= */
+    /* PREMIUM CARD */
+    /* ================================= */
 
-        .sidebar-link:hover {
-            background: rgba(220, 38, 38, 0.08);
-            color: #dc2626;
-        }
+    .premium-card{
+        background:#ffffff;
+        border:1px solid #e2e8f0;
+        box-shadow:
+            0 10px 30px rgba(15,23,42,0.05);
+        transition:all .35s ease;
+    }
 
-        .sidebar-link.active {
-            background: linear-gradient(to right, #dc2626, #991b1b);
-            color: white;
-            box-shadow: 0 10px 30px rgba(220, 38, 38, 0.25);
-        }
+    .premium-card:hover{
+        transform:translateY(-6px);
+        box-shadow:
+            0 25px 50px rgba(15,23,42,0.12);
+        border-color:#fecaca;
+    }
 
-        .table-modern {
-            width: 100%;
-            border-collapse: collapse;
-        }
+    /* ================================= */
+    /* BUTTON PRIMARY */
+    /* ================================= */
 
-        .table-modern thead {
-            background: #f1f5f9;
-        }
+    .btn-primary{
+        background:linear-gradient(
+            to right,
+            #991b1b,
+            #dc2626
+        );
+        transition:all .3s ease;
+        box-shadow:
+            0 10px 25px rgba(220,38,38,0.25);
+    }
 
-        .table-modern th,
-        .table-modern td {
-            padding: 18px;
-            text-align: left;
-        }
+    .btn-primary:hover{
+        transform:translateY(-2px);
+        box-shadow:
+            0 18px 35px rgba(220,38,38,0.35);
+    }
 
-        .table-modern tbody tr {
-            border-bottom: 1px solid #e2e8f0;
-            transition: all 0.3s ease;
-        }
+    /* ================================= */
+    /* BUTTON SECONDARY */
+    /* ================================= */
 
-        .table-modern tbody tr:hover {
-            background: rgba(220, 38, 38, 0.03);
-        }
+    .btn-secondary{
+        background:#ffffff;
+        border:1px solid #e2e8f0;
+        transition:all .3s ease;
+    }
 
-        .input-modern {
-            width: 100%;
-            padding: 14px 18px;
-            border-radius: 18px;
-            border: 1px solid #e2e8f0;
-            background: white;
-            transition: all 0.3s ease;
-        }
+    .btn-secondary:hover{
+        background:#f8fafc;
+        border-color:#fecaca;
+    }
 
-        .input-modern:focus {
-            outline: none;
-            border-color: #dc2626;
-            box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.1);
-        }
+    /* ================================= */
+    /* SHADOW */
+    /* ================================= */
 
-        .badge-success {
-            background: rgba(34, 197, 94, 0.12);
-            color: #16a34a;
-            padding: 6px 14px;
-            border-radius: 999px;
-            font-size: 12px;
-            font-weight: 700;
-        }
+    .shadow-soft{
+        box-shadow:
+            0 10px 35px rgba(15,23,42,0.06);
+    }
 
-        .badge-danger {
-            background: rgba(239, 68, 68, 0.12);
-            color: #dc2626;
-            padding: 6px 14px;
-            border-radius: 999px;
-            font-size: 12px;
-            font-weight: 700;
-        }
+    .shadow-glow{
+        box-shadow:
+            0 15px 40px rgba(220,38,38,0.25);
+    }
 
-        .badge-warning {
-            background: rgba(245, 158, 11, 0.12);
-            color: #d97706;
-            padding: 6px 14px;
-            border-radius: 999px;
-            font-size: 12px;
-            font-weight: 700;
-        }
+    /* ================================= */
+    /* INPUT */
+    /* ================================= */
 
-        .animated-bg {
-            background:
-                radial-gradient(circle at top left, rgba(220, 38, 38, 0.08), transparent 30%),
-                radial-gradient(circle at bottom right, rgba(153, 27, 27, 0.08), transparent 30%);
-        }
-    </style>
+    .input-modern{
+        width:100%;
+        padding:14px 18px;
+        border-radius:18px;
+        border:1px solid #e2e8f0;
+        background:#ffffff;
+        transition:.3s ease;
+        outline:none;
+    }
+
+    .input-modern:focus{
+        border-color:#dc2626;
+        box-shadow:
+            0 0 0 4px rgba(220,38,38,.12);
+    }
+
+    /* ================================= */
+    /* TABLE */
+    /* ================================= */
+
+    .table-modern{
+        width:100%;
+        border-collapse:collapse;
+    }
+
+    .table-modern th{
+        background:#f8fafc;
+        padding:16px;
+        text-align:left;
+        font-size:14px;
+        font-weight:700;
+        color:#475569;
+    }
+
+    .table-modern td{
+        padding:18px 16px;
+        border-top:1px solid #e2e8f0;
+    }
+
+    .table-modern tr:hover{
+        background:#fafafa;
+    }
+
+    /* ================================= */
+    /* ANIMATION */
+    /* ================================= */
+
+    .hover-lift{
+        transition:all .3s ease;
+    }
+
+    .hover-lift:hover{
+        transform:translateY(-5px);
+    }
+
+</style>
+```
 
 </head>
 
-<body class="animated-bg min-h-screen">
+<body>
 
-    <!-- NAVBAR -->
-    {% include 'partials/navbar.html' %}
+```
+<!-- NAVBAR -->
+{% include 'partials/navbar.html' %}
 
-    <!-- FLASH MESSAGE -->
-    <div class="fixed top-24 right-6 z-50 space-y-4">
+<!-- CONTENT -->
+<main>
 
-        {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-        {% for category, message in messages %}
+    {% block content %}
+    {% endblock %}
 
-        <div
-            class="glass rounded-2xl px-5 py-4 shadow-soft border border-white/40 min-w-[320px] animate-pulse">
+</main>
 
-            <div class="flex items-start gap-3">
+<!-- FOOTER -->
+{% include 'partials/footer.html' %}
 
-                <div class="mt-1">
-                    {% if category == 'success' %}
-                    <i data-lucide="check-circle" class="w-5 h-5 text-green-500"></i>
-                    {% elif category == 'danger' %}
-                    <i data-lucide="x-circle" class="w-5 h-5 text-red-500"></i>
-                    {% else %}
-                    <i data-lucide="info" class="w-5 h-5 text-blue-500"></i>
-                    {% endif %}
-                </div>
+<!-- AOS -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
-                <div>
-                    <p class="font-semibold text-slate-800 capitalize">
-                        {{ category }}
-                    </p>
+<script>
+    AOS.init({
+        duration:1000,
+        once:true
+    });
+</script>
 
-                    <p class="text-sm text-slate-500 mt-1">
-                        {{ message }}
-                    </p>
-                </div>
-
-            </div>
-
-        </div>
-
-        {% endfor %}
-        {% endif %}
-        {% endwith %}
-
-    </div>
-
-    <!-- CONTENT -->
-    <main>
-        {% block content %}
-        {% endblock %}
-    </main>
-
-    <!-- FOOTER -->
-    {% include 'partials/footer.html' %}
-
-    <!-- AOS -->
-    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-
-    <script>
-        AOS.init({
-            duration: 900,
-            once: true,
-        });
-
-        lucide.createIcons();
-    </script>
+<!-- LUCIDE -->
+<script>
+    lucide.createIcons();
+</script>
+```
 
 </body>
 
