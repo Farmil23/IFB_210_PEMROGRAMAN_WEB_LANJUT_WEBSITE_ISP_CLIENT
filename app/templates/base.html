@@ -1,293 +1,248 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-```
-<meta charset="UTF-8">
+    <title>
+        {% block title %}
+        BTN Net
+        {% endblock %}
+    </title>
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-<title>
-    {% block title %}
-    BTN Net
-    {% endblock %}
-</title>
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
 
-<!-- TAILWIND -->
-<script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+    >
 
-<!-- AOS -->
-<link
-    href="https://unpkg.com/aos@2.3.4/dist/aos.css"
-    rel="stylesheet"
->
+    <!-- AOS -->
+    <link
+        href="https://unpkg.com/aos@2.3.4/dist/aos.css"
+        rel="stylesheet"
+    >
 
-<!-- FONT -->
-<link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
->
+    <!-- Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-<link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
->
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
 
-<link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
-    rel="stylesheet"
->
+        html {
+            scroll-behavior: smooth;
+        }
 
-<!-- LUCIDE -->
-<script src="https://unpkg.com/lucide@latest"></script>
+        body {
+            background: #f5f5f5;
+            color: #111827;
+            overflow-x: hidden;
+        }
 
-<!-- CUSTOM -->
-<style>
+        /* ===================================== */
+        /* CYBMEDIA STYLE BACKGROUND */
+        /* ===================================== */
 
-    html {
-        scroll-behavior: smooth;
-    }
+        .cyb-grid {
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
 
-    body{
-        font-family: 'Inter', sans-serif;
-        background:#f5f5f5;
-        color:#111827;
-        overflow-x:hidden;
-    }
+        .hero-pattern {
+            background:
+                linear-gradient(135deg,
+                    rgba(120, 0, 0, 0.7),
+                    rgba(0, 0, 0, 0.92)),
+                url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
 
-    /* ===================================== */
-    /* TYPOGRAPHY */
-    /* ===================================== */
+        .tech-lines::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(120deg,
+                    transparent 0%,
+                    transparent 47%,
+                    rgba(255, 0, 51, 0.15) 48%,
+                    rgba(255, 0, 51, 0.15) 49%,
+                    transparent 50%),
+                linear-gradient(60deg,
+                    transparent 0%,
+                    transparent 65%,
+                    rgba(255, 255, 255, 0.04) 66%,
+                    transparent 67%);
+            background-size: 300px 300px;
+            pointer-events: none;
+        }
 
-    .heading-xl{
-        font-size:clamp(3rem,7vw,6.5rem);
-        line-height:0.95;
-        font-weight:900;
-        letter-spacing:-0.05em;
-    }
+        /* ===================================== */
+        /* COMPONENTS */
+        /* ===================================== */
 
-    .heading-lg{
-        font-size:clamp(2.5rem,5vw,4.5rem);
-        line-height:1;
-        font-weight:900;
-        letter-spacing:-0.04em;
-    }
+        .btn-primary {
+            background: linear-gradient(to right, #b91c1c, #dc2626);
+            transition: 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
 
-    .section-label{
-        font-size:0.8rem;
-        font-weight:700;
-        letter-spacing:0.25em;
-        text-transform:uppercase;
-        color:#b91c1c;
-    }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(220, 38, 38, 0.35);
+        }
 
-    /* ===================================== */
-    /* BUTTONS */
-    /* ===================================== */
+        .btn-secondary {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: 0.3s ease;
+        }
 
-    .btn-primary{
-        background:#b91c1c;
-        color:white;
-        transition:all .3s ease;
-        position:relative;
-        overflow:hidden;
-    }
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.08);
+        }
 
-    .btn-primary:hover{
-        background:#991b1b;
-        transform:translateY(-3px);
-        box-shadow:
-            0 15px 40px rgba(185,28,28,.25);
-    }
+        .section-label {
+            letter-spacing: 0.2em;
+        }
 
-    .btn-secondary{
-        background:white;
-        border:1px solid #e5e7eb;
-        transition:all .3s ease;
-    }
+        .enterprise-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-top: 4px solid #dc2626;
+            transition: 0.3s ease;
+        }
 
-    .btn-secondary:hover{
-        border-color:#b91c1c;
-        color:#b91c1c;
-        transform:translateY(-2px);
-    }
+        .enterprise-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+        }
 
-    /* ===================================== */
-    /* CARDS */
-    /* ===================================== */
+        .dark-card {
+            background: rgba(17, 24, 39, 0.9);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-top: 3px solid #dc2626;
+            backdrop-filter: blur(10px);
+        }
 
-    .premium-card{
-        background:white;
-        border:1px solid #e5e7eb;
-        position:relative;
-        transition:all .35s ease;
-        overflow:hidden;
-    }
+        .dashboard-card {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-left: 4px solid #dc2626;
+            transition: 0.3s ease;
+        }
 
-    .premium-card::before{
-        content:'';
-        position:absolute;
-        top:0;
-        left:0;
-        width:100%;
-        height:4px;
-        background:#b91c1c;
-    }
+        .dashboard-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+        }
 
-    .premium-card:hover{
-        transform:translateY(-8px);
-        border-color:#fecaca;
-        box-shadow:
-            0 25px 50px rgba(0,0,0,.08);
-    }
+        .table-modern {
+            width: 100%;
+            border-collapse: collapse;
+        }
 
-    /* ===================================== */
-    /* DARK SECTION */
-    /* ===================================== */
+        .table-modern thead {
+            background: #111827;
+            color: white;
+        }
 
-    .dark-section{
-        background:
-            linear-gradient(
-                135deg,
-                #0f0f10 0%,
-                #161616 100%
-            );
-        color:white;
-        position:relative;
-        overflow:hidden;
-    }
+        .table-modern th,
+        .table-modern td {
+            padding: 16px;
+            text-align: left;
+        }
 
-    .dark-section::before{
-        content:'';
-        position:absolute;
-        inset:0;
-        background-image:
-            linear-gradient(
-                rgba(255,255,255,.03) 1px,
-                transparent 1px
-            ),
-            linear-gradient(
-                90deg,
-                rgba(255,255,255,.03) 1px,
-                transparent 1px
-            );
-        background-size:40px 40px;
-        opacity:.4;
-    }
+        .table-modern tbody tr {
+            border-bottom: 1px solid #e5e7eb;
+            transition: 0.2s ease;
+        }
 
-    /* ===================================== */
-    /* CYBER LINES */
-    /* ===================================== */
+        .table-modern tbody tr:hover {
+            background: #f9fafb;
+        }
 
-    .cyber-lines{
-        position:absolute;
-        inset:0;
-        overflow:hidden;
-        pointer-events:none;
-    }
+        /* ===================================== */
+        /* SCROLLBAR */
+        /* ===================================== */
 
-    .cyber-lines::before{
-        content:'';
-        position:absolute;
-        width:120%;
-        height:2px;
-        background:
-            linear-gradient(
-                90deg,
-                transparent,
-                rgba(220,38,38,.8),
-                transparent
-            );
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
 
-        top:20%;
-        left:-10%;
-        transform:rotate(-12deg);
-    }
+        ::-webkit-scrollbar-track {
+            background: #111827;
+        }
 
-    .cyber-lines::after{
-        content:'';
-        position:absolute;
-        width:120%;
-        height:2px;
-        background:
-            linear-gradient(
-                90deg,
-                transparent,
-                rgba(220,38,38,.5),
-                transparent
-            );
+        ::-webkit-scrollbar-thumb {
+            background: #dc2626;
+        }
 
-        bottom:20%;
-        left:-10%;
-        transform:rotate(8deg);
-    }
+        /* ===================================== */
+        /* MOBILE MENU */
+        /* ===================================== */
 
-    /* ===================================== */
-    /* SHARP SHAPES */
-    /* ===================================== */
-
-    .sharp-shape{
-        clip-path: polygon(
-            10% 0,
-            100% 0,
-            90% 100%,
-            0 100%
-        );
-    }
-
-    /* ===================================== */
-    /* NAVBAR */
-    /* ===================================== */
-
-    .navbar-blur{
-        background:rgba(255,255,255,.9);
-        backdrop-filter:blur(20px);
-        border-bottom:1px solid rgba(0,0,0,.05);
-    }
-
-</style>
-```
+        #mobileMenu {
+            transition: all .3s ease;
+        }
+    </style>
 
 </head>
 
 <body>
 
-```
-<!-- NAVBAR -->
-{% include 'partials/navbar.html' %}
+    <!-- NAVBAR -->
+    {% include 'partials/navbar.html' %}
 
-<!-- CONTENT -->
-<main>
+    <!-- CONTENT -->
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
 
-    {% block content %}
-    {% endblock %}
+    <!-- FOOTER -->
+    {% include 'partials/footer.html' %}
 
-</main>
+    <!-- AOS -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
-<!-- FOOTER -->
-{% include 'partials/footer.html' %}
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        })
 
-<!-- AOS -->
-<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+        lucide.createIcons()
 
-<script>
-    AOS.init({
-        duration:1000,
-        once:true
-    });
-</script>
+        // MOBILE MENU
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu')
 
-<!-- LUCIDE -->
-<script>
-    lucide.createIcons();
-</script>
-```
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden')
+            } else {
+                menu.classList.add('hidden')
+            }
+        }
+    </script>
 
 </body>
 
