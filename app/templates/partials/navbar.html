@@ -1,12 +1,15 @@
 <nav
+    x-data="{ open: false }"
     class="
-        sticky
+        fixed
         top-0
+        left-0
+        w-full
         z-50
         border-b
-        border-white/10
-        bg-slate-950/70
-        backdrop-blur-2xl
+        border-white/20
+        bg-white/80
+        backdrop-blur-xl
     "
 >
 
@@ -14,144 +17,131 @@
 
         <div class="flex items-center justify-between h-20">
 
-            <!-- ===================================== -->
             <!-- LOGO -->
-            <!-- ===================================== -->
             <a
                 href="/"
-                class="flex items-center gap-3 group"
+                class="flex items-center gap-4"
             >
 
-                <div
-                    class="
-                        w-11
-                        h-11
+                <!-- ICON -->
+                <div class="
+                        w-12
+                        h-12
                         rounded-2xl
                         bg-gradient-to-br
-                        from-indigo-600
-                        to-cyan-500
+                        from-red-600
+                        to-red-800
                         flex
                         items-center
                         justify-center
                         shadow-glow
-                        transition-all
-                        duration-300
-                        group-hover:scale-105
-                    "
-                >
+                    ">
 
                     <i
                         data-lucide="wifi"
-                        class="w-5 h-5 text-white"
+                        class="w-6 h-6 text-white"
                     ></i>
 
                 </div>
 
+                <!-- TEXT -->
                 <div>
 
-                    <h1
-                        class="
-                            text-xl
-                            font-extrabold
+                    <h1 class="
+                            text-lg
+                            font-black
                             tracking-tight
-                            text-white
-                        "
-                    >
-                        NexaNet
+                            text-slate-900
+                        ">
+                        BTN Net
                     </h1>
 
-                    <p
-                        class="
+                    <p class="
                             text-xs
-                            text-slate-400
+                            text-slate-500
                             -mt-1
-                        "
-                    >
-                        Premium ISP Platform
+                        ">
+                        Baraya Telematika Nusantara
                     </p>
 
                 </div>
 
             </a>
 
-            <!-- ===================================== -->
             <!-- DESKTOP MENU -->
-            <!-- ===================================== -->
-            <div
-                class="
+            <div class="
                     hidden
                     lg:flex
                     items-center
-                    gap-2
-                    glass
-                    px-3
-                    py-2
-                    rounded-2xl
-                "
-            >
+                    gap-3
+                ">
 
+                <!-- HOME -->
                 <a
                     href="/"
                     class="
-                        px-4
-                        py-2
-                        rounded-xl
+                        px-5
+                        py-3
+                        rounded-2xl
                         text-sm
-                        font-medium
-                        text-slate-300
-                        hover:text-white
-                        hover:bg-white/5
+                        font-semibold
+                        text-slate-700
+                        hover:bg-red-50
+                        hover:text-red-600
                         transition-all
                     "
                 >
                     Home
                 </a>
 
+                <!-- PACKAGES -->
                 <a
-                    href="#packages"
+                    href="/#packages"
                     class="
-                        px-4
-                        py-2
-                        rounded-xl
+                        px-5
+                        py-3
+                        rounded-2xl
                         text-sm
-                        font-medium
-                        text-slate-300
-                        hover:text-white
-                        hover:bg-white/5
+                        font-semibold
+                        text-slate-700
+                        hover:bg-red-50
+                        hover:text-red-600
                         transition-all
                     "
                 >
                     Packages
                 </a>
 
+                <!-- FEATURES -->
                 <a
-                    href="#features"
+                    href="/#features"
                     class="
-                        px-4
-                        py-2
-                        rounded-xl
+                        px-5
+                        py-3
+                        rounded-2xl
                         text-sm
-                        font-medium
-                        text-slate-300
-                        hover:text-white
-                        hover:bg-white/5
+                        font-semibold
+                        text-slate-700
+                        hover:bg-red-50
+                        hover:text-red-600
                         transition-all
                     "
                 >
                     Features
                 </a>
 
+                <!-- FAQ -->
                 <a
-                    href="#faq"
+                    href="/#faq"
                     class="
-                        px-4
-                        py-2
-                        rounded-xl
+                        px-5
+                        py-3
+                        rounded-2xl
                         text-sm
-                        font-medium
-                        text-slate-300
-                        hover:text-white
-                        hover:bg-white/5
+                        font-semibold
+                        text-slate-700
+                        hover:bg-red-50
+                        hover:text-red-600
                         transition-all
                     "
                 >
@@ -160,159 +150,121 @@
 
             </div>
 
-            <!-- ===================================== -->
-            <!-- RIGHT MENU -->
-            <!-- ===================================== -->
-            <div class="hidden lg:flex items-center gap-4">
+            <!-- RIGHT -->
+            <div class="
+                    hidden
+                    lg:flex
+                    items-center
+                    gap-4
+                ">
 
                 {% if current_user.is_authenticated %}
 
-                    <!-- USER INFO -->
-                    <div
-                        class="
-                            glass
-                            px-4
-                            py-2
-                            rounded-2xl
-                            flex
-                            items-center
-                            gap-3
-                        "
-                    >
+                <!-- DASHBOARD -->
+                <a
+                    href="/dashboard"
+                    class="
+                        px-5
+                        py-3
+                        rounded-2xl
+                        text-sm
+                        font-semibold
+                        text-slate-700
+                        hover:bg-red-50
+                        hover:text-red-600
+                        transition-all
+                    "
+                >
+                    Dashboard
+                </a>
 
-                        <div
-                            class="
-                                w-10
-                                h-10
-                                rounded-xl
-                                bg-gradient-to-br
-                                from-indigo-600
-                                to-cyan-500
-                                flex
-                                items-center
-                                justify-center
-                                font-bold
-                                text-white
-                            "
-                        >
-                            {{ current_user.username[0]|upper }}
-                        </div>
+                {% if current_user.is_admin %}
 
-                        <div>
+                <!-- ADMIN -->
+                <a
+                    href="/admin"
+                    class="
+                        px-5
+                        py-3
+                        rounded-2xl
+                        text-sm
+                        font-semibold
+                        text-slate-700
+                        hover:bg-red-50
+                        hover:text-red-600
+                        transition-all
+                    "
+                >
+                    Admin
+                </a>
 
-                            <p
-                                class="
-                                    text-sm
-                                    font-semibold
-                                    text-white
-                                "
-                            >
-                                {{ current_user.username }}
-                            </p>
+                {% endif %}
 
-                            <p
-                                class="
-                                    text-xs
-                                    text-slate-400
-                                "
-                            >
-                                {% if current_user.is_admin %}
-                                    Administrator
-                                {% else %}
-                                    Customer
-                                {% endif %}
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                    <!-- DASHBOARD -->
-                    <a
-                        href="/dashboard"
-                        class="
-                            btn-primary
-                            px-5
-                            py-3
-                            rounded-2xl
-                            text-sm
-                            font-semibold
-                            text-white
-                            shadow-glow
-                        "
-                    >
-                        Dashboard
-                    </a>
-
-                    <!-- LOGOUT -->
-                    <a
-                        href="/logout"
-                        class="
-                            px-5
-                            py-3
-                            rounded-2xl
-                            border
-                            border-white/10
-                            bg-white/5
-                            text-sm
-                            font-medium
-                            text-slate-300
-                            hover:bg-white/10
-                            hover:text-white
-                            transition-all
-                        "
-                    >
-                        Logout
-                    </a>
+                <!-- LOGOUT -->
+                <a
+                    href="/logout"
+                    class="
+                        btn-primary
+                        px-6
+                        py-3
+                        rounded-2xl
+                        text-white
+                        text-sm
+                        font-semibold
+                    "
+                >
+                    Logout
+                </a>
 
                 {% else %}
 
-                    <!-- LOGIN -->
-                    <a
-                        href="/login"
-                        class="
-                            text-slate-300
-                            hover:text-white
-                            transition-all
-                            text-sm
-                            font-medium
-                        "
-                    >
-                        Login
-                    </a>
+                <!-- LOGIN -->
+                <a
+                    href="/login"
+                    class="
+                        px-5
+                        py-3
+                        rounded-2xl
+                        text-sm
+                        font-semibold
+                        text-slate-700
+                        hover:bg-red-50
+                        hover:text-red-600
+                        transition-all
+                    "
+                >
+                    Login
+                </a>
 
-                    <!-- REGISTER -->
-                    <a
-                        href="/register"
-                        class="
-                            btn-primary
-                            px-5
-                            py-3
-                            rounded-2xl
-                            text-sm
-                            font-semibold
-                            text-white
-                            shadow-glow
-                        "
-                    >
-                        Get Started
-                    </a>
+                <!-- REGISTER -->
+                <a
+                    href="/register"
+                    class="
+                        btn-primary
+                        px-6
+                        py-3
+                        rounded-2xl
+                        text-white
+                        text-sm
+                        font-semibold
+                    "
+                >
+                    Get Started
+                </a>
 
                 {% endif %}
 
             </div>
 
-            <!-- ===================================== -->
             <!-- MOBILE BUTTON -->
-            <!-- ===================================== -->
             <button
-                id="mobile-menu-button"
+                @click="open = !open"
                 class="
                     lg:hidden
-                    glass
                     w-12
                     h-12
                     rounded-2xl
+                    bg-red-50
                     flex
                     items-center
                     justify-center
@@ -321,7 +273,7 @@
 
                 <i
                     data-lucide="menu"
-                    class="w-5 h-5 text-white"
+                    class="w-6 h-6 text-red-600"
                 ></i>
 
             </button>
@@ -330,146 +282,163 @@
 
     </div>
 
-    <!-- ===================================== -->
     <!-- MOBILE MENU -->
-    <!-- ===================================== -->
     <div
-        id="mobile-menu"
+        x-show="open"
+        x-transition
         class="
-            hidden
             lg:hidden
             border-t
-            border-white/10
-            bg-slate-950/95
-            backdrop-blur-2xl
+            border-slate-200
+            bg-white
         "
     >
 
-        <div class="px-6 py-6 space-y-3">
+        <div class="
+                px-6
+                py-6
+                space-y-3
+            ">
 
+            <!-- HOME -->
             <a
                 href="/"
                 class="
                     block
-                    px-4
-                    py-3
+                    px-5
+                    py-4
                     rounded-2xl
-                    text-slate-300
-                    hover:bg-white/5
-                    hover:text-white
-                    transition-all
+                    bg-slate-50
+                    text-slate-700
+                    font-semibold
                 "
             >
                 Home
             </a>
 
+            <!-- PACKAGES -->
             <a
-                href="#packages"
+                href="/#packages"
                 class="
                     block
-                    px-4
-                    py-3
+                    px-5
+                    py-4
                     rounded-2xl
-                    text-slate-300
-                    hover:bg-white/5
-                    hover:text-white
-                    transition-all
+                    bg-slate-50
+                    text-slate-700
+                    font-semibold
                 "
             >
                 Packages
             </a>
 
+            <!-- FEATURES -->
             <a
-                href="#features"
+                href="/#features"
                 class="
                     block
-                    px-4
-                    py-3
+                    px-5
+                    py-4
                     rounded-2xl
-                    text-slate-300
-                    hover:bg-white/5
-                    hover:text-white
-                    transition-all
+                    bg-slate-50
+                    text-slate-700
+                    font-semibold
                 "
             >
                 Features
             </a>
 
+            {% if current_user.is_authenticated %}
+
+            <!-- DASHBOARD -->
             <a
-                href="#faq"
+                href="/dashboard"
                 class="
                     block
-                    px-4
-                    py-3
+                    px-5
+                    py-4
                     rounded-2xl
-                    text-slate-300
-                    hover:bg-white/5
-                    hover:text-white
-                    transition-all
+                    bg-slate-50
+                    text-slate-700
+                    font-semibold
                 "
             >
-                FAQ
+                Dashboard
             </a>
 
-            <div class="pt-4 border-t border-white/10">
+            {% if current_user.is_admin %}
 
-                {% if current_user.is_authenticated %}
+            <!-- ADMIN -->
+            <a
+                href="/admin"
+                class="
+                    block
+                    px-5
+                    py-4
+                    rounded-2xl
+                    bg-slate-50
+                    text-slate-700
+                    font-semibold
+                "
+            >
+                Admin Panel
+            </a>
 
-                    <a
-                        href="/dashboard"
-                        class="
-                            block
-                            w-full
-                            text-center
-                            btn-primary
-                            py-3
-                            rounded-2xl
-                            text-white
-                            font-semibold
-                        "
-                    >
-                        Dashboard
-                    </a>
+            {% endif %}
 
-                {% else %}
+            <!-- LOGOUT -->
+            <a
+                href="/logout"
+                class="
+                    block
+                    btn-primary
+                    text-center
+                    px-5
+                    py-4
+                    rounded-2xl
+                    text-white
+                    font-semibold
+                "
+            >
+                Logout
+            </a>
 
-                    <a
-                        href="/login"
-                        class="
-                            block
-                            w-full
-                            text-center
-                            border
-                            border-white/10
-                            bg-white/5
-                            py-3
-                            rounded-2xl
-                            text-slate-300
-                            mb-3
-                        "
-                    >
-                        Login
-                    </a>
+            {% else %}
 
-                    <a
-                        href="/register"
-                        class="
-                            block
-                            w-full
-                            text-center
-                            btn-primary
-                            py-3
-                            rounded-2xl
-                            text-white
-                            font-semibold
-                        "
-                    >
-                        Get Started
-                    </a>
+            <!-- LOGIN -->
+            <a
+                href="/login"
+                class="
+                    block
+                    px-5
+                    py-4
+                    rounded-2xl
+                    bg-slate-50
+                    text-slate-700
+                    font-semibold
+                "
+            >
+                Login
+            </a>
 
-                {% endif %}
+            <!-- REGISTER -->
+            <a
+                href="/register"
+                class="
+                    block
+                    btn-primary
+                    text-center
+                    px-5
+                    py-4
+                    rounded-2xl
+                    text-white
+                    font-semibold
+                "
+            >
+                Register
+            </a>
 
-            </div>
+            {% endif %}
 
         </div>
 
@@ -477,18 +446,5 @@
 
 </nav>
 
-<script>
-
-    const mobileMenuButton =
-        document.getElementById('mobile-menu-button');
-
-    const mobileMenu =
-        document.getElementById('mobile-menu');
-
-    mobileMenuButton.addEventListener('click', () => {
-
-        mobileMenu.classList.toggle('hidden');
-
-    });
-
-</script>
+<!-- SPACER -->
+<div class="h-20"></div>
