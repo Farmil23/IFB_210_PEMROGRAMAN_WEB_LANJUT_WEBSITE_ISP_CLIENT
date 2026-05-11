@@ -6,69 +6,78 @@ BTN Net | Baraya Telematika Nusantara
 
 {% block content %}
 
-<!-- ===================================== -->
-<!-- HERO SECTION -->
-<!-- ===================================== -->
+<!-- ======================================= -->
+
+<!-- HERO -->
+
+<!-- ======================================= -->
+
 <section class="
         relative
         overflow-hidden
-        min-h-[95vh]
-        flex
-        items-center
+        pt-24
+        pb-32
     ">
 
-    <!-- BACKGROUND -->
-    <div class="
-            absolute
-            inset-0
-            bg-gradient-to-br
-            from-red-50
-            via-white
-            to-red-100
-        ">
-    </div>
+```
+<!-- BACKGROUND -->
+<div class="
+        absolute
+        inset-0
+        bg-gradient-to-br
+        from-white
+        via-red-50
+        to-slate-100
+    ">
+</div>
 
-    <!-- GLOW -->
-    <div class="
-            absolute
-            top-0
-            left-0
-            w-[500px]
-            h-[500px]
-            bg-red-500/10
-            blur-[120px]
-            rounded-full
-        ">
-    </div>
+<!-- GRID PATTERN -->
+<div class="
+        absolute
+        inset-0
+        opacity-[0.04]
+    "
+    style="
+        background-image:
+        linear-gradient(#000 1px, transparent 1px),
+        linear-gradient(to right, #000 1px, transparent 1px);
+        background-size:40px 40px;
+    "
+></div>
+
+<!-- RED GLOW -->
+<div class="
+        absolute
+        top-0
+        right-0
+        w-[500px]
+        h-[500px]
+        bg-red-500/10
+        blur-[120px]
+        rounded-full
+    ">
+</div>
+
+<div class="
+        relative
+        z-10
+        max-w-7xl
+        mx-auto
+        px-6
+        lg:px-8
+    ">
 
     <div class="
-            absolute
-            bottom-0
-            right-0
-            w-[500px]
-            h-[500px]
-            bg-red-800/10
-            blur-[120px]
-            rounded-full
-        ">
-    </div>
-
-    <!-- CONTENT -->
-    <div class="
-            relative
-            z-10
-            max-w-7xl
-            mx-auto
-            px-6
-            lg:px-8
-            py-24
             grid
             lg:grid-cols-2
             gap-20
             items-center
         ">
 
+        <!-- ======================================= -->
         <!-- LEFT -->
+        <!-- ======================================= -->
+
         <div data-aos="fade-right">
 
             <!-- BADGE -->
@@ -79,18 +88,17 @@ BTN Net | Baraya Telematika Nusantara
                     px-5
                     py-3
                     rounded-full
-                    bg-white
-                    shadow-soft
+                    bg-red-50
                     border
                     border-red-100
-                    mb-8
+                    mb-10
                 ">
 
                 <span class="
-                        w-3
-                        h-3
+                        w-2.5
+                        h-2.5
                         rounded-full
-                        bg-red-500
+                        bg-red-600
                         animate-pulse
                     ">
                 </span>
@@ -110,27 +118,20 @@ BTN Net | Baraya Telematika Nusantara
                     text-5xl
                     lg:text-7xl
                     font-black
-                    leading-tight
+                    leading-[1]
                     tracking-tight
-                    text-slate-900
+                    text-slate-950
                 ">
 
-                Premium Internet
-                <span class="
-                        text-transparent
-                        bg-clip-text
-                        bg-gradient-to-r
-                        from-red-600
-                        to-red-800
-                    ">
-                    For Modern
+                Powerful Internet
+                Infrastructure For
+                <span class="text-red-700">
+                    Modern Connectivity
                 </span>
-
-                Digital Connectivity
 
             </h1>
 
-            <!-- DESCRIPTION -->
+            <!-- DESC -->
             <p class="
                     mt-8
                     text-lg
@@ -141,9 +142,10 @@ BTN Net | Baraya Telematika Nusantara
                 ">
 
                 BARAYA TELEMATIKA NUSANTARA delivers
-                enterprise-grade internet infrastructure with
-                ultra-fast connectivity, secure networking,
-                and reliable digital services for modern users.
+                enterprise-grade internet services,
+                premium fiber infrastructure,
+                secure digital connectivity,
+                and seamless network performance.
 
             </p>
 
@@ -153,39 +155,37 @@ BTN Net | Baraya Telematika Nusantara
                     flex
                     flex-col
                     sm:flex-row
-                    gap-4
+                    gap-5
                 ">
 
-                <!-- PRIMARY -->
-                <a href="/register"
+                <a
+                    href="/register"
                     class="
                         btn-primary
                         px-8
                         py-4
                         rounded-2xl
                         text-white
-                        font-bold
+                        font-semibold
                         text-center
-                    ">
-
+                    "
+                >
                     Get Started
-
                 </a>
 
-                <!-- SECONDARY -->
-                <a href="#packages"
+                <a
+                    href="#packages"
                     class="
                         btn-secondary
                         px-8
                         py-4
                         rounded-2xl
                         text-slate-800
-                        font-bold
+                        font-semibold
                         text-center
-                    ">
-
-                    Explore Packages
-
+                    "
+                >
+                    View Packages
                 </a>
 
             </div>
@@ -195,23 +195,22 @@ BTN Net | Baraya Telematika Nusantara
                     mt-16
                     grid
                     grid-cols-3
-                    gap-4
+                    gap-5
                 ">
 
-                <!-- CARD -->
                 <div class="
                         premium-card
                         rounded-3xl
-                        p-5
+                        p-6
                     ">
 
-                    <h2 class="
+                    <h3 class="
                             text-3xl
                             font-black
-                            text-red-600
+                            text-red-700
                         ">
                         99.9%
-                    </h2>
+                    </h3>
 
                     <p class="
                             text-sm
@@ -223,52 +222,50 @@ BTN Net | Baraya Telematika Nusantara
 
                 </div>
 
-                <!-- CARD -->
                 <div class="
                         premium-card
                         rounded-3xl
-                        p-5
+                        p-6
                     ">
 
-                    <h2 class="
+                    <h3 class="
                             text-3xl
                             font-black
-                            text-red-600
+                            text-red-700
                         ">
                         24/7
-                    </h2>
+                    </h3>
 
                     <p class="
                             text-sm
                             text-slate-500
                             mt-2
                         ">
-                        Support Service
+                        Support
                     </p>
 
                 </div>
 
-                <!-- CARD -->
                 <div class="
                         premium-card
                         rounded-3xl
-                        p-5
+                        p-6
                     ">
 
-                    <h2 class="
+                    <h3 class="
                             text-3xl
                             font-black
-                            text-red-600
+                            text-red-700
                         ">
                         10K+
-                    </h2>
+                    </h3>
 
                     <p class="
                             text-sm
                             text-slate-500
                             mt-2
                         ">
-                        Active Users
+                        Customers
                     </p>
 
                 </div>
@@ -277,7 +274,10 @@ BTN Net | Baraya Telematika Nusantara
 
         </div>
 
+        <!-- ======================================= -->
         <!-- RIGHT -->
+        <!-- ======================================= -->
+
         <div
             class="relative"
             data-aos="fade-left"
@@ -286,13 +286,26 @@ BTN Net | Baraya Telematika Nusantara
             <!-- MAIN CARD -->
             <div class="
                     premium-card
-                    rounded-[40px]
+                    rounded-[36px]
                     p-8
-                    relative
                     overflow-hidden
+                    relative
                 ">
 
-                <!-- HEADER -->
+                <!-- GLOW -->
+                <div class="
+                        absolute
+                        top-0
+                        right-0
+                        w-52
+                        h-52
+                        bg-red-500/10
+                        blur-[100px]
+                        rounded-full
+                    ">
+                </div>
+
+                <!-- TOP -->
                 <div class="
                         flex
                         items-center
@@ -306,20 +319,20 @@ BTN Net | Baraya Telematika Nusantara
                                 text-sm
                                 text-slate-500
                             ">
-                            Network Performance
+                            Active Network Speed
                         </p>
 
                         <h2 class="
-                                text-5xl
+                                text-6xl
                                 font-black
-                                text-slate-900
-                                mt-2
+                                text-slate-950
+                                mt-3
                             ">
-
                             940
+
                             <span class="
-                                    text-xl
-                                    text-red-600
+                                    text-2xl
+                                    text-red-700
                                 ">
                                 Mbps
                             </span>
@@ -329,12 +342,12 @@ BTN Net | Baraya Telematika Nusantara
                     </div>
 
                     <div class="
-                            w-16
-                            h-16
+                            w-20
+                            h-20
                             rounded-3xl
                             bg-gradient-to-br
-                            from-red-600
-                            to-red-800
+                            from-red-700
+                            to-red-500
                             flex
                             items-center
                             justify-center
@@ -343,7 +356,7 @@ BTN Net | Baraya Telematika Nusantara
 
                         <i
                             data-lucide="activity"
-                            class="w-8 h-8 text-white"
+                            class="w-10 h-10 text-white"
                         ></i>
 
                     </div>
@@ -352,25 +365,23 @@ BTN Net | Baraya Telematika Nusantara
 
                 <!-- GRAPH -->
                 <div class="
-                        h-52
+                        h-56
                         rounded-3xl
-                        bg-gradient-to-br
-                        from-red-50
-                        to-red-100
+                        bg-slate-50
                         border
-                        border-red-100
+                        border-slate-200
                         flex
                         items-end
                         gap-3
                         p-6
                     ">
 
-                    <div class="w-full h-16 bg-red-300 rounded-t-2xl"></div>
-                    <div class="w-full h-24 bg-red-400 rounded-t-2xl"></div>
-                    <div class="w-full h-32 bg-red-500 rounded-t-2xl"></div>
-                    <div class="w-full h-20 bg-red-400 rounded-t-2xl"></div>
-                    <div class="w-full h-40 bg-red-600 rounded-t-2xl"></div>
-                    <div class="w-full h-28 bg-red-500 rounded-t-2xl"></div>
+                    <div class="w-full h-16 bg-red-200 rounded-t-2xl"></div>
+                    <div class="w-full h-28 bg-red-300 rounded-t-2xl"></div>
+                    <div class="w-full h-36 bg-red-400 rounded-t-2xl"></div>
+                    <div class="w-full h-24 bg-red-300 rounded-t-2xl"></div>
+                    <div class="w-full h-44 bg-red-600 rounded-t-2xl"></div>
+                    <div class="w-full h-32 bg-red-400 rounded-t-2xl"></div>
 
                 </div>
 
@@ -378,28 +389,29 @@ BTN Net | Baraya Telematika Nusantara
                 <div class="
                         grid
                         grid-cols-2
-                        gap-4
+                        gap-5
                         mt-6
                     ">
 
-                    <!-- CARD -->
                     <div class="
-                            bg-red-50
-                            rounded-3xl
+                            bg-slate-50
+                            rounded-2xl
                             p-5
+                            border
+                            border-slate-200
                         ">
 
                         <p class="
                                 text-sm
                                 text-slate-500
                             ">
-                            Ping
+                            Latency
                         </p>
 
                         <h3 class="
-                                text-2xl
+                                text-3xl
                                 font-black
-                                text-slate-900
+                                text-slate-950
                                 mt-2
                             ">
                             4ms
@@ -407,11 +419,12 @@ BTN Net | Baraya Telematika Nusantara
 
                     </div>
 
-                    <!-- CARD -->
                     <div class="
-                            bg-red-50
-                            rounded-3xl
+                            bg-slate-50
+                            rounded-2xl
                             p-5
+                            border
+                            border-slate-200
                         ">
 
                         <p class="
@@ -422,9 +435,9 @@ BTN Net | Baraya Telematika Nusantara
                         </p>
 
                         <h3 class="
-                                text-2xl
+                                text-3xl
                                 font-black
-                                text-slate-900
+                                text-slate-950
                                 mt-2
                             ">
                             Excellent
@@ -440,314 +453,317 @@ BTN Net | Baraya Telematika Nusantara
 
     </div>
 
+</div>
+```
+
 </section>
 
-<!-- ===================================== -->
+<!-- ======================================= -->
+
 <!-- FEATURES -->
-<!-- ===================================== -->
+
+<!-- ======================================= -->
+
 <section
     id="features"
-    class="py-28"
+    class="py-28 bg-white"
 >
 
+```
+<div class="
+        max-w-7xl
+        mx-auto
+        px-6
+        lg:px-8
+    ">
+
+    <!-- TITLE -->
     <div class="
-            max-w-7xl
+            max-w-3xl
             mx-auto
-            px-6
-            lg:px-8
+            text-center
+        "
+        data-aos="fade-up"
+    >
+
+        <p class="
+                text-red-700
+                font-semibold
+                uppercase
+                tracking-[0.2em]
+                text-sm
+            ">
+            WHY CHOOSE BTN NET
+        </p>
+
+        <h2 class="
+                mt-5
+                text-4xl
+                lg:text-6xl
+                font-black
+                tracking-tight
+                text-slate-950
+            ">
+            Enterprise ISP Solutions
+            For Modern Digital Needs
+        </h2>
+
+        <p class="
+                mt-6
+                text-lg
+                text-slate-600
+                leading-relaxed
+            ">
+            Powerful infrastructure with modern
+            connectivity solutions designed for
+            high-speed and reliable internet access.
+        </p>
+
+    </div>
+
+    <!-- GRID -->
+    <div class="
+            mt-20
+            grid
+            md:grid-cols-2
+            lg:grid-cols-3
+            gap-8
         ">
 
-        <!-- TITLE -->
-        <div
-            class="
-                text-center
-                max-w-3xl
-                mx-auto
+        <!-- CARD -->
+        <div class="
+                premium-card
+                rounded-[32px]
+                p-8
             "
             data-aos="fade-up"
         >
 
-            <h2 class="
-                    text-4xl
-                    lg:text-5xl
-                    font-black
-                    text-slate-900
+            <div class="
+                    w-16
+                    h-16
+                    rounded-2xl
+                    bg-red-700
+                    flex
+                    items-center
+                    justify-center
                 ">
 
-                Enterprise Grade
-                Digital Infrastructure
+                <i
+                    data-lucide="zap"
+                    class="w-8 h-8 text-white"
+                ></i>
 
-            </h2>
+            </div>
+
+            <h3 class="
+                    mt-8
+                    text-2xl
+                    font-black
+                    text-slate-950
+                ">
+                Ultra Fast Connectivity
+            </h3>
 
             <p class="
-                    mt-6
-                    text-lg
+                    mt-4
                     text-slate-600
+                    leading-relaxed
                 ">
-
-                Designed for modern connectivity,
-                secure networking, and premium digital experience.
-
+                High-speed fiber internet with
+                enterprise-grade performance
+                and low-latency connectivity.
             </p>
 
         </div>
 
-        <!-- GRID -->
+        <!-- CARD -->
         <div class="
-                mt-20
-                grid
-                md:grid-cols-2
-                lg:grid-cols-3
-                gap-8
-            ">
+                premium-card
+                rounded-[32px]
+                p-8
+            "
+            data-aos="fade-up"
+            data-aos-delay="100"
+        >
 
-            <!-- FEATURE -->
             <div class="
-                    premium-card
-                    rounded-[32px]
-                    p-8
-                "
-                data-aos="fade-up"
-            >
+                    w-16
+                    h-16
+                    rounded-2xl
+                    bg-red-700
+                    flex
+                    items-center
+                    justify-center
+                ">
 
-                <div class="
-                        w-16
-                        h-16
-                        rounded-3xl
-                        bg-gradient-to-br
-                        from-red-600
-                        to-red-800
-                        flex
-                        items-center
-                        justify-center
-                        shadow-glow
-                    ">
-
-                    <i
-                        data-lucide="zap"
-                        class="w-8 h-8 text-white"
-                    ></i>
-
-                </div>
-
-                <h3 class="
-                        mt-8
-                        text-2xl
-                        font-black
-                        text-slate-900
-                    ">
-                    Ultra Fast Internet
-                </h3>
-
-                <p class="
-                        mt-4
-                        text-slate-600
-                        leading-relaxed
-                    ">
-
-                    Experience blazing-fast fiber internet
-                    optimized for streaming, gaming,
-                    and enterprise connectivity.
-
-                </p>
+                <i
+                    data-lucide="shield-check"
+                    class="w-8 h-8 text-white"
+                ></i>
 
             </div>
 
-            <!-- FEATURE -->
+            <h3 class="
+                    mt-8
+                    text-2xl
+                    font-black
+                    text-slate-950
+                ">
+                Secure Infrastructure
+            </h3>
+
+            <p class="
+                    mt-4
+                    text-slate-600
+                    leading-relaxed
+                ">
+                Reliable infrastructure with
+                stable enterprise-grade
+                network security systems.
+            </p>
+
+        </div>
+
+        <!-- CARD -->
+        <div class="
+                premium-card
+                rounded-[32px]
+                p-8
+            "
+            data-aos="fade-up"
+            data-aos-delay="200"
+        >
+
             <div class="
-                    premium-card
-                    rounded-[32px]
-                    p-8
-                "
-                data-aos="fade-up"
-                data-aos-delay="100"
-            >
+                    w-16
+                    h-16
+                    rounded-2xl
+                    bg-red-700
+                    flex
+                    items-center
+                    justify-center
+                ">
 
-                <div class="
-                        w-16
-                        h-16
-                        rounded-3xl
-                        bg-gradient-to-br
-                        from-red-600
-                        to-red-800
-                        flex
-                        items-center
-                        justify-center
-                        shadow-glow
-                    ">
-
-                    <i
-                        data-lucide="shield-check"
-                        class="w-8 h-8 text-white"
-                    ></i>
-
-                </div>
-
-                <h3 class="
-                        mt-8
-                        text-2xl
-                        font-black
-                        text-slate-900
-                    ">
-                    Enterprise Security
-                </h3>
-
-                <p class="
-                        mt-4
-                        text-slate-600
-                        leading-relaxed
-                    ">
-
-                    Advanced network protection
-                    and stable infrastructure
-                    for maximum reliability.
-
-                </p>
+                <i
+                    data-lucide="headphones"
+                    class="w-8 h-8 text-white"
+                ></i>
 
             </div>
 
-            <!-- FEATURE -->
-            <div class="
-                    premium-card
-                    rounded-[32px]
-                    p-8
-                "
-                data-aos="fade-up"
-                data-aos-delay="200"
-            >
+            <h3 class="
+                    mt-8
+                    text-2xl
+                    font-black
+                    text-slate-950
+                ">
+                Premium Support
+            </h3>
 
-                <div class="
-                        w-16
-                        h-16
-                        rounded-3xl
-                        bg-gradient-to-br
-                        from-red-600
-                        to-red-800
-                        flex
-                        items-center
-                        justify-center
-                        shadow-glow
-                    ">
-
-                    <i
-                        data-lucide="headphones"
-                        class="w-8 h-8 text-white"
-                    ></i>
-
-                </div>
-
-                <h3 class="
-                        mt-8
-                        text-2xl
-                        font-black
-                        text-slate-900
-                    ">
-                    24/7 Premium Support
-                </h3>
-
-                <p class="
-                        mt-4
-                        text-slate-600
-                        leading-relaxed
-                    ">
-
-                    Dedicated customer support team
-                    ready to assist your connectivity needs.
-
-                </p>
-
-            </div>
+            <p class="
+                    mt-4
+                    text-slate-600
+                    leading-relaxed
+                ">
+                Dedicated customer support
+                available 24/7 to ensure
+                optimal network performance.
+            </p>
 
         </div>
 
     </div>
 
+</div>
+```
+
 </section>
 
-<!-- ===================================== -->
+<!-- ======================================= -->
+
 <!-- PACKAGES -->
-<!-- ===================================== -->
+
+<!-- ======================================= -->
+
 <section
     id="packages"
-    class="pb-28"
+    class="
+        py-28
+        bg-slate-50
+    "
 >
 
+```
+<div class="
+        max-w-7xl
+        mx-auto
+        px-6
+        lg:px-8
+    ">
+
+    <!-- TITLE -->
     <div class="
-            max-w-7xl
+            text-center
+            max-w-3xl
             mx-auto
-            px-6
-            lg:px-8
+        "
+    >
+
+        <p class="
+                text-red-700
+                font-semibold
+                uppercase
+                tracking-[0.2em]
+                text-sm
+            ">
+            INTERNET PACKAGES
+        </p>
+
+        <h2 class="
+                mt-5
+                text-4xl
+                lg:text-6xl
+                font-black
+                tracking-tight
+                text-slate-950
+            ">
+            Flexible Packages For
+            Every Connectivity Need
+        </h2>
+
+    </div>
+
+    <!-- PACKAGE GRID -->
+    <div class="
+            mt-20
+            grid
+            md:grid-cols-2
+            lg:grid-cols-3
+            gap-8
         ">
 
-        <!-- TITLE -->
+        {% for package in packages %}
+
         <div class="
-                text-center
-                max-w-3xl
-                mx-auto
-            ">
+                premium-card
+                rounded-[36px]
+                p-8
+                relative
+                overflow-hidden
+            "
+            data-aos="fade-up"
+        >
 
-            <h2 class="
-                    text-4xl
-                    lg:text-5xl
-                    font-black
-                    text-slate-900
-                ">
-
-                Premium Internet Packages
-
-            </h2>
-
-            <p class="
-                    mt-6
-                    text-lg
-                    text-slate-600
-                ">
-
-                Choose the perfect package
-                for your digital lifestyle.
-
-            </p>
-
-        </div>
-
-        <!-- GRID -->
-        <div class="
-                mt-20
-                grid
-                md:grid-cols-2
-                lg:grid-cols-3
-                gap-8
-            ">
-
-            {% for package in packages %}
-
+            <!-- TOP -->
             <div class="
-                    premium-card
-                    rounded-[36px]
-                    p-8
-                    relative
-                    overflow-hidden
-                "
-                data-aos="fade-up"
-            >
+                    flex
+                    items-center
+                    justify-between
+                ">
 
-                <!-- GLOW -->
                 <div class="
-                        absolute
-                        top-0
-                        right-0
-                        w-40
-                        h-40
-                        bg-red-500/10
-                        blur-[80px]
-                    ">
-                </div>
-
-                <!-- SPEED -->
-                <div class="
-                        inline-flex
-                        items-center
-                        px-5
+                        px-4
                         py-2
                         rounded-full
                         bg-red-50
@@ -755,115 +771,131 @@ BTN Net | Baraya Telematika Nusantara
                         border-red-100
                         text-red-700
                         text-sm
-                        font-bold
+                        font-semibold
                     ">
-
                     {{ package.speed }}
-
                 </div>
 
-                <!-- NAME -->
-                <h3 class="
-                        mt-6
-                        text-3xl
-                        font-black
-                        text-slate-900
-                    ">
-
-                    {{ package.name }}
-
-                </h3>
-
-                <!-- PRICE -->
-                <div class="mt-6">
-
-                    <span class="
-                            text-5xl
-                            font-black
-                            text-slate-900
-                        ">
-
-                        Rp{{ package.price }}
-
-                    </span>
-
-                    <span class="text-slate-500">
-                        /month
-                    </span>
-
-                </div>
-
-                <!-- FEATURES -->
-                <div class="
-                        mt-8
-                        space-y-4
-                    ">
-
-                    <div class="flex items-center gap-3">
-
-                        <i
-                            data-lucide="check"
-                            class="w-5 h-5 text-red-600"
-                        ></i>
-
-                        <p class="text-slate-600">
-                            Unlimited Bandwidth
-                        </p>
-
-                    </div>
-
-                    <div class="flex items-center gap-3">
-
-                        <i
-                            data-lucide="check"
-                            class="w-5 h-5 text-red-600"
-                        ></i>
-
-                        <p class="text-slate-600">
-                            Fiber Optic Infrastructure
-                        </p>
-
-                    </div>
-
-                    <div class="flex items-center gap-3">
-
-                        <i
-                            data-lucide="check"
-                            class="w-5 h-5 text-red-600"
-                        ></i>
-
-                        <p class="text-slate-600">
-                            24/7 Customer Support
-                        </p>
-
-                    </div>
-
-                </div>
-
-                <!-- BUTTON -->
-                <a href="/login"
-                    class="
-                        mt-10
-                        block
-                        btn-primary
-                        py-4
-                        rounded-2xl
-                        text-center
-                        text-white
-                        font-bold
-                    ">
-
-                    Choose Package
-
-                </a>
+                <i
+                    data-lucide="wifi"
+                    class="w-6 h-6 text-red-600"
+                ></i>
 
             </div>
 
-            {% endfor %}
+            <!-- NAME -->
+            <h3 class="
+                    mt-8
+                    text-3xl
+                    font-black
+                    text-slate-950
+                ">
+                {{ package.name }}
+            </h3>
+
+            <!-- PRICE -->
+            <div class="mt-8">
+
+                <span class="
+                        text-5xl
+                        font-black
+                        text-slate-950
+                    ">
+                    Rp{{ package.price }}
+                </span>
+
+                <span class="
+                        text-slate-500
+                    ">
+                    /month
+                </span>
+
+            </div>
+
+            <!-- FEATURES -->
+            <div class="
+                    mt-10
+                    space-y-4
+                ">
+
+                <div class="
+                        flex
+                        items-center
+                        gap-3
+                    ">
+
+                    <i
+                        data-lucide="check"
+                        class="w-5 h-5 text-red-600"
+                    ></i>
+
+                    <p class="text-slate-700">
+                        Unlimited Bandwidth
+                    </p>
+
+                </div>
+
+                <div class="
+                        flex
+                        items-center
+                        gap-3
+                    ">
+
+                    <i
+                        data-lucide="check"
+                        class="w-5 h-5 text-red-600"
+                    ></i>
+
+                    <p class="text-slate-700">
+                        Fiber Infrastructure
+                    </p>
+
+                </div>
+
+                <div class="
+                        flex
+                        items-center
+                        gap-3
+                    ">
+
+                    <i
+                        data-lucide="check"
+                        class="w-5 h-5 text-red-600"
+                    ></i>
+
+                    <p class="text-slate-700">
+                        Premium Support
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- BUTTON -->
+            <a
+                href="/login"
+                class="
+                    mt-10
+                    block
+                    btn-primary
+                    py-4
+                    rounded-2xl
+                    text-center
+                    text-white
+                    font-semibold
+                "
+            >
+                Purchase Package
+            </a>
 
         </div>
 
+        {% endfor %}
+
     </div>
+
+</div>
+```
 
 </section>
 
