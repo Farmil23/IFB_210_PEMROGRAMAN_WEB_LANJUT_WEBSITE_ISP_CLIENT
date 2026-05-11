@@ -16,6 +16,9 @@ class Package(db.Model): # INFO = COLUMN PACKAGE
     package_type = db.Column(db.String(50), nullable=False) # INFO = 'bulanan' atau 'voucher_jam'
     price = db.Column(db.Float, nullable=False)
     speed = db.Column(db.String(50)) # INFO = contoh: '20 Mbps'
+    
+    # INFO = Tambahkan baris ini agar Transaction bisa memanggil .package
+    transactions = db.relationship('Transaction', backref='package', lazy=True)
 
 class Transaction(db.Model): # INFO = COLUMN TRANSACTION
     id = db.Column(db.Integer, primary_key=True)
@@ -34,3 +37,5 @@ class Voucher(db.Model): # INFO = COLUMN VOUCHER
     transaction_id = db.Column(db.Integer, db.ForeignKey('transaction.id'), nullable=False)
     code = db.Column(db.String(20), unique=True, nullable=False)
     status = db.Column(db.String(20), default='unused') # INFO = unused, active, expired
+    
+    

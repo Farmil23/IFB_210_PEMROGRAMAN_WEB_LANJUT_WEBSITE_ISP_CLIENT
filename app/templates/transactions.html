@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Transactions | NexaNet{% endblock %}
+
+{% block content %}
+<div class="min-h-screen relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-slate-950 via-indigo-950 to-slate-950"></div>
+    
+    <div class="relative z-10 flex">
+        {% include 'partials/sidebar.html' %}
+
+        <main class="flex-1 p-6 lg:p-10">
+            <div class="mb-10">
+                <h1 class="text-4xl font-black text-white">Riwayat Transaksi</h1>
+                <p class="text-slate-400 mt-2 text-lg">Pantau status pembayaran dan voucher kamu di sini.</p>
+            </div>
+
+            <div class="grid gap-6">
+                {% if transactions %}
+                    {% for transaction in transactions %}
+                    <div class="premium-card rounded-[32px] p-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                        <div class="flex items-center gap-6">
+                            <div class="w-16 h-16 rounded-2xl bg-cyan-500/10 flex items-center justify-center">
+                                <i data-lucide="receipt" class="w-8 h-8 text-cyan-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-white font-bold text-xl">{{ transaction.package.name }}</h3>
+                                <p class="text-slate-500 text-sm">{{ transaction.created_at.strftime('%d %b %Y, %H:%M') }} WIB</p>
+                                
+                                {% if transaction.status == 'paid' and transaction.voucher %}
+                                    <div class="mt-3 inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
+                                        <i data-lucide="ticket" class="w-4 h-4 text-emerald-400"></i>
+                                        <span class="text-emerald-400 font-mono font-bold">{{ transaction.voucher.code }}</span>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col md:items-end gap-2">
+                            <span class="text-white font-black text-2xl">Rp{{ "{:,.0f}".format(transaction.package.price) }}</span>
+                            
+                            {% if transaction.status == 'paid' %}
+                                <span class="px-4 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-sm font-bold border border-emerald-500/30">SUKSES</span>
+                            {% elif transaction.status == 'pending' %}
+                                <span class="px-4 py-1 rounded-full bg-amber-500/20 text-amber-400 text-sm font-bold border border-amber-500/30">PENDING</span>
+                            {% else %}
+                                <span class="px-4 py-1 rounded-full bg-red-500/20 text-red-400 text-sm font-bold border border-red-500/30">GAGAL</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="glass rounded-[32px] p-16 text-center">
+                        <div class="w-20 h-20 bg-white/5 rounded-3xl flex items-center justify-center mx-auto mb-6">
+                            <i data-lucide="shopping-bag" class="w-10 h-10 text-slate-500"></i>
+                        </div>
+                        <h3 class="text-white text-2xl font-bold">Belum Ada Pesanan</h3>
+                        <p class="text-slate-400 mt-2">Sepertinya kamu belum melakukan pembelian paket internet.</p>
+                        <a href="/" class="mt-8 inline-block btn-primary px-8 py-3 rounded-xl text-white font-bold">Beli Paket Sekarang</a>
+                    </div>
+                {% endif %}
+            </div>
+        </main>
+    </div>
+</div>
+{% endblock %}
