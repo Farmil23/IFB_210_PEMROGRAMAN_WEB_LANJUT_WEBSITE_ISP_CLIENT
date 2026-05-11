@@ -1,83 +1,171 @@
-<footer class="
+<!-- ========================================= -->
+<!-- BTN NET ENTERPRISE FOOTER -->
+<!-- ========================================= -->
+
+<footer
+    id="contact"
+    class="
         relative
         overflow-hidden
-        bg-slate-950
-        text-white
-        pt-24
-        pb-10
-    ">
+        bg-[#050505]
+        border-t
+        border-white/5
+    "
+>
+
+    <!-- ===================================== -->
+    <!-- GRID BACKGROUND -->
+    <!-- ===================================== -->
+
+    <div
+        class="
+            absolute
+            inset-0
+            opacity-[0.04]
+            bg-[linear-gradient(rgba(255,255,255,0.2)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.2)_1px,transparent_1px)]
+            bg-[size:40px_40px]
+        "
+    ></div>
 
     <!-- RED GLOW -->
-    <div class="
+    <div
+        class="
             absolute
             top-0
             right-0
-            w-[400px]
-            h-[400px]
-            bg-red-700/20
+            w-[500px]
+            h-[500px]
+            bg-red-700/10
             blur-[120px]
             rounded-full
-        ">
-    </div>
+        "
+    ></div>
 
-    <div class="
+    <!-- TOP RED LINE -->
+    <div
+        class="
+            h-[2px]
+            w-full
+            bg-gradient-to-r
+            from-transparent
+            via-red-600
+            to-transparent
+        "
+    ></div>
+
+    <!-- ===================================== -->
+    <!-- MAIN FOOTER -->
+    <!-- ===================================== -->
+
+    <div
+        class="
             relative
             z-10
             max-w-7xl
             mx-auto
             px-6
             lg:px-8
-        ">
+            py-24
+        "
+    >
 
-        <!-- TOP -->
-        <div class="
+        <!-- ================================= -->
+        <!-- TOP SECTION -->
+        <!-- ================================= -->
+
+        <div
+            class="
                 grid
-                lg:grid-cols-4
+                lg:grid-cols-5
                 gap-14
-                pb-16
+                pb-20
                 border-b
-                border-white/10
-            ">
+                border-white/5
+            "
+        >
 
-            <!-- BRAND -->
+            <!-- ================================= -->
+            <!-- COMPANY -->
+            <!-- ================================= -->
+
             <div class="lg:col-span-2">
 
-                <div class="
+                <!-- LOGO -->
+                <div
+                    class="
                         flex
                         items-center
                         gap-4
-                    ">
+                    "
+                >
 
-                    <div class="
+                    <!-- ICON -->
+                    <div
+                        class="
+                            relative
                             w-14
                             h-14
-                            rounded-2xl
-                            bg-red-700
+                            rounded-xl
+                            overflow-hidden
+                            border
+                            border-red-500/20
+                            bg-gradient-to-br
+                            from-red-700
+                            to-red-900
                             flex
                             items-center
                             justify-center
-                        ">
+                            shadow-[0_0_30px_rgba(239,68,68,0.25)]
+                        "
+                    >
+
+                        <!-- GRID -->
+                        <div
+                            class="
+                                absolute
+                                inset-0
+                                opacity-20
+                                bg-[linear-gradient(rgba(255,255,255,0.15)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.15)_1px,transparent_1px)]
+                                bg-[size:10px_10px]
+                            "
+                        ></div>
 
                         <i
-                            data-lucide="wifi"
-                            class="w-7 h-7 text-white"
+                            data-lucide="radio-tower"
+                            class="
+                                w-6
+                                h-6
+                                text-white
+                                relative
+                                z-10
+                            "
                         ></i>
 
                     </div>
 
+                    <!-- TEXT -->
                     <div>
 
-                        <h2 class="
+                        <h2
+                            class="
+                                text-white
                                 text-2xl
                                 font-black
-                            ">
+                                tracking-tight
+                            "
+                        >
                             BTN Net
                         </h2>
 
-                        <p class="
-                                text-sm
-                                text-slate-400
-                            ">
+                        <p
+                            class="
+                                text-red-400
+                                uppercase
+                                tracking-[0.25em]
+                                text-[11px]
+                                mt-1
+                            "
+                        >
                             Baraya Telematika Nusantara
                         </p>
 
@@ -85,77 +173,453 @@
 
                 </div>
 
-                <p class="
+                <!-- DESC -->
+                <p
+                    class="
                         mt-8
                         text-slate-400
                         leading-relaxed
-                        max-w-xl
-                    ">
-                    Premium enterprise internet provider
-                    delivering high-speed connectivity,
-                    secure infrastructure, and modern
-                    digital networking solutions.
+                        text-[15px]
+                        max-w-lg
+                    "
+                >
+                    Enterprise-grade ISP infrastructure delivering
+                    high-speed internet connectivity, premium network
+                    stability, secure digital services, and modern
+                    telecommunications solutions for businesses and
+                    households across Indonesia.
                 </p>
+
+                <!-- NETWORK STATUS -->
+                <div
+                    class="
+                        mt-10
+                        flex
+                        flex-wrap
+                        gap-4
+                    "
+                >
+
+                    <!-- STATUS -->
+                    <div
+                        class="
+                            flex
+                            items-center
+                            gap-3
+                            px-4
+                            py-3
+                            rounded-xl
+                            border
+                            border-white/5
+                            bg-white/[0.03]
+                        "
+                    >
+
+                        <div
+                            class="
+                                w-3
+                                h-3
+                                rounded-full
+                                bg-green-400
+                                animate-pulse
+                            "
+                        ></div>
+
+                        <div>
+
+                            <p
+                                class="
+                                    text-white
+                                    text-sm
+                                    font-semibold
+                                "
+                            >
+                                Network Status
+                            </p>
+
+                            <p
+                                class="
+                                    text-green-400
+                                    text-xs
+                                "
+                            >
+                                Operational
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <!-- UPTIME -->
+                    <div
+                        class="
+                            px-4
+                            py-3
+                            rounded-xl
+                            border
+                            border-white/5
+                            bg-white/[0.03]
+                        "
+                    >
+
+                        <p
+                            class="
+                                text-white
+                                text-sm
+                                font-semibold
+                            "
+                        >
+                            99.9% Uptime
+                        </p>
+
+                        <p
+                            class="
+                                text-slate-400
+                                text-xs
+                            "
+                        >
+                            Enterprise SLA
+                        </p>
+
+                    </div>
+
+                </div>
 
             </div>
 
-            <!-- COMPANY -->
+            <!-- ================================= -->
+            <!-- SERVICES -->
+            <!-- ================================= -->
+
             <div>
 
-                <h3 class="
-                        text-lg
+                <h3
+                    class="
+                        text-white
+                        uppercase
+                        tracking-[0.2em]
+                        text-sm
                         font-bold
-                        mb-6
-                    ">
-                    Company
+                        mb-8
+                    "
+                >
+                    Services
                 </h3>
 
-                <div class="
-                        space-y-4
-                        text-slate-400
-                    ">
+                <div class="space-y-5">
 
-                    <a href="/"
-                        class="block hover:text-red-400 transition-all"
+                    <a
+                        href="#packages"
+                        class="
+                            block
+                            text-slate-400
+                            hover:text-red-400
+                            transition
+                        "
                     >
-                        Home
+                        Fiber Internet
                     </a>
 
-                    <a href="/#features"
-                        class="block hover:text-red-400 transition-all"
+                    <a
+                        href="#packages"
+                        class="
+                            block
+                            text-slate-400
+                            hover:text-red-400
+                            transition
+                        "
                     >
-                        Features
+                        Business Network
                     </a>
 
-                    <a href="/#packages"
-                        class="block hover:text-red-400 transition-all"
+                    <a
+                        href="#packages"
+                        class="
+                            block
+                            text-slate-400
+                            hover:text-red-400
+                            transition
+                        "
                     >
-                        Packages
+                        Dedicated Connection
+                    </a>
+
+                    <a
+                        href="#packages"
+                        class="
+                            block
+                            text-slate-400
+                            hover:text-red-400
+                            transition
+                        "
+                    >
+                        Smart Infrastructure
                     </a>
 
                 </div>
 
             </div>
 
-            <!-- SUPPORT -->
+            <!-- ================================= -->
+            <!-- COMPANY -->
+            <!-- ================================= -->
+
             <div>
 
-                <h3 class="
-                        text-lg
+                <h3
+                    class="
+                        text-white
+                        uppercase
+                        tracking-[0.2em]
+                        text-sm
                         font-bold
-                        mb-6
-                    ">
-                    Support
+                        mb-8
+                    "
+                >
+                    Company
                 </h3>
 
-                <div class="
-                        space-y-4
-                        text-slate-400
-                    ">
+                <div class="space-y-5">
 
-                    <p>24/7 Customer Support</p>
-                    <p>Enterprise Services</p>
-                    <p>Fiber Infrastructure</p>
+                    <a
+                        href="#features"
+                        class="
+                            block
+                            text-slate-400
+                            hover:text-red-400
+                            transition
+                        "
+                    >
+                        Infrastructure
+                    </a>
+
+                    <a
+                        href="#coverage"
+                        class="
+                            block
+                            text-slate-400
+                            hover:text-red-400
+                            transition
+                        "
+                    >
+                        Coverage Area
+                    </a>
+
+                    <a
+                        href="#"
+                        class="
+                            block
+                            text-slate-400
+                            hover:text-red-400
+                            transition
+                        "
+                    >
+                        Enterprise Solutions
+                    </a>
+
+                    <a
+                        href="#"
+                        class="
+                            block
+                            text-slate-400
+                            hover:text-red-400
+                            transition
+                        "
+                    >
+                        Support Center
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- ================================= -->
+            <!-- CONTACT -->
+            <!-- ================================= -->
+
+            <div>
+
+                <h3
+                    class="
+                        text-white
+                        uppercase
+                        tracking-[0.2em]
+                        text-sm
+                        font-bold
+                        mb-8
+                    "
+                >
+                    Contact
+                </h3>
+
+                <div class="space-y-6">
+
+                    <!-- EMAIL -->
+                    <div class="flex items-start gap-4">
+
+                        <div
+                            class="
+                                w-11
+                                h-11
+                                rounded-xl
+                                bg-red-600/10
+                                border
+                                border-red-500/20
+                                flex
+                                items-center
+                                justify-center
+                                shrink-0
+                            "
+                        >
+
+                            <i
+                                data-lucide="mail"
+                                class="
+                                    w-5
+                                    h-5
+                                    text-red-400
+                                "
+                            ></i>
+
+                        </div>
+
+                        <div>
+
+                            <p
+                                class="
+                                    text-white
+                                    font-semibold
+                                    text-sm
+                                "
+                            >
+                                Email
+                            </p>
+
+                            <p
+                                class="
+                                    text-slate-400
+                                    text-sm
+                                    mt-1
+                                "
+                            >
+                                support@btnnet.id
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <!-- PHONE -->
+                    <div class="flex items-start gap-4">
+
+                        <div
+                            class="
+                                w-11
+                                h-11
+                                rounded-xl
+                                bg-red-600/10
+                                border
+                                border-red-500/20
+                                flex
+                                items-center
+                                justify-center
+                                shrink-0
+                            "
+                        >
+
+                            <i
+                                data-lucide="phone"
+                                class="
+                                    w-5
+                                    h-5
+                                    text-red-400
+                                "
+                            ></i>
+
+                        </div>
+
+                        <div>
+
+                            <p
+                                class="
+                                    text-white
+                                    font-semibold
+                                    text-sm
+                                "
+                            >
+                                Hotline
+                            </p>
+
+                            <p
+                                class="
+                                    text-slate-400
+                                    text-sm
+                                    mt-1
+                                "
+                            >
+                                +62 812 0000 0000
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <!-- ADDRESS -->
+                    <div class="flex items-start gap-4">
+
+                        <div
+                            class="
+                                w-11
+                                h-11
+                                rounded-xl
+                                bg-red-600/10
+                                border
+                                border-red-500/20
+                                flex
+                                items-center
+                                justify-center
+                                shrink-0
+                            "
+                        >
+
+                            <i
+                                data-lucide="map-pin"
+                                class="
+                                    w-5
+                                    h-5
+                                    text-red-400
+                                "
+                            ></i>
+
+                        </div>
+
+                        <div>
+
+                            <p
+                                class="
+                                    text-white
+                                    font-semibold
+                                    text-sm
+                                "
+                            >
+                                Headquarters
+                            </p>
+
+                            <p
+                                class="
+                                    text-slate-400
+                                    text-sm
+                                    mt-1
+                                    leading-relaxed
+                                "
+                            >
+                                Bandung, West Java,
+                                Indonesia
+                            </p>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
@@ -163,35 +627,130 @@
 
         </div>
 
+        <!-- ================================= -->
         <!-- BOTTOM -->
-        <div class="
-                pt-8
+        <!-- ================================= -->
+
+        <div
+            class="
+                pt-10
                 flex
                 flex-col
                 lg:flex-row
                 items-center
                 justify-between
-                gap-5
-            ">
+                gap-6
+            "
+        >
 
-            <p class="
+            <!-- COPYRIGHT -->
+            <div
+                class="
                     text-slate-500
                     text-sm
-                ">
-                © 2026 BTN Net — Baraya Telematika Nusantara.
+                    text-center
+                    lg:text-left
+                "
+            >
+                © 2026 Baraya Telematika Nusantara.
                 All rights reserved.
-            </p>
+            </div>
 
-            <div class="
+            <!-- SOCIAL -->
+            <div
+                class="
                     flex
                     items-center
-                    gap-6
-                    text-slate-500
-                    text-sm
-                ">
+                    gap-4
+                "
+            >
 
-                <p>Enterprise ISP Platform</p>
-                <p>Secure Infrastructure</p>
+                <!-- SOCIAL ITEM -->
+                <a
+                    href="#"
+                    class="
+                        w-11
+                        h-11
+                        rounded-xl
+                        border
+                        border-white/5
+                        bg-white/[0.03]
+                        flex
+                        items-center
+                        justify-center
+                        text-slate-400
+                        hover:text-white
+                        hover:border-red-500/30
+                        hover:bg-red-500/10
+                        transition-all
+                        duration-300
+                    "
+                >
+
+                    <i
+                        data-lucide="instagram"
+                        class="w-5 h-5"
+                    ></i>
+
+                </a>
+
+                <!-- SOCIAL ITEM -->
+                <a
+                    href="#"
+                    class="
+                        w-11
+                        h-11
+                        rounded-xl
+                        border
+                        border-white/5
+                        bg-white/[0.03]
+                        flex
+                        items-center
+                        justify-center
+                        text-slate-400
+                        hover:text-white
+                        hover:border-red-500/30
+                        hover:bg-red-500/10
+                        transition-all
+                        duration-300
+                    "
+                >
+
+                    <i
+                        data-lucide="facebook"
+                        class="w-5 h-5"
+                    ></i>
+
+                </a>
+
+                <!-- SOCIAL ITEM -->
+                <a
+                    href="#"
+                    class="
+                        w-11
+                        h-11
+                        rounded-xl
+                        border
+                        border-white/5
+                        bg-white/[0.03]
+                        flex
+                        items-center
+                        justify-center
+                        text-slate-400
+                        hover:text-white
+                        hover:border-red-500/30
+                        hover:bg-red-500/10
+                        transition-all
+                        duration-300
+                    "
+                >
+
+                    <i
+                        data-lucide="linkedin"
+                        class="w-5 h-5"
+                    ></i>
+
+                </a>
 
             </div>
 
