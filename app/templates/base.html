@@ -1,42 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>
-        {% block title %}
-        BTN Net
-        {% endblock %}
+        {% block title %}BTN Net{% endblock %}
     </title>
 
-    <!-- Tailwind -->
+    <!-- TAILWIND -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Google Font -->
+    <!-- FONT -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
-        rel="stylesheet"
-    >
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
 
     <!-- AOS -->
-    <link
-        href="https://unpkg.com/aos@2.3.4/dist/aos.css"
-        rel="stylesheet"
-    >
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
-    <!-- Lucide -->
+    <!-- LUCIDE -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
@@ -44,164 +28,34 @@
             font-family: 'Inter', sans-serif;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
         body {
-            background: #f5f5f5;
-            color: #111827;
+            background: #f4f5f7;
             overflow-x: hidden;
         }
 
-        /* ===================================== */
-        /* CYBMEDIA STYLE BACKGROUND */
-        /* ===================================== */
-
-        .cyb-grid {
-            background-image:
-                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
+        .container-app {
+            max-width: 1600px;
+            margin: auto;
         }
 
-        .hero-pattern {
-            background:
-                linear-gradient(135deg,
-                    rgba(120, 0, 0, 0.7),
-                    rgba(0, 0, 0, 0.92)),
-                url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .tech-lines::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image:
-                linear-gradient(120deg,
-                    transparent 0%,
-                    transparent 47%,
-                    rgba(255, 0, 51, 0.15) 48%,
-                    rgba(255, 0, 51, 0.15) 49%,
-                    transparent 50%),
-                linear-gradient(60deg,
-                    transparent 0%,
-                    transparent 65%,
-                    rgba(255, 255, 255, 0.04) 66%,
-                    transparent 67%);
-            background-size: 300px 300px;
-            pointer-events: none;
-        }
-
-        /* ===================================== */
-        /* COMPONENTS */
-        /* ===================================== */
-
-        .btn-primary {
-            background: linear-gradient(to right, #b91c1c, #dc2626);
-            transition: 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.08);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 35px rgba(220, 38, 38, 0.35);
-        }
-
-        .btn-secondary {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.08);
-            transition: 0.3s ease;
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255,255,255,0.08);
-        }
-
-        .section-label {
-            letter-spacing: 0.2em;
-        }
-
-        .enterprise-card {
-            background: white;
-            border: 1px solid #e5e7eb;
-            border-top: 4px solid #dc2626;
-            transition: 0.3s ease;
-        }
-
-        .enterprise-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-        }
-
-        .dark-card {
-            background: rgba(17, 24, 39, 0.9);
-            border: 1px solid rgba(255,255,255,0.06);
-            border-top: 3px solid #dc2626;
-            backdrop-filter: blur(10px);
-        }
-
-        .dashboard-card {
-            background: white;
-            border: 1px solid #e5e7eb;
-            border-left: 4px solid #dc2626;
-            transition: 0.3s ease;
-        }
-
-        .dashboard-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-        }
-
-        .table-modern {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .table-modern thead {
-            background: #111827;
-            color: white;
-        }
-
-        .table-modern th,
-        .table-modern td {
-            padding: 16px;
-            text-align: left;
-        }
-
-        .table-modern tbody tr {
-            border-bottom: 1px solid #e5e7eb;
-            transition: 0.2s ease;
-        }
-
-        .table-modern tbody tr:hover {
-            background: #f9fafb;
-        }
-
-        /* ===================================== */
-        /* SCROLLBAR */
-        /* ===================================== */
-
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #111827;
-        }
-
-        ::-webkit-scrollbar-thumb {
+        .btn-red {
             background: #dc2626;
+            color: white;
+            transition: .3s;
         }
 
-        /* ===================================== */
-        /* MOBILE MENU */
-        /* ===================================== */
+        .btn-red:hover {
+            background: black;
+        }
 
-        #mobileMenu {
-            transition: all .3s ease;
+        .card-hover {
+            transition: .3s;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow:
+                0 20px 40px rgba(0, 0, 0, .08);
         }
     </style>
 
@@ -209,39 +63,37 @@
 
 <body>
 
-    <!-- NAVBAR -->
-    {% include 'partials/navbar.html' %}
+    <!-- ===================================== -->
+    <!-- PUBLIC NAVBAR ONLY -->
+    <!-- ===================================== -->
+    {% if request.endpoint not in [
+        'dashboard',
+        'admin_dashboard'
+    ] %}
+        {% include 'partials/navbar.html' %}
+    {% endif %}
 
     <!-- CONTENT -->
-    <main>
-        {% block content %}
-        {% endblock %}
-    </main>
+    {% block content %}{% endblock %}
 
-    <!-- FOOTER -->
-    {% include 'partials/footer.html' %}
+    <!-- PUBLIC FOOTER ONLY -->
+    {% if request.endpoint not in [
+        'dashboard',
+        'admin_dashboard'
+    ] %}
+        {% include 'partials/footer.html' %}
+    {% endif %}
 
-    <!-- AOS -->
+    <!-- SCRIPTS -->
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
     <script>
         AOS.init({
-            duration: 1000,
-            once: true
-        })
+            once: true,
+            duration: 800
+        });
 
-        lucide.createIcons()
-
-        // MOBILE MENU
-        function toggleMenu() {
-            const menu = document.getElementById('mobileMenu')
-
-            if (menu.classList.contains('hidden')) {
-                menu.classList.remove('hidden')
-            } else {
-                menu.classList.add('hidden')
-            }
-        }
+        lucide.createIcons();
     </script>
 
 </body>

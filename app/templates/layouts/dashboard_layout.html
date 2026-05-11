@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}BTN Net{% endblock %}
+    </title>
+
+    <!-- TAILWIND -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- ICON -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: #050505;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #991b1b;
+        }
+
+        .dashboard-bg {
+            background:
+                linear-gradient(to bottom,
+                    rgba(120, 0, 0, 0.08),
+                    transparent),
+                #050505;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(12px);
+        }
+
+        .border-red-soft {
+            border-color: rgba(239, 68, 68, 0.18);
+        }
+    </style>
+</head>
+
+<body class="dashboard-bg">
+
+    <!-- MAIN WRAPPER -->
+    <div class="min-h-screen flex">
+
+        <!-- SIDEBAR -->
+        {% include 'partials/sidebar.html' %}
+
+        <!-- CONTENT AREA -->
+        <div class="flex-1 flex flex-col lg:ml-72 min-h-screen">
+
+            <!-- TOPBAR -->
+            <header class="
+                sticky
+                top-0
+                z-40
+                h-20
+                border-b
+                border-white/5
+                bg-black/80
+                backdrop-blur-xl
+            ">
+
+                <div class="
+                    h-full
+                    px-6
+                    lg:px-10
+                    flex
+                    items-center
+                    justify-between
+                ">
+
+                    <!-- LEFT -->
+                    <div>
+
+                        <h1 class="
+                            text-xl
+                            font-bold
+                            tracking-wide
+                        ">
+                            {% block page_title %}
+                            Dashboard
+                            {% endblock %}
+                        </h1>
+
+                        <p class="text-sm text-zinc-500 mt-1">
+                            BARAYA TELEMATIKA NUSANTARA
+                        </p>
+
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="flex items-center gap-4">
+
+                        <!-- NOTIF -->
+                        <button class="
+                            w-11
+                            h-11
+                            rounded-xl
+                            border
+                            border-white/10
+                            bg-white/5
+                            flex
+                            items-center
+                            justify-center
+                            hover:border-red-500/40
+                            transition
+                        ">
+                            <i data-lucide="bell" class="w-5 h-5"></i>
+                        </button>
+
+                        <!-- PROFILE -->
+                        <div class="
+                            flex
+                            items-center
+                            gap-3
+                            pl-4
+                            border-l
+                            border-white/10
+                        ">
+
+                            <div class="
+                                w-11
+                                h-11
+                                rounded-xl
+                                bg-red-700
+                                flex
+                                items-center
+                                justify-center
+                                font-bold
+                            ">
+                                {{ current_user.username[0] if current_user.is_authenticated else 'U' }}
+                            </div>
+
+                            <div class="hidden md:block">
+
+                                <h3 class="font-semibold text-sm">
+                                    {{ current_user.username if current_user.is_authenticated else 'Guest' }}
+                                </h3>
+
+                                <p class="text-xs text-zinc-500">
+                                    {% if current_user.is_authenticated and current_user.is_admin %}
+                                    Administrator
+                                    {% else %}
+                                    Customer
+                                    {% endif %}
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+            <!-- PAGE CONTENT -->
+            <main class="
+                flex-1
+                px-6
+                lg:px-10
+                py-8
+            ">
+
+                {% block content %}
+                {% endblock %}
+
+            </main>
+
+        </div>
+
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+
+</body>
+
+</html>
