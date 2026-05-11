@@ -29,7 +29,10 @@ BTN Net | Baraya Telematika Nusantara
 
     <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 pt-40 pb-28 grid lg:grid-cols-2 gap-20 items-center">
 
+        <!-- ====================================================== -->
         <!-- LEFT -->
+        <!-- ====================================================== -->
+
         <div>
 
             <!-- LABEL -->
@@ -87,8 +90,9 @@ BTN Net | Baraya Telematika Nusantara
             </div>
 
             <!-- STATS -->
-            <div class="mt-16 grid grid-cols-3 gap-5">
+            <div class="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-5">
 
+                <!-- CARD -->
                 <div class="bg-white/5 border border-white/10 p-6 backdrop-blur-md hover:border-red-500/30 transition-all duration-300">
 
                     <h2 class="text-4xl font-black text-red-500">
@@ -101,6 +105,7 @@ BTN Net | Baraya Telematika Nusantara
 
                 </div>
 
+                <!-- CARD -->
                 <div class="bg-white/5 border border-white/10 p-6 backdrop-blur-md hover:border-red-500/30 transition-all duration-300">
 
                     <h2 class="text-4xl font-black text-red-500">
@@ -113,6 +118,7 @@ BTN Net | Baraya Telematika Nusantara
 
                 </div>
 
+                <!-- CARD -->
                 <div class="bg-white/5 border border-white/10 p-6 backdrop-blur-md hover:border-red-500/30 transition-all duration-300">
 
                     <h2 class="text-4xl font-black text-red-500">
@@ -129,7 +135,10 @@ BTN Net | Baraya Telematika Nusantara
 
         </div>
 
+        <!-- ====================================================== -->
         <!-- RIGHT -->
+        <!-- ====================================================== -->
+
         <div class="relative">
 
             <!-- MAIN PANEL -->
@@ -160,7 +169,7 @@ BTN Net | Baraya Telematika Nusantara
                     <!-- SPEED -->
                     <div class="flex items-end gap-3">
 
-                        <h2 class="text-8xl font-black text-white leading-none">
+                        <h2 class="text-7xl lg:text-8xl font-black text-white leading-none">
                             940
                         </h2>
 
@@ -175,63 +184,96 @@ BTN Net | Baraya Telematika Nusantara
                     </p>
 
                     <!-- GRAPH -->
-                    <div class="mt-12 flex items-end gap-4 h-52">
+                    <div class="mt-12">
 
-                        <div class="w-full bg-red-900/30 h-20"></div>
-                        <div class="w-full bg-red-700/40 h-32"></div>
-                        <div class="w-full bg-red-600 h-44 shadow-[0_0_30px_rgba(220,38,38,0.5)]"></div>
-                        <div class="w-full bg-red-700/40 h-36"></div>
-                        <div class="w-full bg-red-900/30 h-24"></div>
+                        <div class="flex items-end gap-4 h-52">
 
-                    </div>
+                            <div class="flex-1 bg-red-900/30 h-20 transition-all duration-300 hover:bg-red-700/50"></div>
 
-                    <!-- STATS -->
-                    <div class="mt-10 grid grid-cols-2 gap-5">
+                            <div class="flex-1 bg-red-700/40 h-32 transition-all duration-300 hover:bg-red-600/60"></div>
 
-                        <div class="border border-white/10 p-5 bg-black/20">
+                            <div class="flex-1 bg-red-600 h-44 shadow-[0_0_30px_rgba(220,38,38,0.5)] transition-all duration-300 hover:scale-105"></div>
 
-                            <p class="text-gray-500 text-sm uppercase">
-                                Ping
-                            </p>
+                            <div class="flex-1 bg-red-700/40 h-36 transition-all duration-300 hover:bg-red-600/60"></div>
 
-                            <h3 class="mt-2 text-3xl font-black text-white">
-                                4ms
-                            </h3>
+                            <div class="flex-1 bg-red-900/30 h-24 transition-all duration-300 hover:bg-red-700/50"></div>
 
                         </div>
 
-                        <div class="border border-white/10 p-5 bg-black/20">
+                    </div>
 
-                            <p class="text-gray-500 text-sm uppercase">
-                                Stability
-                            </p>
+                    <!-- ====================================================== -->
+                    <!-- FIXED BOTTOM STATS -->
+                    <!-- ====================================================== -->
 
-                            <h3 class="mt-2 text-3xl font-black text-white">
-                                Excellent
-                            </h3>
+                    <div class="mt-10">
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+                            <!-- CARD -->
+                            <div class="relative overflow-hidden border border-red-500/20 bg-gradient-to-br from-red-600 to-red-700 p-6 min-h-[170px] flex flex-col justify-between">
+
+                                <div>
+
+                                    <p class="text-xs uppercase tracking-[0.35em] text-red-100">
+                                        Real-Time Infrastructure
+                                    </p>
+
+                                    <h3 class="mt-4 text-5xl font-black text-white">
+                                        150+
+                                    </h3>
+
+                                </div>
+
+                                <p class="text-sm text-red-100 leading-relaxed">
+                                    Fiber Nodes Connected Across Indonesia
+                                </p>
+
+                            </div>
+
+                            <!-- CARD -->
+                            <div class="border border-white/10 bg-black/30 p-6 min-h-[170px] flex flex-col justify-between">
+
+                                <div>
+
+                                    <p class="text-gray-500 text-xs uppercase tracking-[0.3em]">
+                                        Ping
+                                    </p>
+
+                                    <h3 class="mt-4 text-5xl font-black text-white">
+                                        4ms
+                                    </h3>
+
+                                </div>
+
+                                <div class="w-16 h-[3px] bg-red-600"></div>
+
+                            </div>
+
+                            <!-- CARD -->
+                            <div class="border border-white/10 bg-black/30 p-6 min-h-[170px] flex flex-col justify-between overflow-hidden">
+
+                                <div>
+
+                                    <p class="text-gray-500 text-xs uppercase tracking-[0.3em]">
+                                        Stability
+                                    </p>
+
+                                    <h3 class="mt-4 text-4xl lg:text-5xl font-black text-white break-words leading-tight">
+                                        Excellent
+                                    </h3>
+
+                                </div>
+
+                                <div class="w-16 h-[3px] bg-emerald-500"></div>
+
+                            </div>
 
                         </div>
 
                     </div>
 
                 </div>
-
-            </div>
-
-            <!-- FLOATING INFO -->
-            <div class="absolute -bottom-10 -left-10 bg-red-600 text-white p-6 shadow-2xl hidden lg:block">
-
-                <p class="uppercase text-xs tracking-[0.3em] opacity-80">
-                    Real-Time Infrastructure
-                </p>
-
-                <h3 class="text-4xl font-black mt-3">
-                    150+
-                </h3>
-
-                <p class="mt-2 text-sm text-red-100">
-                    Fiber Nodes Connected
-                </p>
 
             </div>
 
