@@ -6,266 +6,270 @@ BTN Net | Baraya Telematika Nusantara
 
 {% block content %}
 
-<!-- ======================================= -->
+<!-- ====================================================== -->
+<!-- HERO SECTION -->
+<!-- ====================================================== -->
 
-<!-- HERO -->
+<section class="relative min-h-screen overflow-hidden dark-section">
 
-<!-- ======================================= -->
+    <!-- CYBER LINES -->
+    <div class="cyber-lines"></div>
 
-<section class="
-        relative
-        overflow-hidden
-        pt-24
-        pb-32
-    ">
-
-```
-<!-- BACKGROUND -->
-<div class="
-        absolute
-        inset-0
-        bg-gradient-to-br
-        from-white
-        via-red-50
-        to-slate-100
-    ">
-</div>
-
-<!-- GRID PATTERN -->
-<div class="
-        absolute
-        inset-0
-        opacity-[0.04]
-    "
-    style="
-        background-image:
-        linear-gradient(#000 1px, transparent 1px),
-        linear-gradient(to right, #000 1px, transparent 1px);
-        background-size:40px 40px;
-    "
-></div>
-
-<!-- RED GLOW -->
-<div class="
+    <!-- RED SHAPES -->
+    <div class="
         absolute
         top-0
         right-0
+        w-[45rem]
+        h-[45rem]
+        bg-red-900/20
+        blur-3xl
+        rounded-full
+    "></div>
+
+    <div class="
+        absolute
+        bottom-0
+        left-0
+        w-[30rem]
+        h-[30rem]
+        bg-red-700/10
+        blur-3xl
+        rounded-full
+    "></div>
+
+    <!-- GEOMETRIC SHAPES -->
+    <div class="
+        absolute
+        top-0
+        right-0
+        w-[600px]
+        h-[600px]
+        border
+        border-red-800/20
+        rotate-45
+        translate-x-1/2
+        -translate-y-1/2
+    "></div>
+
+    <div class="
+        absolute
+        bottom-0
+        left-0
         w-[500px]
         h-[500px]
-        bg-red-500/10
-        blur-[120px]
-        rounded-full
-    ">
-</div>
+        border
+        border-red-900/20
+        -rotate-12
+        -translate-x-1/2
+        translate-y-1/2
+    "></div>
 
-<div class="
+    <div class="
         relative
         z-10
         max-w-7xl
         mx-auto
         px-6
         lg:px-8
+        pt-40
+        pb-28
+        grid
+        lg:grid-cols-2
+        gap-20
+        items-center
     ">
 
-    <div class="
-            grid
-            lg:grid-cols-2
-            gap-20
-            items-center
-        ">
+        <!-- ====================================================== -->
+        <!-- LEFT CONTENT -->
+        <!-- ====================================================== -->
 
-        <!-- ======================================= -->
-        <!-- LEFT -->
-        <!-- ======================================= -->
+        <div>
 
-        <div data-aos="fade-right">
-
-            <!-- BADGE -->
+            <!-- LABEL -->
             <div class="
-                    inline-flex
-                    items-center
-                    gap-3
-                    px-5
-                    py-3
-                    rounded-full
-                    bg-red-50
-                    border
-                    border-red-100
-                    mb-10
-                ">
+                inline-flex
+                items-center
+                gap-4
+                mb-8
+            ">
 
-                <span class="
-                        w-2.5
-                        h-2.5
-                        rounded-full
-                        bg-red-600
-                        animate-pulse
-                    ">
+                <div class="
+                    w-16
+                    h-[2px]
+                    bg-red-600
+                "></div>
+
+                <span class="section-label">
+                    INTERNET SERVICE PROVIDER
                 </span>
-
-                <p class="
-                        text-sm
-                        font-semibold
-                        text-red-700
-                    ">
-                    Enterprise Internet Infrastructure
-                </p>
 
             </div>
 
             <!-- TITLE -->
             <h1 class="
-                    text-5xl
-                    lg:text-7xl
-                    font-black
-                    leading-[1]
-                    tracking-tight
-                    text-slate-950
-                ">
+                heading-xl
+                text-white
+                uppercase
+            ">
+                BARAYA
+                <br>
 
-                Powerful Internet
-                Infrastructure For
-                <span class="text-red-700">
-                    Modern Connectivity
+                <span class="text-red-600">
+                    TELEMATIKA
                 </span>
 
+                <br>
+
+                NUSANTARA
             </h1>
 
-            <!-- DESC -->
+            <!-- DESCRIPTION -->
             <p class="
-                    mt-8
-                    text-lg
-                    lg:text-xl
-                    text-slate-600
-                    leading-relaxed
-                    max-w-2xl
-                ">
-
-                BARAYA TELEMATIKA NUSANTARA delivers
-                enterprise-grade internet services,
-                premium fiber infrastructure,
-                secure digital connectivity,
-                and seamless network performance.
-
+                mt-10
+                text-lg
+                text-gray-300
+                leading-relaxed
+                max-w-2xl
+            ">
+                Penyedia layanan internet modern dengan koneksi cepat,
+                stabil, dan infrastruktur digital enterprise-grade untuk
+                kebutuhan rumah, bisnis, dan perusahaan modern.
             </p>
 
-            <!-- BUTTON -->
+            <!-- BUTTONS -->
             <div class="
-                    mt-10
-                    flex
-                    flex-col
-                    sm:flex-row
-                    gap-5
-                ">
+                mt-12
+                flex
+                flex-col
+                sm:flex-row
+                gap-5
+            ">
 
-                <a
-                    href="/register"
-                    class="
+                <a href="/register"
+                   class="
                         btn-primary
-                        px-8
-                        py-4
-                        rounded-2xl
-                        text-white
-                        font-semibold
-                        text-center
-                    "
-                >
-                    Get Started
+                        px-10
+                        py-5
+                        font-bold
+                        uppercase
+                        tracking-wide
+                        text-sm
+                    ">
+
+                    Mulai Berlangganan
+
                 </a>
 
-                <a
-                    href="#packages"
-                    class="
+                <a href="#packages"
+                   class="
                         btn-secondary
-                        px-8
-                        py-4
-                        rounded-2xl
-                        text-slate-800
-                        font-semibold
+                        px-10
+                        py-5
+                        font-bold
+                        uppercase
+                        tracking-wide
+                        text-sm
                         text-center
-                    "
-                >
-                    View Packages
+                    ">
+
+                    Lihat Paket
+
                 </a>
 
             </div>
 
             <!-- STATS -->
             <div class="
-                    mt-16
-                    grid
-                    grid-cols-3
-                    gap-5
+                mt-16
+                grid
+                grid-cols-3
+                gap-5
+            ">
+
+                <!-- CARD -->
+                <div class="
+                    bg-white/5
+                    border
+                    border-white/10
+                    p-6
+                    backdrop-blur-md
                 ">
 
-                <div class="
-                        premium-card
-                        rounded-3xl
-                        p-6
+                    <h2 class="
+                        text-4xl
+                        font-black
+                        text-red-500
                     ">
-
-                    <h3 class="
-                            text-3xl
-                            font-black
-                            text-red-700
-                        ">
-                        99.9%
-                    </h3>
+                        99%
+                    </h2>
 
                     <p class="
-                            text-sm
-                            text-slate-500
-                            mt-2
-                        ">
-                        Network Uptime
+                        mt-2
+                        text-sm
+                        text-gray-400
+                        uppercase
+                        tracking-wider
+                    ">
+                        Uptime Network
                     </p>
 
                 </div>
 
+                <!-- CARD -->
                 <div class="
-                        premium-card
-                        rounded-3xl
-                        p-6
-                    ">
+                    bg-white/5
+                    border
+                    border-white/10
+                    p-6
+                    backdrop-blur-md
+                ">
 
-                    <h3 class="
-                            text-3xl
-                            font-black
-                            text-red-700
-                        ">
+                    <h2 class="
+                        text-4xl
+                        font-black
+                        text-red-500
+                    ">
                         24/7
-                    </h3>
+                    </h2>
 
                     <p class="
-                            text-sm
-                            text-slate-500
-                            mt-2
-                        ">
-                        Support
+                        mt-2
+                        text-sm
+                        text-gray-400
+                        uppercase
+                        tracking-wider
+                    ">
+                        Technical Support
                     </p>
 
                 </div>
 
+                <!-- CARD -->
                 <div class="
-                        premium-card
-                        rounded-3xl
-                        p-6
-                    ">
+                    bg-white/5
+                    border
+                    border-white/10
+                    p-6
+                    backdrop-blur-md
+                ">
 
-                    <h3 class="
-                            text-3xl
-                            font-black
-                            text-red-700
-                        ">
+                    <h2 class="
+                        text-4xl
+                        font-black
+                        text-red-500
+                    ">
                         10K+
-                    </h3>
+                    </h2>
 
                     <p class="
-                            text-sm
-                            text-slate-500
-                            mt-2
-                        ">
-                        Customers
+                        mt-2
+                        text-sm
+                        text-gray-400
+                        uppercase
+                        tracking-wider
+                    ">
+                        Active Users
                     </p>
 
                 </div>
@@ -274,174 +278,182 @@ BTN Net | Baraya Telematika Nusantara
 
         </div>
 
-        <!-- ======================================= -->
-        <!-- RIGHT -->
-        <!-- ======================================= -->
+        <!-- ====================================================== -->
+        <!-- RIGHT CONTENT -->
+        <!-- ====================================================== -->
 
-        <div
-            class="relative"
-            data-aos="fade-left"
-        >
+        <div class="relative">
 
-            <!-- MAIN CARD -->
+            <!-- MAIN PANEL -->
             <div class="
-                    premium-card
-                    rounded-[36px]
-                    p-8
-                    overflow-hidden
-                    relative
+                relative
+                bg-[#151515]
+                border
+                border-red-900/20
+                overflow-hidden
+                shadow-2xl
+            ">
+
+                <!-- TOP BAR -->
+                <div class="
+                    flex
+                    items-center
+                    justify-between
+                    border-b
+                    border-white/10
+                    px-8
+                    py-5
+                    bg-black/40
                 ">
-
-                <!-- GLOW -->
-                <div class="
-                        absolute
-                        top-0
-                        right-0
-                        w-52
-                        h-52
-                        bg-red-500/10
-                        blur-[100px]
-                        rounded-full
-                    ">
-                </div>
-
-                <!-- TOP -->
-                <div class="
-                        flex
-                        items-center
-                        justify-between
-                        mb-10
-                    ">
 
                     <div>
 
                         <p class="
-                                text-sm
-                                text-slate-500
-                            ">
-                            Active Network Speed
+                            text-xs
+                            uppercase
+                            tracking-[0.3em]
+                            text-red-500
+                        ">
+                            BTN NET MONITORING
                         </p>
 
-                        <h2 class="
-                                text-6xl
-                                font-black
-                                text-slate-950
-                                mt-3
-                            ">
-                            940
-
-                            <span class="
-                                    text-2xl
-                                    text-red-700
-                                ">
-                                Mbps
-                            </span>
-
-                        </h2>
+                        <h3 class="
+                            text-2xl
+                            font-black
+                            text-white
+                            mt-2
+                        ">
+                            Network Status
+                        </h3>
 
                     </div>
 
                     <div class="
-                            w-20
-                            h-20
-                            rounded-3xl
-                            bg-gradient-to-br
-                            from-red-700
-                            to-red-500
-                            flex
-                            items-center
-                            justify-center
-                            shadow-glow
-                        ">
-
-                        <i
-                            data-lucide="activity"
-                            class="w-10 h-10 text-white"
-                        ></i>
-
-                    </div>
+                        w-4
+                        h-4
+                        rounded-full
+                        bg-green-500
+                        animate-pulse
+                    "></div>
 
                 </div>
 
-                <!-- GRAPH -->
-                <div class="
-                        h-56
-                        rounded-3xl
-                        bg-slate-50
-                        border
-                        border-slate-200
+                <!-- BODY -->
+                <div class="p-8">
+
+                    <!-- SPEED -->
+                    <div class="
                         flex
                         items-end
                         gap-3
-                        p-6
                     ">
 
-                    <div class="w-full h-16 bg-red-200 rounded-t-2xl"></div>
-                    <div class="w-full h-28 bg-red-300 rounded-t-2xl"></div>
-                    <div class="w-full h-36 bg-red-400 rounded-t-2xl"></div>
-                    <div class="w-full h-24 bg-red-300 rounded-t-2xl"></div>
-                    <div class="w-full h-44 bg-red-600 rounded-t-2xl"></div>
-                    <div class="w-full h-32 bg-red-400 rounded-t-2xl"></div>
-
-                </div>
-
-                <!-- BOTTOM -->
-                <div class="
-                        grid
-                        grid-cols-2
-                        gap-5
-                        mt-6
-                    ">
-
-                    <div class="
-                            bg-slate-50
-                            rounded-2xl
-                            p-5
-                            border
-                            border-slate-200
+                        <h2 class="
+                            text-8xl
+                            font-black
+                            text-white
+                            leading-none
                         ">
+                            940
+                        </h2>
 
-                        <p class="
-                                text-sm
-                                text-slate-500
-                            ">
-                            Latency
-                        </p>
-
-                        <h3 class="
-                                text-3xl
-                                font-black
-                                text-slate-950
-                                mt-2
-                            ">
-                            4ms
-                        </h3>
+                        <span class="
+                            text-red-500
+                            text-2xl
+                            font-bold
+                            mb-2
+                        ">
+                            Mbps
+                        </span>
 
                     </div>
 
+                    <p class="
+                        mt-4
+                        text-gray-400
+                        uppercase
+                        tracking-[0.2em]
+                        text-sm
+                    ">
+                        Dedicated Fiber Connection
+                    </p>
+
+                    <!-- BARS -->
                     <div class="
-                            bg-slate-50
-                            rounded-2xl
-                            p-5
+                        mt-12
+                        flex
+                        items-end
+                        gap-4
+                        h-52
+                    ">
+
+                        <div class="w-full bg-red-900/30 h-20"></div>
+                        <div class="w-full bg-red-700/40 h-32"></div>
+                        <div class="w-full bg-red-600 h-44"></div>
+                        <div class="w-full bg-red-700/40 h-36"></div>
+                        <div class="w-full bg-red-900/30 h-24"></div>
+
+                    </div>
+
+                    <!-- BOTTOM STATS -->
+                    <div class="
+                        mt-10
+                        grid
+                        grid-cols-2
+                        gap-5
+                    ">
+
+                        <div class="
                             border
-                            border-slate-200
+                            border-white/10
+                            p-5
+                            bg-black/20
                         ">
 
-                        <p class="
+                            <p class="
+                                text-gray-500
                                 text-sm
-                                text-slate-500
+                                uppercase
                             ">
-                            Stability
-                        </p>
+                                Ping
+                            </p>
 
-                        <h3 class="
+                            <h3 class="
+                                mt-2
                                 text-3xl
                                 font-black
-                                text-slate-950
-                                mt-2
+                                text-white
                             ">
-                            Excellent
-                        </h3>
+                                4ms
+                            </h3>
+
+                        </div>
+
+                        <div class="
+                            border
+                            border-white/10
+                            p-5
+                            bg-black/20
+                        ">
+
+                            <p class="
+                                text-gray-500
+                                text-sm
+                                uppercase
+                            ">
+                                Stability
+                            </p>
+
+                            <h3 class="
+                                mt-2
+                                text-3xl
+                                font-black
+                                text-white
+                            ">
+                                Excellent
+                            </h3>
+
+                        </div>
 
                     </div>
 
@@ -452,9 +464,6 @@ BTN Net | Baraya Telematika Nusantara
         </div>
 
     </div>
-
-</div>
-```
 
 </section>
 
