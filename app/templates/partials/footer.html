@@ -1,587 +1,202 @@
 <footer class="
         relative
         overflow-hidden
-        bg-[#0f0f10]
+        bg-slate-950
         text-white
-        mt-32
+        pt-24
+        pb-10
     ">
 
-```
-<!-- TOP BORDER -->
-<div class="
-        h-1
-        bg-gradient-to-r
-        from-red-900
-        via-red-600
-        to-red-500
-    ">
-</div>
-
-<!-- GLOW -->
-<div class="
-        absolute
-        top-0
-        right-0
-        w-[500px]
-        h-[500px]
-        bg-red-600/10
-        blur-[140px]
-        rounded-full
-    ">
-</div>
-
-<!-- CONTAINER -->
-<div class="
-        relative
-        z-10
-        max-w-7xl
-        mx-auto
-        px-6
-        lg:px-8
-        py-24
-    ">
-
-    <!-- TOP -->
+    <!-- RED GLOW -->
     <div class="
-            grid
-            lg:grid-cols-5
-            gap-16
+            absolute
+            top-0
+            right-0
+            w-[400px]
+            h-[400px]
+            bg-red-700/20
+            blur-[120px]
+            rounded-full
+        ">
+    </div>
+
+    <div class="
+            relative
+            z-10
+            max-w-7xl
+            mx-auto
+            px-6
+            lg:px-8
         ">
 
-        <!-- ================================= -->
-        <!-- BRAND -->
-        <!-- ================================= -->
+        <!-- TOP -->
+        <div class="
+                grid
+                lg:grid-cols-4
+                gap-14
+                pb-16
+                border-b
+                border-white/10
+            ">
 
-        <div class="lg:col-span-2">
-
-            <!-- LOGO -->
-            <div class="
-                    flex
-                    items-center
-                    gap-4
-                ">
+            <!-- BRAND -->
+            <div class="lg:col-span-2">
 
                 <div class="
-                        w-14
-                        h-14
-                        rounded-2xl
-                        bg-gradient-to-br
-                        from-red-700
-                        to-red-500
                         flex
                         items-center
-                        justify-center
-                        shadow-glow
+                        gap-4
                     ">
 
-                    <i
-                        data-lucide="wifi"
-                        class="w-7 h-7 text-white"
-                    ></i>
+                    <div class="
+                            w-14
+                            h-14
+                            rounded-2xl
+                            bg-red-700
+                            flex
+                            items-center
+                            justify-center
+                        ">
+
+                        <i
+                            data-lucide="wifi"
+                            class="w-7 h-7 text-white"
+                        ></i>
+
+                    </div>
+
+                    <div>
+
+                        <h2 class="
+                                text-2xl
+                                font-black
+                            ">
+                            BTN Net
+                        </h2>
+
+                        <p class="
+                                text-sm
+                                text-slate-400
+                            ">
+                            Baraya Telematika Nusantara
+                        </p>
+
+                    </div>
 
                 </div>
 
-                <div>
+                <p class="
+                        mt-8
+                        text-slate-400
+                        leading-relaxed
+                        max-w-xl
+                    ">
+                    Premium enterprise internet provider
+                    delivering high-speed connectivity,
+                    secure infrastructure, and modern
+                    digital networking solutions.
+                </p>
 
-                    <h2 class="
-                            text-2xl
-                            font-black
-                            tracking-tight
-                        ">
-                        BTN Net
-                    </h2>
+            </div>
 
-                    <p class="
-                            text-sm
-                            text-slate-400
-                            mt-1
-                        ">
-                        Baraya Telematika Nusantara
-                    </p>
+            <!-- COMPANY -->
+            <div>
+
+                <h3 class="
+                        text-lg
+                        font-bold
+                        mb-6
+                    ">
+                    Company
+                </h3>
+
+                <div class="
+                        space-y-4
+                        text-slate-400
+                    ">
+
+                    <a href="/"
+                        class="block hover:text-red-400 transition-all"
+                    >
+                        Home
+                    </a>
+
+                    <a href="/#features"
+                        class="block hover:text-red-400 transition-all"
+                    >
+                        Features
+                    </a>
+
+                    <a href="/#packages"
+                        class="block hover:text-red-400 transition-all"
+                    >
+                        Packages
+                    </a>
 
                 </div>
 
             </div>
 
-            <!-- DESCRIPTION -->
+            <!-- SUPPORT -->
+            <div>
+
+                <h3 class="
+                        text-lg
+                        font-bold
+                        mb-6
+                    ">
+                    Support
+                </h3>
+
+                <div class="
+                        space-y-4
+                        text-slate-400
+                    ">
+
+                    <p>24/7 Customer Support</p>
+                    <p>Enterprise Services</p>
+                    <p>Fiber Infrastructure</p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- BOTTOM -->
+        <div class="
+                pt-8
+                flex
+                flex-col
+                lg:flex-row
+                items-center
+                justify-between
+                gap-5
+            ">
+
             <p class="
-                    mt-8
-                    text-slate-400
-                    leading-relaxed
-                    max-w-lg
+                    text-slate-500
+                    text-sm
                 ">
-
-                Premium enterprise internet provider delivering
-                high-speed fiber connectivity, stable infrastructure,
-                and trusted digital network solutions for modern
-                businesses and households.
-
+                © 2026 BTN Net — Baraya Telematika Nusantara.
+                All rights reserved.
             </p>
 
-            <!-- STATS -->
             <div class="
-                    mt-10
-                    grid
-                    grid-cols-3
-                    gap-4
+                    flex
+                    items-center
+                    gap-6
+                    text-slate-500
+                    text-sm
                 ">
 
-                <div class="
-                        bg-white/5
-                        border
-                        border-white/10
-                        rounded-2xl
-                        p-4
-                    ">
-
-                    <h3 class="
-                            text-2xl
-                            font-black
-                            text-red-400
-                        ">
-                        99.9%
-                    </h3>
-
-                    <p class="
-                            text-xs
-                            text-slate-400
-                            mt-1
-                        ">
-                        Uptime
-                    </p>
-
-                </div>
-
-                <div class="
-                        bg-white/5
-                        border
-                        border-white/10
-                        rounded-2xl
-                        p-4
-                    ">
-
-                    <h3 class="
-                            text-2xl
-                            font-black
-                            text-red-400
-                        ">
-                        24/7
-                    </h3>
-
-                    <p class="
-                            text-xs
-                            text-slate-400
-                            mt-1
-                        ">
-                        Support
-                    </p>
-
-                </div>
-
-                <div class="
-                        bg-white/5
-                        border
-                        border-white/10
-                        rounded-2xl
-                        p-4
-                    ">
-
-                    <h3 class="
-                            text-2xl
-                            font-black
-                            text-red-400
-                        ">
-                        10K+
-                    </h3>
-
-                    <p class="
-                            text-xs
-                            text-slate-400
-                            mt-1
-                        ">
-                        Customers
-                    </p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- ================================= -->
-        <!-- QUICK LINKS -->
-        <!-- ================================= -->
-
-        <div>
-
-            <h3 class="
-                    text-lg
-                    font-bold
-                    mb-6
-                ">
-                Navigation
-            </h3>
-
-            <div class="space-y-4">
-
-                <a
-                    href="/"
-                    class="
-                        block
-                        text-slate-400
-                        hover:text-red-400
-                        transition-all
-                    "
-                >
-                    Home
-                </a>
-
-                <a
-                    href="/#features"
-                    class="
-                        block
-                        text-slate-400
-                        hover:text-red-400
-                        transition-all
-                    "
-                >
-                    Features
-                </a>
-
-                <a
-                    href="/#packages"
-                    class="
-                        block
-                        text-slate-400
-                        hover:text-red-400
-                        transition-all
-                    "
-                >
-                    Packages
-                </a>
-
-                <a
-                    href="/#faq"
-                    class="
-                        block
-                        text-slate-400
-                        hover:text-red-400
-                        transition-all
-                    "
-                >
-                    FAQ
-                </a>
-
-            </div>
-
-        </div>
-
-        <!-- ================================= -->
-        <!-- SERVICES -->
-        <!-- ================================= -->
-
-        <div>
-
-            <h3 class="
-                    text-lg
-                    font-bold
-                    mb-6
-                ">
-                Services
-            </h3>
-
-            <div class="space-y-4">
-
-                <p class="text-slate-400">
-                    Fiber Internet
-                </p>
-
-                <p class="text-slate-400">
-                    Business Network
-                </p>
-
-                <p class="text-slate-400">
-                    Enterprise ISP
-                </p>
-
-                <p class="text-slate-400">
-                    Cloud Connectivity
-                </p>
-
-            </div>
-
-        </div>
-
-        <!-- ================================= -->
-        <!-- CONTACT -->
-        <!-- ================================= -->
-
-        <div>
-
-            <h3 class="
-                    text-lg
-                    font-bold
-                    mb-6
-                ">
-                Contact
-            </h3>
-
-            <div class="space-y-5">
-
-                <!-- EMAIL -->
-                <div class="
-                        flex
-                        items-start
-                        gap-4
-                    ">
-
-                    <div class="
-                            w-10
-                            h-10
-                            rounded-xl
-                            bg-red-600/10
-                            flex
-                            items-center
-                            justify-center
-                            shrink-0
-                        ">
-
-                        <i
-                            data-lucide="mail"
-                            class="w-5 h-5 text-red-400"
-                        ></i>
-
-                    </div>
-
-                    <div>
-
-                        <p class="
-                                text-sm
-                                text-slate-500
-                            ">
-                            Email
-                        </p>
-
-                        <p class="
-                                text-slate-300
-                                mt-1
-                            ">
-                            support@btnnet.id
-                        </p>
-
-                    </div>
-
-                </div>
-
-                <!-- PHONE -->
-                <div class="
-                        flex
-                        items-start
-                        gap-4
-                    ">
-
-                    <div class="
-                            w-10
-                            h-10
-                            rounded-xl
-                            bg-red-600/10
-                            flex
-                            items-center
-                            justify-center
-                            shrink-0
-                        ">
-
-                        <i
-                            data-lucide="phone"
-                            class="w-5 h-5 text-red-400"
-                        ></i>
-
-                    </div>
-
-                    <div>
-
-                        <p class="
-                                text-sm
-                                text-slate-500
-                            ">
-                            Phone
-                        </p>
-
-                        <p class="
-                                text-slate-300
-                                mt-1
-                            ">
-                            +62 812 3456 7890
-                        </p>
-
-                    </div>
-
-                </div>
-
-                <!-- LOCATION -->
-                <div class="
-                        flex
-                        items-start
-                        gap-4
-                    ">
-
-                    <div class="
-                            w-10
-                            h-10
-                            rounded-xl
-                            bg-red-600/10
-                            flex
-                            items-center
-                            justify-center
-                            shrink-0
-                        ">
-
-                        <i
-                            data-lucide="map-pin"
-                            class="w-5 h-5 text-red-400"
-                        ></i>
-
-                    </div>
-
-                    <div>
-
-                        <p class="
-                                text-sm
-                                text-slate-500
-                            ">
-                            Location
-                        </p>
-
-                        <p class="
-                                text-slate-300
-                                mt-1
-                            ">
-                            Indonesia
-                        </p>
-
-                    </div>
-
-                </div>
+                <p>Enterprise ISP Platform</p>
+                <p>Secure Infrastructure</p>
 
             </div>
 
         </div>
 
     </div>
-
-    <!-- ================================= -->
-    <!-- BOTTOM -->
-    <!-- ================================= -->
-
-    <div class="
-            border-t
-            border-white/10
-            mt-20
-            pt-8
-            flex
-            flex-col
-            lg:flex-row
-            items-center
-            justify-between
-            gap-6
-        ">
-
-        <!-- COPYRIGHT -->
-        <p class="
-                text-slate-500
-                text-sm
-            ">
-            © 2026 BARAYA TELEMATIKA NUSANTARA.
-            All rights reserved.
-        </p>
-
-        <!-- SOCIAL -->
-        <div class="
-                flex
-                items-center
-                gap-4
-            ">
-
-            <a
-                href="#"
-                class="
-                    w-11
-                    h-11
-                    rounded-xl
-                    bg-white/5
-                    border
-                    border-white/10
-                    flex
-                    items-center
-                    justify-center
-                    hover:bg-red-600
-                    hover:border-red-600
-                    transition-all
-                "
-            >
-
-                <i
-                    data-lucide="instagram"
-                    class="w-5 h-5"
-                ></i>
-
-            </a>
-
-            <a
-                href="#"
-                class="
-                    w-11
-                    h-11
-                    rounded-xl
-                    bg-white/5
-                    border
-                    border-white/10
-                    flex
-                    items-center
-                    justify-center
-                    hover:bg-red-600
-                    hover:border-red-600
-                    transition-all
-                "
-            >
-
-                <i
-                    data-lucide="facebook"
-                    class="w-5 h-5"
-                ></i>
-
-            </a>
-
-            <a
-                href="#"
-                class="
-                    w-11
-                    h-11
-                    rounded-xl
-                    bg-white/5
-                    border
-                    border-white/10
-                    flex
-                    items-center
-                    justify-center
-                    hover:bg-red-600
-                    hover:border-red-600
-                    transition-all
-                "
-            >
-
-                <i
-                    data-lucide="linkedin"
-                    class="w-5 h-5"
-                ></i>
-
-            </a>
-
-        </div>
-
-    </div>
-
-</div>
-```
 
 </footer>
