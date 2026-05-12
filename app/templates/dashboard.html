@@ -1,869 +1,103 @@
-{% extends "base.html" %}
-
-{% block title %}
-Dashboard | BTN Net
-{% endblock %}
+{% extends "base_dashboard.html" %}
 
 {% block content %}
+<div class="flex min-h-screen bg-[#f4f5f7]">
 
-<div class="min-h-screen bg-[#f4f5f7]">
+    {% include 'partials/sidebar.html' %}
 
-    <!-- ===================================== -->
-    <!-- LAYOUT -->
-    <!-- ===================================== -->
-    <div class="flex">
+    <main class="flex-1 overflow-x-hidden">
+        
+        <header class="bg-white border-b border-gray-200 py-8 px-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+                <p class="text-[11px] uppercase tracking-[0.3em] text-red-600 font-bold">Enterprise Customer Portal</p>
+                <h1 class="mt-2 text-4xl font-black text-black">
+                    Welcome back, <span class="text-red-600">{{ current_user.username }}</span>
+                </h1>
+                <p class="text-gray-500 mt-1">Monitor your internet services and network performance.</p>
+            </div>
 
-        <!-- SIDEBAR -->
-        {% include 'partials/sidebar.html' %}
+            <div class="flex items-center gap-3 relative z-10">
+                <div class="bg-green-50 text-green-600 px-4 py-2 rounded-xl border border-green-100 flex items-center font-bold text-sm">
+                    <span class="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span> Network Stable
+                </div>
+                <a href="{{ url_for('browse_packages') }}" 
+                   class="bg-red-600 text-white px-6 py-2 rounded-xl font-bold shadow-lg shadow-red-600/20 hover:bg-red-700 transition cursor-pointer">
+                    Upgrade Package
+                </a>
+            </div>
+        </header>
 
-        <!-- ===================================== -->
-        <!-- MAIN -->
-        <!-- ===================================== -->
-        <main class="flex-1 lg:ml-[280px]">
-
-            <!-- ===================================== -->
-            <!-- TOP HEADER -->
-            <!-- ===================================== -->
-            <section class="bg-white border-b border-gray-200">
-
-                <div class="px-6 lg:px-10 py-8">
-
-                    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
-
-                        <!-- LEFT -->
-                        <div>
-
-                            <p class="
-                                text-sm
-                                uppercase
-                                tracking-[0.3em]
-                                text-red-600
-                                font-bold
-                            ">
-                                Enterprise Customer Portal
-                            </p>
-
-                            <h1 class="
-                                mt-3
-                                text-4xl
-                                lg:text-5xl
-                                font-black
-                                text-black
-                                leading-tight
-                            ">
-                                Welcome back,
-                                <span class="text-red-600">
-                                    {{ current_user.username }}
-                                </span>
-                            </h1>
-
-                            <p class="
-                                mt-4
-                                text-gray-500
-                                max-w-2xl
-                                leading-relaxed
-                            ">
-                                Monitor your internet services, subscription,
-                                billing activity, and network performance
-                                through BTN Net enterprise dashboard.
-                            </p>
-
-                        </div>
-
-                        <!-- RIGHT -->
-                        <div class="flex items-center gap-4">
-
-                            <!-- STATUS -->
-                            <div class="
-                                hidden md:flex
-                                items-center
-                                gap-3
-                                px-5
-                                py-3
-                                bg-green-50
-                                border
-                                border-green-200
-                                rounded-xl
-                            ">
-
-                                <div class="
-                                    w-3
-                                    h-3
-                                    rounded-full
-                                    bg-green-500
-                                    animate-pulse
-                                "></div>
-
-                                <span class="
-                                    text-sm
-                                    font-semibold
-                                    text-green-700
-                                ">
-                                    Network Stable
-                                </span>
-
-                            </div>
-
-                            <!-- BUTTON -->
-                            <button class="
-                                bg-red-600
-                                hover:bg-black
-                                transition-all
-                                duration-300
-                                text-white
-                                px-7
-                                py-4
-                                rounded-xl
-                                font-bold
-                                shadow-lg
-                            ">
-                                Upgrade Package
-                            </button>
-
-                        </div>
-
-                    </div>
-
+        <div class="p-10 space-y-8">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-7 rounded-2xl border border-gray-100 shadow-sm relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-red-600"></div>
+                    <p class="text-[10px] uppercase font-bold text-gray-400">Active Plan</p>
+                    <h2 class="text-4xl font-black mt-4">100 <span class="text-red-600 text-lg italic">Mbps</span></h2>
                 </div>
 
-            </section>
+                <div class="bg-white p-7 rounded-2xl border border-gray-100 shadow-sm">
+                    <p class="text-[10px] uppercase font-bold text-gray-400">Transactions</p>
+                    <h2 class="text-4xl font-black mt-4">{{ transactions|length if transactions else '24' }}</h2>
+                </div>
 
-            <!-- ===================================== -->
-            <!-- CONTENT -->
-            <!-- ===================================== -->
-            <section class="p-6 lg:p-10">
+                <div class="bg-white p-7 rounded-2xl border border-gray-100 shadow-sm">
+                    <p class="text-[10px] uppercase font-bold text-gray-400">Active Voucher</p>
+                    <h2 class="text-4xl font-black mt-4">12</h2>
+                </div>
 
-                <!-- ===================================== -->
-                <!-- STATS -->
-                <!-- ===================================== -->
-                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+                <div class="bg-white p-7 rounded-2xl border border-gray-100 shadow-sm relative overflow-hidden">
+                    <p class="text-[10px] uppercase font-bold text-gray-400">Connection</p>
+                    <h2 class="text-4xl font-black mt-4 text-green-600">Stable</h2>
+                </div>
+            </div>
 
-                    <!-- CARD -->
-                    <div class="
-                        bg-white
-                        border
-                        border-gray-200
-                        rounded-2xl
-                        overflow-hidden
-                        hover:shadow-2xl
-                        transition-all
-                        duration-300
-                    ">
+            <div class="bg-white rounded-3xl border border-gray-100 shadow-sm p-8">
+                <div class="flex justify-between items-center mb-8">
+                    <div>
+                        <p class="text-[10px] uppercase tracking-widest text-red-600 font-bold mb-1">Billing System</p>
+                        <h3 class="text-2xl font-black text-black">Recent Transactions</h3>
+                    </div>
+                    <a href="{{ url_for('transactions') }}" class="px-6 py-2 border rounded-xl font-bold text-sm hover:bg-gray-50 transition">View All</a>
+                </div>
 
-                        <div class="h-1 bg-red-600"></div>
-
-                        <div class="p-7">
-
-                            <div class="flex items-start justify-between">
-
-                                <div>
-
-                                    <p class="
-                                        text-xs
-                                        uppercase
-                                        tracking-[0.25em]
-                                        text-gray-500
-                                        font-semibold
-                                    ">
-                                        Active Plan
-                                    </p>
-
-                                    <h2 class="
-                                        mt-4
-                                        text-4xl
-                                        font-black
-                                        text-black
-                                    ">
-                                        100
-                                        <span class="text-lg text-red-600">
-                                            Mbps
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="text-[11px] uppercase text-gray-400 border-b pb-4">
+                                <th class="pb-4 font-bold uppercase tracking-widest">Invoice</th>
+                                <th class="pb-4 font-bold uppercase tracking-widest">Package</th>
+                                <th class="pb-4 font-bold uppercase tracking-widest text-center">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-50">
+                            {% if transactions %}
+                                {% for trx in transactions[:5] %}
+                                <tr class="group">
+                                    <td class="py-5 font-black text-gray-800">INV-{{ trx.id }}</td>
+                                    <td class="py-5 text-gray-500">Enterprise Fiber</td>
+                                    <td class="py-5 text-center">
+                                        <span class="{% if trx.status == 'paid' %}bg-green-100 text-green-700{% else %}bg-yellow-100 text-yellow-700{% endif %} px-4 py-1 rounded-full font-bold text-xs">
+                                            {{ trx.status|capitalize }}
                                         </span>
-                                    </h2>
-
-                                </div>
-
-                                <div class="
-                                    w-14
-                                    h-14
-                                    rounded-xl
-                                    bg-red-50
-                                    flex
-                                    items-center
-                                    justify-center
-                                ">
-
-                                    <i data-lucide="wifi" class="w-7 h-7 text-red-600"></i>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <!-- CARD -->
-                    <div class="
-                        bg-white
-                        border
-                        border-gray-200
-                        rounded-2xl
-                        overflow-hidden
-                        hover:shadow-2xl
-                        transition-all
-                        duration-300
-                    ">
-
-                        <div class="h-1 bg-black"></div>
-
-                        <div class="p-7">
-
-                            <div class="flex items-start justify-between">
-
-                                <div>
-
-                                    <p class="
-                                        text-xs
-                                        uppercase
-                                        tracking-[0.25em]
-                                        text-gray-500
-                                        font-semibold
-                                    ">
-                                        Transactions
-                                    </p>
-
-                                    <h2 class="
-                                        mt-4
-                                        text-4xl
-                                        font-black
-                                        text-black
-                                    ">
-                                        24
-                                    </h2>
-
-                                </div>
-
-                                <div class="
-                                    w-14
-                                    h-14
-                                    rounded-xl
-                                    bg-gray-100
-                                    flex
-                                    items-center
-                                    justify-center
-                                ">
-
-                                    <i data-lucide="receipt" class="w-7 h-7 text-black"></i>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <!-- CARD -->
-                    <div class="
-                        bg-white
-                        border
-                        border-gray-200
-                        rounded-2xl
-                        overflow-hidden
-                        hover:shadow-2xl
-                        transition-all
-                        duration-300
-                    ">
-
-                        <div class="h-1 bg-red-600"></div>
-
-                        <div class="p-7">
-
-                            <div class="flex items-start justify-between">
-
-                                <div>
-
-                                    <p class="
-                                        text-xs
-                                        uppercase
-                                        tracking-[0.25em]
-                                        text-gray-500
-                                        font-semibold
-                                    ">
-                                        Active Voucher
-                                    </p>
-
-                                    <h2 class="
-                                        mt-4
-                                        text-4xl
-                                        font-black
-                                        text-black
-                                    ">
-                                        12
-                                    </h2>
-
-                                </div>
-
-                                <div class="
-                                    w-14
-                                    h-14
-                                    rounded-xl
-                                    bg-red-50
-                                    flex
-                                    items-center
-                                    justify-center
-                                ">
-
-                                    <i data-lucide="ticket-percent" class="w-7 h-7 text-red-600"></i>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <!-- CARD -->
-                    <div class="
-                        bg-white
-                        border
-                        border-gray-200
-                        rounded-2xl
-                        overflow-hidden
-                        hover:shadow-2xl
-                        transition-all
-                        duration-300
-                    ">
-
-                        <div class="h-1 bg-black"></div>
-
-                        <div class="p-7">
-
-                            <div class="flex items-start justify-between">
-
-                                <div>
-
-                                    <p class="
-                                        text-xs
-                                        uppercase
-                                        tracking-[0.25em]
-                                        text-gray-500
-                                        font-semibold
-                                    ">
-                                        Connection
-                                    </p>
-
-                                    <h2 class="
-                                        mt-4
-                                        text-4xl
-                                        font-black
-                                        text-green-600
-                                    ">
-                                        Stable
-                                    </h2>
-
-                                </div>
-
-                                <div class="
-                                    w-14
-                                    h-14
-                                    rounded-xl
-                                    bg-green-50
-                                    flex
-                                    items-center
-                                    justify-center
-                                ">
-
-                                    <i data-lucide="activity" class="w-7 h-7 text-green-600"></i>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            {% else %}
+                                <tr>
+                                    <td class="py-5 font-black text-gray-800">INV-202601</td>
+                                    <td class="py-5 text-gray-500">Enterprise Fiber</td>
+                                    <td class="py-5 text-center">
+                                        <span class="bg-green-100 text-green-700 px-4 py-1 rounded-full font-bold text-xs">Paid</span>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
                 </div>
+            </div>
 
-                <!-- ===================================== -->
-                <!-- MAIN GRID -->
-                <!-- ===================================== -->
-                <div class="grid grid-cols-1 xl:grid-cols-3 gap-8 mt-8">
-
-                    <!-- ================================= -->
-                    <!-- LEFT SIDE -->
-                    <!-- ================================= -->
-                    <div class="xl:col-span-2 space-y-8">
-
-                        <!-- NETWORK PERFORMANCE -->
-                        <div class="
-                            bg-white
-                            border
-                            border-gray-200
-                            rounded-2xl
-                            overflow-hidden
-                        ">
-
-                            <div class="h-1 bg-red-600"></div>
-
-                            <div class="p-8">
-
-                                <!-- HEADER -->
-                                <div class="
-                                    flex
-                                    flex-col
-                                    md:flex-row
-                                    md:items-center
-                                    md:justify-between
-                                    gap-5
-                                    mb-10
-                                ">
-
-                                    <div>
-
-                                        <p class="
-                                            text-xs
-                                            uppercase
-                                            tracking-[0.3em]
-                                            text-red-600
-                                            font-bold
-                                        ">
-                                            Network Analytics
-                                        </p>
-
-                                        <h2 class="
-                                            mt-3
-                                            text-3xl
-                                            font-black
-                                            text-black
-                                        ">
-                                            Real-Time Performance
-                                        </h2>
-
-                                    </div>
-
-                                    <button class="
-                                        border
-                                        border-red-600
-                                        text-red-600
-                                        hover:bg-red-600
-                                        hover:text-white
-                                        transition-all
-                                        px-5
-                                        py-3
-                                        rounded-xl
-                                        font-semibold
-                                    ">
-                                        View Analytics
-                                    </button>
-
-                                </div>
-
-                                <!-- SPEED GRID -->
-                                <div class="grid md:grid-cols-3 gap-6">
-
-                                    <div class="
-                                        bg-[#f7f8fa]
-                                        rounded-2xl
-                                        p-7
-                                    ">
-
-                                        <p class="
-                                            text-xs
-                                            uppercase
-                                            tracking-[0.25em]
-                                            text-gray-500
-                                            font-semibold
-                                        ">
-                                            Download Speed
-                                        </p>
-
-                                        <h3 class="
-                                            mt-5
-                                            text-5xl
-                                            font-black
-                                            text-black
-                                        ">
-                                            940
-                                        </h3>
-
-                                        <p class="mt-2 text-red-600 font-semibold">
-                                            Mbps
-                                        </p>
-
-                                    </div>
-
-                                    <div class="
-                                        bg-[#f7f8fa]
-                                        rounded-2xl
-                                        p-7
-                                    ">
-
-                                        <p class="
-                                            text-xs
-                                            uppercase
-                                            tracking-[0.25em]
-                                            text-gray-500
-                                            font-semibold
-                                        ">
-                                            Upload Speed
-                                        </p>
-
-                                        <h3 class="
-                                            mt-5
-                                            text-5xl
-                                            font-black
-                                            text-black
-                                        ">
-                                            520
-                                        </h3>
-
-                                        <p class="mt-2 text-red-600 font-semibold">
-                                            Mbps
-                                        </p>
-
-                                    </div>
-
-                                    <div class="
-                                        bg-[#f7f8fa]
-                                        rounded-2xl
-                                        p-7
-                                    ">
-
-                                        <p class="
-                                            text-xs
-                                            uppercase
-                                            tracking-[0.25em]
-                                            text-gray-500
-                                            font-semibold
-                                        ">
-                                            Ping
-                                        </p>
-
-                                        <h3 class="
-                                            mt-5
-                                            text-5xl
-                                            font-black
-                                            text-black
-                                        ">
-                                            4
-                                        </h3>
-
-                                        <p class="mt-2 text-red-600 font-semibold">
-                                            ms
-                                        </p>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <!-- TRANSACTION TABLE -->
-                        <div class="
-                            bg-white
-                            border
-                            border-gray-200
-                            rounded-2xl
-                            overflow-hidden
-                        ">
-
-                            <div class="h-1 bg-black"></div>
-
-                            <div class="p-8">
-
-                                <!-- HEADER -->
-                                <div class="
-                                    flex
-                                    items-center
-                                    justify-between
-                                    mb-8
-                                ">
-
-                                    <div>
-
-                                        <p class="
-                                            text-xs
-                                            uppercase
-                                            tracking-[0.3em]
-                                            text-red-600
-                                            font-bold
-                                        ">
-                                            Billing System
-                                        </p>
-
-                                        <h2 class="
-                                            mt-3
-                                            text-3xl
-                                            font-black
-                                            text-black
-                                        ">
-                                            Recent Transactions
-                                        </h2>
-
-                                    </div>
-
-                                    <button class="
-                                        border
-                                        border-gray-300
-                                        hover:border-red-600
-                                        hover:text-red-600
-                                        transition-all
-                                        px-5
-                                        py-3
-                                        rounded-xl
-                                        font-semibold
-                                    ">
-                                        View All
-                                    </button>
-
-                                </div>
-
-                                <!-- TABLE -->
-                                <div class="overflow-x-auto">
-
-                                    <table class="w-full min-w-[700px]">
-
-                                        <thead>
-
-                                            <tr class="border-b border-gray-200">
-
-                                                <th class="text-left py-5 text-sm uppercase tracking-wider text-gray-500">
-                                                    Invoice
-                                                </th>
-
-                                                <th class="text-left py-5 text-sm uppercase tracking-wider text-gray-500">
-                                                    Package
-                                                </th>
-
-                                                <th class="text-left py-5 text-sm uppercase tracking-wider text-gray-500">
-                                                    Status
-                                                </th>
-
-                                                <th class="text-left py-5 text-sm uppercase tracking-wider text-gray-500">
-                                                    Amount
-                                                </th>
-
-                                            </tr>
-
-                                        </thead>
-
-                                        <tbody>
-
-                                            <tr class="border-b border-gray-100 hover:bg-gray-50 transition-all">
-
-                                                <td class="py-6 font-bold text-black">
-                                                    INV-202601
-                                                </td>
-
-                                                <td class="py-6 text-gray-600">
-                                                    Enterprise Fiber
-                                                </td>
-
-                                                <td class="py-6">
-
-                                                    <span class="
-                                                        bg-green-100
-                                                        text-green-700
-                                                        px-4
-                                                        py-2
-                                                        rounded-full
-                                                        text-sm
-                                                        font-semibold
-                                                    ">
-                                                        Paid
-                                                    </span>
-
-                                                </td>
-
-                                                <td class="py-6 font-bold text-black">
-                                                    Rp 350.000
-                                                </td>
-
-                                            </tr>
-
-                                            <tr class="hover:bg-gray-50 transition-all">
-
-                                                <td class="py-6 font-bold text-black">
-                                                    INV-202600
-                                                </td>
-
-                                                <td class="py-6 text-gray-600">
-                                                    Gamer Package
-                                                </td>
-
-                                                <td class="py-6">
-
-                                                    <span class="
-                                                        bg-yellow-100
-                                                        text-yellow-700
-                                                        px-4
-                                                        py-2
-                                                        rounded-full
-                                                        text-sm
-                                                        font-semibold
-                                                    ">
-                                                        Pending
-                                                    </span>
-
-                                                </td>
-
-                                                <td class="py-6 font-bold text-black">
-                                                    Rp 250.000
-                                                </td>
-
-                                            </tr>
-
-                                        </tbody>
-
-                                    </table>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <!-- ================================= -->
-                    <!-- RIGHT SIDE -->
-                    <!-- ================================= -->
-                    <div class="space-y-8">
-
-                        <!-- PROFILE -->
-                        <div class="
-                            bg-black
-                            rounded-2xl
-                            overflow-hidden
-                            text-white
-                            relative
-                        ">
-
-                            <div class="absolute top-0 left-0 w-full h-1 bg-red-600"></div>
-
-                            <div class="p-8">
-
-                                <div class="
-                                    w-20
-                                    h-20
-                                    rounded-2xl
-                                    bg-red-600
-                                    flex
-                                    items-center
-                                    justify-center
-                                    text-3xl
-                                    font-black
-                                ">
-                                    {{ current_user.username[0] | upper }}
-                                </div>
-
-                                <h3 class="
-                                    mt-6
-                                    text-3xl
-                                    font-black
-                                ">
-                                    {{ current_user.username }}
-                                </h3>
-
-                                <p class="mt-2 text-gray-400">
-                                    Premium Enterprise Customer
-                                </p>
-
-                                <button class="
-                                    mt-8
-                                    w-full
-                                    bg-red-600
-                                    hover:bg-white
-                                    hover:text-black
-                                    transition-all
-                                    py-4
-                                    rounded-xl
-                                    font-bold
-                                ">
-                                    Manage Profile
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                        <!-- VOUCHER -->
-                        <div class="
-                            bg-white
-                            border
-                            border-gray-200
-                            rounded-2xl
-                            overflow-hidden
-                        ">
-
-                            <div class="h-1 bg-red-600"></div>
-
-                            <div class="p-8">
-
-                                <p class="
-                                    text-xs
-                                    uppercase
-                                    tracking-[0.3em]
-                                    text-red-600
-                                    font-bold
-                                ">
-                                    Voucher Access
-                                </p>
-
-                                <h3 class="
-                                    mt-4
-                                    text-3xl
-                                    font-black
-                                    text-black
-                                ">
-                                    BTN-ULTRA-25
-                                </h3>
-
-                                <p class="
-                                    mt-4
-                                    text-gray-500
-                                    leading-relaxed
-                                ">
-                                    Redeem your enterprise voucher for
-                                    premium internet service upgrades
-                                    and transaction discounts.
-                                </p>
-
-                                <button class="
-                                    mt-8
-                                    w-full
-                                    border
-                                    border-red-600
-                                    text-red-600
-                                    hover:bg-red-600
-                                    hover:text-white
-                                    transition-all
-                                    py-4
-                                    rounded-xl
-                                    font-bold
-                                ">
-                                    Redeem Voucher
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-        </main>
-
-    </div>
-
+        </div>
+    </main>
 </div>
-
 {% endblock %}

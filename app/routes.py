@@ -25,21 +25,10 @@ import string
 from functools import wraps
 
 
-# ==========================================
-# INFO = KONFIGURASI URL N8N
-# ==========================================
-# INFO = Ganti IP ini dengan IP VPS n8n kamu yang asli
 N8N_WEBHOOK_CHECKOUT_URL = "https://n8n.srv1631432.hstgr.cloud/webhook/create_checkout"
 
 
-# ==========================================
-# INFO = HELPER FUNCTIONS
-# ==========================================
 def generate_wifi_code():
-    """
-    Menghasilkan kode unik untuk voucher Wi-Fi
-    Contoh: WF-A8K9Z
-    """
 
     chars = string.ascii_uppercase + string.digits
 
@@ -48,9 +37,6 @@ def generate_wifi_code():
     )
 
 
-# ==========================================
-# INFO = ADMIN DECORATOR
-# ==========================================
 def admin_required(f):
 
     @wraps(f)
@@ -67,16 +53,8 @@ def admin_required(f):
     return decorated_function
 
 
-# ==========================================
-# INFO = WEB ROUTES
-# ==========================================
-
 @current_app.route('/')
 def index():
-
-    # ==========================================
-    # DUMMY DATA
-    # ==========================================
 
     if not User.query.first():
 
@@ -108,10 +86,6 @@ def index():
         db.session.add_all([paket1, paket2])
         db.session.commit()
 
-    # ==========================================
-    # GET PACKAGES
-    # ==========================================
-
     packages = Package.query.all()
 
     return render_template(
@@ -119,10 +93,6 @@ def index():
         packages=packages
     )
 
-
-# ==========================================
-# LOGIN
-# ==========================================
 
 @current_app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -137,10 +107,6 @@ def login():
         user = User.query.filter_by(
             email=email
         ).first()
-
-        # ==========================================
-        # DUMMY PASSWORD CHECK
-        # ==========================================
 
         if user and user.password_hash == password:
 
@@ -171,10 +137,6 @@ def login():
     )
 
 
-# ==========================================
-# REGISTER
-# ==========================================
-
 @current_app.route('/register', methods=['GET', 'POST'])
 def register():
 
@@ -183,10 +145,6 @@ def register():
         username = request.form.get('username')
         email = request.form.get('email')
         password = request.form.get('password')
-
-        # ==========================================
-        # CHECK EXISTING USER
-        # ==========================================
 
         existing_user = User.query.filter(
             (User.email == email) |
@@ -203,10 +161,6 @@ def register():
             return redirect(
                 url_for('register')
             )
-
-        # ==========================================
-        # CREATE USER
-        # ==========================================
 
         new_user = User(
             username=username,
@@ -229,10 +183,6 @@ def register():
     return render_template('register.html')
 
 
-# ==========================================
-# LOGOUT
-# ==========================================
-
 @current_app.route('/logout')
 @login_required
 def logout():
@@ -245,10 +195,6 @@ def logout():
         url_for('index')
     )
 
-
-# ==========================================
-# DASHBOARD
-# ==========================================
 
 @current_app.route('/dashboard')
 @login_required
@@ -266,10 +212,6 @@ def dashboard():
     )
 
 
-# ==========================================
-# ADMIN DASHBOARD
-# ==========================================
-
 @current_app.route('/admin')
 @login_required
 @admin_required
@@ -282,10 +224,6 @@ def admin_dashboard():
         packages=packages
     )
 
-
-# ==========================================
-# ADD PACKAGE
-# ==========================================
 
 @current_app.route(
     '/admin/package/add',
@@ -328,10 +266,6 @@ def admin_package_add():
     )
 
 
-# ==========================================
-# EDIT PACKAGE
-# ==========================================
-
 @current_app.route(
     '/admin/package/edit/<int:id>',
     methods=['GET', 'POST']
@@ -369,10 +303,6 @@ def admin_package_edit(id):
     )
 
 
-# ==========================================
-# DELETE PACKAGE
-# ==========================================
-
 @current_app.route(
     '/admin/package/delete/<int:id>',
     methods=['POST']
@@ -397,10 +327,6 @@ def admin_package_delete(id):
     )
 
 
-# ==========================================
-# ORDER PAGE
-# ==========================================
-
 @current_app.route('/order/<int:package_id>')
 @login_required
 def order(package_id):
@@ -419,10 +345,6 @@ def order(package_id):
         package=paket
     )
 
-
-# ==========================================
-# CHECKOUT
-# ==========================================
 
 @current_app.route(
     '/checkout/<int:package_id>',
@@ -446,10 +368,6 @@ def checkout(package_id):
         'phone_number'
     )
 
-    # ==========================================
-    # CREATE TRANSACTION
-    # ==========================================
-
     transaksi_baru = Transaction(
         user_id=current_user.id,
         package_id=paket.id,
@@ -461,10 +379,6 @@ def checkout(package_id):
 
     db.session.add(transaksi_baru)
     db.session.commit()
-
-    # ==========================================
-    # PAYLOAD N8N
-    # ==========================================
 
     payload = {
         "title": paket.name,
@@ -479,10 +393,6 @@ def checkout(package_id):
             json=payload,
             allow_redirects=False
         )
-
-        # ==========================================
-        # REDIRECT
-        # ==========================================
 
         if response.status_code in (
             301,
@@ -499,10 +409,6 @@ def checkout(package_id):
             if checkout_url:
 
                 return redirect(checkout_url)
-
-        # ==========================================
-        # JSON URL
-        # ==========================================
 
         if response.status_code == 200:
 
@@ -532,10 +438,6 @@ def checkout(package_id):
         """, 500
 
 
-# ==========================================
-# PAYMENT SUCCESS WEBHOOK
-# ==========================================
-
 @current_app.route(
     '/api/payment-success',
     methods=['POST']
@@ -563,10 +465,6 @@ def payment_success():
             "message": "Transaction not found"
         }), 404
 
-    # ==========================================
-    # ALREADY PAID
-    # ==========================================
-
     if transaksi.status == 'paid':
 
         return jsonify({
@@ -576,15 +474,7 @@ def payment_success():
 
     try:
 
-        # ==========================================
-        # UPDATE STATUS
-        # ==========================================
-
         transaksi.status = 'paid'
-
-        # ==========================================
-        # CREATE VOUCHER
-        # ==========================================
 
         kode_baru = generate_wifi_code()
 
@@ -610,31 +500,58 @@ def payment_success():
             "status": "error",
             "message": str(e)
         }), 500
-        return jsonify({"status": "error", "message": str(e)}), 500
-    
-    
-    
-@app.route('/transactions')
+
+
+@current_app.route('/transactions')
 @login_required
 def transactions():
-    # Ambil semua riwayat transaksi untuk user yang sedang login
-    transaksi_user = Transaction.query.filter_by(user_id=current_user.id).order_by(Transaction.id.desc()).all()
-    return render_template('transactions.html', transactions=transaksi_user)
+
+    transaksi_user = Transaction.query.filter_by(
+        user_id=current_user.id
+    ).order_by(
+        Transaction.id.desc()
+    ).all()
+
+    return render_template(
+        'transactions.html',
+        transactions=transaksi_user
+    )
 
 
-@app.route('/packages')
+@current_app.route('/packages')
 @login_required
 def browse_packages():
-    # Mengambil semua paket yang tersedia dari database
-    available_packages = Package.query.all()
-    return render_template('packages.html', packages=available_packages)
 
-@app.route('/vouchers')
+    available_packages = Package.query.all()
+
+    return render_template(
+        'packages.html',
+        packages=available_packages
+    )
+
+
+@current_app.route('/vouchers')
 @login_required
 def vouchers():
-    # Mengambil semua voucher yang transaksinya dimiliki oleh user yang sedang login
-    user_vouchers = Voucher.query.join(Transaction).filter(
+
+    user_vouchers = Voucher.query.join(
+        Transaction
+    ).filter(
         Transaction.user_id == current_user.id
-    ).order_by(Voucher.id.desc()).all()
-    
-    return render_template('vouchers.html', vouchers=user_vouchers)
+    ).order_by(
+        Voucher.id.desc()
+    ).all()
+
+    return render_template(
+        'vouchers.html',
+        vouchers=user_vouchers
+    )
+
+@current_app.route('/account')
+@login_required
+def account():
+
+    return render_template(
+        'account.html',
+        user=current_user
+    )
