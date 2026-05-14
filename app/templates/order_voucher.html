@@ -1,55 +1,268 @@
 {% extends "base.html" %}
 
-{% block title %}Checkout Voucher | NexaNet{% endblock %}
+{% block title %}Checkout Voucher | BTN Net{% endblock %}
 
 {% block content %}
-<div class="relative min-h-screen flex items-center justify-center px-6 py-20 overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-slate-950 via-indigo-950 to-slate-950"></div>
-    <div class="absolute top-0 left-0 w-[500px] h-[500px] bg-cyan-500/10 blur-[140px] rounded-full"></div>
+<div class="relative min-h-screen flex items-center justify-center px-6 py-20 overflow-hidden bg-[#0f1115]">
 
+    <!-- BACKGROUND -->
+    <div class="absolute inset-0 overflow-hidden">
+
+        <!-- MAIN GRADIENT -->
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(239,68,68,0.08),transparent_25%),radial-gradient(circle_at_bottom_left,rgba(59,130,246,0.05),transparent_30%)]">
+        </div>
+
+        <!-- GRID -->
+        <div
+            class="absolute inset-0 opacity-[0.05]"
+            style="
+                background-image:
+                linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px);
+                background-size: 56px 56px;
+            ">
+        </div>
+
+        <!-- NETWORK LINES -->
+        <svg
+            class="absolute inset-0 w-full h-full opacity-[0.08]"
+            xmlns="http://www.w3.org/2000/svg">
+
+            <line x1="10%" y1="20%" x2="40%" y2="40%"
+                  stroke="rgba(239,68,68,0.35)"
+                  stroke-width="1"/>
+
+            <line x1="40%" y1="40%" x2="70%" y2="25%"
+                  stroke="rgba(239,68,68,0.25)"
+                  stroke-width="1"/>
+
+            <line x1="70%" y1="25%" x2="90%" y2="45%"
+                  stroke="rgba(239,68,68,0.2)"
+                  stroke-width="1"/>
+
+            <line x1="20%" y1="75%" x2="50%" y2="60%"
+                  stroke="rgba(255,255,255,0.08)"
+                  stroke-width="1"/>
+
+            <line x1="50%" y1="60%" x2="80%" y2="80%"
+                  stroke="rgba(255,255,255,0.08)"
+                  stroke-width="1"/>
+
+            <!-- NODES -->
+            <circle cx="40%" cy="40%" r="4" fill="rgba(239,68,68,0.5)"/>
+            <circle cx="70%" cy="25%" r="3" fill="rgba(239,68,68,0.4)"/>
+            <circle cx="50%" cy="60%" r="3" fill="rgba(255,255,255,0.2)"/>
+
+        </svg>
+
+        <!-- SOFT GLOW -->
+        <div class="absolute top-[-120px] right-[-120px] w-[420px] h-[420px] bg-red-500/10 rounded-full blur-[140px] animate-pulse">
+        </div>
+
+        <div class="absolute bottom-[-150px] left-[-150px] w-[380px] h-[380px] bg-indigo-500/10 rounded-full blur-[140px] animate-pulse">
+        </div>
+
+        <!-- FLOATING BLUR -->
+        <div class="absolute top-[22%] left-[15%] w-24 h-24 rounded-full bg-red-500/[0.06] blur-3xl animate-bounce">
+        </div>
+
+        <div class="absolute bottom-[18%] right-[12%] w-28 h-28 rounded-full bg-sky-500/[0.05] blur-3xl animate-pulse">
+        </div>
+
+    </div>
+
+    <!-- CONTENT -->
     <div class="relative z-10 w-full max-w-lg">
-        <div class="premium-card rounded-[40px] p-10 backdrop-blur-2xl border border-white/10">
-            <div class="text-center mb-8">
-                <div class="w-20 h-20 rounded-3xl bg-gradient-to-br from-indigo-600 to-cyan-500 flex items-center justify-center shadow-glow mx-auto mb-6">
-                    <i data-lucide="ticket" class="w-10 h-10 text-white"></i>
+
+        <!-- CARD -->
+        <div class="group rounded-[36px] border border-white/10 bg-white/[0.03] backdrop-blur-2xl p-10 shadow-2xl transition-all duration-500 hover:-translate-y-1 hover:border-red-500/20 hover:shadow-[0_20px_50px_rgba(239,68,68,0.12)] overflow-hidden">
+
+            <!-- HOVER GLOW -->
+            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-700">
+
+                <div class="absolute top-[-80px] right-[-80px] w-52 h-52 bg-red-500/10 rounded-full blur-3xl">
                 </div>
-                <h2 class="text-3xl font-black text-white">Konfirmasi Pesanan</h2>
-                <p class="text-slate-400 mt-2">Paket: <span class="text-cyan-400 font-bold">{{ package.name }}</span> ({{ package.speed }})</p>
+
             </div>
 
-            <form action="{{ url_for('checkout', package_id=package.id) }}" method="POST" class="space-y-6">
+            <!-- HEADER -->
+            <div class="relative z-10 text-center mb-10">
+
+                <!-- ICON -->
+                <div class="w-20 h-20 rounded-3xl bg-red-500/10 border border-red-500/20 flex items-center justify-center mx-auto mb-6 shadow-[0_0_25px_rgba(239,68,68,0.08)]">
+
+                    <i data-lucide="ticket" class="w-10 h-10 text-red-400"></i>
+
+                </div>
+
+                <!-- TITLE -->
+                <h2 class="text-3xl font-black tracking-tight text-white">
+
+                    Complete Your Purchase
+
+                </h2>
+
+                <!-- PACKAGE -->
+                <p class="text-slate-400 mt-3 text-base">
+
+                    Package:
+                    <span class="text-red-400 font-bold">
+                        {{ package.name }}
+                    </span>
+
+                    <span class="text-slate-500">
+                        ({{ package.speed }})
+                    </span>
+
+                </p>
+
+            </div>
+
+            <!-- FORM -->
+            <form action="{{ url_for('checkout', package_id=package.id) }}" method="POST" class="relative z-10 space-y-7">
+
+                <!-- ROUTER -->
                 <div>
-                    <label class="block text-sm font-semibold text-slate-300 mb-3">Pilih Jaringan / Router Terdekat</label>
+
+                    <label class="block text-sm font-semibold text-slate-300 mb-3">
+
+                        Select Available Router
+
+                    </label>
+
                     <div class="relative">
-                        <i data-lucide="map-pin" class="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500"></i>
-                        <select name="router_location" required class="input-modern w-full h-16 rounded-2xl pl-14 pr-5 text-white appearance-none cursor-pointer">
-                            <option value="" disabled selected>-- Pilih Lokasi --</option>
-                            <option value="Router Utara (Kampus)">Router Utara (Kampus)</option>
-                            <option value="Router Selatan (Asrama)">Router Selatan (Asrama)</option>
-                            <option value="Router Barat (Kantin)">Router Barat (Kantin)</option>
-                            <option value="Warnet Utama">Warnet Utama</option>
+
+                        <!-- ICON -->
+                        <i data-lucide="map-pin"
+                           class="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500">
+                        </i>
+
+                        <!-- SELECT -->
+                        <select
+                            name="router_location"
+                            required
+                            class="w-full h-16 rounded-2xl border border-white/10 bg-white/[0.04] pl-14 pr-5 text-white appearance-none outline-none transition-all duration-300 focus:border-red-500/30 focus:bg-white/[0.06] cursor-pointer">
+
+                            <option value="" disabled selected class="bg-[#111418] text-slate-400">
+                                -- Select Router Location --
+                            </option>
+
+                            <option value="North Router (Campus)" class="bg-[#111418] text-white">
+                                North Router (Campus)
+                            </option>
+
+                            <option value="South Router (Dormitory)" class="bg-[#111418] text-white">
+                                South Router (Dormitory)
+                            </option>
+
+                            <option value="West Router (Cafeteria)" class="bg-[#111418] text-white">
+                                West Router (Cafeteria)
+                            </option>
+
+                            <option value="Main Internet Cafe" class="bg-[#111418] text-white">
+                                Main Internet Cafe
+                            </option>
+
                         </select>
+
                     </div>
+
                 </div>
 
-                <div class="glass rounded-2xl p-6 border border-white/5 space-y-3">
-                    <div class="flex justify-between text-slate-400">
-                        <span>Harga Paket</span>
-                        <span>Rp{{ "{:,.0f}".format(package.price) }}</span>
+                <!-- PRICE BOX -->
+                <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-6 space-y-4">
+
+                    <!-- PRICE -->
+                    <div class="flex items-center justify-between text-slate-400">
+
+                        <span>
+                            Package Price
+                        </span>
+
+                        <span>
+                            Rp{{ "{:,.0f}".format(package.price) }}
+                        </span>
+
                     </div>
-                    <div class="flex justify-between text-white font-bold text-lg pt-3 border-t border-white/10">
-                        <span>Total Bayar</span>
-                        <span class="text-cyan-400">Rp{{ "{:,.0f}".format(package.price) }}</span>
+
+                    <!-- TOTAL -->
+                    <div class="flex items-center justify-between pt-4 border-t border-white/10">
+
+                        <span class="text-white font-semibold text-lg">
+                            Total Payment
+                        </span>
+
+                        <span class="text-2xl font-black text-red-400">
+
+                            Rp{{ "{:,.0f}".format(package.price) }}
+
+                        </span>
+
                     </div>
+
                 </div>
 
-                <button type="submit" class="w-full h-16 rounded-2xl bg-gradient-to-r from-indigo-600 to-cyan-500 text-white font-bold text-lg shadow-glow hover:scale-[1.02] transition-all">
-                    Lanjut ke Pembayaran
+                <!-- TRUST INFO -->
+                <div class="grid grid-cols-3 gap-3">
+
+                    <!-- ITEM -->
+                    <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-center transition-all duration-300 hover:border-emerald-500/20">
+
+                        <i data-lucide="shield-check" class="w-5 h-5 text-emerald-400 mx-auto mb-2"></i>
+
+                        <p class="text-[11px] text-slate-400 leading-relaxed">
+                            Secure Payment
+                        </p>
+
+                    </div>
+
+                    <!-- ITEM -->
+                    <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-center transition-all duration-300 hover:border-amber-500/20">
+
+                        <i data-lucide="zap" class="w-5 h-5 text-amber-400 mx-auto mb-2"></i>
+
+                        <p class="text-[11px] text-slate-400 leading-relaxed">
+                            Instant Access
+                        </p>
+
+                    </div>
+
+                    <!-- ITEM -->
+                    <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-center transition-all duration-300 hover:border-sky-500/20">
+
+                        <i data-lucide="wifi" class="w-5 h-5 text-sky-400 mx-auto mb-2"></i>
+
+                        <p class="text-[11px] text-slate-400 leading-relaxed">
+                            Stable Network
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- BUTTON -->
+                <button
+                    type="submit"
+                    class="w-full h-16 rounded-2xl border border-red-500/20 bg-red-500 text-white font-bold text-lg transition-all duration-300 hover:bg-red-600 hover:scale-[1.01] hover:shadow-[0_0_30px_rgba(239,68,68,0.25)]">
+
+                    Continue to Payment
+
                 </button>
-                
-                <a href="/packages" class="block text-center text-slate-500 hover:text-white transition-all text-sm">Batal dan Kembali</a>
+
+                <!-- CANCEL -->
+                <a
+                    href="/packages"
+                    class="block text-center text-slate-500 hover:text-white transition-all text-sm">
+
+                    Cancel & Return
+
+                </a>
+
             </form>
+
         </div>
+
     </div>
+
 </div>
 {% endblock %}
