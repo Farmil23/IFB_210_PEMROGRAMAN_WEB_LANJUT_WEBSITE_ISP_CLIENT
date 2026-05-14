@@ -1,51 +1,418 @@
-<aside class="w-[280px] min-h-screen bg-black text-white flex flex-col flex-shrink-0">
-    <div class="h-[90px] px-8 flex items-center border-b border-white/10">
+<aside class="
+    w-[300px]
+    min-h-screen
+    bg-[#d9d9dd]
+    border-r
+    border-black/5
+    flex
+    flex-col
+    flex-shrink-0
+">
+
+    <!-- TOP -->
+    <div class="
+        h-[95px]
+        px-8
+        flex
+        items-center
+        border-b
+        border-black/5
+        bg-[#e4e4e7]
+    ">
+
         <div>
-            <h1 class="text-2xl font-black text-white">BTN<span class="text-red-600">Net</span></h1>
-            <p class="text-[10px] text-gray-500 uppercase tracking-widest mt-1">Enterprise ISP</p>
+
+            <h1 class="
+                text-3xl
+                font-black
+                leading-none
+                text-zinc-900
+            ">
+                BTN<span class="text-red-500">Net</span>
+            </h1>
+
+            <p class="
+                text-[10px]
+                text-zinc-500
+                uppercase
+                tracking-[0.35em]
+                mt-2
+                font-bold
+            ">
+                Enterprise ISP
+            </p>
+
         </div>
+
     </div>
 
-    <div class="flex-1 px-5 py-8 space-y-2">
-        <p class="text-[10px] text-gray-600 uppercase font-bold px-4 mb-4 tracking-widest">Main Menu</p>
-        
-        <nav class="space-y-1">
-            <a href="{{ url_for('dashboard') }}" 
-               class="flex items-center px-4 py-3 rounded-xl transition-all {{ 'bg-red-600 text-white shadow-lg' if request.endpoint == 'dashboard' else 'text-gray-400 hover:bg-white/10 hover:text-white' }}">
-                <span class="mr-3">📊</span> 
-                <span class="font-semibold">Dashboard</span>
+    <!-- MENU -->
+    <div class="
+        flex-1
+        px-6
+        py-8
+    ">
+
+        <p class="
+            text-[11px]
+            text-zinc-500
+            uppercase
+            font-black
+            px-4
+            mb-5
+            tracking-[0.3em]
+        ">
+            Main Menu
+        </p>
+
+        <nav class="space-y-3">
+
+            <!-- DASHBOARD -->
+            <a href="{{ url_for('dashboard') }}"
+               class="
+                    flex
+                    items-center
+                    gap-4
+                    px-5
+                    py-4
+                    rounded-2xl
+                    transition-all
+                    duration-300
+                    border
+                    {{ 'bg-red-500/10 text-zinc-900 border-red-500/20' if request.endpoint == 'dashboard' else 'bg-[#e4e4e7] border-black/5 text-zinc-700 hover:bg-white' }}
+               ">
+
+                <div class="
+                    w-11
+                    h-11
+                    rounded-xl
+                    flex
+                    items-center
+                    justify-center
+                    {{ 'bg-red-500/10 text-red-500' if request.endpoint == 'dashboard' else 'bg-[#f1f1f3] text-zinc-500' }}
+                ">
+
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="w-5 h-5"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke="currentColor"
+                         stroke-width="2">
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M3 13h8V3H3v10zm10 8h8V11h-8v10zm0-18v4h8V3h-8zM3 21h8v-6H3v6z"/>
+                    </svg>
+
+                </div>
+
+                <div>
+
+                    <p class="font-semibold text-[15px]">
+                        Dashboard
+                    </p>
+
+                    <p class="
+                        text-xs
+                        {{ 'text-red-500' if request.endpoint == 'dashboard' else 'text-zinc-400' }}
+                    ">
+                        Main overview
+                    </p>
+
+                </div>
+
             </a>
 
-            <a href="{{ url_for('browse_packages') }}" 
-               class="flex items-center px-4 py-3 rounded-xl transition-all {{ 'bg-red-600 text-white shadow-lg' if request.endpoint == 'browse_packages' else 'text-gray-400 hover:bg-white/10 hover:text-white' }}">
-                <span class="mr-3">🌐</span> 
-                <span>Packages</span>
+            <!-- PACKAGES -->
+            <a href="{{ url_for('browse_packages') }}"
+               class="
+                    flex
+                    items-center
+                    gap-4
+                    px-5
+                    py-4
+                    rounded-2xl
+                    transition-all
+                    duration-300
+                    border
+                    {{ 'bg-red-500/10 text-zinc-900 border-red-500/20' if request.endpoint == 'browse_packages' else 'bg-[#e4e4e7] border-black/5 text-zinc-700 hover:bg-white' }}
+               ">
+
+                <div class="
+                    w-11
+                    h-11
+                    rounded-xl
+                    flex
+                    items-center
+                    justify-center
+                    {{ 'bg-red-500/10 text-red-500' if request.endpoint == 'browse_packages' else 'bg-[#f1f1f3] text-zinc-500' }}
+                ">
+
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="w-5 h-5"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke="currentColor"
+                         stroke-width="2">
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-14L4 7m8 4v10"/>
+                    </svg>
+
+                </div>
+
+                <div>
+
+                    <p class="font-semibold text-[15px]">
+                        Packages
+                    </p>
+
+                    <p class="
+                        text-xs
+                        {{ 'text-red-500' if request.endpoint == 'browse_packages' else 'text-zinc-400' }}
+                    ">
+                        Internet plans
+                    </p>
+
+                </div>
+
             </a>
 
-            <a href="{{ url_for('transactions') }}" 
-               class="flex items-center px-4 py-3 rounded-xl transition-all {{ 'bg-red-600 text-white shadow-lg' if request.endpoint == 'transactions' else 'text-gray-400 hover:bg-white/10 hover:text-white' }}">
-                <span class="mr-3">💵</span> 
-                <span>Transactions</span>
+            <!-- TRANSACTIONS -->
+            <a href="{{ url_for('transactions') }}"
+               class="
+                    flex
+                    items-center
+                    gap-4
+                    px-5
+                    py-4
+                    rounded-2xl
+                    transition-all
+                    duration-300
+                    border
+                    {{ 'bg-red-500/10 text-zinc-900 border-red-500/20' if request.endpoint == 'transactions' else 'bg-[#e4e4e7] border-black/5 text-zinc-700 hover:bg-white' }}
+               ">
+
+                <div class="
+                    w-11
+                    h-11
+                    rounded-xl
+                    flex
+                    items-center
+                    justify-center
+                    {{ 'bg-red-500/10 text-red-500' if request.endpoint == 'transactions' else 'bg-[#f1f1f3] text-zinc-500' }}
+                ">
+
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="w-5 h-5"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke="currentColor"
+                         stroke-width="2">
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M17 9V7a5 5 0 00-10 0v2m-2 0h14l1 11H4L5 9z"/>
+                    </svg>
+
+                </div>
+
+                <div>
+
+                    <p class="font-semibold text-[15px]">
+                        Transactions
+                    </p>
+
+                    <p class="
+                        text-xs
+                        {{ 'text-red-500' if request.endpoint == 'transactions' else 'text-zinc-400' }}
+                    ">
+                        Payment history
+                    </p>
+
+                </div>
+
             </a>
 
-            <a href="{{ url_for('vouchers') }}" 
-               class="flex items-center px-4 py-3 rounded-xl transition-all {{ 'bg-red-600 text-white shadow-lg' if request.endpoint == 'vouchers' else 'text-gray-400 hover:bg-white/10 hover:text-white' }}">
-                <span class="mr-3">🎟️</span> 
-                <span>Vouchers</span>
+            <!-- VOUCHERS -->
+            <a href="{{ url_for('vouchers') }}"
+               class="
+                    flex
+                    items-center
+                    gap-4
+                    px-5
+                    py-4
+                    rounded-2xl
+                    transition-all
+                    duration-300
+                    border
+                    {{ 'bg-red-500/10 text-zinc-900 border-red-500/20' if request.endpoint == 'vouchers' else 'bg-[#e4e4e7] border-black/5 text-zinc-700 hover:bg-white' }}
+               ">
+
+                <div class="
+                    w-11
+                    h-11
+                    rounded-xl
+                    flex
+                    items-center
+                    justify-center
+                    {{ 'bg-red-500/10 text-red-500' if request.endpoint == 'vouchers' else 'bg-[#f1f1f3] text-zinc-500' }}
+                ">
+
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="w-5 h-5"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke="currentColor"
+                         stroke-width="2">
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M4 8h16v8H4z"/>
+                    </svg>
+
+                </div>
+
+                <div>
+
+                    <p class="font-semibold text-[15px]">
+                        Vouchers
+                    </p>
+
+                    <p class="
+                        text-xs
+                        {{ 'text-red-500' if request.endpoint == 'vouchers' else 'text-zinc-400' }}
+                    ">
+                        Active access
+                    </p>
+
+                </div>
+
             </a>
 
-            <a href="{{ url_for('account') }}" 
-               class="flex items-center px-4 py-3 rounded-xl transition-all {{ 'bg-red-600 text-white shadow-lg' if request.endpoint == 'account' else 'text-gray-400 hover:bg-white/10 hover:text-white' }}">
-                <span class="mr-3">👤</span> 
-                <span>Account</span>
+            <!-- ACCOUNT -->
+            <a href="{{ url_for('account') }}"
+               class="
+                    flex
+                    items-center
+                    gap-4
+                    px-5
+                    py-4
+                    rounded-2xl
+                    transition-all
+                    duration-300
+                    border
+                    {{ 'bg-red-500/10 text-zinc-900 border-red-500/20' if request.endpoint == 'account' else 'bg-[#e4e4e7] border-black/5 text-zinc-700 hover:bg-white' }}
+               ">
+
+                <div class="
+                    w-11
+                    h-11
+                    rounded-xl
+                    flex
+                    items-center
+                    justify-center
+                    {{ 'bg-red-500/10 text-red-500' if request.endpoint == 'account' else 'bg-[#f1f1f3] text-zinc-500' }}
+                ">
+
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="w-5 h-5"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke="currentColor"
+                         stroke-width="2">
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M5.121 17.804A9 9 0 1118.88 17.8M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+
+                </div>
+
+                <div>
+
+                    <p class="font-semibold text-[15px]">
+                        Account
+                    </p>
+
+                    <p class="
+                        text-xs
+                        {{ 'text-red-500' if request.endpoint == 'account' else 'text-zinc-400' }}
+                    ">
+                        User profile
+                    </p>
+
+                </div>
+
             </a>
+
         </nav>
+
     </div>
 
-    <div class="p-5 border-t border-white/10">
-        <a href="{{ url_for('logout') }}" 
-           class="flex items-center justify-center w-full bg-red-600 text-white py-3 rounded-xl font-bold hover:bg-red-700 transition-all">
-            <span class="mr-2">↪</span> Logout
+    <!-- BOTTOM -->
+    <div class="
+        p-6
+        border-t
+        border-black/5
+        bg-[#e4e4e7]
+    ">
+
+        <a href="{{ url_for('logout') }}"
+           class="
+                flex
+                items-center
+                justify-between
+                px-5
+                py-4
+                rounded-2xl
+                bg-[#ececef]
+                border
+                border-black/5
+                text-zinc-800
+                hover:bg-red-500/10
+                hover:border-red-500/20
+                transition-all
+                duration-300
+           ">
+
+            <div>
+
+                <p class="font-semibold">
+                    Logout
+                </p>
+
+                <p class="
+                    text-xs
+                    text-zinc-400
+                ">
+                    Sign out account
+                </p>
+
+            </div>
+
+            <div class="
+                w-11
+                h-11
+                rounded-xl
+                bg-[#f1f1f3]
+                flex
+                items-center
+                justify-center
+                text-zinc-500
+            ">
+
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     class="w-5 h-5"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke="currentColor"
+                     stroke-width="2">
+                    <path stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1m0-10V5"/>
+                </svg>
+
+            </div>
+
         </a>
+
     </div>
+
 </aside>
