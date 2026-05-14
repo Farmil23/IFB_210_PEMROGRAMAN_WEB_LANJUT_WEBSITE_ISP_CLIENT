@@ -1,103 +1,833 @@
 {% extends "base_dashboard.html" %}
 
 {% block content %}
-<div class="flex min-h-screen bg-[#f4f5f7]">
+
+<div class="flex min-h-screen bg-[#050505] text-white overflow-hidden">
 
     {% include 'partials/sidebar.html' %}
 
     <main class="flex-1 overflow-x-hidden">
-        
-        <header class="bg-white border-b border-gray-200 py-8 px-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-            <div>
-                <p class="text-[11px] uppercase tracking-[0.3em] text-red-600 font-bold">Enterprise Customer Portal</p>
-                <h1 class="mt-2 text-4xl font-black text-black">
-                    Welcome back, <span class="text-red-600">{{ current_user.username }}</span>
-                </h1>
-                <p class="text-gray-500 mt-1">Monitor your internet services and network performance.</p>
+
+        <!-- HEADER -->
+        <header class="
+            sticky
+            top-0
+            z-30
+            bg-black/50
+            backdrop-blur-2xl
+            border-b
+            border-white/10
+            px-10
+            py-5
+        ">
+
+            <div class="
+                flex
+                flex-col
+                lg:flex-row
+                lg:items-center
+                lg:justify-between
+                gap-5
+            ">
+
+                <!-- LEFT -->
+                <div>
+
+                    <p class="
+                        text-[10px]
+                        uppercase
+                        tracking-[0.4em]
+                        text-red-500
+                        font-bold
+                    ">
+                        Network Control Center
+                    </p>
+
+                    <h1 class="
+                        text-3xl
+                        font-black
+                        mt-2
+                        text-white
+                    ">
+                        BTN Net Enterprise Dashboard
+                    </h1>
+
+                    <div class="
+                        flex
+                        items-center
+                        gap-3
+                        mt-3
+                        text-sm
+                        text-zinc-400
+                    ">
+
+                        <span>
+                            Logged in as
+                            <span class="text-white font-semibold">
+                                {{ current_user.username }}
+                            </span>
+                        </span>
+
+                        <span class="w-1 h-1 bg-zinc-700 rounded-full"></span>
+
+                        <span>
+                            Enterprise Customer
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <!-- RIGHT -->
+                <div class="flex items-center gap-4">
+
+                    <!-- STATUS -->
+                    <div class="
+                        flex
+                        items-center
+                        gap-3
+                        px-5
+                        py-3
+                        rounded-2xl
+                        border
+                        border-green-500/20
+                        bg-green-500/10
+                        backdrop-blur-xl
+                    ">
+
+                        <span class="
+                            w-2
+                            h-2
+                            rounded-full
+                            bg-green-500
+                            animate-pulse
+                        "></span>
+
+                        <span class="
+                            text-green-400
+                            text-sm
+                            font-semibold
+                        ">
+                            Network Stable
+                        </span>
+
+                    </div>
+
+                    <!-- BUTTON -->
+                    <a href="{{ url_for('browse_packages') }}"
+                       class="
+                            px-7
+                            py-3
+                            rounded-2xl
+                            bg-gradient-to-r
+                            from-red-600
+                            to-red-500
+                            hover:from-red-500
+                            hover:to-red-400
+                            shadow-lg
+                            shadow-red-500/20
+                            transition-all
+                            duration-300
+                            hover:-translate-y-1
+                            active:scale-95
+                            font-bold
+                       ">
+                        Upgrade Package
+                    </a>
+
+                </div>
+
             </div>
 
-            <div class="flex items-center gap-3 relative z-10">
-                <div class="bg-green-50 text-green-600 px-4 py-2 rounded-xl border border-green-100 flex items-center font-bold text-sm">
-                    <span class="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span> Network Stable
-                </div>
-                <a href="{{ url_for('browse_packages') }}" 
-                   class="bg-red-600 text-white px-6 py-2 rounded-xl font-bold shadow-lg shadow-red-600/20 hover:bg-red-700 transition cursor-pointer">
-                    Upgrade Package
-                </a>
-            </div>
         </header>
 
         <div class="p-10 space-y-8">
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-white p-7 rounded-2xl border border-gray-100 shadow-sm relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-full h-1 bg-red-600"></div>
-                    <p class="text-[10px] uppercase font-bold text-gray-400">Active Plan</p>
-                    <h2 class="text-4xl font-black mt-4">100 <span class="text-red-600 text-lg italic">Mbps</span></h2>
+
+            <!-- HERO SECTION -->
+            <div class="
+                relative
+                overflow-hidden
+                rounded-[36px]
+                border
+                border-white/10
+                bg-[#121212]
+                p-8
+                shadow-[0_0_80px_rgba(0,0,0,0.45)]
+            ">
+
+                <!-- AMBIENT -->
+                <div class="
+                    absolute
+                    -bottom-32
+                    -left-32
+                    w-[420px]
+                    h-[420px]
+                    bg-red-500/10
+                    blur-3xl
+                    rounded-full
+                "></div>
+
+                <div class="
+                    relative
+                    z-10
+                    grid
+                    grid-cols-1
+                    xl:grid-cols-[1.1fr_0.9fr]
+                    gap-8
+                    items-start
+                ">
+
+                    <!-- LEFT -->
+                    <div class="flex flex-col justify-between h-full">
+
+                        <div>
+
+                            <p class="
+                                text-[13px]
+                                uppercase
+                                tracking-[0.45em]
+                                text-red-500
+                                font-bold
+                            ">
+                                Dedicated Fiber Infrastructure
+                            </p>
+
+                            <div class="
+                                flex
+                                items-end
+                                gap-4
+                                mt-8
+                                flex-wrap
+                            ">
+
+                                <h1 class="
+                                    text-6xl
+                                    xl:text-7xl
+                                    font-black
+                                    leading-none
+                                    text-white
+                                ">
+                                    940
+                                </h1>
+
+                                <span class="
+                                    text-red-500
+                                    text-3xl
+                                    italic
+                                    font-black
+                                    mb-2
+                                ">
+                                    Mbps
+                                </span>
+
+                            </div>
+
+                            <p class="
+                                mt-8
+                                text-zinc-300
+                                text-lg
+                                leading-relaxed
+                                max-w-2xl
+                            ">
+                                Real-time enterprise network monitoring with stable infrastructure performance and uptime analytics.
+                            </p>
+
+                        </div>
+
+                        <!-- STATS -->
+                        <div class="
+                            grid
+                            grid-cols-3
+                            gap-6
+                            mt-12
+                        ">
+
+                            <div>
+
+                                <p class="text-zinc-400 text-sm">
+                                    Uptime
+                                </p>
+
+                                <h3 class="
+                                    text-4xl
+                                    font-black
+                                    mt-3
+                                    text-white
+                                ">
+                                    99.9%
+                                </h3>
+
+                                <div class="
+                                    w-12
+                                    h-[3px]
+                                    bg-red-500
+                                    rounded-full
+                                    mt-4
+                                "></div>
+
+                            </div>
+
+                            <div class="
+                                border-l
+                                border-white/10
+                                pl-6
+                            ">
+
+                                <p class="text-zinc-400 text-sm">
+                                    Latency
+                                </p>
+
+                                <h3 class="
+                                    text-4xl
+                                    font-black
+                                    mt-3
+                                    text-white
+                                ">
+                                    5ms
+                                </h3>
+
+                                <div class="
+                                    w-12
+                                    h-[3px]
+                                    bg-red-500
+                                    rounded-full
+                                    mt-4
+                                "></div>
+
+                            </div>
+
+                            <div class="
+                                border-l
+                                border-white/10
+                                pl-6
+                            ">
+
+                                <p class="text-zinc-400 text-sm">
+                                    Active Devices
+                                </p>
+
+                                <h3 class="
+                                    text-4xl
+                                    font-black
+                                    mt-3
+                                    text-white
+                                ">
+                                    12
+                                </h3>
+
+                                <div class="
+                                    w-12
+                                    h-[3px]
+                                    bg-red-500
+                                    rounded-full
+                                    mt-4
+                                "></div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- RIGHT -->
+                    <div class="
+                        grid
+                        grid-cols-2
+                        gap-5
+                    ">
+
+                        <!-- CARD -->
+                        <div class="
+                            rounded-[28px]
+                            border
+                            border-blue-500/20
+                            bg-[#111111]
+                            p-6
+                            h-[240px]
+                            flex
+                            flex-col
+                            justify-between
+                        ">
+
+                            <div class="flex items-center justify-between">
+
+                                <p class="
+                                    text-zinc-400
+                                    uppercase
+                                    tracking-[0.2em]
+                                    text-xs
+                                    font-bold
+                                ">
+                                    Transactions
+                                </p>
+
+                                <div class="
+                                    w-11
+                                    h-11
+                                    rounded-2xl
+                                    bg-blue-500/10
+                                    flex
+                                    items-center
+                                    justify-center
+                                    text-blue-400
+                                ">
+                                    ↗
+                                </div>
+
+                            </div>
+
+                            <h2 class="
+                                text-6xl
+                                font-black
+                                text-blue-400
+                            ">
+                                {{ transactions|length if transactions else '1' }}
+                            </h2>
+
+                            <div class="
+                                pt-5
+                                border-t
+                                border-white/10
+                            ">
+
+                                <p class="
+                                    text-sm
+                                    text-zinc-300
+                                    leading-relaxed
+                                ">
+                                    Last payment 2 days ago
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <!-- CARD -->
+                        <div class="
+                            rounded-[28px]
+                            border
+                            border-green-500/20
+                            bg-[#111111]
+                            p-6
+                            h-[240px]
+                            flex
+                            flex-col
+                            justify-between
+                        ">
+
+                            <div class="flex items-center justify-between">
+
+                                <p class="
+                                    text-zinc-400
+                                    uppercase
+                                    tracking-[0.2em]
+                                    text-xs
+                                    font-bold
+                                ">
+                                    Connection
+                                </p>
+
+                                <div class="
+                                    w-11
+                                    h-11
+                                    rounded-2xl
+                                    bg-green-500/10
+                                    flex
+                                    items-center
+                                    justify-center
+                                    text-green-400
+                                ">
+                                    ≋
+                                </div>
+
+                            </div>
+
+                            <h2 class="
+                                text-5xl
+                                font-black
+                                text-green-400
+                            ">
+                                Stable
+                            </h2>
+
+                            <div class="
+                                pt-5
+                                border-t
+                                border-white/10
+                            ">
+
+                                <p class="
+                                    text-sm
+                                    text-zinc-300
+                                    leading-relaxed
+                                ">
+                                    99.9% uptime monitoring
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <!-- CARD -->
+                        <div class="
+                            rounded-[28px]
+                            border
+                            border-purple-500/20
+                            bg-[#111111]
+                            p-6
+                            h-[240px]
+                            flex
+                            flex-col
+                            justify-between
+                        ">
+
+                            <div class="flex items-center justify-between">
+
+                                <p class="
+                                    text-zinc-400
+                                    uppercase
+                                    tracking-[0.2em]
+                                    text-xs
+                                    font-bold
+                                ">
+                                    Active Voucher
+                                </p>
+
+                                <div class="
+                                    w-11
+                                    h-11
+                                    rounded-2xl
+                                    bg-purple-500/10
+                                    flex
+                                    items-center
+                                    justify-center
+                                    text-purple-400
+                                ">
+                                    ◈
+                                </div>
+
+                            </div>
+
+                            <h2 class="
+                                text-6xl
+                                font-black
+                                text-purple-400
+                            ">
+                                12
+                            </h2>
+
+                            <div class="
+                                pt-5
+                                border-t
+                                border-white/10
+                            ">
+
+                                <p class="
+                                    text-sm
+                                    text-zinc-300
+                                    leading-relaxed
+                                ">
+                                    Customer active access
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <!-- CARD -->
+                        <div class="
+                            rounded-[28px]
+                            border
+                            border-red-500/20
+                            bg-[#111111]
+                            p-6
+                            h-[240px]
+                            flex
+                            flex-col
+                            justify-between
+                        ">
+
+                            <div class="flex items-center justify-between">
+
+                                <p class="
+                                    text-zinc-400
+                                    uppercase
+                                    tracking-[0.2em]
+                                    text-xs
+                                    font-bold
+                                ">
+                                    Fiber Package
+                                </p>
+
+                                <div class="
+                                    w-11
+                                    h-11
+                                    rounded-2xl
+                                    bg-red-500/10
+                                    flex
+                                    items-center
+                                    justify-center
+                                    text-red-400
+                                ">
+                                    ⚡
+                                </div>
+
+                            </div>
+
+                            <div class="
+                                flex
+                                items-end
+                                gap-2
+                                flex-wrap
+                            ">
+
+                                <h2 class="
+                                    text-4xl
+                                    xl:text-5xl
+                                    font-black
+                                    text-red-400
+                                    leading-none
+                                ">
+                                    100
+                                </h2>
+
+                                <span class="
+                                    text-red-400
+                                    text-xl
+                                    xl:text-2xl
+                                    italic
+                                    font-black
+                                    leading-none
+                                    mb-1
+                                ">
+                                    Mbps
+                                </span>
+
+                            </div>
+
+                            <div class="
+                                pt-5
+                                border-t
+                                border-white/10
+                            ">
+
+                                <p class="
+                                    text-sm
+                                    text-zinc-300
+                                    leading-relaxed
+                                ">
+                                    Dedicated enterprise network
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
                 </div>
 
-                <div class="bg-white p-7 rounded-2xl border border-gray-100 shadow-sm">
-                    <p class="text-[10px] uppercase font-bold text-gray-400">Transactions</p>
-                    <h2 class="text-4xl font-black mt-4">{{ transactions|length if transactions else '24' }}</h2>
-                </div>
-
-                <div class="bg-white p-7 rounded-2xl border border-gray-100 shadow-sm">
-                    <p class="text-[10px] uppercase font-bold text-gray-400">Active Voucher</p>
-                    <h2 class="text-4xl font-black mt-4">12</h2>
-                </div>
-
-                <div class="bg-white p-7 rounded-2xl border border-gray-100 shadow-sm relative overflow-hidden">
-                    <p class="text-[10px] uppercase font-bold text-gray-400">Connection</p>
-                    <h2 class="text-4xl font-black mt-4 text-green-600">Stable</h2>
-                </div>
             </div>
 
-            <div class="bg-white rounded-3xl border border-gray-100 shadow-sm p-8">
-                <div class="flex justify-between items-center mb-8">
+            <!-- RECENT ACTIVITY -->
+            <div class="
+                rounded-[32px]
+                border
+                border-white/10
+                bg-[#1a1a1a]
+                p-8
+                shadow-2xl
+                shadow-black/20
+            ">
+
+                <div class="
+                    flex
+                    items-center
+                    justify-between
+                    mb-8
+                ">
+
                     <div>
-                        <p class="text-[10px] uppercase tracking-widest text-red-600 font-bold mb-1">Billing System</p>
-                        <h3 class="text-2xl font-black text-black">Recent Transactions</h3>
+
+                        <p class="
+                            text-[10px]
+                            uppercase
+                            tracking-[0.3em]
+                            text-red-500
+                            font-bold
+                            mb-2
+                        ">
+                            Activity Timeline
+                        </p>
+
+                        <h3 class="
+                            text-3xl
+                            font-black
+                            text-white
+                        ">
+                            Recent Activity
+                        </h3>
+
                     </div>
-                    <a href="{{ url_for('transactions') }}" class="px-6 py-2 border rounded-xl font-bold text-sm hover:bg-gray-50 transition">View All</a>
+
+                    <a href="{{ url_for('transactions') }}"
+                        class="
+                                inline-flex
+                                items-center
+                                justify-center
+                                px-6
+                                py-3
+                                rounded-2xl
+                                border
+                                border-white/10
+                                bg-[#2a2a2a]
+                                hover:bg-red-600
+                                hover:border-red-600
+                                transition-all
+                                duration-300
+                                font-semibold
+                                text-sm
+                        ">
+                            View All
+                        </a>
+
                 </div>
 
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left">
-                        <thead>
-                            <tr class="text-[11px] uppercase text-gray-400 border-b pb-4">
-                                <th class="pb-4 font-bold uppercase tracking-widest">Invoice</th>
-                                <th class="pb-4 font-bold uppercase tracking-widest">Package</th>
-                                <th class="pb-4 font-bold uppercase tracking-widest text-center">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-gray-50">
-                            {% if transactions %}
-                                {% for trx in transactions[:5] %}
-                                <tr class="group">
-                                    <td class="py-5 font-black text-gray-800">INV-{{ trx.id }}</td>
-                                    <td class="py-5 text-gray-500">Enterprise Fiber</td>
-                                    <td class="py-5 text-center">
-                                        <span class="{% if trx.status == 'paid' %}bg-green-100 text-green-700{% else %}bg-yellow-100 text-yellow-700{% endif %} px-4 py-1 rounded-full font-bold text-xs">
-                                            {{ trx.status|capitalize }}
-                                        </span>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            {% else %}
-                                <tr>
-                                    <td class="py-5 font-black text-gray-800">INV-202601</td>
-                                    <td class="py-5 text-gray-500">Enterprise Fiber</td>
-                                    <td class="py-5 text-center">
-                                        <span class="bg-green-100 text-green-700 px-4 py-1 rounded-full font-bold text-xs">Paid</span>
-                                    </td>
-                                </tr>
-                            {% endif %}
-                        </tbody>
-                    </table>
+                <!-- ACTIVITY ITEMS -->
+                <div class="space-y-4">
+
+                    <!-- ITEM -->
+                    <div class="
+                        flex
+                        items-center
+                        justify-between
+                        p-5
+                        rounded-3xl
+                        border
+                        border-white/10
+                        bg-[#111111]
+                        hover:border-red-500/20
+                        transition-all
+                        duration-300
+                    ">
+
+                        <div class="flex items-center gap-4">
+
+                            <div class="
+                                w-14
+                                h-14
+                                rounded-2xl
+                                bg-red-500/10
+                                flex
+                                items-center
+                                justify-center
+                                text-red-400
+                                font-bold
+                            ">
+                                INV
+                            </div>
+
+                            <div>
+
+                                <h4 class="
+                                    text-lg
+                                    font-bold
+                                    text-white
+                                ">
+                                    Enterprise Fiber Payment
+                                </h4>
+
+                                <p class="
+                                    text-sm
+                                    text-zinc-400
+                                    mt-1
+                                ">
+                                    Invoice #INV-20 has been completed
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <span class="
+                            text-sm
+                            text-zinc-500
+                        ">
+                            2 hours ago
+                        </span>
+
+                    </div>
+
+                    <!-- ITEM -->
+                    <div class="
+                        flex
+                        items-center
+                        justify-between
+                        p-5
+                        rounded-3xl
+                        border
+                        border-white/10
+                        bg-[#111111]
+                        hover:border-green-500/20
+                        transition-all
+                        duration-300
+                    ">
+
+                        <div class="flex items-center gap-4">
+
+                            <div class="
+                                w-14
+                                h-14
+                                rounded-2xl
+                                bg-green-500/10
+                                flex
+                                items-center
+                                justify-center
+                                text-green-400
+                                font-bold
+                            ">
+                                NET
+                            </div>
+
+                            <div>
+
+                                <h4 class="
+                                    text-lg
+                                    font-bold
+                                    text-white
+                                ">
+                                    Network Connection Stable
+                                </h4>
+
+                                <p class="
+                                    text-sm
+                                    text-zinc-400
+                                    mt-1
+                                ">
+                                    Uptime monitoring running normally
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <span class="
+                            text-sm
+                            text-zinc-500
+                        ">
+                            5 min ago
+                        </span>
+
+                    </div>
+
                 </div>
+
             </div>
 
         </div>
+
     </main>
+
 </div>
+
 {% endblock %}
