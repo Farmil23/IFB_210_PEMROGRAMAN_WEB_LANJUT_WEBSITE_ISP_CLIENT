@@ -1,6 +1,6 @@
 {% extends "base_dashboard.html" %}
 
-{% block title %}Form Paket - BTN Net{% endblock %}
+{% block title %}{{ 'Edit Paket' if package else 'Tambah Paket' }} - BTN Net{% endblock %}
 
 {% block content %}
 <div class="flex min-h-screen bg-[#f4f5f7] text-zinc-900 overflow-hidden">
@@ -8,72 +8,195 @@
     {% include 'partials/sidebar.html' %}
 
     <main class="flex-1 overflow-y-auto h-screen relative">
-        <header class="
-            sticky
-            top-0
-            z-30
-            bg-white/80
-            backdrop-blur-xl
-            border-b
-            border-black/5
-            px-10
-            py-6
-        ">
-            <h1 class="text-2xl font-black text-zinc-900">Admin Panel</h1>
-            <p class="text-sm text-zinc-500 mt-1">BTN Net Enterprise System Configuration</p>
+
+        <!-- PAGE HEADER -->
+        <header class="sticky top-0 z-30 bg-white/80 backdrop-blur-xl border-b border-black/5 px-10 py-6">
+            <div class="flex items-center gap-4">
+                <a href="{{ url_for('admin_dashboard') }}"
+                   class="w-9 h-9 flex items-center justify-center rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-500 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+                    </svg>
+                </a>
+                <div>
+                    <h1 class="text-2xl font-black text-zinc-900">
+                        {{ 'Edit Paket' if package else 'Tambah Paket Baru' }}
+                    </h1>
+                    <p class="text-sm text-zinc-500 mt-0.5">BTN Net &mdash; Internet Package Management</p>
+                </div>
+            </div>
         </header>
 
-        <div class="p-10 max-w-[1400px] mx-auto flex justify-center">
-            <div class="card bg-white rounded-2xl shadow-sm border border-black/5" style="width: 100%; max-width: 500px; padding: 30px;">
-        <h2 style="margin-bottom: 20px;">{{ 'Edit Paket' if package else 'Tambah Paket Baru' }}</h2>
-        
-        <form method="POST">
-            <div style="margin-bottom: 15px; text-align: left;">
-                <label style="display: block; margin-bottom: 5px;">Nama Paket</label>
-                <input type="text" name="name" value="{{ package.name if package else '' }}" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" required placeholder="Contoh: Paket Bulanan Premium">
-            </div>
-            
-            <div style="margin-bottom: 15px; text-align: left;">
-                <label style="display: block; margin-bottom: 5px;">Tipe Paket</label>
-                <select name="package_type" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" required>
-                    <option value="bulanan" {% if package and package.package_type == 'bulanan' %}selected{% endif %}>Langganan (Bulanan)</option>
-                    <option value="jam-jaman" {% if package and package.package_type == 'jam-jaman' %}selected{% endif %}>Voucher (Jam-jaman)</option>
-                </select>
-            </div>
-            
-            <div style="margin-bottom: 15px; text-align: left;">
-                <label style="display: block; margin-bottom: 5px;">Harga (Rp)</label>
-                <input type="number" name="price" value="{{ package.price | int if package else '' }}" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" required placeholder="Contoh: 150000">
-            </div>
-            
-            <div style="margin-bottom: 20px; text-align: left;">
-                <label style="display: block; margin-bottom: 5px;">Kecepatan</label>
-                <input type="text" name="speed" value="{{ package.speed if package else '' }}" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" required placeholder="Contoh: 20 Mbps">
-            </div>
-            
-            <div style="margin-bottom: 15px; text-align: left;" id="voucher-duration-wrap">
-                <label style="display: block; margin-bottom: 5px;">Masa berlaku voucher (jam)</label>
-                <input type="number" name="voucher_duration_hours" min="1" value="{% if package and package.voucher_duration_hours %}{{ package.voucher_duration_hours }}{% else %}8{% endif %}" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
-                <small style="color: #666;">Hanya dipakai untuk tipe Voucher (jam-jaman). Contoh: 8 = berlaku 8 jam sejak pembayaran sukses.</small>
-            </div>
-            
-            <script>
-                (function() {
-                    var sel = document.querySelector('select[name="package_type"]');
-                    var wrap = document.getElementById('voucher-duration-wrap');
-                    function toggle() {
-                        wrap.style.display = sel.value === 'jam-jaman' ? 'block' : 'none';
-                    }
-                    sel.addEventListener('change', toggle);
-                    toggle();
-                })();
-            </script>
-            
-            <button type="submit" class="btn btn-primary" style="width: 100%;">Simpan Paket</button>
-            <a href="{{ url_for('admin_dashboard') }}" style="display: block; text-align: center; margin-top: 15px; color: #555;">Batal</a>
-        </form>
+        <div class="p-10 flex justify-center">
+            <div class="w-full max-w-xl">
+
+                <!-- FORM CARD -->
+                <div class="bg-white rounded-3xl border border-black/5 shadow-sm overflow-hidden">
+
+                    <!-- RED TOP ACCENT -->
+                    <div class="h-1.5 w-full bg-gradient-to-r from-red-600 to-red-400"></div>
+
+                    <!-- CARD HEADER -->
+                    <div class="px-8 pt-7 pb-5 border-b border-black/5">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-red-500/10 text-red-500 flex items-center justify-center flex-shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-14L4 7m8 4v10"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h2 class="text-lg font-black text-zinc-900">
+                                    {{ 'Edit Paket Internet' if package else 'Paket Internet Baru' }}
+                                </h2>
+                                <p class="text-sm text-zinc-500">
+                                    {{ 'Perbarui detail paket yang sudah ada.' if package else 'Isi detail untuk membuat paket baru.' }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FORM BODY -->
+                    <form method="POST" class="px-8 py-7 space-y-6">
+
+                        <!-- NAMA PAKET -->
+                        <div class="space-y-2">
+                            <label for="f-name" class="block text-sm font-bold text-zinc-700 tracking-wide">
+                                Nama Paket <span class="text-red-500">*</span>
+                            </label>
+                            <input
+                                type="text"
+                                id="f-name"
+                                name="name"
+                                value="{{ package.name if package else '' }}"
+                                required
+                                placeholder="Contoh: Paket Fiber Premium 20 Mbps"
+                                class="w-full px-4 py-3 rounded-xl border border-zinc-200 bg-zinc-50 text-zinc-900 text-sm font-medium placeholder-zinc-400
+                                       focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent focus:bg-white transition-all"
+                            >
+                        </div>
+
+                        <!-- TIPE PAKET -->
+                        <div class="space-y-2">
+                            <label for="f-type" class="block text-sm font-bold text-zinc-700 tracking-wide">
+                                Tipe Paket <span class="text-red-500">*</span>
+                            </label>
+                            <div class="relative">
+                                <select
+                                    id="f-type"
+                                    name="package_type"
+                                    required
+                                    class="w-full appearance-none px-4 py-3 rounded-xl border border-zinc-200 bg-zinc-50 text-zinc-900 text-sm font-medium
+                                           focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent focus:bg-white transition-all cursor-pointer"
+                                >
+                                    <option value="bulanan" {% if package and package.package_type == 'bulanan' %}selected{% endif %}>
+                                        Langganan Bulanan
+                                    </option>
+                                    <option value="jam-jaman" {% if package and package.package_type == 'jam-jaman' %}selected{% endif %}>
+                                        Voucher Jam-jaman
+                                    </option>
+                                </select>
+                                <div class="pointer-events-none absolute inset-y-0 right-4 flex items-center text-zinc-400">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- HARGA -->
+                        <div class="space-y-2">
+                            <label for="f-price" class="block text-sm font-bold text-zinc-700 tracking-wide">
+                                Harga (Rp) <span class="text-red-500">*</span>
+                            </label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-4 flex items-center text-zinc-400 text-sm font-semibold pointer-events-none">Rp</span>
+                                <input
+                                    type="number"
+                                    id="f-price"
+                                    name="price"
+                                    value="{{ package.price | int if package else '' }}"
+                                    required
+                                    min="0"
+                                    placeholder="150000"
+                                    class="w-full pl-10 pr-4 py-3 rounded-xl border border-zinc-200 bg-zinc-50 text-zinc-900 text-sm font-medium placeholder-zinc-400
+                                           focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent focus:bg-white transition-all"
+                                >
+                            </div>
+                        </div>
+
+                        <!-- KECEPATAN -->
+                        <div class="space-y-2">
+                            <label for="f-speed" class="block text-sm font-bold text-zinc-700 tracking-wide">
+                                Kecepatan <span class="text-red-500">*</span>
+                            </label>
+                            <input
+                                type="text"
+                                id="f-speed"
+                                name="speed"
+                                value="{{ package.speed if package else '' }}"
+                                required
+                                placeholder="Contoh: 20 Mbps"
+                                class="w-full px-4 py-3 rounded-xl border border-zinc-200 bg-zinc-50 text-zinc-900 text-sm font-medium placeholder-zinc-400
+                                       focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent focus:bg-white transition-all"
+                            >
+                        </div>
+
+                        <!-- VOUCHER DURATION (conditional) -->
+                        <div id="voucher-duration-wrap" class="space-y-2">
+                            <label for="f-voucher-hours" class="block text-sm font-bold text-zinc-700 tracking-wide">
+                                Masa Berlaku Voucher (jam)
+                            </label>
+                            <input
+                                type="number"
+                                id="f-voucher-hours"
+                                name="voucher_duration_hours"
+                                min="1"
+                                value="{% if package and package.voucher_duration_hours %}{{ package.voucher_duration_hours }}{% else %}8{% endif %}"
+                                class="w-full px-4 py-3 rounded-xl border border-zinc-200 bg-zinc-50 text-zinc-900 text-sm font-medium placeholder-zinc-400
+                                       focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent focus:bg-white transition-all"
+                            >
+                            <p class="text-xs text-zinc-400 leading-relaxed">
+                                Hanya berlaku untuk tipe <span class="font-semibold text-zinc-500">Voucher (jam-jaman)</span>.
+                                Contoh: <code class="bg-zinc-100 px-1 rounded text-zinc-600">8</code> = berlaku 8 jam sejak pembayaran berhasil.
+                            </p>
+                        </div>
+
+                        <!-- JS TOGGLE (preserved exactly) -->
+                        <script>
+                            (function() {
+                                var sel = document.querySelector('select[name="package_type"]');
+                                var wrap = document.getElementById('voucher-duration-wrap');
+                                function toggle() {
+                                    wrap.style.display = sel.value === 'jam-jaman' ? 'block' : 'none';
+                                }
+                                sel.addEventListener('change', toggle);
+                                toggle();
+                            })();
+                        </script>
+
+                        <!-- ACTION BUTTONS -->
+                        <div class="pt-2 space-y-3">
+                            <button
+                                type="submit"
+                                class="w-full py-3.5 rounded-xl bg-red-600 text-white font-bold text-sm hover:bg-red-700 active:scale-[0.98] transition-all shadow-lg shadow-red-500/25"
+                            >
+                                {{ 'Simpan Perubahan' if package else 'Buat Paket' }}
+                            </button>
+
+                            <a
+                                href="{{ url_for('admin_dashboard') }}"
+                                class="block w-full py-3.5 rounded-xl bg-zinc-100 text-zinc-600 font-bold text-sm text-center hover:bg-zinc-200 active:scale-[0.98] transition-all"
+                            >
+                                Batal
+                            </a>
+                        </div>
+
+                    </form>
+                </div>
+
             </div>
         </div>
+
     </main>
 </div>
 {% endblock %}
