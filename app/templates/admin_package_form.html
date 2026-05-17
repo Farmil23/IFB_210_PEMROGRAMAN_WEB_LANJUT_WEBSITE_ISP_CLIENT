@@ -1,7 +1,5 @@
 {% extends "base_dashboard.html" %}
-
 {% block title %}{{ 'Edit Paket' if package else 'Tambah Paket' }} - BTN Net{% endblock %}
-
 {% block content %}
 <div class="flex min-h-screen bg-zinc-950 text-zinc-900 overflow-hidden">
 
@@ -19,21 +17,21 @@
                     </svg>
                 </a>
                 <div>
-                    <h1 class="text-2xl font-black text-zinc-900">
+                    <h1 class="text-xl font-black text-zinc-900">
                         {{ 'Edit Paket' if package else 'Tambah Paket Baru' }}
                     </h1>
-                    <p class="text-sm text-zinc-500 mt-0.5">BTN Net &mdash; Internet Package Management</p>
+                    <p class="text-sm text-zinc-500 mt-0.5">BTN Net — Internet Package Management</p>
                 </div>
             </div>
         </header>
 
-        <div class="p-10 flex justify-center">
-            <div class="w-full max-w-xl">
+        <div class="p-8 flex justify-center">
+            <div class="w-full max-w-lg">
 
                 <!-- FORM CARD -->
-                <div class="bg-white rounded-3xl border border-black/5 shadow-sm overflow-hidden">
+                <div class="bg-white rounded-2xl border border-black/5 shadow-sm overflow-hidden">
 
-                    <!-- RED TOP ACCENT -->
+                    <!-- RED ACCENT TOP -->
                     <div class="h-1.5 w-full bg-gradient-to-r from-red-600 to-red-400"></div>
 
                     <!-- CARD HEADER -->
@@ -45,22 +43,22 @@
                                 </svg>
                             </div>
                             <div>
-                                <h2 class="text-lg font-black text-zinc-900">
+                                <h2 class="text-base font-black text-zinc-900">
                                     {{ 'Edit Paket Internet' if package else 'Paket Internet Baru' }}
                                 </h2>
-                                <p class="text-sm text-zinc-500">
+                                <p class="text-xs text-zinc-500 mt-0.5">
                                     {{ 'Perbarui detail paket yang sudah ada.' if package else 'Isi detail untuk membuat paket baru.' }}
                                 </p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- FORM BODY -->
-                    <form method="POST" class="px-8 py-7 space-y-6">
+                    <!-- FORM -->
+                    <form method="POST" class="px-8 py-7 space-y-5">
 
                         <!-- NAMA PAKET -->
-                        <div class="space-y-2">
-                            <label for="f-name" class="block text-sm font-bold text-zinc-700 tracking-wide">
+                        <div class="space-y-1.5">
+                            <label for="f-name" class="block text-sm font-bold text-zinc-700">
                                 Nama Paket <span class="text-red-500">*</span>
                             </label>
                             <input
@@ -76,8 +74,8 @@
                         </div>
 
                         <!-- TIPE PAKET -->
-                        <div class="space-y-2">
-                            <label for="f-type" class="block text-sm font-bold text-zinc-700 tracking-wide">
+                        <div class="space-y-1.5">
+                            <label for="f-type" class="block text-sm font-bold text-zinc-700">
                                 Tipe Paket <span class="text-red-500">*</span>
                             </label>
                             <div class="relative">
@@ -104,8 +102,8 @@
                         </div>
 
                         <!-- HARGA -->
-                        <div class="space-y-2">
-                            <label for="f-price" class="block text-sm font-bold text-zinc-700 tracking-wide">
+                        <div class="space-y-1.5">
+                            <label for="f-price" class="block text-sm font-bold text-zinc-700">
                                 Harga (Rp) <span class="text-red-500">*</span>
                             </label>
                             <div class="relative">
@@ -125,8 +123,8 @@
                         </div>
 
                         <!-- KECEPATAN -->
-                        <div class="space-y-2">
-                            <label for="f-speed" class="block text-sm font-bold text-zinc-700 tracking-wide">
+                        <div class="space-y-1.5">
+                            <label for="f-speed" class="block text-sm font-bold text-zinc-700">
                                 Kecepatan <span class="text-red-500">*</span>
                             </label>
                             <input
@@ -141,9 +139,9 @@
                             >
                         </div>
 
-                        <!-- VOUCHER DURATION (conditional) -->
-                        <div id="voucher-duration-wrap" class="space-y-2">
-                            <label for="f-voucher-hours" class="block text-sm font-bold text-zinc-700 tracking-wide">
+                        <!-- VOUCHER DURATION -->
+                        <div id="voucher-duration-wrap" class="space-y-1.5">
+                            <label for="f-voucher-hours" class="block text-sm font-bold text-zinc-700">
                                 Masa Berlaku Voucher (jam)
                             </label>
                             <input
@@ -152,7 +150,7 @@
                                 name="voucher_duration_hours"
                                 min="1"
                                 value="{% if package and package.voucher_duration_hours %}{{ package.voucher_duration_hours }}{% else %}8{% endif %}"
-                                class="w-full px-4 py-3 rounded-xl border border-zinc-200 bg-zinc-50 text-zinc-900 text-sm font-medium placeholder-zinc-400
+                                class="w-full px-4 py-3 rounded-xl border border-zinc-200 bg-zinc-50 text-zinc-900 text-sm font-medium
                                        focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent focus:bg-white transition-all"
                             >
                             <p class="text-xs text-zinc-400 leading-relaxed">
@@ -161,7 +159,7 @@
                             </p>
                         </div>
 
-                        <!-- JS TOGGLE (preserved exactly) -->
+                        <!-- JS TOGGLE (preserved) -->
                         <script>
                             (function() {
                                 var sel = document.querySelector('select[name="package_type"]');
@@ -174,19 +172,14 @@
                             })();
                         </script>
 
-                        <!-- ACTION BUTTONS -->
+                        <!-- ACTIONS -->
                         <div class="pt-2 space-y-3">
-                            <button
-                                type="submit"
-                                class="w-full py-3.5 rounded-xl bg-red-600 text-white font-bold text-sm hover:bg-red-700 active:scale-[0.98] transition-all shadow-lg shadow-red-500/25"
-                            >
+                            <button type="submit"
+                                class="w-full py-3.5 rounded-xl bg-red-600 text-white font-bold text-sm hover:bg-red-700 active:scale-[0.98] transition-all shadow-lg shadow-red-500/25">
                                 {{ 'Simpan Perubahan' if package else 'Buat Paket' }}
                             </button>
-
-                            <a
-                                href="{{ url_for('admin_dashboard') }}"
-                                class="block w-full py-3.5 rounded-xl bg-zinc-100 text-zinc-600 font-bold text-sm text-center hover:bg-zinc-200 active:scale-[0.98] transition-all"
-                            >
+                            <a href="{{ url_for('admin_dashboard') }}"
+                               class="block w-full py-3.5 rounded-xl bg-zinc-100 text-zinc-600 font-bold text-sm text-center hover:bg-zinc-200 active:scale-[0.98] transition-all">
                                 Batal
                             </a>
                         </div>
