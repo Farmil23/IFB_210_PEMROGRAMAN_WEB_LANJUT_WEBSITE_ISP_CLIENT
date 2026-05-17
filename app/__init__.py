@@ -54,6 +54,23 @@ def create_app(config_class=Config):
 
     login_manager.login_message_category = "warning"
 
+    @app.context_processor
+    def inject_presentation():
+
+        from .timezone_util import WIB_LABEL
+
+        return {
+            'presentation_mode': not app.config.get('PRODUCTION', True),
+            'wib_label': WIB_LABEL,
+        }
+
+    @app.template_filter('format_wib')
+    def format_wib_filter(dt):
+
+        from .timezone_util import format_wib
+
+        return format_wib(dt)
+
     # ==========================================
     # APP CONTEXT
     # ==========================================
@@ -79,6 +96,14 @@ def create_app(config_class=Config):
         # ==========================================
 
         db.create_all()
+
+        from .schema_migrate import ensure_schema
+
+        ensure_schema()
+
+        from .demo_reset import maybe_reset_demo_environment
+
+        maybe_reset_demo_environment(app)
 
         # ==========================================
         # IMPORT ROUTES
