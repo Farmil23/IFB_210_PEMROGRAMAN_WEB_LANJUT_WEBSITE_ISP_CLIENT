@@ -36,6 +36,8 @@ from datetime import datetime, timedelta
 from .timezone_util import now_wib, ensure_wib
 
 from functools import wraps
+import os
+from werkzeug.utils import secure_filename
 
 
 N8N_WEBHOOK_CHECKOUT_URL = "https://n8n.srv1631432.hstgr.cloud/webhook/create_checkout"
@@ -1356,7 +1358,6 @@ def browse_packages():
         packages=available_packages
     )
 
-
 @current_app.route('/vouchers')
 @login_required
 def vouchers():
@@ -1395,6 +1396,7 @@ def vouchers():
         server_now=now_wib(),
     )
 
+
 @current_app.route('/account')
 @login_required
 def account():
@@ -1402,4 +1404,105 @@ def account():
     return render_template(
         'account.html',
         user=current_user
+    )
+
+
+@current_app.route('/edit-profile', methods=['GET', 'POST'])
+@login_required
+def edit_profile():
+
+    if request.method == 'POST':
+
+        username = request.form.get('username')
+        email = request.form.get('email')
+
+        if username and username.strip() != '':
+            current_user.username = username.strip()
+
+        if email and email.strip() != '':
+            current_user.email = email.strip()
+
+        image = request.files.get('profile_image')
+
+        if image and image.filename != '':
+
+            filename = secure_filename(image.filename)
+
+            ext = filename.rsplit('.', 1)[1].lower()
+
+            new_filename = f"user_{current_user.id}.{ext}"
+
+            upload_folder = os.path.join(
+                current_app.root_path,
+                'static',
+                'uploads',
+                'profile'
+            )
+
+            os.makedirs(upload_folder, exist_ok=True)
+
+            upload_path = os.path.join(
+                upload_folder,
+                new_filename
+            )
+
+            image.save(upload_path)
+
+            current_user.profile_image = (
+                f'uploads/profile/{new_filename}'
+            )
+
+        db.session.commit()
+
+        flash(
+            'Profile updated successfully!',
+            'success'
+        )
+
+        return redirect(url_for('account'))
+
+    return render_template(
+        'edit_profile.html',
+        user=current_user
+    )
+
+
+@current_app.route('/change-password', methods=['POST'])
+@login_required
+def change_password():
+
+    current_password = request.form.get('current_password')
+    new_password = request.form.get('new_password')
+    confirm_password = request.form.get('confirm_password')
+
+    # cek password lama
+    if current_user.password_hash != current_password:
+
+        flash('Current password is incorrect', 'danger')
+
+        return redirect(
+            url_for('account')
+        )
+
+    # cek konfirmasi password
+    if new_password != confirm_password:
+
+        flash('New password does not match', 'danger')
+
+        return redirect(
+            url_for('account')
+        )
+
+    # update password baru
+    current_user.password_hash = new_password
+
+    db.session.commit()
+
+    flash(
+        'Password changed successfully!',
+        'success'
+    )
+
+    return redirect(
+        url_for('account')
     )
