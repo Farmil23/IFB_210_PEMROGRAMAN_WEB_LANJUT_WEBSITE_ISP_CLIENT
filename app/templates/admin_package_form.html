@@ -1,8 +1,30 @@
-{% extends "base.html" %}
+{% extends "base_dashboard.html" %}
+
+{% block title %}Form Paket - BTN Net{% endblock %}
 
 {% block content %}
-<div style="display: flex; justify-content: center; margin-top: 50px;">
-    <div class="card" style="width: 100%; max-width: 500px; padding: 30px;">
+<div class="flex min-h-screen bg-[#f4f5f7] text-zinc-900 overflow-hidden">
+
+    {% include 'partials/sidebar.html' %}
+
+    <main class="flex-1 overflow-y-auto h-screen relative">
+        <header class="
+            sticky
+            top-0
+            z-30
+            bg-white/80
+            backdrop-blur-xl
+            border-b
+            border-black/5
+            px-10
+            py-6
+        ">
+            <h1 class="text-2xl font-black text-zinc-900">Admin Panel</h1>
+            <p class="text-sm text-zinc-500 mt-1">BTN Net Enterprise System Configuration</p>
+        </header>
+
+        <div class="p-10 max-w-[1400px] mx-auto flex justify-center">
+            <div class="card bg-white rounded-2xl shadow-sm border border-black/5" style="width: 100%; max-width: 500px; padding: 30px;">
         <h2 style="margin-bottom: 20px;">{{ 'Edit Paket' if package else 'Tambah Paket Baru' }}</h2>
         
         <form method="POST">
@@ -50,6 +72,8 @@
             <button type="submit" class="btn btn-primary" style="width: 100%;">Simpan Paket</button>
             <a href="{{ url_for('admin_dashboard') }}" style="display: block; text-align: center; margin-top: 15px; color: #555;">Batal</a>
         </form>
-    </div>
+            </div>
+        </div>
+    </main>
 </div>
 {% endblock %}
