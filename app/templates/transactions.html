@@ -76,6 +76,7 @@
 
                         Monitor all payment activities, transaction status,
                         and internet vouchers in real-time.
+                        <span class="text-slate-500 block mt-2 text-sm">Klik kartu transaksi untuk melihat jadwal voucher &amp; masa berlaku.</span>
 
                     </p>
 
@@ -134,7 +135,8 @@
                 {% if transactions %}
 
                     {% for transaction in transactions %}
-                    <div class="group relative overflow-hidden rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.015))] backdrop-blur-xl p-7 transition-all duration-500 hover:-translate-y-1 hover:border-red-500/20 hover:shadow-[0_20px_50px_rgba(185,28,28,0.10)]">
+                    <a href="{{ url_for('transaction_detail', transaction_id=transaction.id) }}"
+                       class="group relative block overflow-hidden rounded-[30px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.015))] backdrop-blur-xl p-7 transition-all duration-500 hover:-translate-y-1 hover:border-red-500/20 hover:shadow-[0_20px_50px_rgba(185,28,28,0.10)] no-underline text-inherit">
 
                         <!-- HOVER GLOW -->
                         <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-700">
@@ -168,7 +170,7 @@
 
                                     <p class="text-slate-500 mt-2 text-sm tracking-wide">
 
-                                        {{ transaction.created_at.strftime('%d %b %Y, %H:%M') }} WIB
+                                        {{ transaction.created_at | format_wib }} {{ wib_label }}
 
                                     </p>
 
@@ -248,7 +250,7 @@
 
                         </div>
 
-                    </div>
+                    </a>
                     {% endfor %}
 
                 {% else %}

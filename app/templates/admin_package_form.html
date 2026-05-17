@@ -29,6 +29,24 @@
                 <input type="text" name="speed" value="{{ package.speed if package else '' }}" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" required placeholder="Contoh: 20 Mbps">
             </div>
             
+            <div style="margin-bottom: 15px; text-align: left;" id="voucher-duration-wrap">
+                <label style="display: block; margin-bottom: 5px;">Masa berlaku voucher (jam)</label>
+                <input type="number" name="voucher_duration_hours" min="1" value="{% if package and package.voucher_duration_hours %}{{ package.voucher_duration_hours }}{% else %}8{% endif %}" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                <small style="color: #666;">Hanya dipakai untuk tipe Voucher (jam-jaman). Contoh: 8 = berlaku 8 jam sejak pembayaran sukses.</small>
+            </div>
+            
+            <script>
+                (function() {
+                    var sel = document.querySelector('select[name="package_type"]');
+                    var wrap = document.getElementById('voucher-duration-wrap');
+                    function toggle() {
+                        wrap.style.display = sel.value === 'jam-jaman' ? 'block' : 'none';
+                    }
+                    sel.addEventListener('change', toggle);
+                    toggle();
+                })();
+            </script>
+            
             <button type="submit" class="btn btn-primary" style="width: 100%;">Simpan Paket</button>
             <a href="{{ url_for('admin_dashboard') }}" style="display: block; text-align: center; margin-top: 15px; color: #555;">Batal</a>
         </form>

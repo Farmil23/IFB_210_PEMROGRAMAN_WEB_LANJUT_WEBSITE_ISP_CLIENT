@@ -1,0 +1,154 @@
+{% extends "base_dashboard.html" %}
+
+{% block title %}Transaksi #{{ transaction.id }} | BTN Net{% endblock %}
+
+{% block content %}
+<div class="relative min-h-screen overflow-hidden bg-[#0b0b0f] text-white">
+
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(185,28,28,0.12),transparent_32%)]">
+    </div>
+
+    <div class="relative z-10 flex min-h-screen">
+
+        {% include 'partials/sidebar.html' %}
+
+        <main class="flex-1 px-6 py-8 lg:px-10 lg:py-10 max-w-4xl">
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div class="mb-6 space-y-2">
+                {% for category, message in messages %}
+                <div class="rounded-xl px-4 py-3 text-sm {% if category == 'success' %}bg-emerald-500/10 border border-emerald-500/30 text-emerald-300{% elif category == 'danger' %}bg-red-500/10 border border-red-500/30 text-red-300{% else %}bg-amber-500/10 border border-amber-500/30 text-amber-200{% endif %}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+
+            <a href="{{ url_for('transactions') }}"
+               class="inline-flex items-center gap-2 text-slate-400 hover:text-white text-sm mb-8 transition-colors">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                Kembali ke transaksi
+            </a>
+
+            <h1 class="text-3xl md:text-4xl font-black text-white">
+                Transaksi #{{ transaction.id }}
+            </h1>
+
+            <p class="mt-2 text-slate-400">
+                {{ package.name if package else 'Paket' }}
+                · Rp{{ "{:,.0f}".format(package.price) if package else '0' }}
+            </p>
+
+            <p class="mt-1 text-sm text-slate-500">
+                Dibuat {{ transaction.created_at | format_wib }} {{ wib_label }}
+            </p>
+
+            {% if transaction.paid_at %}
+            <p class="mt-1 text-sm text-emerald-500/90">
+                Pembayaran sukses {{ transaction.paid_at | format_wib }} {{ wib_label }}
+            </p>
+            {% endif %}
+
+            <!-- STATUS STRIP -->
+            <div class="mt-10 rounded-[28px] border border-white/10 bg-white/[0.03] p-8">
+
+                <p class="text-[11px] uppercase tracking-[0.25em] text-red-400 font-bold mb-3">
+                    Status
+                </p>
+
+                {% if timeline.kind == 'pending_payment' %}
+                <p class="text-xl font-bold text-amber-400">{{ timeline.label }}</p>
+                <p class="mt-2 text-slate-400 text-sm">
+                    Setelah bayar di Stripe, status &amp; voucher di-update lewat redirect ke aplikasi.
+                    Jika status masih pending, klik tombol di bawah (Stripe tidak memanggil localhost secara otomatis kecuali <code class="text-amber-300">success_url</code> sudah diset di workflow n8n).
+                </p>
+                <div class="mt-6 flex flex-col sm:flex-row gap-3">
+                    <a href="{{ payment_complete_url }}"
+                       class="inline-flex justify-center items-center rounded-2xl bg-emerald-600 hover:bg-emerald-500 px-6 py-3 font-semibold text-white transition-colors">
+                        Saya sudah bayar — aktifkan voucher
+                    </a>
+                    {% if presentation_mode %}
+                    <form method="POST" action="{{ url_for('payment_demo_confirm', transaction_id=transaction.id) }}">
+                        <button type="submit"
+                                class="w-full sm:w-auto rounded-2xl border border-amber-500/40 bg-amber-500/10 hover:bg-amber-500/20 px-6 py-3 font-semibold text-amber-200 transition-colors">
+                            Konfirmasi demo (tanpa Stripe)
+                        </button>
+                    </form>
+                    {% endif %}
+                </div>
+
+                {% elif timeline.kind == 'subscription' %}
+                <p class="text-xl font-bold text-sky-400">{{ timeline.label }}</p>
+                <p class="mt-2 text-slate-400 text-sm">Halaman ini untuk voucher jam-jaman. Langganan bulanan tidak memakai kode voucher di sini.</p>
+
+                {% elif timeline.kind == 'voucher_missing' %}
+                <p class="text-xl font-bold text-amber-400">{{ timeline.label }}</p>
+                <p class="mt-2 text-slate-400 text-sm">Pembayaran tercatat tetapi voucher belum dibuat.</p>
+                <a href="{{ payment_complete_url }}"
+                   class="mt-4 inline-flex rounded-2xl bg-emerald-600 hover:bg-emerald-500 px-6 py-3 font-semibold text-white">
+                    Generate voucher sekarang
+                </a>
+
+                {% elif timeline.kind == 'scheduled' %}
+                <p class="text-xl font-bold text-cyan-400">{{ timeline.label }}</p>
+                <p class="mt-3 text-slate-300 text-sm leading-relaxed">
+                    Masa aktif dihitung dari <strong>waktu pembayaran sukses ({{ wib_label }})</strong>.
+                    Contoh: paket 8 jam mulai 01:00 → berakhir 09:00.
+                </p>
+                <ul class="mt-6 space-y-3 text-sm text-slate-400">
+                    <li><span class="text-slate-500">Mulai berlaku:</span>
+                        <span class="text-white font-mono">{{ timeline.valid_from | format_wib }} {{ wib_label }}</span>
+                    </li>
+                    <li><span class="text-slate-500">Berakhir:</span>
+                        <span class="text-white font-mono">{{ timeline.expires_at | format_wib if timeline.expires_at else '—' }} {{ wib_label }}</span>
+                    </li>
+                    <li><span class="text-slate-500">Durasi paket:</span> {{ timeline.hours }} jam</li>
+                </ul>
+
+                {% elif timeline.kind == 'expired' %}
+                <p class="text-xl font-bold text-slate-500">{{ timeline.label }}</p>
+                <ul class="mt-6 space-y-3 text-sm text-slate-400">
+                    <li><span class="text-slate-500">Sempat berlaku:</span>
+                        {{ timeline.valid_from | format_wib if timeline.valid_from else '—' }} {{ wib_label }}
+                        — {{ timeline.expires_at | format_wib if timeline.expires_at else '—' }} {{ wib_label }}
+                    </li>
+                </ul>
+
+                {% elif timeline.kind == 'active' %}
+                <p class="text-xl font-bold text-emerald-400">{{ timeline.label }}</p>
+                <ul class="mt-6 space-y-3 text-sm text-slate-400">
+                    <li><span class="text-slate-500">Mulai:</span>
+                        <span class="text-white font-mono">{{ timeline.valid_from | format_wib if timeline.valid_from else '—' }} {{ wib_label }}</span>
+                    </li>
+                    <li><span class="text-slate-500">Berakhir:</span>
+                        <span class="text-white font-mono">{{ timeline.expires_at | format_wib if timeline.expires_at else '—' }} {{ wib_label }}</span>
+                    </li>
+                    {% if timeline.remaining %}
+                    {% set rs = timeline.remaining.total_seconds() %}
+                    <li><span class="text-slate-500">Sisa:</span>
+                        <span class="text-emerald-300 font-semibold">{{ (rs / 3600)|int }} jam {{ ((rs % 3600) / 60)|int }} menit</span>
+                    </li>
+                    {% endif %}
+                </ul>
+
+                {% else %}
+                <p class="text-slate-400">{{ timeline.label }}</p>
+                {% endif %}
+
+                {% if voucher and package and package.package_type == 'jam-jaman' %}
+                <div class="mt-8 rounded-2xl border border-white/10 bg-[#111] p-6">
+                    <p class="text-[11px] uppercase tracking-[0.2em] text-slate-500 mb-3">Kode voucher</p>
+                    <p class="font-mono text-xl md:text-2xl font-bold tracking-widest break-all {% if timeline.kind == 'expired' %}text-slate-600 line-through{% else %}text-white{% endif %}">
+                        {{ voucher.code }}
+                    </p>
+                </div>
+                {% endif %}
+
+            </div>
+
+        </main>
+    </div>
+</div>
+{% endblock %}

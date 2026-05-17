@@ -90,8 +90,16 @@
                         py-3
                         rounded-2xl
                         border
+                        {% if network_badge_tone == 'green' %}
                         border-green-500/20
                         bg-green-500/10
+                        {% elif network_badge_tone == 'amber' %}
+                        border-amber-500/20
+                        bg-amber-500/10
+                        {% else %}
+                        border-zinc-500/20
+                        bg-zinc-500/10
+                        {% endif %}
                         backdrop-blur-xl
                     ">
 
@@ -99,16 +107,28 @@
                             w-2
                             h-2
                             rounded-full
-                            bg-green-500
                             animate-pulse
+                            {% if network_badge_tone == 'green' %}
+                            bg-green-500
+                            {% elif network_badge_tone == 'amber' %}
+                            bg-amber-500
+                            {% else %}
+                            bg-zinc-500
+                            {% endif %}
                         "></span>
 
                         <span class="
-                            text-green-400
                             text-sm
                             font-semibold
+                            {% if network_badge_tone == 'green' %}
+                            text-green-400
+                            {% elif network_badge_tone == 'amber' %}
+                            text-amber-400
+                            {% else %}
+                            text-zinc-400
+                            {% endif %}
                         ">
-                            Network Stable
+                            {{ network_badge_label }}
                         </span>
 
                     </div>
@@ -207,7 +227,7 @@
                                     leading-none
                                     text-white
                                 ">
-                                    940
+                                    {{ hero_speed_num }}
                                 </h1>
 
                                 <span class="
@@ -254,7 +274,7 @@
                                     mt-3
                                     text-white
                                 ">
-                                    99.9%
+                                    {{ uptime_label }}
                                 </h3>
 
                                 <div class="
@@ -283,7 +303,7 @@
                                     mt-3
                                     text-white
                                 ">
-                                    5ms
+                                    {{ latency_label }}
                                 </h3>
 
                                 <div class="
@@ -312,7 +332,7 @@
                                     mt-3
                                     text-white
                                 ">
-                                    12
+                                    {{ active_devices }}
                                 </h3>
 
                                 <div class="
@@ -381,7 +401,7 @@
                                 font-black
                                 text-blue-400
                             ">
-                                {{ transactions|length if transactions else '1' }}
+                                {{ transaction_count }}
                             </h2>
 
                             <div class="
@@ -395,7 +415,11 @@
                                     text-zinc-300
                                     leading-relaxed
                                 ">
-                                    Last payment 2 days ago
+                                    {% if last_payment_rel %}
+                                        Pembayaran terakhir: {{ last_payment_rel }}
+                                    {% else %}
+                                        Belum ada pembayaran
+                                    {% endif %}
                                 </p>
 
                             </div>
@@ -445,9 +469,15 @@
                             <h2 class="
                                 text-5xl
                                 font-black
+                                {% if connection_status == 'Stable' %}
                                 text-green-400
+                                {% elif connection_status == 'Limited' %}
+                                text-amber-400
+                                {% else %}
+                                text-zinc-500
+                                {% endif %}
                             ">
-                                Stable
+                                {{ connection_status }}
                             </h2>
 
                             <div class="
@@ -461,7 +491,7 @@
                                     text-zinc-300
                                     leading-relaxed
                                 ">
-                                    99.9% uptime monitoring
+                                    {{ connection_footer }}
                                 </p>
 
                             </div>
@@ -513,7 +543,7 @@
                                 font-black
                                 text-purple-400
                             ">
-                                12
+                                {{ voucher_display }}
                             </h2>
 
                             <div class="
@@ -588,7 +618,7 @@
                                     text-red-400
                                     leading-none
                                 ">
-                                    100
+                                    {{ fiber_speed_num }}
                                 </h2>
 
                                 <span class="
@@ -616,7 +646,7 @@
                                     text-zinc-300
                                     leading-relaxed
                                 ">
-                                    Dedicated enterprise network
+                                    {{ fiber_caption }}
                                 </p>
 
                             </div>
@@ -696,7 +726,7 @@
                 <!-- ACTIVITY ITEMS -->
                 <div class="space-y-4">
 
-                    <!-- ITEM -->
+                    {% for row in recent_activity_rows %}
                     <div class="
                         flex
                         items-center
@@ -706,71 +736,15 @@
                         border
                         border-white/10
                         bg-[#111111]
-                        hover:border-red-500/20
                         transition-all
                         duration-300
-                    ">
-
-                        <div class="flex items-center gap-4">
-
-                            <div class="
-                                w-14
-                                h-14
-                                rounded-2xl
-                                bg-red-500/10
-                                flex
-                                items-center
-                                justify-center
-                                text-red-400
-                                font-bold
-                            ">
-                                INV
-                            </div>
-
-                            <div>
-
-                                <h4 class="
-                                    text-lg
-                                    font-bold
-                                    text-white
-                                ">
-                                    Enterprise Fiber Payment
-                                </h4>
-
-                                <p class="
-                                    text-sm
-                                    text-zinc-400
-                                    mt-1
-                                ">
-                                    Invoice #INV-20 has been completed
-                                </p>
-
-                            </div>
-
-                        </div>
-
-                        <span class="
-                            text-sm
-                            text-zinc-500
-                        ">
-                            2 hours ago
-                        </span>
-
-                    </div>
-
-                    <!-- ITEM -->
-                    <div class="
-                        flex
-                        items-center
-                        justify-between
-                        p-5
-                        rounded-3xl
-                        border
-                        border-white/10
-                        bg-[#111111]
+                        {% if row.tone == 'green' %}
                         hover:border-green-500/20
-                        transition-all
-                        duration-300
+                        {% elif row.tone == 'amber' %}
+                        hover:border-amber-500/20
+                        {% else %}
+                        hover:border-zinc-600/30
+                        {% endif %}
                     ">
 
                         <div class="flex items-center gap-4">
@@ -779,14 +753,22 @@
                                 w-14
                                 h-14
                                 rounded-2xl
-                                bg-green-500/10
                                 flex
                                 items-center
                                 justify-center
-                                text-green-400
                                 font-bold
+                                {% if row.tone == 'green' %}
+                                bg-green-500/10
+                                text-green-400
+                                {% elif row.tone == 'amber' %}
+                                bg-amber-500/10
+                                text-amber-400
+                                {% else %}
+                                bg-zinc-500/10
+                                text-zinc-400
+                                {% endif %}
                             ">
-                                NET
+                                {{ row.abbr }}
                             </div>
 
                             <div>
@@ -796,7 +778,7 @@
                                     font-bold
                                     text-white
                                 ">
-                                    Network Connection Stable
+                                    {{ row.title }}
                                 </h4>
 
                                 <p class="
@@ -804,7 +786,7 @@
                                     text-zinc-400
                                     mt-1
                                 ">
-                                    Uptime monitoring running normally
+                                    {{ row.subtitle }}
                                 </p>
 
                             </div>
@@ -815,10 +797,18 @@
                             text-sm
                             text-zinc-500
                         ">
-                            5 min ago
+                            {{ row.when }}
                         </span>
 
                     </div>
+
+                    {% else %}
+
+                    <p class="text-zinc-500 text-center py-8">
+                        Belum ada aktivitas transaksi.
+                    </p>
+
+                    {% endfor %}
 
                 </div>
 

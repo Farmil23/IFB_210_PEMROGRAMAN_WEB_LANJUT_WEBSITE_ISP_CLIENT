@@ -5,7 +5,8 @@ from flask import (
     url_for,
     request,
     jsonify,
-    flash
+    flash,
+    abort,
 )
 
 from flask_login import (
@@ -15,17 +16,121 @@ from flask_login import (
     current_user
 )
 
-from .models import db, User, Package, Transaction, Voucher
+from .models import (
+    db,
+    User,
+    Package,
+    Transaction,
+    Voucher,
+    HotspotRouter,
+)
 from .forms import LoginForm
 
 import requests
 import random
 import string
+import re
+
+from datetime import datetime, timedelta
+
+from .timezone_util import now_wib, ensure_wib
 
 from functools import wraps
 
 
 N8N_WEBHOOK_CHECKOUT_URL = "https://n8n.srv1631432.hstgr.cloud/webhook/create_checkout"
+
+DEMO_ROUTER_LABEL = 'Demo (presentasi — tanpa router fisik)'
+
+
+def _presentation_mode():
+
+    return not current_app.config.get('PRODUCTION', True)
+
+
+def _app_base_url():
+
+    configured = current_app.config.get('APP_BASE_URL') or ''
+
+    if configured:
+
+        return configured.rstrip('/')
+
+    return request.url_root.rstrip('/')
+
+
+def _finalize_transaction_payment(transaksi):
+
+    paket = transaksi.package
+
+    if transaksi.status == 'paid':
+
+        existing_v = None
+
+        if paket and paket.package_type == 'jam-jaman':
+
+            existing_v = Voucher.query.filter_by(
+                transaction_id=transaksi.id,
+            ).first()
+
+        return {
+            'ok': True,
+            'already_paid': True,
+            'voucher_code': existing_v.code if existing_v else None,
+        }
+
+    paid_moment = now_wib()
+
+    transaksi.status = 'paid'
+
+    transaksi.paid_at = paid_moment
+
+    if not paket or paket.package_type != 'jam-jaman':
+
+        db.session.commit()
+
+        return {
+            'ok': True,
+            'voucher_code': None,
+        }
+
+    existing_v = Voucher.query.filter_by(
+        transaction_id=transaksi.id,
+    ).first()
+
+    if existing_v:
+
+        db.session.commit()
+
+        return {
+            'ok': True,
+            'voucher_code': existing_v.code,
+        }
+
+    hours = _package_voucher_hours(paket)
+
+    valid_from = paid_moment
+
+    expires_at = valid_from + timedelta(hours=hours)
+
+    kode_baru = generate_wifi_code()
+
+    voucher_baru = Voucher(
+        transaction_id=transaksi.id,
+        code=kode_baru,
+        status='unused',
+        valid_from=valid_from,
+        expires_at=expires_at,
+    )
+
+    db.session.add(voucher_baru)
+
+    db.session.commit()
+
+    return {
+        'ok': True,
+        'voucher_code': kode_baru,
+    }
 
 
 def generate_wifi_code():
@@ -35,6 +140,195 @@ def generate_wifi_code():
     return "WF-" + ''.join(
         random.choice(chars) for _ in range(6)
     )
+
+
+def _parse_mbps(speed_str):
+
+    if not speed_str:
+
+        return None
+
+    m = re.search(
+        r'(\d+(?:\.\d+)?)',
+        str(speed_str),
+    )
+
+    if not m:
+
+        return None
+
+    return int(float(m.group(1)))
+
+
+def _relative_time_id(dt):
+
+    if dt is None:
+
+        return None
+
+    now = now_wib()
+
+    dt = ensure_wib(dt)
+
+    secs = int((now - dt).total_seconds())
+
+    if secs < 60:
+
+        return 'Baru saja'
+
+    if secs < 3600:
+
+        return f'{secs // 60} menit lalu'
+
+    if secs < 86400:
+
+        return f'{secs // 3600} jam lalu'
+
+    days = (now - dt).days
+
+    if days == 1:
+
+        return 'Kemarin'
+
+    return f'{days} hari lalu'
+
+
+def _package_voucher_hours(pkg):
+
+    if not pkg or pkg.package_type != 'jam-jaman':
+
+        return None
+
+    h = pkg.voucher_duration_hours
+
+    if h is not None and h > 0:
+
+        return int(h)
+
+    return 8
+
+
+def _apply_voucher_expiry(vouchers):
+
+    now = now_wib()
+
+    changed = False
+
+    for v in vouchers:
+
+        if not v:
+
+            continue
+
+        if v.status == 'expired':
+
+            continue
+
+        trx = v.transaction
+
+        pkg = trx.package if trx else None
+
+        if not pkg or pkg.package_type != 'jam-jaman':
+
+            continue
+
+        hours = _package_voucher_hours(pkg)
+
+        vf = v.valid_from or trx.paid_at or trx.created_at or now
+
+        if v.valid_from is None:
+
+            v.valid_from = vf
+
+            changed = True
+
+        if v.expires_at is None:
+
+            v.expires_at = vf + timedelta(hours=hours)
+
+            changed = True
+
+        if v.status in ('unused', 'active') and v.expires_at and now > v.expires_at:
+
+            v.status = 'expired'
+
+            changed = True
+
+    if changed:
+
+        db.session.commit()
+
+
+def _voucher_timeline(voucher, transaction, package):
+
+    now = now_wib()
+
+    if transaction.status != 'paid':
+
+        return {
+            'kind': 'pending_payment',
+            'label': 'Menunggu pembayaran',
+        }
+
+    if not package:
+
+        return {'kind': 'unknown', 'label': 'Paket tidak ditemukan'}
+
+    if package.package_type == 'bulanan':
+
+        return {
+            'kind': 'subscription',
+            'label': 'Langganan bulanan',
+            'paid_at': transaction.paid_at,
+        }
+
+    if not voucher:
+
+        return {
+            'kind': 'voucher_missing',
+            'label': 'Voucher belum tersedia',
+        }
+
+    hours = _package_voucher_hours(package) or 8
+
+    vf = voucher.valid_from or transaction.paid_at or transaction.created_at
+
+    exp = voucher.expires_at
+
+    if exp is None and vf is not None:
+
+        exp = vf + timedelta(hours=hours)
+
+    if vf and now < vf:
+
+        return {
+            'kind': 'scheduled',
+            'label': 'Belum aktif',
+            'valid_from': vf,
+            'expires_at': exp,
+            'hours': hours,
+        }
+
+    if exp and now >= exp:
+
+        return {
+            'kind': 'expired',
+            'label': 'Tidak berlaku',
+            'valid_from': vf,
+            'expires_at': exp,
+            'hours': hours,
+            'status': voucher.status,
+        }
+
+    return {
+        'kind': 'active',
+        'label': 'Aktif',
+        'valid_from': vf,
+        'expires_at': exp,
+        'hours': hours,
+        'remaining': exp - now if exp else None,
+        'status': voucher.status,
+    }
 
 
 def admin_required(f):
@@ -73,14 +367,16 @@ def index():
             name="Voucher 3 Jam",
             package_type="jam-jaman",
             price=5000,
-            speed="Up to 10 Mbps"
+            speed="Up to 10 Mbps",
+            voucher_duration_hours=3,
         )
 
         paket2 = Package(
             name="Paket Bulanan Basic",
             package_type="bulanan",
             price=150000,
-            speed="20 Mbps"
+            speed="20 Mbps",
+            voucher_duration_hours=None,
         )
 
         db.session.add_all([paket1, paket2])
@@ -206,9 +502,169 @@ def dashboard():
         Transaction.id.desc()
     ).all()
 
+    paid_list = [
+        t for t in transaksi_user
+        if t.status == 'paid'
+    ]
+
+    last_paid = paid_list[0] if paid_list else None
+
+    last_paid_bulanan = next(
+        (
+            t for t in transaksi_user
+            if t.status == 'paid'
+            and t.package
+            and t.package.package_type == 'bulanan'
+        ),
+        None,
+    )
+
+    hero_mbps = _parse_mbps(
+        last_paid_bulanan.package.speed
+        if last_paid_bulanan and last_paid_bulanan.package
+        else None,
+    )
+
+    if hero_mbps is None and last_paid and last_paid.package:
+
+        hero_mbps = _parse_mbps(last_paid.package.speed)
+
+    hero_speed_num = str(hero_mbps if hero_mbps is not None else 0)
+
+    fiber_mbps = _parse_mbps(
+        last_paid_bulanan.package.speed
+        if last_paid_bulanan and last_paid_bulanan.package
+        else None,
+    )
+
+    fiber_speed_num = str(fiber_mbps if fiber_mbps is not None else 0)
+
+    fiber_caption = (
+        last_paid_bulanan.package.name
+        if last_paid_bulanan and last_paid_bulanan.package
+        else 'Belum ada langganan fiber aktif'
+    )
+
+    active_router_count = HotspotRouter.query.filter_by(
+        is_active=True,
+    ).count()
+
+    active_devices = active_router_count or 0
+
+    is_router_online = active_devices > 0
+
+    has_active_subscription = last_paid_bulanan is not None
+
+    uptime_label = '99.9%' if is_router_online else '0%'
+
+    latency_label = '5ms' if is_router_online else '0ms'
+
+    if is_router_online and has_active_subscription:
+
+        connection_status = 'Stable'
+
+        connection_footer = '99.9% uptime monitoring'
+
+    elif is_router_online:
+
+        connection_status = 'Limited'
+
+        connection_footer = 'Router aktif, belum ada langganan fiber'
+
+    else:
+
+        connection_status = 'Offline'
+
+        connection_footer = '0 router tersambung ke sistem'
+
+    if is_router_online and has_active_subscription:
+
+        network_badge_label = 'Network Stable'
+
+        network_badge_tone = 'green'
+
+    elif is_router_online:
+
+        network_badge_label = 'Limited'
+
+        network_badge_tone = 'amber'
+
+    else:
+
+        network_badge_label = 'No Router Link'
+
+        network_badge_tone = 'zinc'
+
+    jam_vouchers = Voucher.query.join(
+        Transaction,
+        Transaction.id == Voucher.transaction_id,
+    ).join(
+        Package,
+        Package.id == Transaction.package_id,
+    ).filter(
+        Transaction.user_id == current_user.id,
+        Package.package_type == 'jam-jaman',
+        Transaction.status == 'paid',
+    ).all()
+
+    _apply_voucher_expiry(jam_vouchers)
+
+    voucher_display = sum(
+        1 for v in jam_vouchers
+        if v.status in ('unused', 'active')
+    )
+
+    last_payment_rel = (
+        _relative_time_id(last_paid.created_at)
+        if last_paid
+        else None
+    )
+
+    transaction_count = len(transaksi_user)
+
+    recent_activity_rows = []
+
+    for t in transaksi_user[:5]:
+
+        pkg_name = t.package.name if t.package else 'Paket'
+
+        tone = (
+            'green' if t.status == 'paid'
+            else 'amber' if t.status == 'pending'
+            else 'zinc'
+        )
+
+        abbr = (
+            'PAY' if t.status == 'paid'
+            else 'PEN' if t.status == 'pending'
+            else 'TRX'
+        )
+
+        recent_activity_rows.append({
+            'title': f'Pembelian {pkg_name}',
+            'subtitle': f'#{t.id} — {t.status}',
+            'when': _relative_time_id(t.created_at) or '',
+            'tone': tone,
+            'abbr': abbr,
+        })
+
     return render_template(
         'dashboard.html',
-        transactions=transaksi_user
+        transactions=transaksi_user,
+        hero_speed_num=hero_speed_num,
+        uptime_label=uptime_label,
+        latency_label=latency_label,
+        active_devices=active_devices,
+        transaction_count=transaction_count,
+        last_payment_rel=last_payment_rel,
+        connection_status=connection_status,
+        connection_footer=connection_footer,
+        voucher_display=voucher_display,
+        fiber_speed_num=fiber_speed_num,
+        fiber_caption=fiber_caption,
+        network_badge_label=network_badge_label,
+        network_badge_tone=network_badge_tone,
+        recent_activity_rows=recent_activity_rows,
     )
 
 
@@ -219,9 +675,20 @@ def admin_dashboard():
 
     packages = Package.query.all()
 
+    routers = HotspotRouter.query.order_by(
+        HotspotRouter.sort_order,
+        HotspotRouter.id,
+    ).all()
+
+    active_router_count = HotspotRouter.query.filter_by(
+        is_active=True
+    ).count()
+
     return render_template(
         'admin_dashboard.html',
-        packages=packages
+        packages=packages,
+        routers=routers,
+        active_router_count=active_router_count or 0,
     )
 
 
@@ -240,12 +707,26 @@ def admin_package_add():
         package_type = request.form.get('package_type')
         price = request.form.get('price')
         speed = request.form.get('speed')
+        vdh_raw = request.form.get('voucher_duration_hours')
+
+        if package_type == 'jam-jaman':
+
+            voucher_duration_hours = int(vdh_raw) if vdh_raw else 8
+
+            if voucher_duration_hours < 1:
+
+                voucher_duration_hours = 8
+
+        else:
+
+            voucher_duration_hours = None
 
         new_package = Package(
             name=name,
             package_type=package_type,
             price=float(price),
-            speed=speed
+            speed=speed,
+            voucher_duration_hours=voucher_duration_hours,
         )
 
         db.session.add(new_package)
@@ -280,11 +761,25 @@ def admin_package_edit(id):
     if request.method == 'POST':
 
         paket.name = request.form.get('name')
-        paket.package_type = request.form.get('package_type')
+        package_type = request.form.get('package_type')
+        paket.package_type = package_type
         paket.price = float(
             request.form.get('price')
         )
         paket.speed = request.form.get('speed')
+        vdh_raw = request.form.get('voucher_duration_hours')
+
+        if package_type == 'jam-jaman':
+
+            paket.voucher_duration_hours = int(vdh_raw) if vdh_raw else 8
+
+            if paket.voucher_duration_hours < 1:
+
+                paket.voucher_duration_hours = 8
+
+        else:
+
+            paket.voucher_duration_hours = None
 
         db.session.commit()
 
@@ -327,6 +822,130 @@ def admin_package_delete(id):
     )
 
 
+@current_app.route(
+    '/admin/router/add',
+    methods=['GET', 'POST'],
+)
+
+@login_required
+@admin_required
+def admin_router_add():
+
+    if request.method == 'POST':
+
+        name = (request.form.get('name') or '').strip()
+        notes = (request.form.get('notes') or '').strip() or None
+        sort_order = int(request.form.get('sort_order') or 0)
+        is_active = request.form.get('is_active') == 'on'
+
+        if not name:
+
+            flash('Nama router wajib diisi.', 'danger')
+
+            return redirect(url_for('admin_router_add'))
+
+        if HotspotRouter.query.filter_by(name=name).first():
+
+            flash('Nama router sudah dipakai.', 'warning')
+
+            return redirect(url_for('admin_router_add'))
+
+        db.session.add(
+            HotspotRouter(
+                name=name,
+                notes=notes,
+                sort_order=sort_order,
+                is_active=is_active,
+            )
+        )
+
+        db.session.commit()
+
+        flash('Titik router berhasil ditambahkan.', 'success')
+
+        return redirect(url_for('admin_dashboard'))
+
+    return render_template(
+        'admin_router_form.html',
+        router=None,
+    )
+
+
+@current_app.route(
+    '/admin/router/edit/<int:id>',
+    methods=['GET', 'POST'],
+)
+
+@login_required
+@admin_required
+def admin_router_edit(id):
+
+    router = HotspotRouter.query.get_or_404(id)
+
+    if request.method == 'POST':
+
+        name = (request.form.get('name') or '').strip()
+        notes = (request.form.get('notes') or '').strip() or None
+        sort_order = int(request.form.get('sort_order') or 0)
+        is_active = request.form.get('is_active') == 'on'
+
+        if not name:
+
+            flash('Nama router wajib diisi.', 'danger')
+
+            return redirect(
+                url_for('admin_router_edit', id=id)
+            )
+
+        other = HotspotRouter.query.filter(
+            HotspotRouter.name == name,
+            HotspotRouter.id != id,
+        ).first()
+
+        if other:
+
+            flash('Nama router sudah dipakai.', 'warning')
+
+            return redirect(
+                url_for('admin_router_edit', id=id)
+            )
+
+        router.name = name
+        router.notes = notes
+        router.sort_order = sort_order
+        router.is_active = is_active
+
+        db.session.commit()
+
+        flash('Titik router diperbarui.', 'success')
+
+        return redirect(url_for('admin_dashboard'))
+
+    return render_template(
+        'admin_router_form.html',
+        router=router,
+    )
+
+
+@current_app.route(
+    '/admin/router/delete/<int:id>',
+    methods=['POST'],
+)
+
+@login_required
+@admin_required
+def admin_router_delete(id):
+
+    router = HotspotRouter.query.get_or_404(id)
+
+    db.session.delete(router)
+    db.session.commit()
+
+    flash('Titik router dihapus.', 'success')
+
+    return redirect(url_for('admin_dashboard'))
+
+
 @current_app.route('/order/<int:package_id>')
 @login_required
 def order(package_id):
@@ -335,9 +954,21 @@ def order(package_id):
 
     if paket.package_type == 'jam-jaman':
 
+        routers = HotspotRouter.query.filter_by(
+            is_active=True
+        ).order_by(
+            HotspotRouter.sort_order,
+            HotspotRouter.id,
+        ).all()
+
+        router_count = len(routers) or 0
+
         return render_template(
             'order_voucher.html',
-            package=paket
+            package=paket,
+            routers=routers,
+            router_count=router_count or 0,
+            demo_router_label=DEMO_ROUTER_LABEL,
         )
 
     return render_template(
@@ -368,22 +999,97 @@ def checkout(package_id):
         'phone_number'
     )
 
-    transaksi_baru = Transaction(
-        user_id=current_user.id,
-        package_id=paket.id,
-        status='pending',
-        router_location=router_location,
-        address=address,
-        phone_number=phone_number
+    if paket.package_type == 'jam-jaman':
+
+        allowed = [
+            r.name for r in HotspotRouter.query.filter_by(
+                is_active=True
+            ).order_by(
+                HotspotRouter.sort_order,
+                HotspotRouter.id,
+            ).all()
+        ]
+
+        presentation = _presentation_mode()
+
+        if not allowed:
+
+            if presentation:
+
+                router_location = DEMO_ROUTER_LABEL
+
+            else:
+
+                flash(
+                    'Belum ada titik hotspot/router aktif. Hubungi admin.',
+                    'danger',
+                )
+
+                return redirect(
+                    url_for('order', package_id=package_id)
+                )
+
+        elif not router_location or router_location not in allowed:
+
+            flash(
+                'Pilih lokasi router yang valid.',
+                'danger',
+            )
+
+            return redirect(
+                url_for('order', package_id=package_id)
+            )
+
+    cutoff = now_wib() - timedelta(minutes=15)
+
+    transaksi_baru = Transaction.query.filter(
+        Transaction.user_id == current_user.id,
+        Transaction.package_id == paket.id,
+        Transaction.status == 'pending',
+        Transaction.created_at >= cutoff,
+    ).order_by(
+        Transaction.id.desc()
+    ).first()
+
+    if not transaksi_baru:
+
+        transaksi_baru = Transaction(
+            user_id=current_user.id,
+            package_id=paket.id,
+            status='pending',
+            router_location=router_location,
+            address=address,
+            phone_number=phone_number,
+        )
+
+        db.session.add(transaksi_baru)
+        db.session.commit()
+
+    else:
+
+        transaksi_baru.router_location = router_location
+        transaksi_baru.address = address
+        transaksi_baru.phone_number = phone_number
+        db.session.commit()
+
+    base = _app_base_url()
+
+    success_path = url_for(
+        'payment_complete',
+        transaction_id=transaksi_baru.id,
     )
 
-    db.session.add(transaksi_baru)
-    db.session.commit()
+    cancel_path = url_for(
+        'transaction_detail',
+        transaction_id=transaksi_baru.id,
+    )
 
     payload = {
         "title": paket.name,
         "price": int(paket.price),
-        "transaction_id": transaksi_baru.id
+        "transaction_id": transaksi_baru.id,
+        "success_url": f"{base}{success_path}",
+        "cancel_url": f"{base}{cancel_path}",
     }
 
     try:
@@ -418,6 +1124,18 @@ def checkout(package_id):
 
                 checkout_url = data.get('url')
 
+                session_id = (
+                    data.get('session_id')
+                    or data.get('stripe_session_id')
+                    or data.get('id')
+                )
+
+                if session_id:
+
+                    transaksi_baru.stripe_session_id = str(session_id)
+
+                    db.session.commit()
+
                 if checkout_url:
 
                     return redirect(checkout_url)
@@ -427,6 +1145,9 @@ def checkout(package_id):
 
         return f"""
         Gagal mendapatkan link pembayaran dari n8n.
+        Pastikan workflow n8n memakai success_url dari payload:
+        {payload.get('success_url')}
+        <br>
         Status: {response.status_code}
         """, 500
 
@@ -465,31 +1186,14 @@ def payment_success():
             "message": "Transaction not found"
         }), 404
 
-    if transaksi.status == 'paid':
-
-        return jsonify({
-            "status": "success",
-            "message": "Already paid"
-        }), 200
-
     try:
 
-        transaksi.status = 'paid'
-
-        kode_baru = generate_wifi_code()
-
-        voucher_baru = Voucher(
-            transaction_id=transaksi.id,
-            code=kode_baru,
-            status='active'
-        )
-
-        db.session.add(voucher_baru)
-        db.session.commit()
+        result = _finalize_transaction_payment(transaksi)
 
         return jsonify({
             "status": "success",
-            "voucher_code": kode_baru
+            "message": "Already paid" if result.get('already_paid') else "Payment confirmed",
+            "voucher_code": result.get('voucher_code'),
         }), 200
 
     except Exception as e:
@@ -500,6 +1204,93 @@ def payment_success():
             "status": "error",
             "message": str(e)
         }), 500
+
+
+@current_app.route('/payment/complete/<int:transaction_id>')
+@login_required
+def payment_complete(transaction_id):
+
+    transaksi = Transaction.query.get_or_404(transaction_id)
+
+    if transaksi.user_id != current_user.id:
+
+        abort(403)
+
+    try:
+
+        result = _finalize_transaction_payment(transaksi)
+
+        if result.get('voucher_code'):
+
+            flash(
+                f'Pembayaran berhasil. Kode voucher: {result["voucher_code"]}',
+                'success',
+            )
+
+        else:
+
+            flash('Pembayaran berhasil dicatat.', 'success')
+
+    except Exception as e:
+
+        db.session.rollback()
+
+        flash(f'Gagal memproses pembayaran: {e}', 'danger')
+
+    return redirect(
+        url_for('transaction_detail', transaction_id=transaction_id)
+    )
+
+
+@current_app.route(
+    '/payment/demo-confirm/<int:transaction_id>',
+    methods=['POST'],
+)
+@login_required
+def payment_demo_confirm(transaction_id):
+
+    if current_app.config.get('PRODUCTION', True):
+
+        abort(404)
+
+    transaksi = Transaction.query.get_or_404(transaction_id)
+
+    if transaksi.user_id != current_user.id:
+
+        abort(403)
+
+    if transaksi.status != 'pending':
+
+        flash('Transaksi ini sudah diproses.', 'warning')
+
+        return redirect(
+            url_for('transaction_detail', transaction_id=transaction_id)
+        )
+
+    try:
+
+        result = _finalize_transaction_payment(transaksi)
+
+        if result.get('voucher_code'):
+
+            flash(
+                f'[Demo] Pembayaran dikonfirmasi. Voucher: {result["voucher_code"]}',
+                'success',
+            )
+
+        else:
+
+            flash('[Demo] Pembayaran dikonfirmasi.', 'success')
+
+    except Exception as e:
+
+        db.session.rollback()
+
+        flash(f'Gagal: {e}', 'danger')
+
+    return redirect(
+        url_for('transaction_detail', transaction_id=transaction_id)
+    )
 
 
 @current_app.route('/transactions')
@@ -515,6 +1306,42 @@ def transactions():
     return render_template(
         'transactions.html',
         transactions=transaksi_user
+    )
+
+
+@current_app.route('/transactions/<int:transaction_id>')
+@login_required
+def transaction_detail(transaction_id):
+
+    trx = Transaction.query.get_or_404(transaction_id)
+
+    if trx.user_id != current_user.id:
+
+        abort(403)
+
+    pkg = trx.package
+
+    v = trx.voucher
+
+    if v:
+
+        _apply_voucher_expiry([v])
+
+        db.session.refresh(v)
+
+    timeline = _voucher_timeline(v, trx, pkg)
+
+    return render_template(
+        'transaction_detail.html',
+        transaction=trx,
+        package=pkg,
+        voucher=v,
+        timeline=timeline,
+        presentation_mode=_presentation_mode(),
+        payment_complete_url=url_for(
+            'payment_complete',
+            transaction_id=trx.id,
+        ),
     )
 
 
@@ -535,16 +1362,37 @@ def browse_packages():
 def vouchers():
 
     user_vouchers = Voucher.query.join(
-        Transaction
+        Transaction,
+        Transaction.id == Voucher.transaction_id,
+    ).join(
+        Package,
+        Package.id == Transaction.package_id,
     ).filter(
-        Transaction.user_id == current_user.id
+        Transaction.user_id == current_user.id,
+        Package.package_type == 'jam-jaman',
+        Transaction.status == 'paid',
     ).order_by(
         Voucher.id.desc()
     ).all()
 
+    _apply_voucher_expiry(user_vouchers)
+
+    vouchers_valid = [
+        v for v in user_vouchers
+        if v.status in ('unused', 'active')
+    ]
+
+    vouchers_expired = [
+        v for v in user_vouchers
+        if v.status == 'expired'
+    ]
+
     return render_template(
         'vouchers.html',
-        vouchers=user_vouchers
+        vouchers_valid=vouchers_valid,
+        vouchers_expired=vouchers_expired,
+        voucher_active_count=len(vouchers_valid),
+        server_now=now_wib(),
     )
 
 @current_app.route('/account')

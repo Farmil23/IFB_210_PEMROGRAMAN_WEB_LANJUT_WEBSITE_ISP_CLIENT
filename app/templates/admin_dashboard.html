@@ -26,6 +26,7 @@
                 <th style="padding: 12px; text-align: left;">Tipe</th>
                 <th style="padding: 12px; text-align: left;">Harga</th>
                 <th style="padding: 12px; text-align: left;">Kecepatan</th>
+                <th style="padding: 12px; text-align: left;">Voucher (jam)</th>
                 <th style="padding: 12px; text-align: center;">Aksi</th>
             </tr>
         </thead>
@@ -36,6 +37,7 @@
                 <td style="padding: 12px;">{{ paket.package_type }}</td>
                 <td style="padding: 12px;">Rp {{ "{:,.0f}".format(paket.price) }}</td>
                 <td style="padding: 12px;">{{ paket.speed }}</td>
+                <td style="padding: 12px;">{% if paket.package_type == 'jam-jaman' %}{{ paket.voucher_duration_hours or 8 }}{% else %}—{% endif %}</td>
                 <td style="padding: 12px; text-align: center;">
                     <a href="{{ url_for('admin_package_edit', id=paket.id) }}" class="btn" style="background-color: #ffc107; color: #000; padding: 5px 10px; text-decoration: none; display: inline-block;">Edit</a>
                     <form action="{{ url_for('admin_package_delete', id=paket.id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Apakah Anda yakin ingin menghapus paket ini?');">
@@ -45,7 +47,50 @@
             </tr>
             {% else %}
             <tr>
-                <td colspan="5" style="padding: 12px; text-align: center;">Belum ada paket yang tersedia.</td>
+                <td colspan="6" style="padding: 12px; text-align: center;">Belum ada paket yang tersedia.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h3 style="margin-top: 36px;">Titik router / hotspot (voucher)</h3>
+    <p>
+        Router aktif untuk pembeli:
+        <strong>{{ active_router_count or 0 }}</strong>
+        — jika 0, pembeli tidak bisa melanjutkan checkout voucher sampai admin menambah titik aktif.
+    </p>
+
+    <div style="margin-bottom: 20px;">
+        <a href="{{ url_for('admin_router_add') }}" class="btn btn-primary">+ Tambah Titik Router</a>
+    </div>
+
+    <table style="width: 100%; border-collapse: collapse; margin-top: 12px;">
+        <thead>
+            <tr style="background-color: #f4f4f4; border-bottom: 2px solid #ddd;">
+                <th style="padding: 12px; text-align: left;">Nama</th>
+                <th style="padding: 12px; text-align: left;">Urutan</th>
+                <th style="padding: 12px; text-align: left;">Status</th>
+                <th style="padding: 12px; text-align: left;">Catatan</th>
+                <th style="padding: 12px; text-align: center;">Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in routers %}
+            <tr style="border-bottom: 1px solid #ddd;">
+                <td style="padding: 12px;">{{ r.name }}</td>
+                <td style="padding: 12px;">{{ r.sort_order }}</td>
+                <td style="padding: 12px;">{{ 'Aktif' if r.is_active else 'Nonaktif' }}</td>
+                <td style="padding: 12px;">{{ r.notes or '—' }}</td>
+                <td style="padding: 12px; text-align: center;">
+                    <a href="{{ url_for('admin_router_edit', id=r.id) }}" class="btn" style="background-color: #ffc107; color: #000; padding: 5px 10px; text-decoration: none; display: inline-block;">Edit</a>
+                    <form action="{{ url_for('admin_router_delete', id=r.id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Hapus titik router ini?');">
+                        <button type="submit" class="btn" style="background-color: #dc3545; color: white; padding: 5px 10px; border: none; cursor: pointer;">Hapus</button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5" style="padding: 12px; text-align: center;">Belum ada titik router di database (0).</td>
             </tr>
             {% endfor %}
         </tbody>

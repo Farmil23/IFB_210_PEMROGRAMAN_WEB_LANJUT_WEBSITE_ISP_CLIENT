@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="display: flex; justify-content: center; margin-top: 50px;">
+    <div class="card" style="width: 100%; max-width: 500px; padding: 30px;">
+        <h2 style="margin-bottom: 20px;">{{ 'Edit Titik Router' if router else 'Tambah Titik Router' }}</h2>
+
+        <form method="POST">
+            <div style="margin-bottom: 15px; text-align: left;">
+                <label style="display: block; margin-bottom: 5px;">Nama / lokasi (tampil di dropdown pembeli)</label>
+                <input type="text" name="name" value="{{ router.name if router else '' }}" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" required placeholder="Contoh: North Router (Campus)">
+            </div>
+
+            <div style="margin-bottom: 15px; text-align: left;">
+                <label style="display: block; margin-bottom: 5px;">Catatan admin (opsional)</label>
+                <input type="text" name="notes" value="{{ router.notes if router and router.notes else '' }}" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" placeholder="SSID, alamat fisik, dll.">
+            </div>
+
+            <div style="margin-bottom: 15px; text-align: left;">
+                <label style="display: block; margin-bottom: 5px;">Urutan tampil (angka kecil lebih dulu)</label>
+                <input type="number" name="sort_order" value="{{ router.sort_order if router else 0 }}" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" required>
+            </div>
+
+            <div style="margin-bottom: 20px; text-align: left;">
+                <label style="display: flex; align-items: center; gap: 8px;">
+                    <input type="checkbox" name="is_active" {% if not router or router.is_active %}checked{% endif %}>
+                    Aktif (muncul untuk pembeli voucher)
+                </label>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Simpan</button>
+            <a href="{{ url_for('admin_dashboard') }}" style="display: block; text-align: center; margin-top: 15px; color: #555;">Batal</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

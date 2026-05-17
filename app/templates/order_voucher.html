@@ -119,16 +119,26 @@
             </div>
 
             <!-- FORM -->
-            <form action="{{ url_for('checkout', package_id=package.id) }}" method="POST" class="relative z-10 space-y-7">
+            <form action="{{ url_for('checkout', package_id=package.id) }}" method="POST" class="relative z-10 space-y-7"
+                  onsubmit="var btn=this.querySelector('[type=submit]');if(btn&amp;&amp;btn.dataset.busy)return false;if(btn){btn.dataset.busy='1';btn.disabled=true;}">
+
+                {% if presentation_mode %}
+                <div class="rounded-2xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-amber-200 text-sm">
+                    <strong>Mode presentasi</strong> (PRODUCTION=false): checkout voucher tetap bisa walau router kosong.
+                </div>
+                {% endif %}
 
                 <!-- ROUTER -->
                 <div>
 
                     <label class="block text-sm font-semibold text-slate-300 mb-3">
 
-                        Select Available Router
+                        Titik router tersedia:
+                        <span class="text-red-400">{{ router_count or 0 }}</span>
 
                     </label>
+
+                    {% if router_count and router_count > 0 %}
 
                     <div class="relative">
 
@@ -144,28 +154,36 @@
                             class="w-full h-16 rounded-2xl border border-white/10 bg-white/[0.04] pl-14 pr-5 text-white appearance-none outline-none transition-all duration-300 focus:border-red-500/30 focus:bg-white/[0.06] cursor-pointer">
 
                             <option value="" disabled selected class="bg-[#111418] text-slate-400">
-                                -- Select Router Location --
+                                -- Pilih lokasi router --
                             </option>
 
-                            <option value="North Router (Campus)" class="bg-[#111418] text-white">
-                                North Router (Campus)
+                            {% for r in routers %}
+                            <option value="{{ r.name }}" class="bg-[#111418] text-white">
+                                {{ r.name }}
                             </option>
-
-                            <option value="South Router (Dormitory)" class="bg-[#111418] text-white">
-                                South Router (Dormitory)
-                            </option>
-
-                            <option value="West Router (Cafeteria)" class="bg-[#111418] text-white">
-                                West Router (Cafeteria)
-                            </option>
-
-                            <option value="Main Internet Cafe" class="bg-[#111418] text-white">
-                                Main Internet Cafe
-                            </option>
+                            {% endfor %}
 
                         </select>
 
                     </div>
+
+                    {% elif presentation_mode %}
+
+                    <p class="text-slate-300 text-sm rounded-2xl border border-cyan-500/25 bg-cyan-500/10 px-4 py-3">
+                        Tidak ada router terdaftar. Lokasi akan diset ke:
+                        <span class="font-mono text-cyan-300">{{ demo_router_label }}</span>
+                    </p>
+
+                    <input type="hidden" name="router_location" value="{{ demo_router_label }}">
+
+                    {% else %}
+
+                    <p class="text-slate-400 text-sm rounded-2xl border border-amber-500/30 bg-amber-500/10 px-4 py-3">
+                        Tidak ada router aktif di sistem (0). Hubungi admin untuk menambahkan titik hotspot,
+                        atau set <span class="font-mono text-amber-300">PRODUCTION=false</span> di <span class="font-mono">.env</span> untuk demo.
+                    </p>
+
+                    {% endif %}
 
                 </div>
 
@@ -243,7 +261,8 @@
                 <!-- BUTTON -->
                 <button
                     type="submit"
-                    class="w-full h-16 rounded-2xl border border-red-500/20 bg-red-500 text-white font-bold text-lg transition-all duration-300 hover:bg-red-600 hover:scale-[1.01] hover:shadow-[0_0_30px_rgba(239,68,68,0.25)]">
+                    {% if (not router_count or router_count == 0) and not presentation_mode %}disabled{% endif %}
+                    class="w-full h-16 rounded-2xl border border-red-500/20 bg-red-500 text-white font-bold text-lg transition-all duration-300 hover:bg-red-600 hover:scale-[1.01] hover:shadow-[0_0_30px_rgba(239,68,68,0.25)] disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100">
 
                     Continue to Payment
 

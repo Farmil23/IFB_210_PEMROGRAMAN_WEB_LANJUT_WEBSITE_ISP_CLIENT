@@ -14,3 +14,4 @@ flask-wtf
 ## HTTP & ENV
 requests         # INFO = Untuk mengirim HTTP POST ke webhook n8n
 python-dotenv    # INFO = Membaca variabel lingkungan dari file .env
+gunicorn         # INFO = Production server (Hugging Face Spaces / Docker)
