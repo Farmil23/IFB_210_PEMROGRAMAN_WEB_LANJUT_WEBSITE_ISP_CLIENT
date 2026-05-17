@@ -1,0 +1,12 @@
+.env
+.env.*
+!.env.example
+__pycache__
+*.pyc
+.git
+.gitignore
+.cursor
+terminals
+assets
+*.md
+!README.md
