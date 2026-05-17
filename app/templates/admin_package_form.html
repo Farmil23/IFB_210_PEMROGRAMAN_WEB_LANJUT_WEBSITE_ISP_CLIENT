@@ -3,14 +3,14 @@
 {% block title %}{{ 'Edit Paket' if package else 'Tambah Paket' }} - BTN Net{% endblock %}
 
 {% block content %}
-<div class="flex min-h-screen bg-[#f4f5f7] text-zinc-900 overflow-hidden">
+<div class="flex min-h-screen bg-zinc-950 text-zinc-900 overflow-hidden">
 
-    {% include 'partials/sidebar.html' %}
+    {% include 'partials/admin_sidebar.html' %}
 
-    <main class="flex-1 overflow-y-auto h-screen relative">
+    <main class="flex-1 overflow-y-auto h-screen relative bg-[#f4f5f7]">
 
         <!-- PAGE HEADER -->
-        <header class="sticky top-0 z-30 bg-white/80 backdrop-blur-xl border-b border-black/5 px-10 py-6">
+        <header class="sticky top-0 z-30 bg-white border-b border-black/5 px-10 py-5">
             <div class="flex items-center gap-4">
                 <a href="{{ url_for('admin_dashboard') }}"
                    class="w-9 h-9 flex items-center justify-center rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-500 transition-colors">
