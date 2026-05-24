@@ -1,6 +1,6 @@
 {% extends "base_dashboard.html" %}
 
-{% block title %}Browse Packages | BTN Net{% endblock %}
+{% block title %}Paket Internet | BTN Net{% endblock %}
 
 {% block content %}
 <div class="relative min-h-screen overflow-hidden bg-[#0b0b0f] text-white">
@@ -9,25 +9,18 @@
     <div class="absolute inset-0 overflow-hidden">
 
         <!-- Gradient -->
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(185,28,28,0.16),transparent_30%),radial-gradient(circle_at_bottom_left,rgba(30,41,59,0.40),transparent_35%)]">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(185,28,28,0.10),transparent_30%),radial-gradient(circle_at_bottom_left,rgba(30,41,59,0.18),transparent_35%)]">
         </div>
 
         <!-- Grid -->
         <div
-            class="absolute inset-0 opacity-[0.04]"
+            class="absolute inset-0 opacity-[0.03]"
             style="
                 background-image:
                 linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px);
                 background-size: 60px 60px;
             ">
-        </div>
-
-        <!-- Animated Glow -->
-        <div class="absolute top-[-120px] right-[-100px] w-[420px] h-[420px] bg-red-600/15 rounded-full blur-3xl animate-pulse">
-        </div>
-
-        <div class="absolute bottom-[-150px] left-[-120px] w-[420px] h-[420px] bg-indigo-700/15 rounded-full blur-3xl animate-pulse">
         </div>
 
     </div>
@@ -40,130 +33,62 @@
         <main class="flex-1 px-6 py-8 lg:px-10 lg:py-10 overflow-hidden">
 
             <!-- HEADER -->
-            <div class="mb-12 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
+            <div class="mb-10">
 
-                <!-- TITLE -->
-                <div>
+                <p class="uppercase tracking-[0.28em] text-[11px] text-red-400 font-semibold">
+                    PAKET INTERNET
+                </p>
 
-                    <div class="flex items-center gap-4 mb-5">
+                <h1 class="mt-4 text-4xl md:text-5xl font-black text-white">
+                    Pilih Paket Internet
+                </h1>
 
-                        <div class="w-14 h-[2px] bg-red-500"></div>
-
-                        <p class="uppercase tracking-[0.35em] text-red-400 text-xs font-semibold">
-                            Enterprise Fiber Network
-                        </p>
-
-                    </div>
-
-                    <h1 class="text-4xl md:text-5xl font-black leading-none tracking-tight text-white">
-
-                        CHOOSE YOUR
-
-                        <span class="block text-red-500 mt-2">
-                            INTERNET PLAN
-                        </span>
-
-                    </h1>
-
-                    <p class="mt-5 text-slate-400 text-base md:text-lg max-w-2xl leading-relaxed">
-
-                        Discover high-performance internet services powered by modern
-                        fiber optic infrastructure for home, business, and enterprise needs.
-
-                    </p>
-
-                </div>
-
-                <!-- STATUS CARD -->
-                <div class="w-full lg:w-[320px] rounded-[28px] border border-white/10 bg-white/[0.03] backdrop-blur-xl p-6 shadow-2xl">
-
-                    <div class="flex items-center justify-between mb-5">
-
-                        <p class="uppercase tracking-[0.25em] text-[11px] text-slate-500">
-                            BTN Net System
-                        </p>
-
-                        <div class="flex items-center gap-2">
-
-                            <div class="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></div>
-
-                            <span class="text-green-400 text-sm">
-                                ACTIVE
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                    <div class="flex items-end gap-2">
-
-                        <h2 class="text-5xl font-black tracking-tight">
-                            99.9%
-                        </h2>
-
-                        <span class="text-red-400 text-lg font-bold mb-1">
-                            UPTIME
-                        </span>
-
-                    </div>
-
-                    <p class="mt-4 text-slate-500 text-sm leading-relaxed">
-
-                        Enterprise-grade fiber infrastructure with stable performance
-                        and real-time network monitoring.
-
-                    </p>
-
-                </div>
+                <p class="mt-4 text-slate-400 text-lg max-w-2xl leading-relaxed">
+                    Pilih paket internet sesuai kebutuhan Anda.
+                    Semua paket menggunakan jaringan BTN Net yang stabil dan cepat.
+                </p>
 
             </div>
 
             <!-- PACKAGE GRID -->
-            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3 gap-10 items-stretch">
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7 items-stretch">
 
                 {% for package in packages %}
-                <div class="group relative flex flex-col justify-between min-h-[680px] min-w-0 rounded-[32px] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.015))] backdrop-blur-xl p-10 overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:border-red-500/20 hover:shadow-[0_20px_50px_rgba(185,28,28,0.12)]">
+                <div class="group relative flex flex-col justify-between min-h-[520px] min-w-0 rounded-[30px] border border-white/10 bg-[#121212] p-8 overflow-hidden transition-all duration-300 hover:border-red-500/30 hover:-translate-y-1">
 
-                    <!-- HOVER GLOW -->
-                    <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-700">
-
-                        <div class="absolute top-[-50px] right-[-50px] w-44 h-44 bg-red-600/10 rounded-full blur-3xl">
-                        </div>
-
+                    <!-- BADGE -->
+                    {% if loop.index == 2 %}
+                    <div class="absolute top-5 right-5 px-4 py-2 rounded-full bg-red-500 text-white text-xs font-bold tracking-wide">
+                        POPULER
                     </div>
+                    {% endif %}
 
                     <!-- CONTENT -->
-                    <div class="relative z-10 flex flex-col flex-1">
+                    <div class="flex flex-col flex-1">
 
                         <!-- TOP -->
-                        <div class="flex items-center justify-between mb-10">
+                        <div class="flex items-center justify-between mb-8">
 
                             <!-- SPEED -->
-                            <div class="inline-flex items-center px-6 py-3 rounded-full border border-red-500/15 bg-red-500/[0.07] text-red-300 text-sm font-semibold tracking-wide">
+                            <div class="inline-flex items-center px-5 py-2 rounded-full border border-red-500/15 bg-red-500/[0.07] text-red-300 text-sm font-semibold">
 
                                 {{ package.speed }}
 
                             </div>
 
                             <!-- ICON -->
-                            <div class="w-14 h-14 rounded-2xl bg-red-500/[0.06] border border-red-500/10 flex items-center justify-center shrink-0">
+                            <div class="w-14 h-14 rounded-2xl bg-red-500/10 flex items-center justify-center">
 
-                                <i data-lucide="wifi" class="w-5 h-5 text-red-400"></i>
+                                <i data-lucide="wifi" class="w-6 h-6 text-red-400"></i>
 
                             </div>
 
                         </div>
 
                         <!-- PACKAGE NAME -->
-                        <div class="mb-10">
+                        <div class="mb-8">
 
-                            <h3 class="text-[2rem] lg:text-[2.3rem]
-                                       leading-[1.05]
-                                       font-black
-                                       uppercase
-                                       tracking-[-0.04em]
-                                       text-white
-                                       break-words">
+                            <h3 class="text-3xl leading-tight font-black text-white break-words">
 
                                 {{ package.name }}
 
@@ -172,49 +97,42 @@
                         </div>
 
                         <!-- PRICE -->
-                        <div class="mb-12 overflow-hidden">
+                        <div class="mb-10">
 
-                            <span class="block
-                                         w-full
-                                         text-[3.5rem]
-                                         lg:text-[4rem]
-                                         leading-none
-                                         font-black
-                                         tracking-[-0.06em]
-                                         text-white">
+                            <span class="block text-[3rem] leading-none font-black tracking-tight text-white">
 
                                 Rp{{ "{:,.0f}".format(package.price) }}
 
                             </span>
 
-                            <p class="text-slate-500 mt-3 text-xl font-medium">
+                            <p class="text-slate-500 mt-3 text-lg font-medium">
 
-                                /{{ 'month' if package.package_type == 'bulanan' else 'voucher' }}
+                                /{{ 'bulan' if package.package_type == 'bulanan' else 'voucher' }}
 
                             </p>
 
                         </div>
 
                         <!-- FEATURES -->
-                        <div class="space-y-7 flex-1">
+                        <div class="space-y-5 flex-1">
 
                             <!-- FEATURE -->
-                            <div class="flex items-start gap-5">
+                            <div class="flex items-start gap-4">
 
-                                <div class="w-12 h-12 rounded-2xl bg-emerald-500/[0.08] border border-emerald-500/15 flex items-center justify-center shrink-0">
+                                <div class="w-11 h-11 rounded-xl bg-emerald-500/10 flex items-center justify-center shrink-0">
 
                                     <i data-lucide="check" class="w-5 h-5 text-emerald-400"></i>
 
                                 </div>
 
-                                <div class="min-w-0">
+                                <div>
 
-                                    <p class="font-semibold text-[1.1rem] text-white leading-snug">
-                                        Unlimited Bandwidth
+                                    <p class="font-semibold text-white">
+                                        Internet Stabil
                                     </p>
 
-                                    <p class="text-slate-500 text-base leading-relaxed mt-2">
-                                        Unlimited high-speed internet access
+                                    <p class="text-slate-500 text-sm mt-1">
+                                        Koneksi cepat dan stabil setiap hari
                                     </p>
 
                                 </div>
@@ -222,22 +140,22 @@
                             </div>
 
                             <!-- FEATURE -->
-                            <div class="flex items-start gap-5">
+                            <div class="flex items-start gap-4">
 
-                                <div class="w-12 h-12 rounded-2xl bg-red-500/[0.08] border border-red-500/15 flex items-center justify-center shrink-0">
+                                <div class="w-11 h-11 rounded-xl bg-red-500/10 flex items-center justify-center shrink-0">
 
                                     <i data-lucide="shield-check" class="w-5 h-5 text-red-400"></i>
 
                                 </div>
 
-                                <div class="min-w-0">
+                                <div>
 
-                                    <p class="font-semibold text-[1.1rem] text-white leading-snug">
-                                        Fiber Optic Network
+                                    <p class="font-semibold text-white">
+                                        Jaringan Aman
                                     </p>
 
-                                    <p class="text-slate-500 text-base leading-relaxed mt-2">
-                                        Stable and reliable fiber optic connectivity
+                                    <p class="text-slate-500 text-sm mt-1">
+                                        Didukung jaringan BTN Net terpercaya
                                     </p>
 
                                 </div>
@@ -245,22 +163,22 @@
                             </div>
 
                             <!-- FEATURE -->
-                            <div class="flex items-start gap-5">
+                            <div class="flex items-start gap-4">
 
-                                <div class="w-12 h-12 rounded-2xl bg-indigo-500/[0.08] border border-indigo-500/15 flex items-center justify-center shrink-0">
+                                <div class="w-11 h-11 rounded-xl bg-indigo-500/10 flex items-center justify-center shrink-0">
 
-                                    <i data-lucide="activity" class="w-5 h-5 text-indigo-400"></i>
+                                    <i data-lucide="zap" class="w-5 h-5 text-indigo-400"></i>
 
                                 </div>
 
-                                <div class="min-w-0">
+                                <div>
 
-                                    <p class="font-semibold text-[1.1rem] text-white leading-snug">
-                                        Low Latency
+                                    <p class="font-semibold text-white">
+                                        Aktivasi Cepat
                                     </p>
 
-                                    <p class="text-slate-500 text-base leading-relaxed mt-2">
-                                        Optimized for gaming, streaming, and meetings
+                                    <p class="text-slate-500 text-sm mt-1">
+                                        Voucher langsung aktif setelah pembayaran
                                     </p>
 
                                 </div>
@@ -272,14 +190,14 @@
                     </div>
 
                     <!-- BUTTON -->
-                    <div class="relative z-10 pt-10">
+                    <div class="pt-8">
 
                         <a
                             href="{{ url_for('order', package_id=package.id) }}"
-                            class="flex items-center justify-center gap-3 w-full rounded-2xl border border-red-500/15 bg-red-500/[0.08] py-5 text-base font-semibold tracking-[0.15em] text-white transition-all duration-300 hover:bg-red-500 hover:border-red-500 hover:shadow-[0_0_30px_rgba(239,68,68,0.25)]">
+                            class="flex items-center justify-center gap-3 w-full rounded-2xl bg-red-500 py-4 text-base font-semibold text-white transition-all duration-300 hover:bg-red-400">
 
                             <span>
-                                PURCHASE PLAN
+                                Beli Sekarang
                             </span>
 
                             <i data-lucide="arrow-right" class="w-5 h-5"></i>
