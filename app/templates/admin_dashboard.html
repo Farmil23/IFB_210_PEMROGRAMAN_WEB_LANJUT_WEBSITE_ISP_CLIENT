@@ -223,65 +223,75 @@
                     </button>
                 </div>
 
-                <div class="bg-white border border-black/5 rounded-2xl shadow-sm overflow-hidden">
-                    <div class="overflow-x-auto">
-                        <table class="w-full min-w-[640px] text-left text-sm">
-                            <thead class="bg-zinc-50 border-b border-black/5">
+                <div class="bg-white border border-black/5 rounded-2xl shadow-sm overflow-hidden relative">
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-600 to-red-400 z-10"></div>
+                    <div class="overflow-x-auto mt-1">
+                        <table class="w-full min-w-[1000px] text-left text-sm">
+                            <thead class="bg-zinc-900 border-b border-zinc-800">
                                 <tr>
-                                    <th class="px-6 py-4 text-[11px] font-black uppercase tracking-wider text-zinc-400">Order ID</th>
-                                    <th class="px-6 py-4 text-[11px] font-black uppercase tracking-wider text-zinc-400">User</th>
-                                    <th class="px-6 py-4 text-[11px] font-black uppercase tracking-wider text-zinc-400">Package</th>
-                                    <th class="px-6 py-4 text-[11px] font-black uppercase tracking-wider text-zinc-400">Amount</th>
-                                    <th class="px-6 py-4 text-[11px] font-black uppercase tracking-wider text-zinc-400">Router</th>
-                                    <th class="px-6 py-4 text-[11px] font-black uppercase tracking-wider text-zinc-400">Created At</th>
-                                    <th class="px-6 py-4 text-[11px] font-black uppercase tracking-wider text-zinc-400">Paid At</th>
-                                    <th class="px-6 py-4 text-[11px] font-black uppercase tracking-wider text-zinc-400">Status</th>
+                                    <th class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-zinc-400 whitespace-nowrap">Order ID</th>
+                                    <th class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-zinc-400 whitespace-nowrap">User</th>
+                                    <th class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-zinc-400 whitespace-nowrap">Package</th>
+                                    <th class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-zinc-400 whitespace-nowrap text-right">Amount</th>
+                                    <th class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-zinc-400 whitespace-nowrap">Router</th>
+                                    <th class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-zinc-400 whitespace-nowrap">Created At</th>
+                                    <th class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-zinc-400 whitespace-nowrap">Paid At</th>
+                                    <th class="px-6 py-4 text-[11px] font-black uppercase tracking-widest text-zinc-400 whitespace-nowrap text-center">Status</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-black/5">
+                            <tbody class="divide-y divide-black/5 bg-white">
                                 {% if recent_transactions is defined and recent_transactions %}
                                 {% for tx in recent_transactions %}
-                                <tr class="hover:bg-zinc-50/70 transition-colors">
-                                    <td class="px-6 py-4 font-mono text-xs text-zinc-500">#{{ tx.id }}</td>
-                                    <td class="px-6 py-4 font-bold text-zinc-900">{{ tx.customer.username if tx.customer else 'Unknown' }}</td>
-                                    <td class="px-6 py-4 text-zinc-600">{{ tx.package.name if tx.package else 'Unknown Package' }}</td>
-                                    <td class="px-6 py-4 font-semibold text-zinc-700">
+                                <tr class="hover:bg-zinc-50 transition-colors group">
+                                    <td class="px-6 py-4 font-mono text-xs text-zinc-500 whitespace-nowrap group-hover:text-zinc-800 transition-colors">#{{ tx.id }}</td>
+                                    <td class="px-6 py-4 font-black text-zinc-900 whitespace-nowrap">{{ tx.customer.username if tx.customer else 'Unknown' }}</td>
+                                    <td class="px-6 py-4 text-zinc-600 whitespace-nowrap">{{ tx.package.name if tx.package else 'Unknown Package' }}</td>
+                                    <td class="px-6 py-4 font-bold text-zinc-800 whitespace-nowrap text-right">
                                         {% if tx.package is defined and tx.package and tx.package.price is not none %}
                                             Rp {{ "{:,.0f}".format(tx.package.price|float) }}
                                         {% else %}
                                             Rp 0
                                         {% endif %}
                                     </td>
-                                    <td class="px-6 py-4 text-zinc-600">{{ tx.router_location if tx.router_location else '-' }}</td>
-                                    <td class="px-6 py-4 text-zinc-500 text-xs">{{ tx.created_at.strftime('%d %b %Y, %H:%M') if tx.created_at else '-' }}</td>
-                                    <td class="px-6 py-4 text-zinc-500 text-xs">
+                                    <td class="px-6 py-4 text-zinc-600 whitespace-nowrap">
+                                        {% if tx.router_location %}
+                                            <span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-lg bg-zinc-100 text-zinc-700 text-[11px] font-bold tracking-wide uppercase"><svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.243-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>{{ tx.router_location }}</span>
+                                        {% else %}
+                                            <span class="text-zinc-300">—</span>
+                                        {% endif %}
+                                    </td>
+                                    <td class="px-6 py-4 text-zinc-500 text-xs font-medium whitespace-nowrap">{{ tx.created_at.strftime('%d %b %Y, %H:%M') if tx.created_at else '-' }}</td>
+                                    <td class="px-6 py-4 text-zinc-500 text-xs font-medium whitespace-nowrap">
                                         {% if tx.paid_at %}
-                                            {{ tx.paid_at.strftime('%d %b %Y, %H:%M') }}
+                                            <span class="text-zinc-800">{{ tx.paid_at.strftime('%d %b %Y, %H:%M') }}</span>
                                         {% else %}
                                             <span class="text-zinc-400 italic">Belum dibayar</span>
                                         {% endif %}
                                     </td>
-                                    <td class="px-6 py-4">
+                                    <td class="px-6 py-4 text-center whitespace-nowrap">
                                         {% if tx.status == 'paid' %}
-                                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-green-100 text-green-700 border border-green-200"><span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>Paid</span>
+                                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] uppercase tracking-widest font-black bg-green-100 text-green-700 border border-green-200"><span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>Paid</span>
                                         {% elif tx.status == 'pending' %}
-                                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-700 border border-amber-200"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>Pending</span>
+                                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] uppercase tracking-widest font-black bg-amber-100 text-amber-700 border border-amber-200"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>Pending</span>
                                         {% elif tx.status in ['failed', 'cancelled'] %}
-                                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-red-100 text-red-700 border border-red-200"><span class="w-1.5 h-1.5 rounded-full bg-red-500"></span>{{ tx.status|title }}</span>
+                                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] uppercase tracking-widest font-black bg-red-100 text-red-700 border border-red-200"><span class="w-1.5 h-1.5 rounded-full bg-red-500"></span>{{ tx.status }}</span>
                                         {% else %}
-                                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-zinc-100 text-zinc-700 border border-zinc-200"><span class="w-1.5 h-1.5 rounded-full bg-zinc-500"></span>{{ tx.status|title if tx.status else 'Unknown' }}</span>
+                                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] uppercase tracking-widest font-black bg-zinc-100 text-zinc-700 border border-zinc-200"><span class="w-1.5 h-1.5 rounded-full bg-zinc-500"></span>{{ tx.status if tx.status else 'Unknown' }}</span>
                                         {% endif %}
                                     </td>
                                 </tr>
                                 {% endfor %}
                                 {% else %}
                                 <tr>
-                                    <td colspan="8" class="px-6 py-16 text-center">
-                                        <div class="flex flex-col items-center gap-3">
-                                            <div class="w-14 h-14 rounded-2xl bg-zinc-100 flex items-center justify-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-zinc-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+                                    <td colspan="8" class="px-6 py-20 text-center">
+                                        <div class="flex flex-col items-center justify-center gap-4">
+                                            <div class="w-16 h-16 rounded-3xl bg-zinc-50 border border-black/5 flex items-center justify-center shadow-inner">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-zinc-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
                                             </div>
-                                            <p class="font-bold text-zinc-500 text-sm">Belum ada transaksi</p>
+                                            <div>
+                                                <p class="font-black text-zinc-700 text-base">No transactions found</p>
+                                                <p class="text-sm text-zinc-500 mt-1">There are no checkouts or payments recorded yet.</p>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
