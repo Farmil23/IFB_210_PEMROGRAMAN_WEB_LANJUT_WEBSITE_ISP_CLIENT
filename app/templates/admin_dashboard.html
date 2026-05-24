@@ -1,33 +1,6 @@
 {% extends "base_dashboard.html" %}
 {% block title %}Admin Dashboard - BTN Net{% endblock %}
 {% block content %}
-<style>
-@media print {
-    body * {
-        visibility: hidden;
-    }
-    #printable-report, #printable-report * {
-        visibility: visible;
-    }
-    #printable-report {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        margin: 0;
-        padding: 0;
-    }
-    #print-btn { display: none !important; }
-    .print-header { display: block !important; margin-bottom: 20px; }
-    table { width: 100% !important; border-collapse: collapse !important; border: 1px solid #e4e4e7 !important; }
-    th, td { border: 1px solid #e4e4e7 !important; padding: 8px !important; color: #000 !important; }
-    th { background-color: #f4f5f7 !important; font-weight: bold !important; color: #52525b !important; }
-    * { box-shadow: none !important; }
-}
-@media screen {
-    .print-header { display: none !important; }
-}
-</style>
 <div class="flex min-h-screen bg-zinc-950 text-zinc-900 overflow-hidden">
 
     {% include 'partials/admin_sidebar.html' %}
@@ -206,21 +179,16 @@
             </div>
 
             <!-- RECENT TRANSACTIONS -->
-            <div id="printable-report">
-                <div class="print-header">
-                    <h1 class="text-2xl font-black text-black">BTN Net Transaction Report</h1>
-                    <p class="text-sm font-semibold text-gray-800">Baraya Telematika Nusantara</p>
-                    <p class="text-xs text-gray-600 mt-1" id="print-date"></p>
-                </div>
+            <div>
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
                     <div>
                         <h2 class="text-xl font-black text-zinc-900">Recent Transactions</h2>
                         <p class="text-sm text-zinc-500 mt-0.5">Latest user checkouts and payments.</p>
                     </div>
-                    <button id="print-btn" onclick="printTransactions()" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-zinc-900 text-white text-sm font-bold hover:bg-black active:scale-95 transition-all shadow-lg shadow-black/20 whitespace-nowrap">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
-                        Print Report
-                    </button>
+                    <a href="{{ url_for('admin_transactions_report') }}" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-zinc-900 text-white text-sm font-bold hover:bg-black active:scale-95 transition-all shadow-lg shadow-black/20 whitespace-nowrap">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                        View Full Report
+                    </a>
                 </div>
 
                 <div class="bg-white border border-black/5 rounded-2xl shadow-sm overflow-hidden relative">
@@ -473,17 +441,4 @@
         </div>
     </main>
 </div>
-<script>
-function printTransactions() {
-    var dateElem = document.getElementById('print-date');
-    if (dateElem) {
-        var now = new Date();
-        dateElem.textContent = 'Printed on: ' + now.toLocaleString('id-ID', {
-            year: 'numeric', month: 'long', day: 'numeric',
-            hour: '2-digit', minute: '2-digit'
-        });
-    }
-    window.print();
-}
-</script>
 {% endblock %}
