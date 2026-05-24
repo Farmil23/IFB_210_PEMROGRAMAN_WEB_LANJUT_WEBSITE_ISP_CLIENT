@@ -176,12 +176,47 @@ def ensure_schema():
 
         db.session.commit()
 
+    def _add_router_ip_address():
+
+        from .models import HotspotRouter
+
+        insp = inspect(db.engine)
+
+        table = HotspotRouter.__tablename__
+
+        if table not in insp.get_table_names():
+
+            return
+
+        cols = {c['name'] for c in insp.get_columns(table)}
+
+        if 'ip_address' in cols:
+
+            return
+
+        if dialect == 'sqlite':
+
+            sql = text(
+                f'ALTER TABLE {table} ADD COLUMN ip_address VARCHAR(64)'
+            )
+
+        else:
+
+            sql = text(
+                f'ALTER TABLE {table} ADD COLUMN ip_address VARCHAR(64) NULL'
+            )
+
+        db.session.execute(sql)
+
+        db.session.commit()
+
     for fn in (
         _add_package_voucher_hours,
         _add_voucher_expires_at,
         _add_transaction_paid_at,
         _add_voucher_valid_from,
         _unique_voucher_per_transaction,
+        _add_router_ip_address,
     ):
 
         try:
@@ -191,3 +226,4 @@ def ensure_schema():
         except Exception:
 
             db.session.rollback()
+

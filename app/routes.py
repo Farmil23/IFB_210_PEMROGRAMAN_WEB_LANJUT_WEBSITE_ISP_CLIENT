@@ -837,12 +837,19 @@ def admin_router_add():
 
         name = (request.form.get('name') or '').strip()
         notes = (request.form.get('notes') or '').strip() or None
+        ip_address = (request.form.get('ip_address') or '').strip() or None
         sort_order = int(request.form.get('sort_order') or 0)
         is_active = request.form.get('is_active') == 'on'
 
         if not name:
 
             flash('Nama router wajib diisi.', 'danger')
+
+            return redirect(url_for('admin_router_add'))
+
+        if not ip_address:
+
+            flash('IP address router wajib diisi.', 'danger')
 
             return redirect(url_for('admin_router_add'))
 
@@ -856,6 +863,7 @@ def admin_router_add():
             HotspotRouter(
                 name=name,
                 notes=notes,
+                ip_address=ip_address,
                 sort_order=sort_order,
                 is_active=is_active,
             )
@@ -888,12 +896,21 @@ def admin_router_edit(id):
 
         name = (request.form.get('name') or '').strip()
         notes = (request.form.get('notes') or '').strip() or None
+        ip_address = (request.form.get('ip_address') or '').strip() or None
         sort_order = int(request.form.get('sort_order') or 0)
         is_active = request.form.get('is_active') == 'on'
 
         if not name:
 
             flash('Nama router wajib diisi.', 'danger')
+
+            return redirect(
+                url_for('admin_router_edit', id=id)
+            )
+
+        if not ip_address:
+
+            flash('IP address router wajib diisi.', 'danger')
 
             return redirect(
                 url_for('admin_router_edit', id=id)
@@ -914,6 +931,7 @@ def admin_router_edit(id):
 
         router.name = name
         router.notes = notes
+        router.ip_address = ip_address
         router.sort_order = sort_order
         router.is_active = is_active
 

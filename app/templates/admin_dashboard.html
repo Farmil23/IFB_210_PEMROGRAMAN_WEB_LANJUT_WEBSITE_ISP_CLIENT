@@ -224,6 +224,7 @@
                             <thead class="bg-zinc-50 border-b border-black/5">
                                 <tr>
                                     <th class="px-6 py-4 text-[11px] font-black uppercase tracking-wider text-zinc-400">Name / Location</th>
+                                    <th class="px-6 py-4 text-[11px] font-black uppercase tracking-wider text-zinc-400">IP Address</th>
                                     <th class="px-6 py-4 text-[11px] font-black uppercase tracking-wider text-zinc-400 text-center">Order</th>
                                     <th class="px-6 py-4 text-[11px] font-black uppercase tracking-wider text-zinc-400">Status</th>
                                     <th class="px-6 py-4 text-[11px] font-black uppercase tracking-wider text-zinc-400">Notes</th>
@@ -235,6 +236,13 @@
                                 {% for r in routers %}
                                 <tr class="hover:bg-zinc-50/70 transition-colors">
                                     <td class="px-6 py-4 font-bold text-zinc-900">{{ r.name }}</td>
+                                    <td class="px-6 py-4 text-zinc-500 font-mono text-xs">
+                                        {% if r.ip_address %}
+                                        <span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-lg bg-zinc-100 text-zinc-700 font-mono text-xs">{{ r.ip_address }}</span>
+                                        {% else %}
+                                        <span class="text-zinc-300">—</span>
+                                        {% endif %}
+                                    </td>
                                     <td class="px-6 py-4 text-center">
                                         <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-zinc-100 text-zinc-600 text-xs font-black font-mono">{{ r.sort_order }}</span>
                                     </td>
