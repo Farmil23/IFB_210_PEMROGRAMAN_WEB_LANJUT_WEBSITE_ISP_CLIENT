@@ -708,11 +708,40 @@ def admin_dashboard():
         is_active=True
     ).count()
 
+    # ---- Read-only monitoring queries (SELECT only, no mutations) ----
+
+    total_routers = HotspotRouter.query.count()
+
+    total_users = User.query.count()
+
+    total_transactions = Transaction.query.count()
+
+    paid_transactions = Transaction.query.filter_by(
+        status='paid'
+    ).count()
+
+    pending_transactions = Transaction.query.filter_by(
+        status='pending'
+    ).count()
+
+    total_vouchers = Voucher.query.count()
+
+    recent_transactions = Transaction.query.order_by(
+        Transaction.id.desc()
+    ).limit(10).all()
+
     return render_template(
         'admin_dashboard.html',
         packages=packages,
         routers=routers,
         active_router_count=active_router_count or 0,
+        total_routers=total_routers or 0,
+        total_users=total_users or 0,
+        total_transactions=total_transactions or 0,
+        paid_transactions=paid_transactions or 0,
+        pending_transactions=pending_transactions or 0,
+        total_vouchers=total_vouchers or 0,
+        recent_transactions=recent_transactions,
     )
 
 
