@@ -206,7 +206,13 @@
                                     <td class="px-6 py-4 font-mono text-xs text-zinc-500">#{{ tx.order_id }}</td>
                                     <td class="px-6 py-4 font-bold text-zinc-900">{{ tx.user.username if tx.user else 'Unknown' }}</td>
                                     <td class="px-6 py-4 text-zinc-600">{{ tx.package.name if tx.package else 'Unknown' }}</td>
-                                    <td class="px-6 py-4 font-semibold text-zinc-700">Rp {{ "{:,.0f}".format(tx.amount) }}</td>
+                                    <td class="px-6 py-4 font-semibold text-zinc-700">
+                                        {% if tx.package is defined and tx.package and tx.package.price is not none %}
+                                            Rp {{ "{:,.0f}".format(tx.package.price|float) }}
+                                        {% else %}
+                                            Rp 0
+                                        {% endif %}
+                                    </td>
                                     <td class="px-6 py-4">
                                         {% if tx.status == 'paid' %}
                                         <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-green-100 text-green-700 border border-green-200"><span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>Paid</span>

@@ -1262,7 +1262,15 @@ def checkout(package_id):
 
                 data = response.json()
 
-                checkout_url = data.get('url')
+                checkout_url = (
+                    data.get('url')
+                    or data.get('checkout_url')
+                    or data.get('checkoutUrl')
+                    or data.get('payment_url')
+                    or data.get('paymentUrl')
+                    or data.get('session_url')
+                    or data.get('sessionUrl')
+                )
 
                 session_id = (
                     data.get('session_id')
@@ -1283,20 +1291,25 @@ def checkout(package_id):
             except ValueError:
                 pass
 
-        return f"""
-        Gagal mendapatkan link pembayaran dari n8n.
-        Pastikan workflow n8n memakai success_url dari payload:
-        {payload.get('success_url')}
-        <br>
-        Status: {response.status_code}
-        """, 500
+        flash(
+            'Checkout gateway tidak merespon dengan URL pembayaran. Pembayaran ditunda.',
+            'warning',
+        )
+
+        return redirect(
+            url_for('transaction_detail', transaction_id=transaksi_baru.id)
+        )
 
     except Exception as e:
 
-        return f"""
-        Terjadi kesalahan koneksi ke server n8n:
-        {str(e)}
-        """, 500
+        flash(
+            'Koneksi ke gateway pembayaran gagal.',
+            'danger',
+        )
+
+        return redirect(
+            url_for('transaction_detail', transaction_id=transaksi_baru.id)
+        )
 
 
 @current_app.route(
