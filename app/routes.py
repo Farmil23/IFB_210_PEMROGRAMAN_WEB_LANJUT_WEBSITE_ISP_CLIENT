@@ -705,15 +705,53 @@ def admin_package_add():
 
     if request.method == 'POST':
 
-        name = request.form.get('name')
-        package_type = request.form.get('package_type')
-        price = request.form.get('price')
-        speed = request.form.get('speed')
+        name = (request.form.get('name') or '').strip()
+        package_type = request.form.get('package_type') or 'bulanan'
+        price_raw = (request.form.get('price') or '').strip()
+        speed = (request.form.get('speed') or '').strip()
         vdh_raw = request.form.get('voucher_duration_hours')
+
+        if not name:
+
+            flash('Nama paket wajib diisi.', 'danger')
+
+            return redirect(url_for('admin_package_add'))
+
+        if not price_raw:
+
+            flash('Harga paket wajib diisi.', 'danger')
+
+            return redirect(url_for('admin_package_add'))
+
+        try:
+
+            price = float(price_raw)
+
+            if price < 0:
+
+                raise ValueError
+
+        except ValueError:
+
+            flash('Harga harus berupa angka positif.', 'danger')
+
+            return redirect(url_for('admin_package_add'))
+
+        if not speed:
+
+            flash('Kecepatan paket wajib diisi.', 'danger')
+
+            return redirect(url_for('admin_package_add'))
 
         if package_type == 'jam-jaman':
 
-            voucher_duration_hours = int(vdh_raw) if vdh_raw else 8
+            try:
+
+                voucher_duration_hours = int(vdh_raw) if vdh_raw else 8
+
+            except ValueError:
+
+                voucher_duration_hours = 8
 
             if voucher_duration_hours < 1:
 
@@ -726,7 +764,7 @@ def admin_package_add():
         new_package = Package(
             name=name,
             package_type=package_type,
-            price=float(price),
+            price=price,
             speed=speed,
             voucher_duration_hours=voucher_duration_hours,
         )
@@ -734,14 +772,9 @@ def admin_package_add():
         db.session.add(new_package)
         db.session.commit()
 
-        flash(
-            'Paket berhasil ditambahkan!',
-            'success'
-        )
+        flash('Paket berhasil ditambahkan!', 'success')
 
-        return redirect(
-            url_for('admin_dashboard')
-        )
+        return redirect(url_for('admin_dashboard'))
 
     return render_template(
         'admin_package_form.html',
@@ -762,18 +795,59 @@ def admin_package_edit(id):
 
     if request.method == 'POST':
 
-        paket.name = request.form.get('name')
-        package_type = request.form.get('package_type')
+        name = (request.form.get('name') or '').strip()
+        package_type = request.form.get('package_type') or 'bulanan'
+        price_raw = (request.form.get('price') or '').strip()
+        speed = (request.form.get('speed') or '').strip()
+        vdh_raw = request.form.get('voucher_duration_hours')
+
+        if not name:
+
+            flash('Nama paket wajib diisi.', 'danger')
+
+            return redirect(url_for('admin_package_edit', id=id))
+
+        if not price_raw:
+
+            flash('Harga paket wajib diisi.', 'danger')
+
+            return redirect(url_for('admin_package_edit', id=id))
+
+        try:
+
+            price = float(price_raw)
+
+            if price < 0:
+
+                raise ValueError
+
+        except ValueError:
+
+            flash('Harga harus berupa angka positif.', 'danger')
+
+            return redirect(url_for('admin_package_edit', id=id))
+
+        if not speed:
+
+            flash('Kecepatan paket wajib diisi.', 'danger')
+
+            return redirect(url_for('admin_package_edit', id=id))
+
+        paket.name = name
         paket.package_type = package_type
-        paket.price = float(
-            request.form.get('price')
-        )
-        paket.speed = request.form.get('speed')
+        paket.price = price
+        paket.speed = speed
         vdh_raw = request.form.get('voucher_duration_hours')
 
         if package_type == 'jam-jaman':
 
-            paket.voucher_duration_hours = int(vdh_raw) if vdh_raw else 8
+            try:
+
+                paket.voucher_duration_hours = int(vdh_raw) if vdh_raw else 8
+
+            except ValueError:
+
+                paket.voucher_duration_hours = 8
 
             if paket.voucher_duration_hours < 1:
 
@@ -785,14 +859,9 @@ def admin_package_edit(id):
 
         db.session.commit()
 
-        flash(
-            'Paket berhasil diperbarui!',
-            'success'
-        )
+        flash('Paket berhasil diperbarui!', 'success')
 
-        return redirect(
-            url_for('admin_dashboard')
-        )
+        return redirect(url_for('admin_dashboard'))
 
     return render_template(
         'admin_package_form.html',
