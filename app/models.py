@@ -59,4 +59,5 @@ class HotspotRouter(db.Model):
     notes = db.Column(db.String(255), nullable=True)
     is_active = db.Column(db.Boolean, default=True)
     sort_order = db.Column(db.Integer, default=0)
+    ip_address = db.Column(db.String(64), nullable=True)  # INFO = IP address router, opsional untuk routing management
 

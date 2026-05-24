@@ -395,6 +395,15 @@ def index():
 @current_app.route('/login', methods=['GET', 'POST'])
 def login():
 
+    # Already authenticated → route to correct dashboard immediately
+    if current_user.is_authenticated:
+
+        if current_user.is_admin:
+
+            return redirect(url_for('admin_dashboard'))
+
+        return redirect(url_for('dashboard'))
+
     form = LoginForm()
 
     if request.method == 'POST':
@@ -438,6 +447,15 @@ def login():
 @current_app.route('/register', methods=['GET', 'POST'])
 def register():
 
+    # Already authenticated → route to correct dashboard immediately
+    if current_user.is_authenticated:
+
+        if current_user.is_admin:
+
+            return redirect(url_for('admin_dashboard'))
+
+        return redirect(url_for('dashboard'))
+
     if request.method == 'POST':
 
         username = request.form.get('username')
@@ -469,14 +487,18 @@ def register():
         db.session.add(new_user)
         db.session.commit()
 
+        login_user(new_user)
+
         flash(
-            'Pendaftaran berhasil! Silakan login.',
+            'Pendaftaran berhasil! Selamat datang, ' + (new_user.username or '') + '.',
             'success'
         )
 
-        return redirect(
-            url_for('login')
-        )
+        if new_user.is_admin:
+
+            return redirect(url_for('admin_dashboard'))
+
+        return redirect(url_for('dashboard'))
 
     return render_template('register.html')
 
@@ -686,11 +708,40 @@ def admin_dashboard():
         is_active=True
     ).count()
 
+    # ---- Read-only monitoring queries (SELECT only, no mutations) ----
+
+    total_routers = HotspotRouter.query.count()
+
+    total_users = User.query.count()
+
+    total_transactions = Transaction.query.count()
+
+    paid_transactions = Transaction.query.filter_by(
+        status='paid'
+    ).count()
+
+    pending_transactions = Transaction.query.filter_by(
+        status='pending'
+    ).count()
+
+    total_vouchers = Voucher.query.count()
+
+    recent_transactions = Transaction.query.order_by(
+        Transaction.id.desc()
+    ).limit(10).all()
+
     return render_template(
         'admin_dashboard.html',
         packages=packages,
         routers=routers,
         active_router_count=active_router_count or 0,
+        total_routers=total_routers or 0,
+        total_users=total_users or 0,
+        total_transactions=total_transactions or 0,
+        paid_transactions=paid_transactions or 0,
+        pending_transactions=pending_transactions or 0,
+        total_vouchers=total_vouchers or 0,
+        recent_transactions=recent_transactions,
     )
 
 
@@ -705,15 +756,53 @@ def admin_package_add():
 
     if request.method == 'POST':
 
-        name = request.form.get('name')
-        package_type = request.form.get('package_type')
-        price = request.form.get('price')
-        speed = request.form.get('speed')
+        name = (request.form.get('name') or '').strip()
+        package_type = request.form.get('package_type') or 'bulanan'
+        price_raw = (request.form.get('price') or '').strip()
+        speed = (request.form.get('speed') or '').strip()
         vdh_raw = request.form.get('voucher_duration_hours')
+
+        if not name:
+
+            flash('Nama paket wajib diisi.', 'danger')
+
+            return redirect(url_for('admin_package_add'))
+
+        if not price_raw:
+
+            flash('Harga paket wajib diisi.', 'danger')
+
+            return redirect(url_for('admin_package_add'))
+
+        try:
+
+            price = float(price_raw)
+
+            if price < 0:
+
+                raise ValueError
+
+        except ValueError:
+
+            flash('Harga harus berupa angka positif.', 'danger')
+
+            return redirect(url_for('admin_package_add'))
+
+        if not speed:
+
+            flash('Kecepatan paket wajib diisi.', 'danger')
+
+            return redirect(url_for('admin_package_add'))
 
         if package_type == 'jam-jaman':
 
-            voucher_duration_hours = int(vdh_raw) if vdh_raw else 8
+            try:
+
+                voucher_duration_hours = int(vdh_raw) if vdh_raw else 8
+
+            except ValueError:
+
+                voucher_duration_hours = 8
 
             if voucher_duration_hours < 1:
 
@@ -726,7 +815,7 @@ def admin_package_add():
         new_package = Package(
             name=name,
             package_type=package_type,
-            price=float(price),
+            price=price,
             speed=speed,
             voucher_duration_hours=voucher_duration_hours,
         )
@@ -734,14 +823,9 @@ def admin_package_add():
         db.session.add(new_package)
         db.session.commit()
 
-        flash(
-            'Paket berhasil ditambahkan!',
-            'success'
-        )
+        flash('Paket berhasil ditambahkan!', 'success')
 
-        return redirect(
-            url_for('admin_dashboard')
-        )
+        return redirect(url_for('admin_dashboard'))
 
     return render_template(
         'admin_package_form.html',
@@ -762,18 +846,59 @@ def admin_package_edit(id):
 
     if request.method == 'POST':
 
-        paket.name = request.form.get('name')
-        package_type = request.form.get('package_type')
+        name = (request.form.get('name') or '').strip()
+        package_type = request.form.get('package_type') or 'bulanan'
+        price_raw = (request.form.get('price') or '').strip()
+        speed = (request.form.get('speed') or '').strip()
+        vdh_raw = request.form.get('voucher_duration_hours')
+
+        if not name:
+
+            flash('Nama paket wajib diisi.', 'danger')
+
+            return redirect(url_for('admin_package_edit', id=id))
+
+        if not price_raw:
+
+            flash('Harga paket wajib diisi.', 'danger')
+
+            return redirect(url_for('admin_package_edit', id=id))
+
+        try:
+
+            price = float(price_raw)
+
+            if price < 0:
+
+                raise ValueError
+
+        except ValueError:
+
+            flash('Harga harus berupa angka positif.', 'danger')
+
+            return redirect(url_for('admin_package_edit', id=id))
+
+        if not speed:
+
+            flash('Kecepatan paket wajib diisi.', 'danger')
+
+            return redirect(url_for('admin_package_edit', id=id))
+
+        paket.name = name
         paket.package_type = package_type
-        paket.price = float(
-            request.form.get('price')
-        )
-        paket.speed = request.form.get('speed')
+        paket.price = price
+        paket.speed = speed
         vdh_raw = request.form.get('voucher_duration_hours')
 
         if package_type == 'jam-jaman':
 
-            paket.voucher_duration_hours = int(vdh_raw) if vdh_raw else 8
+            try:
+
+                paket.voucher_duration_hours = int(vdh_raw) if vdh_raw else 8
+
+            except ValueError:
+
+                paket.voucher_duration_hours = 8
 
             if paket.voucher_duration_hours < 1:
 
@@ -785,14 +910,9 @@ def admin_package_edit(id):
 
         db.session.commit()
 
-        flash(
-            'Paket berhasil diperbarui!',
-            'success'
-        )
+        flash('Paket berhasil diperbarui!', 'success')
 
-        return redirect(
-            url_for('admin_dashboard')
-        )
+        return redirect(url_for('admin_dashboard'))
 
     return render_template(
         'admin_package_form.html',
@@ -837,12 +957,19 @@ def admin_router_add():
 
         name = (request.form.get('name') or '').strip()
         notes = (request.form.get('notes') or '').strip() or None
+        ip_address = (request.form.get('ip_address') or '').strip() or None
         sort_order = int(request.form.get('sort_order') or 0)
         is_active = request.form.get('is_active') == 'on'
 
         if not name:
 
             flash('Nama router wajib diisi.', 'danger')
+
+            return redirect(url_for('admin_router_add'))
+
+        if not ip_address:
+
+            flash('IP address router wajib diisi.', 'danger')
 
             return redirect(url_for('admin_router_add'))
 
@@ -856,6 +983,7 @@ def admin_router_add():
             HotspotRouter(
                 name=name,
                 notes=notes,
+                ip_address=ip_address,
                 sort_order=sort_order,
                 is_active=is_active,
             )
@@ -888,12 +1016,21 @@ def admin_router_edit(id):
 
         name = (request.form.get('name') or '').strip()
         notes = (request.form.get('notes') or '').strip() or None
+        ip_address = (request.form.get('ip_address') or '').strip() or None
         sort_order = int(request.form.get('sort_order') or 0)
         is_active = request.form.get('is_active') == 'on'
 
         if not name:
 
             flash('Nama router wajib diisi.', 'danger')
+
+            return redirect(
+                url_for('admin_router_edit', id=id)
+            )
+
+        if not ip_address:
+
+            flash('IP address router wajib diisi.', 'danger')
 
             return redirect(
                 url_for('admin_router_edit', id=id)
@@ -914,6 +1051,7 @@ def admin_router_edit(id):
 
         router.name = name
         router.notes = notes
+        router.ip_address = ip_address
         router.sort_order = sort_order
         router.is_active = is_active
 
@@ -1124,7 +1262,15 @@ def checkout(package_id):
 
                 data = response.json()
 
-                checkout_url = data.get('url')
+                checkout_url = (
+                    data.get('url')
+                    or data.get('checkout_url')
+                    or data.get('checkoutUrl')
+                    or data.get('payment_url')
+                    or data.get('paymentUrl')
+                    or data.get('session_url')
+                    or data.get('sessionUrl')
+                )
 
                 session_id = (
                     data.get('session_id')
@@ -1145,20 +1291,25 @@ def checkout(package_id):
             except ValueError:
                 pass
 
-        return f"""
-        Gagal mendapatkan link pembayaran dari n8n.
-        Pastikan workflow n8n memakai success_url dari payload:
-        {payload.get('success_url')}
-        <br>
-        Status: {response.status_code}
-        """, 500
+        flash(
+            'Checkout gateway tidak merespon dengan URL pembayaran. Pembayaran ditunda.',
+            'warning',
+        )
+
+        return redirect(
+            url_for('transaction_detail', transaction_id=transaksi_baru.id)
+        )
 
     except Exception as e:
 
-        return f"""
-        Terjadi kesalahan koneksi ke server n8n:
-        {str(e)}
-        """, 500
+        flash(
+            'Koneksi ke gateway pembayaran gagal.',
+            'danger',
+        )
+
+        return redirect(
+            url_for('transaction_detail', transaction_id=transaksi_baru.id)
+        )
 
 
 @current_app.route(
