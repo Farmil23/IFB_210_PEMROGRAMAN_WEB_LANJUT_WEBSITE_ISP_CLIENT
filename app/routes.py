@@ -395,6 +395,15 @@ def index():
 @current_app.route('/login', methods=['GET', 'POST'])
 def login():
 
+    # Already authenticated → route to correct dashboard immediately
+    if current_user.is_authenticated:
+
+        if current_user.is_admin:
+
+            return redirect(url_for('admin_dashboard'))
+
+        return redirect(url_for('dashboard'))
+
     form = LoginForm()
 
     if request.method == 'POST':
@@ -438,6 +447,15 @@ def login():
 @current_app.route('/register', methods=['GET', 'POST'])
 def register():
 
+    # Already authenticated → route to correct dashboard immediately
+    if current_user.is_authenticated:
+
+        if current_user.is_admin:
+
+            return redirect(url_for('admin_dashboard'))
+
+        return redirect(url_for('dashboard'))
+
     if request.method == 'POST':
 
         username = request.form.get('username')
@@ -469,14 +487,18 @@ def register():
         db.session.add(new_user)
         db.session.commit()
 
+        login_user(new_user)
+
         flash(
-            'Pendaftaran berhasil! Silakan login.',
+            'Pendaftaran berhasil! Selamat datang, ' + (new_user.username or '') + '.',
             'success'
         )
 
-        return redirect(
-            url_for('login')
-        )
+        if new_user.is_admin:
+
+            return redirect(url_for('admin_dashboard'))
+
+        return redirect(url_for('dashboard'))
 
     return render_template('register.html')
 
