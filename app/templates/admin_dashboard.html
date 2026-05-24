@@ -196,6 +196,9 @@
                                     <th class="px-6 py-4 text-[11px] font-black uppercase tracking-wider text-zinc-400">User</th>
                                     <th class="px-6 py-4 text-[11px] font-black uppercase tracking-wider text-zinc-400">Package</th>
                                     <th class="px-6 py-4 text-[11px] font-black uppercase tracking-wider text-zinc-400">Amount</th>
+                                    <th class="px-6 py-4 text-[11px] font-black uppercase tracking-wider text-zinc-400">Router</th>
+                                    <th class="px-6 py-4 text-[11px] font-black uppercase tracking-wider text-zinc-400">Created At</th>
+                                    <th class="px-6 py-4 text-[11px] font-black uppercase tracking-wider text-zinc-400">Paid At</th>
                                     <th class="px-6 py-4 text-[11px] font-black uppercase tracking-wider text-zinc-400">Status</th>
                                 </tr>
                             </thead>
@@ -203,9 +206,9 @@
                                 {% if recent_transactions is defined and recent_transactions %}
                                 {% for tx in recent_transactions %}
                                 <tr class="hover:bg-zinc-50/70 transition-colors">
-                                    <td class="px-6 py-4 font-mono text-xs text-zinc-500">#{{ tx.order_id }}</td>
-                                    <td class="px-6 py-4 font-bold text-zinc-900">{{ tx.user.username if tx.user else 'Unknown' }}</td>
-                                    <td class="px-6 py-4 text-zinc-600">{{ tx.package.name if tx.package else 'Unknown' }}</td>
+                                    <td class="px-6 py-4 font-mono text-xs text-zinc-500">#{{ tx.id }}</td>
+                                    <td class="px-6 py-4 font-bold text-zinc-900">{{ tx.customer.username if tx.customer else 'Unknown' }}</td>
+                                    <td class="px-6 py-4 text-zinc-600">{{ tx.package.name if tx.package else 'Unknown Package' }}</td>
                                     <td class="px-6 py-4 font-semibold text-zinc-700">
                                         {% if tx.package is defined and tx.package and tx.package.price is not none %}
                                             Rp {{ "{:,.0f}".format(tx.package.price|float) }}
@@ -213,20 +216,31 @@
                                             Rp 0
                                         {% endif %}
                                     </td>
+                                    <td class="px-6 py-4 text-zinc-600">{{ tx.router_location if tx.router_location else '-' }}</td>
+                                    <td class="px-6 py-4 text-zinc-500 text-xs">{{ tx.created_at.strftime('%d %b %Y, %H:%M') if tx.created_at else '-' }}</td>
+                                    <td class="px-6 py-4 text-zinc-500 text-xs">
+                                        {% if tx.paid_at %}
+                                            {{ tx.paid_at.strftime('%d %b %Y, %H:%M') }}
+                                        {% else %}
+                                            <span class="text-zinc-400 italic">Belum dibayar</span>
+                                        {% endif %}
+                                    </td>
                                     <td class="px-6 py-4">
                                         {% if tx.status == 'paid' %}
                                         <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-green-100 text-green-700 border border-green-200"><span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>Paid</span>
                                         {% elif tx.status == 'pending' %}
                                         <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-700 border border-amber-200"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>Pending</span>
-                                        {% else %}
+                                        {% elif tx.status in ['failed', 'cancelled'] %}
                                         <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-red-100 text-red-700 border border-red-200"><span class="w-1.5 h-1.5 rounded-full bg-red-500"></span>{{ tx.status|title }}</span>
+                                        {% else %}
+                                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold bg-zinc-100 text-zinc-700 border border-zinc-200"><span class="w-1.5 h-1.5 rounded-full bg-zinc-500"></span>{{ tx.status|title if tx.status else 'Unknown' }}</span>
                                         {% endif %}
                                     </td>
                                 </tr>
                                 {% endfor %}
                                 {% else %}
                                 <tr>
-                                    <td colspan="5" class="px-6 py-16 text-center">
+                                    <td colspan="8" class="px-6 py-16 text-center">
                                         <div class="flex flex-col items-center gap-3">
                                             <div class="w-14 h-14 rounded-2xl bg-zinc-100 flex items-center justify-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-zinc-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
