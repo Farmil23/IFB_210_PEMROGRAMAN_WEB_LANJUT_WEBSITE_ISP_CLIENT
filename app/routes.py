@@ -745,6 +745,27 @@ def admin_dashboard():
     )
 
 
+@current_app.route('/admin/transactions/report')
+@login_required
+@admin_required
+def admin_transactions_report():
+    
+    transactions = Transaction.query.order_by(Transaction.id.desc()).all()
+    
+    total_tx = len(transactions)
+    paid_tx = sum(1 for t in transactions if t.status == 'paid')
+    total_amount = sum((t.package.price if t.package and t.package.price else 0) for t in transactions if t.status == 'paid')
+    
+    return render_template(
+        'admin_transactions_report.html',
+        transactions=transactions,
+        total_tx=total_tx,
+        paid_tx=paid_tx,
+        total_amount=total_amount,
+        current_time=now_wib()
+    )
+
+
 @current_app.route(
     '/admin/package/add',
     methods=['GET', 'POST']
