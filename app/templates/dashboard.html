@@ -2,6 +2,13 @@
 
 {% block content %}
 
+{# -- Safe device count for all template conditionals -- #}
+{% set device_count = active_devices|default(0)|int %}
+{% set _badge_tone  = network_badge_tone|default('zinc') %}
+{% set _badge_label = network_badge_label|default('No Router Link') %}
+{% set _conn_status = connection_status|default('Offline') %}
+{% set _conn_footer = connection_footer|default('0 router tersambung ke sistem') %}
+
 <div class="flex min-h-screen bg-[#050505] text-white overflow-hidden">
 
     {% include 'partials/sidebar.html' %}
@@ -90,10 +97,10 @@
                         py-3
                         rounded-2xl
                         border
-                        {% if network_badge_tone == 'green' %}
+                        {% if _badge_tone == 'green' %}
                         border-green-500/20
                         bg-green-500/10
-                        {% elif network_badge_tone == 'amber' %}
+                        {% elif _badge_tone == 'amber' %}
                         border-amber-500/20
                         bg-amber-500/10
                         {% else %}
@@ -108,9 +115,9 @@
                             h-2
                             rounded-full
                             animate-pulse
-                            {% if network_badge_tone == 'green' %}
+                            {% if _badge_tone == 'green' %}
                             bg-green-500
-                            {% elif network_badge_tone == 'amber' %}
+                            {% elif _badge_tone == 'amber' %}
                             bg-amber-500
                             {% else %}
                             bg-zinc-500
@@ -120,15 +127,15 @@
                         <span class="
                             text-sm
                             font-semibold
-                            {% if network_badge_tone == 'green' %}
+                            {% if _badge_tone == 'green' %}
                             text-green-400
-                            {% elif network_badge_tone == 'amber' %}
+                            {% elif _badge_tone == 'amber' %}
                             text-amber-400
                             {% else %}
                             text-zinc-400
                             {% endif %}
                         ">
-                            {{ network_badge_label }}
+                            {{ _badge_label }}
                         </span>
 
                     </div>
@@ -330,17 +337,27 @@
                                     text-4xl
                                     font-black
                                     mt-3
-                                    text-white
+                                    {% if device_count > 0 %}
+                                    text-green-400
+                                    {% else %}
+                                    text-zinc-500
+                                    {% endif %}
                                 ">
-                                    {{ active_devices }}
+                                    {{ device_count }}
                                 </h3>
+
+                                <p class="text-xs mt-1
+                                    {% if device_count > 0 %}text-green-500{% else %}text-zinc-600{% endif %}
+                                ">
+                                    {% if device_count > 0 %}Router online{% else %}No router link{% endif %}
+                                </p>
 
                                 <div class="
                                     w-12
                                     h-[3px]
-                                    bg-red-500
+                                    {% if device_count > 0 %}bg-green-500{% else %}bg-zinc-700{% endif %}
                                     rounded-full
-                                    mt-4
+                                    mt-3
                                 "></div>
 
                             </div>
@@ -469,15 +486,15 @@
                             <h2 class="
                                 text-5xl
                                 font-black
-                                {% if connection_status == 'Stable' %}
+                                {% if _conn_status == 'Stable' %}
                                 text-green-400
-                                {% elif connection_status == 'Limited' %}
+                                {% elif _conn_status == 'Limited' %}
                                 text-amber-400
                                 {% else %}
                                 text-zinc-500
                                 {% endif %}
                             ">
-                                {{ connection_status }}
+                                {{ _conn_status }}
                             </h2>
 
                             <div class="
@@ -491,7 +508,7 @@
                                     text-zinc-300
                                     leading-relaxed
                                 ">
-                                    {{ connection_footer }}
+                                    {{ _conn_footer }}
                                 </p>
 
                             </div>
