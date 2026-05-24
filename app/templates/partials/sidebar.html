@@ -39,7 +39,7 @@
                 mt-2
                 font-bold
             ">
-                Enterprise ISP
+                Layanan Internet Terpercaya
             </p>
 
         </div>
@@ -50,7 +50,7 @@
     <div class="
         flex-1
         px-6
-        py-8
+        py-6
     ">
 
         <p class="
@@ -62,10 +62,10 @@
             mb-5
             tracking-[0.3em]
         ">
-            Main Menu
+            Menu Utama
         </p>
 
-        <nav class="space-y-3">
+        <nav class="space-y-2">
 
             <!-- DASHBOARD -->
             <a href="{{ url_for('dashboard') }}"
@@ -115,7 +115,7 @@
                         text-xs
                         {{ 'text-red-500' if request.endpoint == 'dashboard' else 'text-zinc-400' }}
                     ">
-                        Main overview
+                        Ringkasan utama
                     </p>
 
                 </div>
@@ -163,14 +163,14 @@
                 <div>
 
                     <p class="font-semibold text-[15px]">
-                        Packages
+                        Paket
                     </p>
 
                     <p class="
                         text-xs
                         {{ 'text-red-500' if request.endpoint == 'browse_packages' else 'text-zinc-400' }}
                     ">
-                        Internet plans
+                        Paket internet
                     </p>
 
                 </div>
@@ -218,14 +218,14 @@
                 <div>
 
                     <p class="font-semibold text-[15px]">
-                        Transactions
+                        Transaksi
                     </p>
 
                     <p class="
                         text-xs
                         {{ 'text-red-500' if request.endpoint == 'transactions' else 'text-zinc-400' }}
                     ">
-                        Payment history
+                        Riwayat pembayaran
                     </p>
 
                 </div>
@@ -273,14 +273,14 @@
                 <div>
 
                     <p class="font-semibold text-[15px]">
-                        Vouchers
+                        Voucher
                     </p>
 
                     <p class="
                         text-xs
                         {{ 'text-red-500' if request.endpoint == 'vouchers' else 'text-zinc-400' }}
                     ">
-                        Active access
+                        Akses aktif
                     </p>
 
                 </div>
@@ -328,14 +328,14 @@
                 <div>
 
                     <p class="font-semibold text-[15px]">
-                        Account
+                        Akun
                     </p>
 
                     <p class="
                         text-xs
                         {{ 'text-red-500' if request.endpoint == 'account' else 'text-zinc-400' }}
                     ">
-                        User profile
+                        Profil pengguna
                     </p>
 
                 </div>
@@ -353,7 +353,7 @@
                     px-4
                     tracking-[0.3em]
                 ">
-                    Admin Area
+                    Area Admin
                 </p>
             </div>
 
@@ -399,14 +399,14 @@
                 <div>
 
                     <p class="font-semibold text-[15px]">
-                        Admin Panel
+                        Panel Admin
                     </p>
 
                     <p class="
                         text-xs
                         {{ 'text-red-500' if is_admin_route else 'text-zinc-400' }}
                     ">
-                        System config
+                        Pengaturan sistem
                     </p>
 
                 </div>
@@ -420,7 +420,7 @@
 
     <!-- BOTTOM -->
     <div class="
-        p-6
+        p-5
         border-t
         border-black/5
         bg-[#e4e4e7]
@@ -432,7 +432,7 @@
                 items-center
                 justify-between
                 px-5
-                py-4
+                py-3
                 rounded-2xl
                 bg-[#ececef]
                 border
@@ -447,21 +447,21 @@
             <div>
 
                 <p class="font-semibold">
-                    Logout
+                    Keluar
                 </p>
 
                 <p class="
                     text-xs
                     text-zinc-400
                 ">
-                    Sign out account
+                    Keluar dari akun
                 </p>
 
             </div>
 
             <div class="
-                w-11
-                h-11
+                w-10
+                h-10
                 rounded-xl
                 bg-[#f1f1f3]
                 flex
