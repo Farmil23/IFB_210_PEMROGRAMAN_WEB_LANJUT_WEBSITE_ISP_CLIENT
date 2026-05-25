@@ -2,53 +2,28 @@
 
 {% block content %}
 
-{# -- Safe device count for all template conditionals -- #}
-{% set device_count = active_devices|default(0)|int %}
-{% set _badge_tone  = network_badge_tone|default('zinc') %}
-{% set _badge_label = network_badge_label|default('No Router Link') %}
-{% set _conn_status = connection_status|default('Offline') %}
-{% set _conn_footer = connection_footer|default('0 router tersambung ke sistem') %}
+{% set voucher_active = voucher_display|default(0) %}
+{% set internet_active = hero_speed_num|default(0)|int > 0 %}
 
-<div class="flex min-h-screen bg-[#050505] text-white overflow-hidden">
+<div class="flex min-h-screen bg-[#0b0f14] text-white overflow-hidden">
 
     {% include 'partials/sidebar.html' %}
 
     <main class="flex-1 overflow-x-hidden">
 
+        <!-- DASHBOARD MAIN SECTION -->
         <!-- HEADER -->
-        <header class="
-            sticky
-            top-0
-            z-30
-            bg-black/50
-            backdrop-blur-2xl
-            border-b
-            border-white/10
-            px-10
-            py-5
-        ">
+        <header class="border-b border-white/10 bg-black/30 backdrop-blur-xl">
 
-            <div class="
-                flex
-                flex-col
-                lg:flex-row
-                lg:items-center
-                lg:justify-between
-                gap-5
-            ">
+            <div class="px-6 lg:px-10 py-8">
 
-                <!-- LEFT -->
-                <div>
+                <p class="uppercase tracking-[0.3em] text-[11px] text-red-400 font-bold">
+                    DASHBOARD BTN NET
+                </p>
 
-                    <p class="
-                        text-[10px]
-                        uppercase
-                        tracking-[0.4em]
-                        text-red-500
-                        font-bold
-                    ">
-                        Network Control Center
-                    </p>
+                <h1 class="mt-3 text-3xl md:text-5xl font-black text-white">
+                    Halo, {{ current_user.username }} 👋
+                </h1>
 
                     <h1 class="
                         text-3xl
@@ -59,616 +34,148 @@
                         JavaNet Enterprise Dashboard
                     </h1>
 
-                    <div class="
-                        flex
-                        items-center
-                        gap-3
-                        mt-3
-                        text-sm
-                        text-zinc-400
-                    ">
+            </div>
 
-                        <span>
-                            Logged in as
-                            <span class="text-white font-semibold">
-                                {{ current_user.username }}
+        </header>
+
+        <!-- CONTENT -->
+        <div class="p-6 lg:p-10 space-y-8">
+
+            <!-- STATUS -->
+            <div class="rounded-[32px] border border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.02] p-8">
+
+                <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-7">
+
+                    <div>
+
+                        <p class="uppercase tracking-[0.2em] text-[11px] text-slate-500 mb-3">
+                            STATUS INTERNET
+                        </p>
+
+                        {% if internet_active %}
+
+                        <div class="flex items-center gap-3">
+
+                            <div class="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
+
+                            <h2 class="text-3xl font-black text-green-400">
+                                Internet Aktif
+                            </h2>
+
+                        </div>
+
+                        <p class="mt-4 text-slate-400 text-lg">
+                            Kecepatan internet aktif:
+                            <span class="text-white font-bold">
+                                {{ hero_speed_num }} Mbps
                             </span>
-                        </span>
+                        </p>
 
-                        <span class="w-1 h-1 bg-zinc-700 rounded-full"></span>
-
-                        <span>
-                            Enterprise Customer
-                        </span>
-
-                    </div>
-
-                </div>
-
-                <!-- RIGHT -->
-                <div class="flex items-center gap-4">
-
-                    <!-- STATUS -->
-                    <div class="
-                        flex
-                        items-center
-                        gap-3
-                        px-5
-                        py-3
-                        rounded-2xl
-                        border
-                        {% if _badge_tone == 'green' %}
-                        border-green-500/20
-                        bg-green-500/10
-                        {% elif _badge_tone == 'amber' %}
-                        border-amber-500/20
-                        bg-amber-500/10
                         {% else %}
-                        border-zinc-500/20
-                        bg-zinc-500/10
+
+                        <div class="flex items-center gap-3">
+
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+
+                            <h2 class="text-3xl font-black text-red-400">
+                                Belum Aktif
+                            </h2>
+
+                        </div>
+
+                        <p class="mt-4 text-slate-400 text-lg">
+                            Anda belum memiliki paket internet aktif.
+                        </p>
+
                         {% endif %}
-                        backdrop-blur-xl
-                    ">
-
-                        <span class="
-                            w-2
-                            h-2
-                            rounded-full
-                            animate-pulse
-                            {% if _badge_tone == 'green' %}
-                            bg-green-500
-                            {% elif _badge_tone == 'amber' %}
-                            bg-amber-500
-                            {% else %}
-                            bg-zinc-500
-                            {% endif %}
-                        "></span>
-
-                        <span class="
-                            text-sm
-                            font-semibold
-                            {% if _badge_tone == 'green' %}
-                            text-green-400
-                            {% elif _badge_tone == 'amber' %}
-                            text-amber-400
-                            {% else %}
-                            text-zinc-400
-                            {% endif %}
-                        ">
-                            {{ _badge_label }}
-                        </span>
 
                     </div>
 
-                    <!-- BUTTON -->
                     <a href="{{ url_for('browse_packages') }}"
-                       class="
-                            px-7
-                            py-3
-                            rounded-2xl
-                            bg-gradient-to-r
-                            from-red-600
-                            to-red-500
-                            hover:from-red-500
-                            hover:to-red-400
-                            shadow-lg
-                            shadow-red-500/20
-                            transition-all
-                            duration-300
-                            hover:-translate-y-1
-                            active:scale-95
-                            font-bold
-                       ">
-                        Upgrade Package
+                       class="inline-flex items-center justify-center rounded-3xl bg-red-500 px-8 py-5 text-lg font-bold text-white hover:bg-red-400 transition-all duration-500">
+
+                        Beli Paket Internet
+
                     </a>
 
                 </div>
 
             </div>
 
-        </header>
+            <!-- STEP BY STEP -->
+            <div class="rounded-[32px] border border-white/11 bg-[#151515] p-8">
 
-        <div class="p-10 space-y-8">
+                <p class="uppercase tracking-[0.25em] text-[11px] text-red-400 font-bold mb-8">
+                    LANGKAH PENGGUNAAN
+                </p>
 
-            <!-- HERO SECTION -->
-            <div class="
-                relative
-                overflow-hidden
-                rounded-[36px]
-                border
-                border-white/10
-                bg-[#121212]
-                p-8
-                shadow-[0_0_80px_rgba(0,0,0,0.45)]
-            ">
+                <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
 
-                <!-- AMBIENT -->
-                <div class="
-                    absolute
-                    -bottom-32
-                    -left-32
-                    w-[420px]
-                    h-[420px]
-                    bg-red-500/10
-                    blur-3xl
-                    rounded-full
-                "></div>
+                    <!-- STEP 1 -->
+                    <div class="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
 
-                <div class="
-                    relative
-                    z-10
-                    grid
-                    grid-cols-1
-                    xl:grid-cols-[1.1fr_0.9fr]
-                    gap-8
-                    items-start
-                ">
-
-                    <!-- LEFT -->
-                    <div class="flex flex-col justify-between h-full">
-
-                        <div>
-
-                            <p class="
-                                text-[13px]
-                                uppercase
-                                tracking-[0.45em]
-                                text-red-500
-                                font-bold
-                            ">
-                                Dedicated Fiber Infrastructure
-                            </p>
-
-                            <div class="
-                                flex
-                                items-end
-                                gap-4
-                                mt-8
-                                flex-wrap
-                            ">
-
-                                <h1 class="
-                                    text-6xl
-                                    xl:text-7xl
-                                    font-black
-                                    leading-none
-                                    text-white
-                                ">
-                                    {{ hero_speed_num }}
-                                </h1>
-
-                                <span class="
-                                    text-red-500
-                                    text-3xl
-                                    italic
-                                    font-black
-                                    mb-2
-                                ">
-                                    Mbps
-                                </span>
-
-                            </div>
-
-                            <p class="
-                                mt-8
-                                text-zinc-300
-                                text-lg
-                                leading-relaxed
-                                max-w-2xl
-                            ">
-                                Real-time enterprise network monitoring with stable infrastructure performance and uptime analytics.
-                            </p>
-
+                        <div class="w-14 h-14 rounded-2xl bg-red-500 text-white flex items-center justify-center text-2xl font-black mb-5">
+                            1
                         </div>
 
-                        <!-- STATS -->
-                        <div class="
-                            grid
-                            grid-cols-3
-                            gap-6
-                            mt-12
-                        ">
+                        <h3 class="text-2xl font-black text-white">
+                            Pilih Paket
+                        </h3>
 
-                            <div>
-
-                                <p class="text-zinc-400 text-sm">
-                                    Uptime
-                                </p>
-
-                                <h3 class="
-                                    text-4xl
-                                    font-black
-                                    mt-3
-                                    text-white
-                                ">
-                                    {{ uptime_label }}
-                                </h3>
-
-                                <div class="
-                                    w-12
-                                    h-[3px]
-                                    bg-red-500
-                                    rounded-full
-                                    mt-4
-                                "></div>
-
-                            </div>
-
-                            <div class="
-                                border-l
-                                border-white/10
-                                pl-6
-                            ">
-
-                                <p class="text-zinc-400 text-sm">
-                                    Latency
-                                </p>
-
-                                <h3 class="
-                                    text-4xl
-                                    font-black
-                                    mt-3
-                                    text-white
-                                ">
-                                    {{ latency_label }}
-                                </h3>
-
-                                <div class="
-                                    w-12
-                                    h-[3px]
-                                    bg-red-500
-                                    rounded-full
-                                    mt-4
-                                "></div>
-
-                            </div>
-
-                            <div class="
-                                border-l
-                                border-white/10
-                                pl-6
-                            ">
-
-                                <p class="text-zinc-400 text-sm">
-                                    Active Devices
-                                </p>
-
-                                <h3 class="
-                                    text-4xl
-                                    font-black
-                                    mt-3
-                                    {% if device_count > 0 %}
-                                    text-green-400
-                                    {% else %}
-                                    text-zinc-500
-                                    {% endif %}
-                                ">
-                                    {{ device_count }}
-                                </h3>
-
-                                <p class="text-xs mt-1
-                                    {% if device_count > 0 %}text-green-500{% else %}text-zinc-600{% endif %}
-                                ">
-                                    {% if device_count > 0 %}Router online{% else %}No router link{% endif %}
-                                </p>
-
-                                <div class="
-                                    w-12
-                                    h-[3px]
-                                    {% if device_count > 0 %}bg-green-500{% else %}bg-zinc-700{% endif %}
-                                    rounded-full
-                                    mt-3
-                                "></div>
-
-                            </div>
-
-                        </div>
+                        <p class="mt-3 text-slate-500 leading-relaxed">
+                            Pilih paket internet sesuai kebutuhan Anda.
+                        </p>
 
                     </div>
 
-                    <!-- RIGHT -->
-                    <div class="
-                        grid
-                        grid-cols-2
-                        gap-5
-                    ">
+                    <!-- STEP 2 -->
+                    <div class="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
 
-                        <!-- CARD -->
-                        <div class="
-                            rounded-[28px]
-                            border
-                            border-blue-500/20
-                            bg-[#111111]
-                            p-6
-                            h-[240px]
-                            flex
-                            flex-col
-                            justify-between
-                        ">
-
-                            <div class="flex items-center justify-between">
-
-                                <p class="
-                                    text-zinc-400
-                                    uppercase
-                                    tracking-[0.2em]
-                                    text-xs
-                                    font-bold
-                                ">
-                                    Transactions
-                                </p>
-
-                                <div class="
-                                    w-11
-                                    h-11
-                                    rounded-2xl
-                                    bg-blue-500/10
-                                    flex
-                                    items-center
-                                    justify-center
-                                    text-blue-400
-                                ">
-                                    ↗
-                                </div>
-
-                            </div>
-
-                            <h2 class="
-                                text-6xl
-                                font-black
-                                text-blue-400
-                            ">
-                                {{ transaction_count }}
-                            </h2>
-
-                            <div class="
-                                pt-5
-                                border-t
-                                border-white/10
-                            ">
-
-                                <p class="
-                                    text-sm
-                                    text-zinc-300
-                                    leading-relaxed
-                                ">
-                                    {% if last_payment_rel %}
-                                        Pembayaran terakhir: {{ last_payment_rel }}
-                                    {% else %}
-                                        Belum ada pembayaran
-                                    {% endif %}
-                                </p>
-
-                            </div>
-
+                        <div class="w-14 h-14 rounded-2xl bg-red-500 text-white flex items-center justify-center text-2xl font-black mb-5">
+                            2
                         </div>
 
-                        <!-- CARD -->
-                        <div class="
-                            rounded-[28px]
-                            border
-                            border-green-500/20
-                            bg-[#111111]
-                            p-6
-                            h-[240px]
-                            flex
-                            flex-col
-                            justify-between
-                        ">
+                        <h3 class="text-2xl font-black text-white">
+                            Lakukan Pembayaran
+                        </h3>
 
-                            <div class="flex items-center justify-between">
+                        <p class="mt-3 text-slate-400 leading-relaxed">
+                            Selesaikan pembayaran untuk mengaktifkan paket.
+                        </p>
 
-                                <p class="
-                                    text-zinc-400
-                                    uppercase
-                                    tracking-[0.2em]
-                                    text-xs
-                                    font-bold
-                                ">
-                                    Connection
-                                </p>
+                    </div>
 
-                                <div class="
-                                    w-11
-                                    h-11
-                                    rounded-2xl
-                                    bg-green-500/10
-                                    flex
-                                    items-center
-                                    justify-center
-                                    text-green-400
-                                ">
-                                    ≋
-                                </div>
+                    <!-- STEP 3 -->
+                    <div class="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
 
-                            </div>
-
-                            <h2 class="
-                                text-5xl
-                                font-black
-                                {% if _conn_status == 'Stable' %}
-                                text-green-400
-                                {% elif _conn_status == 'Limited' %}
-                                text-amber-400
-                                {% else %}
-                                text-zinc-500
-                                {% endif %}
-                            ">
-                                {{ _conn_status }}
-                            </h2>
-
-                            <div class="
-                                pt-5
-                                border-t
-                                border-white/10
-                            ">
-
-                                <p class="
-                                    text-sm
-                                    text-zinc-300
-                                    leading-relaxed
-                                ">
-                                    {{ _conn_footer }}
-                                </p>
-
-                            </div>
-
+                        <div class="w-14 h-14 rounded-2xl bg-red-500 text-white flex items-center justify-center text-2xl font-black mb-5">
+                            3
                         </div>
 
-                        <!-- CARD -->
-                        <div class="
-                            rounded-[28px]
-                            border
-                            border-purple-500/20
-                            bg-[#111111]
-                            p-6
-                            h-[240px]
-                            flex
-                            flex-col
-                            justify-between
-                        ">
+                        <h3 class="text-2xl font-black text-white">
+                            Ambil Voucher
+                        </h3>
 
-                            <div class="flex items-center justify-between">
+                        <p class="mt-3 text-slate-400 leading-relaxed">
+                            Voucher akan muncul setelah pembayaran berhasil.
+                        </p>
 
-                                <p class="
-                                    text-zinc-400
-                                    uppercase
-                                    tracking-[0.2em]
-                                    text-xs
-                                    font-bold
-                                ">
-                                    Active Voucher
-                                </p>
+                    </div>
 
-                                <div class="
-                                    w-11
-                                    h-11
-                                    rounded-2xl
-                                    bg-purple-500/10
-                                    flex
-                                    items-center
-                                    justify-center
-                                    text-purple-400
-                                ">
-                                    ◈
-                                </div>
+                    <!-- STEP 4 -->
+                    <div class="rounded-3xl border border-white/10 bg-white/[0.03] p-6">
 
-                            </div>
-
-                            <h2 class="
-                                text-6xl
-                                font-black
-                                text-purple-400
-                            ">
-                                {{ voucher_display }}
-                            </h2>
-
-                            <div class="
-                                pt-5
-                                border-t
-                                border-white/10
-                            ">
-
-                                <p class="
-                                    text-sm
-                                    text-zinc-300
-                                    leading-relaxed
-                                ">
-                                    Customer active access
-                                </p>
-
-                            </div>
-
+                        <div class="w-14 h-14 rounded-2xl bg-red-500 text-white flex items-center justify-center text-2xl font-black mb-5">
+                            4
                         </div>
 
-                        <!-- CARD -->
-                        <div class="
-                            rounded-[28px]
-                            border
-                            border-red-500/20
-                            bg-[#111111]
-                            p-6
-                            h-[240px]
-                            flex
-                            flex-col
-                            justify-between
-                        ">
+                        <h3 class="text-2xl font-black text-white">
+                            Gunakan WiFi
+                        </h3>
 
-                            <div class="flex items-center justify-between">
-
-                                <p class="
-                                    text-zinc-400
-                                    uppercase
-                                    tracking-[0.2em]
-                                    text-xs
-                                    font-bold
-                                ">
-                                    Fiber Package
-                                </p>
-
-                                <div class="
-                                    w-11
-                                    h-11
-                                    rounded-2xl
-                                    bg-red-500/10
-                                    flex
-                                    items-center
-                                    justify-center
-                                    text-red-400
-                                ">
-                                    ⚡
-                                </div>
-
-                            </div>
-
-                            <div class="
-                                flex
-                                items-end
-                                gap-2
-                                flex-wrap
-                            ">
-
-                                <h2 class="
-                                    text-4xl
-                                    xl:text-5xl
-                                    font-black
-                                    text-red-400
-                                    leading-none
-                                ">
-                                    {{ fiber_speed_num }}
-                                </h2>
-
-                                <span class="
-                                    text-red-400
-                                    text-xl
-                                    xl:text-2xl
-                                    italic
-                                    font-black
-                                    leading-none
-                                    mb-1
-                                ">
-                                    Mbps
-                                </span>
-
-                            </div>
-
-                            <div class="
-                                pt-5
-                                border-t
-                                border-white/10
-                            ">
-
-                                <p class="
-                                    text-sm
-                                    text-zinc-300
-                                    leading-relaxed
-                                ">
-                                    {{ fiber_caption }}
-                                </p>
-
-                            </div>
-
-                        </div>
+                        <p class="mt-3 text-slate-400 leading-relaxed">
+                            Masukkan kode voucher ke jaringan WiFi BTN Net.
+                        </p>
 
                     </div>
 
@@ -676,156 +183,201 @@
 
             </div>
 
-            <!-- RECENT ACTIVITY -->
-            <div class="
-                rounded-[32px]
-                border
-                border-white/10
-                bg-[#1a1a1a]
-                p-8
-                shadow-2xl
-                shadow-black/20
-            ">
+                        <!-- QUICK MENU -->
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
 
-                <div class="
-                    flex
-                    items-center
-                    justify-between
-                    mb-8
-                ">
+                <!-- PAKET -->
+                <a href="{{ url_for('browse_packages') }}"
+                   class="
+                        group
+                        rounded-3xl
+                        border
+                        border-red-500/15
+                        bg-[#121212]
+                        p-7
+                        hover:border-red-500/40
+                        transition-all
+                        duration-300
+                   ">
+
+                    <div class="
+                        w-14
+                        h-14
+                        rounded-2xl
+                        bg-red-500/10
+                        flex
+                        items-center
+                        justify-center
+                        mb-6
+                    ">
+                        <i data-lucide="package" class="w-7 h-7 text-red-400"></i>
+                    </div>
+
+                    <h3 class="text-2xl font-black text-white">
+                        Paket
+                    </h3>
+
+                    <p class="mt-3 text-slate-400 leading-relaxed">
+                        Lihat dan beli paket internet.
+                    </p>
+
+                    <p class="mt-6 text-red-400 font-semibold">
+                        Buka Menu →
+                    </p>
+
+                </a>
+
+                <!-- PEMBAYARAN -->
+                <a href="{{ url_for('transactions') }}"
+                   class="
+                        group
+                        rounded-3xl
+                        border
+                        border-cyan-500/15
+                        bg-[#121212]
+                        p-7
+                        hover:border-cyan-500/40
+                        transition-all
+                        duration-300
+                   ">
+
+                    <div class="
+                        w-14
+                        h-14
+                        rounded-2xl
+                        bg-cyan-500/10
+                        flex
+                        items-center
+                        justify-center
+                        mb-6
+                    ">
+                        <i data-lucide="credit-card" class="w-7 h-7 text-cyan-400"></i>
+                    </div>
+
+                    <h3 class="text-2xl font-black text-white">
+                        Pembayaran
+                    </h3>
+
+                    <p class="mt-3 text-slate-400 leading-relaxed">
+                        Cek riwayat transaksi Anda.
+                    </p>
+
+                    <p class="mt-6 text-cyan-400 font-semibold">
+                        Buka Menu →
+                    </p>
+
+                </a>
+
+                <!-- VOUCHER -->
+                <a href="{{ url_for('vouchers') }}"
+                   class="
+                        group
+                        rounded-3xl
+                        border
+                        border-purple-500/15
+                        bg-[#121212]
+                        p-7
+                        hover:border-purple-500/40
+                        transition-all
+                        duration-300
+                   ">
+
+                    <div class="
+                        w-14
+                        h-14
+                        rounded-2xl
+                        bg-purple-500/10
+                        flex
+                        items-center
+                        justify-center
+                        mb-6
+                    ">
+                        <i data-lucide="ticket" class="w-7 h-7 text-purple-400"></i>
+                    </div>
+
+                    <h3 class="text-2xl font-black text-white">
+                        Voucher
+                    </h3>
+
+                    <p class="mt-3 text-slate-400 leading-relaxed">
+                        Kelola voucher internet aktif.
+                    </p>
+
+                    <p class="mt-6 text-purple-400 font-semibold">
+                        Buka Menu →
+                    </p>
+
+                </a>
+
+                <!-- PROFIL -->
+                <a href="{{ url_for('account') }}"
+                   class="
+                        group
+                        rounded-3xl
+                        border
+                        border-green-500/15
+                        bg-[#121212]
+                        p-7
+                        hover:border-green-500/40
+                        transition-all
+                        duration-300
+                   ">
+
+                    <div class="
+                        w-14
+                        h-14
+                        rounded-2xl
+                        bg-green-500/10
+                        flex
+                        items-center
+                        justify-center
+                        mb-6
+                    ">
+                        <i data-lucide="user" class="w-7 h-7 text-green-400"></i>
+                    </div>
+
+                    <h3 class="text-2xl font-black text-white">
+                        Profil
+                    </h3>
+
+                    <p class="mt-3 text-slate-400 leading-relaxed">
+                        Kelola akun dan keamanan Anda.
+                    </p>
+
+                    <p class="mt-6 text-green-400 font-semibold">
+                        Buka Menu →
+                    </p>
+
+                </a>
+
+            </div>
+            <!-- ACTIVE VOUCHER -->
+            <div class="rounded-[32px] border border-white/10 bg-gradient-to-b from-white/[0.05] to-white/[0.02] p-8">
+
+                <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
 
                     <div>
 
-                        <p class="
-                            text-[10px]
-                            uppercase
-                            tracking-[0.3em]
-                            text-red-500
-                            font-bold
-                            mb-2
-                        ">
-                            Activity Timeline
+                        <p class="uppercase tracking-[0.2em] text-[11px] text-red-400 font-bold mb-4">
+                            VOUCHER AKTIF
                         </p>
 
-                        <h3 class="
-                            text-3xl
-                            font-black
-                            text-white
-                        ">
-                            Recent Activity
-                        </h3>
+                        <h2 class="text-5xl font-black text-white">
+                            {{ voucher_display }}
+                        </h2>
+
+                        <p class="mt-5 text-slate-400 text-lg">
+                            Voucher internet aktif saat ini.
+                        </p>
 
                     </div>
 
-                    <a href="{{ url_for('transactions') }}"
-                        class="
-                                inline-flex
-                                items-center
-                                justify-center
-                                px-6
-                                py-3
-                                rounded-2xl
-                                border
-                                border-white/10
-                                bg-[#2a2a2a]
-                                hover:bg-red-600
-                                hover:border-red-600
-                                transition-all
-                                duration-300
-                                font-semibold
-                                text-sm
-                        ">
-                            View All
-                        </a>
+                    <a href="{{ url_for('vouchers') }}"
+                       class="inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] px-8 py-5 text-lg font-bold text-white hover:bg-red-500 hover:border-red-500 transition-all duration-300">
 
-                </div>
+                        Lihat Voucher
 
-                <!-- ACTIVITY ITEMS -->
-                <div class="space-y-4">
-
-                    {% for row in recent_activity_rows %}
-                    <div class="
-                        flex
-                        items-center
-                        justify-between
-                        p-5
-                        rounded-3xl
-                        border
-                        border-white/10
-                        bg-[#111111]
-                        transition-all
-                        duration-300
-                        {% if row.tone == 'green' %}
-                        hover:border-green-500/20
-                        {% elif row.tone == 'amber' %}
-                        hover:border-amber-500/20
-                        {% else %}
-                        hover:border-zinc-600/30
-                        {% endif %}
-                    ">
-
-                        <div class="flex items-center gap-4">
-
-                            <div class="
-                                w-14
-                                h-14
-                                rounded-2xl
-                                flex
-                                items-center
-                                justify-center
-                                font-bold
-                                {% if row.tone == 'green' %}
-                                bg-green-500/10
-                                text-green-400
-                                {% elif row.tone == 'amber' %}
-                                bg-amber-500/10
-                                text-amber-400
-                                {% else %}
-                                bg-zinc-500/10
-                                text-zinc-400
-                                {% endif %}
-                            ">
-                                {{ row.abbr }}
-                            </div>
-
-                            <div>
-
-                                <h4 class="
-                                    text-lg
-                                    font-bold
-                                    text-white
-                                ">
-                                    {{ row.title }}
-                                </h4>
-
-                                <p class="
-                                    text-sm
-                                    text-zinc-400
-                                    mt-1
-                                ">
-                                    {{ row.subtitle }}
-                                </p>
-
-                            </div>
-
-                        </div>
-
-                        <span class="
-                            text-sm
-                            text-zinc-500
-                        ">
-                            {{ row.when }}
-                        </span>
-
-                    </div>
-
-                    {% else %}
-
-                    <p class="text-zinc-500 text-center py-8">
-                        Belum ada aktivitas transaksi.
-                    </p>
-
-                    {% endfor %}
+                    </a>
 
                 </div>
 

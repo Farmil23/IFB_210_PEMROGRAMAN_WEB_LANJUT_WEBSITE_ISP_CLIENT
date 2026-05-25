@@ -3,29 +3,9 @@
 {% block title %}My Vouchers | JavaNet{% endblock %}
 
 {% block content %}
-<div class="relative min-h-screen overflow-hidden bg-[#0f1115] text-white">
+<div class="min-h-screen bg-[#0b0f14] text-white">
 
-    <!-- BACKGROUND -->
-    <div class="absolute inset-0">
-
-        <!-- Soft Gradient -->
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(239,68,68,0.06),transparent_25%),radial-gradient(circle_at_bottom_left,rgba(59,130,246,0.05),transparent_30%)]">
-        </div>
-
-        <!-- Subtle Grid -->
-        <div
-            class="absolute inset-0 opacity-[0.03]"
-            style="
-                background-image:
-                linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px);
-                background-size: 56px 56px;
-            ">
-        </div>
-
-    </div>
-
-    <div class="relative z-10 flex min-h-screen">
+    <div class="flex min-h-screen">
 
         {% include 'partials/sidebar.html' %}
 
@@ -33,177 +13,147 @@
         <main class="flex-1 px-6 py-8 lg:px-10 lg:py-10">
 
             <!-- HEADER -->
-            <div class="mb-12 flex flex-col xl:flex-row xl:items-end xl:justify-between gap-8">
+            <div class="mb-10">
 
-                <!-- LEFT -->
-                <div>
+                <p class="uppercase tracking-[0.28em] text-[11px] text-red-400 font-semibold">
+                    VOUCHER INTERNET
+                </p>
 
-                    <div class="flex items-center gap-3 mb-4">
+                <h1 class="mt-4 text-4xl md:text-5xl font-black text-white">
+                    Voucher Saya
+                </h1>
 
-                        <div class="w-10 h-[2px] bg-red-500 rounded-full"></div>
-
-                        <p class="uppercase tracking-[0.25em] text-red-400 text-[11px] font-semibold">
-                            Voucher Management
-                        </p>
-
-                    </div>
-
-                    <h1 class="text-3xl md:text-4xl font-black tracking-tight text-white">
-                        My Wi-Fi Vouchers
-                    </h1>
-
-                    <p class="mt-4 text-slate-400 text-base leading-relaxed max-w-2xl">
-
-                        Only paid <strong class="text-slate-300">time-based voucher packages</strong>
-                        are displayed here. Expired vouchers will automatically
-                        be moved to the inactive archive.
-
-                    </p>
-
-                </div>
-
-                <!-- RIGHT PANEL -->
-                <div class="w-full xl:w-[320px] rounded-[24px] border border-white/10 bg-gradient-to-b from-white/[0.04] to-white/[0.02] backdrop-blur-xl p-6 shadow-[0_0_40px_rgba(239,68,68,0.04)]">
-
-                    <div class="flex items-center justify-between mb-5">
-
-                        <p class="uppercase tracking-[0.18em] text-[11px] text-slate-500">
-                            Active Vouchers
-                        </p>
-
-                        <div class="flex items-center gap-2">
-
-                            <div class="w-2 h-2 rounded-full bg-emerald-400"></div>
-
-                            <span class="text-emerald-400 text-sm font-medium">
-                                Valid
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                    <div class="flex items-end gap-3">
-
-                        <h2 class="text-5xl font-black tracking-tight text-white">
-                            {{ voucher_active_count or 0 }}
-                        </h2>
-
-                        <span class="text-slate-500 text-sm font-semibold mb-2">
-                            codes
-                        </span>
-
-                    </div>
-
-                    <p class="mt-4 text-sm text-slate-500 leading-relaxed">
-
-                        Voucher validity starts after successful payment,
-                        based on the purchased package duration.
-
-                    </p>
-
-                </div>
+                <p class="mt-4 text-slate-400 text-lg max-w-2xl leading-relaxed">
+                    Gunakan voucher untuk terhubung ke jaringan WiFi BTN Net.
+                </p>
 
             </div>
 
-            {% if vouchers_valid or vouchers_expired %}
-
             {% if vouchers_valid %}
-            <h2 class="text-lg font-bold text-white mb-4">Active Vouchers</h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-6 mb-14">
+            <!-- ACTIVE VOUCHERS -->
+            <div class="space-y-8">
 
                 {% for voucher in vouchers_valid %}
 
-                <div class="group rounded-[28px] border border-white/10 bg-gradient-to-b from-white/[0.04] to-white/[0.02] backdrop-blur-xl p-7 transition-all duration-300 hover:border-red-500/20 hover:-translate-y-1 hover:shadow-[0_0_40px_rgba(239,68,68,0.08)]">
+                <div class="rounded-[32px] border border-white/10 bg-[#121212] p-8">
 
-                    <div class="flex items-center justify-between mb-8">
+                    <div class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-8">
 
-                        <div class="w-12 h-12 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center">
-                            <i data-lucide="wifi" class="w-5 h-5 text-slate-300"></i>
+                        <!-- LEFT -->
+                        <div class="flex-1">
+
+                            <!-- STATUS -->
+                            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/20 mb-6">
+
+                                <div class="w-2 h-2 rounded-full bg-green-500"></div>
+
+                                <span class="text-green-400 text-sm font-semibold">
+                                    Voucher Aktif
+                                </span>
+
+                            </div>
+
+                            <!-- PACKAGE -->
+                            <h2 class="text-3xl font-black text-white">
+                                {{ voucher.transaction.package.name }}
+                            </h2>
+
+                            <p class="mt-3 text-slate-400 text-lg">
+                                Berlaku hingga
+                                {% if voucher.expires_at %}
+                                {{ voucher.expires_at | format_wib }} {{ wib_label }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </p>
+
+                            <!-- CODE -->
+                            <div class="mt-8 rounded-3xl border border-white/10 bg-[#0b0f14] p-6">
+
+                                <p class="uppercase tracking-[0.2em] text-[11px] text-slate-500 mb-4">
+                                    KODE VOUCHER
+                                </p>
+
+                                <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+
+                                    <h3 class="text-3xl font-black font-mono tracking-wide text-white break-all">
+                                        {{ voucher.code }}
+                                    </h3>
+
+                                    <button
+                                       onclick="copyVoucher('{{ voucher.code }}')"
+                                        class="inline-flex items-center justify-center gap-3 rounded-2xl bg-red-500 px-7 py-4 text-white font-semibold hover:bg-red-400 transition-all duration-300">
+
+                                        <i data-lucide="copy" class="w-5 h-5"></i>
+
+                                        <span>Salin Voucher</span>
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
                         </div>
 
-                        {% if voucher.status == 'active' %}
+                        <!-- RIGHT -->
+                        <div class="w-full xl:w-[360px] rounded-3xl border border-white/10 bg-[#0f141b] p-7">
 
-                        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/[0.08] border border-emerald-500/10">
+                            <p class="uppercase tracking-[0.2em] text-[11px] text-red-400 font-semibold mb-6">
+                                CARA PENGGUNAAN
+                            </p>
 
-                            <div class="w-2 h-2 rounded-full bg-emerald-400"></div>
+                            <div class="space-y-5">
 
-                            <span class="text-emerald-400 text-xs font-semibold tracking-wide">
-                                ACTIVE
-                            </span>
+                                <div class="flex items-start gap-4">
 
-                        </div>
+                                    <div class="w-9 h-9 rounded-xl bg-red-500 text-white flex items-center justify-center font-bold shrink-0">
+                                        1
+                                    </div>
 
-                        {% else %}
+                                    <p class="text-slate-300 leading-relaxed">
+                                        Hubungkan perangkat ke WiFi BTN Net
+                                    </p>
 
-                        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-500/[0.08] border border-amber-500/10">
+                                </div>
 
-                            <div class="w-2 h-2 rounded-full bg-amber-400"></div>
+                                <div class="flex items-start gap-4">
 
-                            <span class="text-amber-400 text-xs font-semibold tracking-wide">
-                                UNUSED
-                            </span>
+                                    <div class="w-9 h-9 rounded-xl bg-red-500 text-white flex items-center justify-center font-bold shrink-0">
+                                        2
+                                    </div>
 
-                        </div>
+                                    <p class="text-slate-300 leading-relaxed">
+                                        Buka halaman login hotspot
+                                    </p>
 
-                        {% endif %}
+                                </div>
 
-                    </div>
+                                <div class="flex items-start gap-4">
 
-                    <div class="mb-7">
+                                    <div class="w-9 h-9 rounded-xl bg-red-500 text-white flex items-center justify-center font-bold shrink-0">
+                                        3
+                                    </div>
 
-                        <h3 class="text-xl font-bold text-white leading-tight">
-                            {{ voucher.transaction.package.name }}
-                        </h3>
+                                    <p class="text-slate-300 leading-relaxed">
+                                        Masukkan kode voucher Anda
+                                    </p>
 
-                        <p class="mt-2 text-sm text-slate-500">
-                            Purchased
-                            {{ voucher.transaction.created_at | format_wib }} {{ wib_label }}
-                        </p>
+                                </div>
 
-                        <p class="mt-2 text-sm text-red-400/90 font-medium">
+                                <div class="flex items-start gap-4">
 
-                            {% if voucher.valid_from and server_now and voucher.valid_from > server_now %}
+                                    <div class="w-9 h-9 rounded-xl bg-red-500 text-white flex items-center justify-center font-bold shrink-0">
+                                        4
+                                    </div>
 
-                            <span class="block text-cyan-400">
-                                Scheduled — starts on
-                                {{ voucher.valid_from | format_wib }} {{ wib_label }}
-                            </span>
+                                    <p class="text-slate-300 leading-relaxed">
+                                        Internet siap digunakan
+                                    </p>
 
-                            {% endif %}
+                                </div>
 
-                            {% if voucher.expires_at %}
-
-                            Valid until
-                            {{ voucher.expires_at | format_wib }} {{ wib_label }}
-
-                            {% else %}
-
-                            Activation period is being calculated
-
-                            {% endif %}
-
-                            · {{ voucher.transaction.package.voucher_duration_hours or 8 }} hours
-
-                        </p>
-
-                    </div>
-
-                    <div class="rounded-[22px] border border-white/10 bg-[#0b0d11] p-5">
-
-                        <p class="text-[11px] uppercase tracking-[0.22em] text-slate-500 mb-4">
-                            Voucher Code
-                        </p>
-
-                        <div class="flex items-center justify-between gap-4">
-
-                            <h4 class="text-lg lg:text-xl font-mono font-bold tracking-[0.14em] text-white break-all">
-                                {{ voucher.code }}
-                            </h4>
-
-                            <div class="w-10 h-10 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center shrink-0">
-                                <i data-lucide="key-round" class="w-4 h-4 text-slate-400"></i>
                             </div>
 
                         </div>
@@ -216,85 +166,10 @@
 
             </div>
 
-            {% endif %}
-
-            {% if vouchers_expired %}
-
-            <h2 class="text-lg font-bold text-slate-400 mb-4">
-                Expired / Inactive
-            </h2>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 gap-6">
-
-                {% for voucher in vouchers_expired %}
-
-                <div class="group rounded-[28px] border border-white/5 bg-white/[0.02] backdrop-blur-xl p-7 opacity-80">
-
-                    <div class="flex items-center justify-between mb-8">
-
-                        <div class="w-12 h-12 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-center">
-                            <i data-lucide="wifi-off" class="w-5 h-5 text-slate-500"></i>
-                        </div>
-
-                        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-500/[0.08] border border-slate-500/10">
-
-                            <div class="w-2 h-2 rounded-full bg-slate-500"></div>
-
-                            <span class="text-slate-400 text-xs font-semibold tracking-wide">
-                                EXPIRED
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                    <div class="mb-7">
-
-                        <h3 class="text-xl font-bold text-slate-300 leading-tight">
-                            {{ voucher.transaction.package.name }}
-                        </h3>
-
-                        <p class="mt-2 text-sm text-slate-500">
-
-                            Expired on
-
-                            {% if voucher.expires_at %}
-
-                            {{ voucher.expires_at | format_wib }} {{ wib_label }}
-
-                            {% else %}
-
-                            —
-
-                            {% endif %}
-
-                        </p>
-
-                    </div>
-
-                    <div class="rounded-[22px] border border-white/5 bg-[#0b0d11]/80 p-5">
-
-                        <p class="text-[11px] uppercase tracking-[0.22em] text-slate-600 mb-4">
-                            Archived Code
-                        </p>
-
-                        <h4 class="mt-3 text-lg font-mono font-bold tracking-[0.14em] text-slate-500 break-all line-through">
-                            {{ voucher.code }}
-                        </h4>
-
-                    </div>
-
-                </div>
-
-                {% endfor %}
-
-            </div>
-
-            {% endif %}
-
             {% else %}
 
-            <div class="col-span-full rounded-[30px] border border-white/10 bg-gradient-to-b from-white/[0.04] to-white/[0.02] backdrop-blur-xl p-16 text-center shadow-[0_0_60px_rgba(239,68,68,0.04)]">
+            <!-- EMPTY -->
+            <div class="rounded-[32px] border border-white/10 bg-[#121212] p-14 text-center">
 
                 <div class="w-20 h-20 rounded-[24px] bg-white/[0.04] border border-white/10 flex items-center justify-center mx-auto mb-8">
 
@@ -302,22 +177,20 @@
 
                 </div>
 
-                <h3 class="text-3xl font-black text-white">
-                    No Vouchers Yet
-                </h3>
+                <h2 class="text-4xl font-black text-white">
+                    Belum Ada Voucher
+                </h2>
 
-                <p class="mt-4 text-slate-400 text-lg leading-relaxed max-w-xl mx-auto">
-
-                    Purchase a time-based voucher package first.
-                    Monthly subscriptions will not appear on this page.
-
+                <p class="mt-5 text-slate-400 text-lg max-w-2xl mx-auto leading-relaxed">
+                    Anda belum memiliki voucher aktif.
+                    Silakan beli paket internet terlebih dahulu.
                 </p>
 
                 <a
-                    href="/packages"
-                    class="mt-8 inline-flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.04] px-7 py-4 text-white font-semibold transition-all duration-300 hover:bg-red-500 hover:border-red-500 hover:shadow-[0_0_30px_rgba(239,68,68,0.25)]">
+                    href="{{ url_for('browse_packages') }}"
+                    class="mt-8 inline-flex items-center justify-center gap-3 rounded-2xl bg-red-500 px-8 py-5 text-white font-semibold hover:bg-red-400 transition-all duration-300">
 
-                    <span>Browse Packages</span>
+                    <span>Lihat Paket</span>
 
                     <i data-lucide="arrow-right" class="w-5 h-5"></i>
 
@@ -332,4 +205,71 @@
     </div>
 
 </div>
+
+<script>
+function copyVoucher(code) {
+
+    navigator.clipboard.writeText(code)
+    .then(() => {
+
+        showToast();
+
+    })
+    .catch(() => {
+
+        const textArea = document.createElement("textarea");
+
+        textArea.value = code;
+
+        document.body.appendChild(textArea);
+
+        textArea.select();
+
+        document.execCommand("copy");
+
+        document.body.removeChild(textArea);
+
+        showToast();
+
+    });
+
+}
+function showToast() {
+
+    const toast = document.createElement("div");
+
+    toast.innerHTML = `
+        <div class="
+            fixed
+            top-6
+            right-6
+            z-[9999]
+            bg-[#121212]
+            border
+            border-emerald-500/20
+            text-white
+            px-5
+            py-4
+            rounded-2xl
+            shadow-2xl
+            flex
+            items-center
+            gap-3
+        ">
+            <div class="w-3 h-3 rounded-full bg-emerald-400"></div>
+
+            <span class="font-medium">
+                Voucher berhasil disalin
+            </span>
+        </div>
+    `;
+
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+        toast.remove();
+    }, 2200);
+
+}
+</script>
 {% endblock %}

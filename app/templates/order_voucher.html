@@ -23,50 +23,11 @@
             ">
         </div>
 
-        <!-- NETWORK LINES -->
-        <svg
-            class="absolute inset-0 w-full h-full opacity-[0.08]"
-            xmlns="http://www.w3.org/2000/svg">
-
-            <line x1="10%" y1="20%" x2="40%" y2="40%"
-                  stroke="rgba(239,68,68,0.35)"
-                  stroke-width="1"/>
-
-            <line x1="40%" y1="40%" x2="70%" y2="25%"
-                  stroke="rgba(239,68,68,0.25)"
-                  stroke-width="1"/>
-
-            <line x1="70%" y1="25%" x2="90%" y2="45%"
-                  stroke="rgba(239,68,68,0.2)"
-                  stroke-width="1"/>
-
-            <line x1="20%" y1="75%" x2="50%" y2="60%"
-                  stroke="rgba(255,255,255,0.08)"
-                  stroke-width="1"/>
-
-            <line x1="50%" y1="60%" x2="80%" y2="80%"
-                  stroke="rgba(255,255,255,0.08)"
-                  stroke-width="1"/>
-
-            <!-- NODES -->
-            <circle cx="40%" cy="40%" r="4" fill="rgba(239,68,68,0.5)"/>
-            <circle cx="70%" cy="25%" r="3" fill="rgba(239,68,68,0.4)"/>
-            <circle cx="50%" cy="60%" r="3" fill="rgba(255,255,255,0.2)"/>
-
-        </svg>
-
-        <!-- SOFT GLOW -->
+        <!-- GLOW -->
         <div class="absolute top-[-120px] right-[-120px] w-[420px] h-[420px] bg-red-500/10 rounded-full blur-[140px] animate-pulse">
-        </div> 
-
-        <div class="absolute bottom-[-150px] left-[-150px] w-[380px] h-[380px] bg-indigo-500/10 rounded-full blur-[140px] animate-pulse">
-        </div> 
-
-        <!-- FLOATING BLUR -->
-        <div class="absolute top-[22%] left-[15%] w-24 h-24 rounded-full bg-red-500/[0.06] blur-3xl animate-bounce">
         </div>
 
-        <div class="absolute bottom-[18%] right-[12%] w-28 h-28 rounded-full bg-sky-500/[0.05] blur-3xl animate-pulse">
+        <div class="absolute bottom-[-150px] left-[-150px] w-[380px] h-[380px] bg-indigo-500/10 rounded-full blur-[140px] animate-pulse">
         </div>
 
     </div>
@@ -75,21 +36,13 @@
     <div class="relative z-10 w-full max-w-lg">
 
         <!-- CARD -->
-        <div class="group rounded-[36px] border border-white/10 bg-white/[0.03] backdrop-blur-2xl p-10 shadow-2xl transition-all duration-500 hover:-translate-y-1 hover:border-red-500/20 hover:shadow-[0_20px_50px_rgba(239,68,68,0.12)] overflow-hidden">
-
-            <!-- HOVER GLOW -->
-            <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-700">
-
-                <div class="absolute top-[-80px] right-[-80px] w-52 h-52 bg-red-500/10 rounded-full blur-3xl">
-                </div>
-
-            </div>
+        <div class="rounded-[36px] border border-white/10 bg-white/[0.03] backdrop-blur-2xl p-10 shadow-2xl overflow-hidden">
 
             <!-- HEADER -->
             <div class="relative z-10 text-center mb-10">
 
                 <!-- ICON -->
-                <div class="w-20 h-20 rounded-3xl bg-red-500/10 border border-red-500/20 flex items-center justify-center mx-auto mb-6 shadow-[0_0_25px_rgba(239,68,68,0.08)]">
+                <div class="w-20 h-20 rounded-3xl bg-red-500/10 border border-red-500/20 flex items-center justify-center mx-auto mb-6">
 
                     <i data-lucide="ticket" class="w-10 h-10 text-red-400"></i>
 
@@ -98,14 +51,14 @@
                 <!-- TITLE -->
                 <h2 class="text-3xl font-black tracking-tight text-white">
 
-                    Complete Your Purchase
+                    Selesaikan Pembelian
 
                 </h2>
 
                 <!-- PACKAGE -->
                 <p class="text-slate-400 mt-3 text-base">
 
-                    Package:
+                    Paket:
                     <span class="text-red-400 font-bold">
                         {{ package.name }}
                     </span>
@@ -129,64 +82,125 @@
                 {% endif %}
 
                 <!-- ROUTER -->
-                <div>
+<div class="space-y-5">
 
-                    <label class="block text-sm font-semibold text-slate-300 mb-3">
+    <!-- TITLE -->
+    <div>
 
-                        Titik router tersedia:
-                        <span class="text-red-400">{{ router_count or 0 }}</span>
+        <div class="flex items-center gap-2 mb-2">
 
-                    </label>
+            <i data-lucide="map-pin" class="w-5 h-5 text-red-400"></i>
 
-                    {% if router_count and router_count > 0 %}
+            <h3 class="text-lg font-bold text-white">
+                Pilih Lokasi Router
+            </h3>
 
-                    <div class="relative">
+        </div>
 
-                        <!-- ICON -->
-                        <i data-lucide="map-pin"
-                           class="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500">
-                        </i>
+        <p class="text-sm text-slate-400 leading-relaxed">
 
-                        <!-- SELECT -->
-                        <select
-                            name="router_location"
-                            required
-                            class="w-full h-16 rounded-2xl border border-white/10 bg-white/[0.04] pl-14 pr-5 text-white appearance-none outline-none transition-all duration-300 focus:border-red-500/30 focus:bg-white/[0.06] cursor-pointer">
+            Pilih router terdekat agar koneksi internet lebih stabil dan cepat digunakan.
 
-                            <option value="" disabled selected class="bg-[#111418] text-slate-400">
-                                -- Pilih lokasi router --
-                            </option>
+        </p>
 
-                            {% for r in routers %}
-                            <option value="{{ r.name }}" class="bg-[#111418] text-white">
-                                {{ r.name }}
-                            </option>
-                            {% endfor %}
+    </div>
 
-                        </select>
+    {% if presentation_mode %}
 
-                    </div>
+    <div class="rounded-2xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-amber-200 text-sm">
 
-                    {% elif presentation_mode %}
+        <strong>Mode presentasi</strong> (PRODUCTION=false):
+        checkout voucher tetap bisa walau router kosong.
 
-                    <p class="text-slate-300 text-sm rounded-2xl border border-cyan-500/25 bg-cyan-500/10 px-4 py-3">
-                        Tidak ada router terdaftar. Lokasi akan diset ke:
-                        <span class="font-mono text-cyan-300">{{ demo_router_label }}</span>
-                    </p>
+    </div>
 
-                    <input type="hidden" name="router_location" value="{{ demo_router_label }}">
+    {% endif %}
 
-                    {% else %}
+    <!-- ROUTER INFO -->
+    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-red-500/20 bg-red-500/5 text-sm text-slate-300">
 
-                    <p class="text-slate-400 text-sm rounded-2xl border border-amber-500/30 bg-amber-500/10 px-4 py-3">
-                        Tidak ada router aktif di sistem (0). Hubungi admin untuk menambahkan titik hotspot,
-                        atau set <span class="font-mono text-amber-300">PRODUCTION=false</span> di <span class="font-mono">.env</span> untuk demo.
-                    </p>
+        <div class="w-2 h-2 rounded-full bg-red-400"></div>
 
-                    {% endif %}
+        <span>
+            {{ router_count or 0 }} router tersedia
+        </span>
 
-                </div>
+    </div>
 
+    {% if router_count and router_count > 0 %}
+
+    <!-- SELECT -->
+    <div class="relative">
+
+        <i data-lucide="map-pin"
+           class="absolute left-5 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500">
+        </i>
+
+        <select
+            name="router_location"
+            required
+           class="w-full h-13 rounded-2xl border border-white/10 bg-white/[0.04] pl-14 pr-5 text-white outline-none transition-all duration-300 focus:border-red-500/30 focus:bg-white/[0.06]">
+
+            <option value="" disabled selected class="bg-[#111418] text-slate-400">
+                Pilih lokasi router
+            </option>
+
+            {% for r in routers %}
+            <option value="{{ r.name }}" class="bg-[#111418] text-white">
+                {{ r.name }}
+            </option>
+            {% endfor %}
+
+        </select>
+
+    </div>
+
+    <p class="mt-1 text-sm text-slate-500 leading-relaxed"></p>
+
+        Jika bingung memilih router, pilih lokasi yang paling dekat dengan tempat Anda.
+
+    </p>
+
+    {% elif presentation_mode %}
+
+    <p class="text-slate-300 text-sm rounded-2xl border border-cyan-500/25 bg-cyan-500/10 px-4 py-3">
+
+        Tidak ada router terdaftar. Lokasi akan diset ke:
+
+        <span class="font-mono text-cyan-300">
+            {{ demo_router_label }}
+        </span>
+
+    </p>
+
+    <input type="hidden" name="router_location" value="{{ demo_router_label }}">
+
+    {% else %}
+
+    <p class="text-slate-400 text-sm rounded-2xl border border-amber-500/30 bg-amber-500/10 px-4 py-3">
+
+        Tidak ada router aktif di sistem.
+        Hubungi admin untuk menambahkan titik hotspot.
+
+    </p>
+
+    {% endif %}
+
+    <!-- INFO -->
+    <div class="flex items-start gap-3 rounded-2xl border border-emerald-500/20 bg-emerald-500/[0.03] px-4 py-4">
+
+        <i data-lucide="badge-check" class="w-5 h-5 text-emerald-400 shrink-0 mt-0.5"></i>
+
+        <p class="text-sm text-emerald-300 leading-relaxed">
+
+            Setelah pembayaran berhasil,
+            voucher internet akan langsung aktif dan siap digunakan.
+
+        </p>
+
+    </div>
+
+</div>
                 <!-- PRICE BOX -->
                 <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-6 space-y-4">
 
@@ -194,7 +208,7 @@
                     <div class="flex items-center justify-between text-slate-400">
 
                         <span>
-                            Package Price
+                            Harga Paket
                         </span>
 
                         <span>
@@ -207,7 +221,7 @@
                     <div class="flex items-center justify-between pt-4 border-t border-white/10">
 
                         <span class="text-white font-semibold text-lg">
-                            Total Payment
+                            Total Pembayaran
                         </span>
 
                         <span class="text-2xl font-black text-red-400">
@@ -224,34 +238,34 @@
                 <div class="grid grid-cols-3 gap-3">
 
                     <!-- ITEM -->
-                    <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-center transition-all duration-300 hover:border-emerald-500/20">
+                    <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-center">
 
                         <i data-lucide="shield-check" class="w-5 h-5 text-emerald-400 mx-auto mb-2"></i>
 
                         <p class="text-[11px] text-slate-400 leading-relaxed">
-                            Secure Payment
+                            Pembayaran Aman
                         </p>
 
                     </div>
 
                     <!-- ITEM -->
-                    <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-center transition-all duration-300 hover:border-amber-500/20">
+                    <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-center">
 
                         <i data-lucide="zap" class="w-5 h-5 text-amber-400 mx-auto mb-2"></i>
 
                         <p class="text-[11px] text-slate-400 leading-relaxed">
-                            Instant Access
+                            Akses Cepat
                         </p>
 
                     </div>
 
                     <!-- ITEM -->
-                    <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-center transition-all duration-300 hover:border-sky-500/20">
+                    <div class="rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-center">
 
                         <i data-lucide="wifi" class="w-5 h-5 text-sky-400 mx-auto mb-2"></i>
 
                         <p class="text-[11px] text-slate-400 leading-relaxed">
-                            Stable Network
+                            Jaringan Stabil
                         </p>
 
                     </div>
@@ -262,9 +276,9 @@
                 <button
                     type="submit"
                     {% if (not router_count or router_count == 0) and not presentation_mode %}disabled{% endif %}
-                    class="w-full h-16 rounded-2xl border border-red-500/20 bg-red-500 text-white font-bold text-lg transition-all duration-300 hover:bg-red-600 hover:scale-[1.01] hover:shadow-[0_0_30px_rgba(239,68,68,0.25)] disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100">
+                    class="w-full h-16 rounded-2xl border border-red-500/20 bg-red-500 text-white font-bold text-lg transition-all duration-300 hover:bg-red-600 hover:shadow-[0_0_30px_rgba(239,68,68,0.25)] disabled:opacity-40 disabled:cursor-not-allowed">
 
-                    Continue to Payment
+                    Lanjut ke Pembayaran
 
                 </button>
 
@@ -273,7 +287,7 @@
                     href="/packages"
                     class="block text-center text-slate-500 hover:text-white transition-all text-sm">
 
-                    Cancel & Return
+                    Batal & Kembali
 
                 </a>
 
