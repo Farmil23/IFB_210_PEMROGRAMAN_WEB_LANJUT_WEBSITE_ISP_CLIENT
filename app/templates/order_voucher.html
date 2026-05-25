@@ -75,11 +75,6 @@
             <form action="{{ url_for('checkout', package_id=package.id) }}" method="POST" class="relative z-10 space-y-7"
                   onsubmit="var btn=this.querySelector('[type=submit]');if(btn&amp;&amp;btn.dataset.busy)return false;if(btn){btn.dataset.busy='1';btn.disabled=true;}">
 
-                {% if presentation_mode %}
-                <div class="rounded-2xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-amber-200 text-sm">
-                    <strong>Mode presentasi</strong> (PRODUCTION=false): checkout voucher tetap bisa walau router kosong.
-                </div>
-                {% endif %}
 
                 <!-- ROUTER -->
 <div class="space-y-5">
