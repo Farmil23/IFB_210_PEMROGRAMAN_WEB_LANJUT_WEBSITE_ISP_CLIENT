@@ -58,6 +58,10 @@ def _app_base_url():
 
         return configured.rstrip('/')
 
+    space_host = os.environ.get('SPACE_HOST')
+    if space_host:
+        return f"https://{space_host}"
+
     return request.url_root.rstrip('/')
 
 
