@@ -478,7 +478,10 @@ document.addEventListener('DOMContentLoaded', function() {
         dropdownOpen = !dropdownOpen;
         if (dropdownOpen) {
             notifDropdown.classList.remove('hidden');
+            notifBadge.classList.add('hidden'); // Immediately hide red badge
             fetchNotifications(false); // fetch all when opened
+            // Optionally auto-mark all as read if we want:
+            fetch('/api/admin/notifications/read-all', {method: 'POST'});
         } else {
             notifDropdown.classList.add('hidden');
         }
@@ -504,7 +507,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function renderNotifications(data, unreadOnly) {
         if(unreadOnly) {
-            if(data.length > 0) {
+            if(data.length > 0 && !dropdownOpen) {
                 notifBadge.classList.remove('hidden');
             } else {
                 notifBadge.classList.add('hidden');
@@ -519,7 +522,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         const unreadCount = data.filter(n => !n.is_read).length;
-        if (unreadCount > 0) {
+        if (unreadCount > 0 && !dropdownOpen) {
             notifBadge.classList.remove('hidden');
         } else {
             notifBadge.classList.add('hidden');
@@ -532,7 +535,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <p class="text-xs text-zinc-800 ${!n.is_read ? 'font-bold' : 'font-medium'} leading-snug">${n.message}</p>
                     <div class="flex items-center justify-between mt-1">
                         <span class="text-[10px] text-zinc-400 font-semibold uppercase tracking-wider">${n.created_at}</span>
-                        ${n.transaction_id ? `<a href="${n.url}" class="text-[10px] text-red-600 hover:underline font-bold">View Order</a>` : ''}
+                        ${n.transaction_id ? `<a href="${n.url}" class="text-[10px] text-red-600 hover:underline font-bold js-view-order">View Order</a>` : ''}
                     </div>
                 </div>
             </div>
@@ -540,8 +543,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
         notifList.querySelectorAll('div[data-id]').forEach(el => {
             el.addEventListener('click', function(e) {
-                if(e.target.tagName === 'A') return;
                 const id = this.getAttribute('data-id');
+                
+                // If clicked on the link, mark read then redirect
+                if(e.target.tagName === 'A' || e.target.closest('a')) {
+                    e.preventDefault();
+                    let targetUrl = e.target.href || e.target.closest('a').href;
+                    fetch(`/api/admin/notifications/${id}/read`, {method: 'POST'})
+                        .then(() => {
+                            window.location.href = targetUrl;
+                        });
+                    return;
+                }
+
+                // Just mark read
                 fetch(`/api/admin/notifications/${id}/read`, {method: 'POST'})
                     .then(() => {
                         this.classList.remove('bg-blue-50/30');
@@ -549,7 +564,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         if(dot) { dot.classList.remove('bg-blue-500'); }
                         const txt = this.querySelector('p');
                         if(txt) { txt.classList.remove('font-bold'); txt.classList.add('font-medium'); }
-                        setTimeout(() => fetchNotifications(true), 500);
                     });
             });
         });
