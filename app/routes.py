@@ -756,6 +756,16 @@ def admin_dashboard():
     )
 
 
+@current_app.route('/admin/transactions')
+@login_required
+@admin_required
+def admin_transactions():
+    transactions = Transaction.query.order_by(Transaction.created_at.desc()).all()
+    return render_template(
+        'admin_transactions.html',
+        transactions=transactions
+    )
+
 @current_app.route('/admin/transactions/report')
 @login_required
 @admin_required
