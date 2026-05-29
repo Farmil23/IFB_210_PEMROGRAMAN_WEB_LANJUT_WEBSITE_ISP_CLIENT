@@ -5,11 +5,11 @@
 {% set voucher_active = voucher_display|default(0) %}
 {% set internet_active = hero_speed_num|default(0)|int > 0 %}
 
-<div class="flex min-h-screen bg-[#0b0f14] text-white overflow-hidden">
+<div class="flex min-h-[100dvh] bg-[#0b0f14] text-white overflow-hidden">
 
     {% include 'partials/sidebar.html' %}
 
-    <main class="flex-1 pb-28 lg:pb-10 overflow-x-hidden">
+    <main class="flex-1 pb-[calc(7rem+env(safe-area-inset-bottom))] lg:pb-10 overflow-x-hidden">
 
         <!-- DASHBOARD MAIN SECTION -->
         <!-- HEADER -->
