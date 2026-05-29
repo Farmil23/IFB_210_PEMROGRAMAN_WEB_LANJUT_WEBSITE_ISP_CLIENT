@@ -61,3 +61,12 @@ class HotspotRouter(db.Model):
     sort_order = db.Column(db.Integer, default=0)
     ip_address = db.Column(db.String(64), nullable=True)  # INFO = IP address router, opsional untuk routing management
 
+class Notification(db.Model):
+    __tablename__ = 'notification'
+    id = db.Column(db.Integer, primary_key=True)
+    message = db.Column(db.String(255), nullable=False)
+    is_read = db.Column(db.Boolean, default=False)
+    created_at = db.Column(db.DateTime, default=now_wib)
+    transaction_id = db.Column(db.Integer, db.ForeignKey('transaction.id'), nullable=True)
+    transaction = db.relationship('Transaction', backref='notifications')
+
