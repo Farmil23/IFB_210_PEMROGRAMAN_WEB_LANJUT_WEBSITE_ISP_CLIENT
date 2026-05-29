@@ -23,6 +23,7 @@ from .models import (
     Transaction,
     Voucher,
     HotspotRouter,
+    Notification,
 )
 from .forms import LoginForm
 
@@ -90,6 +91,12 @@ def _finalize_transaction_payment(transaksi):
     transaksi.status = 'paid'
 
     transaksi.paid_at = paid_moment
+
+    notif = Notification(
+        message=f"Pembayaran berhasil untuk transaksi #{transaksi.id} oleh {transaksi.customer.username if transaksi.customer else 'Unknown'}",
+        transaction_id=transaksi.id
+    )
+    db.session.add(notif)
 
     if not paket or paket.package_type != 'jam-jaman':
 
@@ -1230,6 +1237,13 @@ def checkout(package_id):
         db.session.add(transaksi_baru)
         db.session.commit()
 
+        notif = Notification(
+            message=f"Transaksi baru #{transaksi_baru.id} dibuat oleh {current_user.username}",
+            transaction_id=transaksi_baru.id
+        )
+        db.session.add(notif)
+        db.session.commit()
+
     else:
 
         transaksi_baru.router_location = router_location
@@ -1682,3 +1696,44 @@ def change_password():
     return redirect(
         url_for('account')
     )
+
+@current_app.route('/api/admin/notifications', methods=['GET'])
+@login_required
+@admin_required
+def api_admin_notifications():
+    unread_only = request.args.get('unread_only', 'true').lower() == 'true'
+    query = Notification.query
+    if unread_only:
+        query = query.filter_by(is_read=False)
+    
+    notifs = query.order_by(Notification.id.desc()).limit(20).all()
+    
+    data = []
+    for n in notifs:
+        data.append({
+            'id': n.id,
+            'message': n.message,
+            'is_read': n.is_read,
+            'created_at': _relative_time_id(n.created_at),
+            'transaction_id': n.transaction_id,
+            'url': url_for('transaction_detail', transaction_id=n.transaction_id) if n.transaction_id else '#'
+        })
+        
+    return jsonify({'status': 'success', 'data': data})
+
+@current_app.route('/api/admin/notifications/<int:id>/read', methods=['POST'])
+@login_required
+@admin_required
+def api_admin_notification_read(id):
+    notif = Notification.query.get_or_404(id)
+    notif.is_read = True
+    db.session.commit()
+    return jsonify({'status': 'success'})
+
+@current_app.route('/api/admin/notifications/read-all', methods=['POST'])
+@login_required
+@admin_required
+def api_admin_notification_read_all():
+    Notification.query.filter_by(is_read=False).update({'is_read': True})
+    db.session.commit()
+    return jsonify({'status': 'success'})
