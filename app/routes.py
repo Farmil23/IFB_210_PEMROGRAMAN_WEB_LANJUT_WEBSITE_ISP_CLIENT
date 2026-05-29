@@ -1716,7 +1716,7 @@ def api_admin_notifications():
             'is_read': n.is_read,
             'created_at': _relative_time_id(n.created_at),
             'transaction_id': n.transaction_id,
-            'url': url_for('transaction_detail', transaction_id=n.transaction_id) if n.transaction_id else '#'
+            'url': url_for('admin_transaction_detail', transaction_id=n.transaction_id) if n.transaction_id else '#'
         })
         
     return jsonify({'status': 'success', 'data': data})
@@ -1729,6 +1729,23 @@ def api_admin_notification_read(id):
     notif.is_read = True
     db.session.commit()
     return jsonify({'status': 'success'})
+
+@current_app.route('/admin/transactions/<int:transaction_id>')
+@login_required
+@admin_required
+def admin_transaction_detail(transaction_id):
+    trx = Transaction.query.get_or_404(transaction_id)
+    pkg = trx.package
+    v = trx.voucher
+    if v:
+        _apply_voucher_expiry([v])
+        db.session.refresh(v)
+    return render_template(
+        'admin_transaction_detail.html',
+        transaction=trx,
+        package=pkg,
+        voucher=v,
+    )
 
 @current_app.route('/api/admin/notifications/read-all', methods=['POST'])
 @login_required
