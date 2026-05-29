@@ -210,6 +210,16 @@ def ensure_schema():
 
         db.session.commit()
 
+    def _create_notification_table():
+
+        from .models import Notification
+
+        insp = inspect(db.engine)
+
+        if Notification.__tablename__ not in insp.get_table_names():
+
+            Notification.__table__.create(db.engine)
+
     for fn in (
         _add_package_voucher_hours,
         _add_voucher_expires_at,
@@ -217,6 +227,7 @@ def ensure_schema():
         _add_voucher_valid_from,
         _unique_voucher_per_transaction,
         _add_router_ip_address,
+        _create_notification_table,
     ):
 
         try:
