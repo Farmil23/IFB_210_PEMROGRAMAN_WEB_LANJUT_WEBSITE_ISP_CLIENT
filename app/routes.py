@@ -1507,7 +1507,7 @@ def transaction_detail(transaction_id):
 
     trx = Transaction.query.get_or_404(transaction_id)
 
-    if trx.user_id != current_user.id:
+    if trx.user_id != current_user.id and not current_user.is_admin:
 
         abort(403)
 
